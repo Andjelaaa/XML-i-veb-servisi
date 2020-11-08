@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<obavestenje>
+    <podnosilac_zahteva>
+        <naziv_podnosioca>
+            <ime></ime>
+            <prezime></prezime>
+            <naziv_firme></naziv_firme>
+        </naziv_podnosioca>
+        <adresa>
+            <ulica></ulica>
+            <broj></broj>
+            <postanski_broj></postanski_broj>
+            <grad></grad>
+        </adresa>
+    </podnosilac_zahteva>
+    <organ_vlasti>
+        <naziv_organa_vlasti></naziv_organa_vlasti>
+        <sediste_organa></sediste_organa>
+        <potpis></potpis>
+    </organ_vlasti>
+    <dostavljeno>
+        Достављено:
+        <lista>
+            <element broj="1">Imenovanom</element>
+            <element broj="2">Arhivi</element>
+        </lista>
+    </dostavljeno>
+    <tekst_obavestenja>
+        <broj_predmeta></broj_predmeta>
+        <datum></datum>
+        <naslov>
+                ОБАВЕШТЕЊЕ
+                о стављању на увид документа који садржи 
+                тражену информацију и о изради копије
+        </naslov>
+        <p>
+            На основу члана 16. ст. 1. Закона о слободном приступу информацијама од јавног<br/>
+            значаја, поступајући по вашем захтеву за слободан приступ информацијама од <br/>
+            <godina></godina>
+            год.,којим сте тражили увид у документ/е са информацијама о / у вези са:
+            <trazena_informacija></trazena_informacija>
+        </p>
+        <p>
+            обавештавамо вас да дана 
+            <dan></dan>
+             , у 
+            <sati></sati>
+            часова, односно у времену од 
+            <od></od>
+            до
+            <do></do>
+             часова, у просторијама органа у 
+            <mesto></mesto>
+             ул.
+            <ulica></ulica>
+             бр.
+            <broj_zgrade></broj_zgrade>
+            , канцеларија бр.
+            <broj_kancelarije></broj_kancelarije>
+            можете извршити увид у документ/е у коме је садржана тражена информација. 
+        </p>
+        <p>
+            Том приликом, на ваш захтев, може вам се издати и копија документа са траженом 
+            информацијом.
+        </p>
+        <p>
+            Трошкови су утврђени Уредбом Владе Републике Србије („Сл. гласник РС“, бр. 8/06), и
+            то: копија стране А4 формата износи 3 динара, А3 формата 6 динара, CD 35 динара, 
+            дискете 20 динара, DVD 40 динара, аудио-касета – 150 динара, видео-касета 300 динара,
+            претварање једне стране документа из физичког у електронски облик – 30 динара.
+        </p>
+        <p>
+            Износ укупних трошкова израде копије документа по вашем захтеву износи 
+            <novcana_naknada></novcana_naknada>
+            динара и уплаћује се на жиро-рачун Буџета Републике Србије бр. 840-742328-843-30, с позивом на број 97 – ознака шифре општине/града где се налази орган власти (из Правилника о условима и начину вођења рачуна – „Сл. гласник РС“, 20/07... 40/10). 
+        </p>
+    </tekst_obavestenja>
+    <mesto_pecata>
+        (М.П.)
+    </mesto_pecata>
+</obavestenje>

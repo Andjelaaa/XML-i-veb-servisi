@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zalba_odluke>
+    <podnosilac_zalbe>
+        <naziv_podnosioca>
+            <ime></ime>
+            <prezime></prezime>
+            <naziv_firme></naziv_firme>
+        </naziv_podnosioca>
+        <adresa>
+            <ulica></ulica>
+            <broj></broj>
+            <postanski_broj></postanski_broj>
+            <grad></grad>
+        </adresa>
+        <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
+        <potpis></potpis>
+    </podnosilac_zalbe>
+    <poverenik>
+        <naziv_poverenika>
+                Повереникy за информације од јавног значаја и заштиту података о личности
+        </naziv_poverenika>
+        <sediste_poverenika>
+            Aдреса за пошту:
+            <grad>
+            Београд 
+            </grad>,
+            <ulica>Булевар краља Александра</ulica>
+            бр.
+            <broj>15</broj> 
+        </sediste_poverenika>
+    </poverenik>
+    <naslov>
+           ЖАЛБА ПРОТИВ ОДЛУКЕ ОРГАНА ВЛАСТИ КОЈОМ ЈЕ ОДБИЈЕН ИЛИ ОДБАЧЕН ЗАТЕВ ЗА ПРИСТУП ИНФОРМАЦИЈИ
+    </naslov>
+    <tekst_zalbe>
+        <zalba>
+            Жалбa
+            <zalilac>
+                <naziv_podnosioca>
+                    <ime></ime>
+                    <prezime></prezime>
+                    <naziv_firme></naziv_firme>
+                </naziv_podnosioca>
+                <adresa>
+                    <ulica></ulica>
+                    <broj></broj>
+                    <postanski_broj></postanski_broj>
+                    <grad></grad>
+                </adresa>
+                <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
+                <potpis></potpis>
+            </zalilac>
+            против решења-закључка
+            <organ_vlasti>
+                <naziv_organa></naziv_organa>
+            </organ_vlasti>
+            <p>
+                Број
+                <broj_zalbe></broj_zalbe>
+                од
+                <godina_odbijanja></godina_odbijanja>
+                године.
+            </p>
+            <p>
+                Наведеном одлуком органа власти(решењем, закључком, обавештењем у писаној
+                форми са елементима одлуке) , супротно закону, одбијен-одбачен је мој захтев који
+                сам поднео/ла- упутио/ла дана
+                <datum></datum>
+                године и тако ми ускраћено-онемогућено остваривање уставног и законског права на 
+                слободан приступ информацијама од јавног значаја. Одлуку побијам у целости, односно 
+                у делу којим
+                <razlog> </razlog>
+                јер није заснована на Закону о слободном приступу информацијама од јавног значаја.
+            </p>
+            <p>
+                На основу изнетих разлога, предлажем да Повереник уважи моју жалбу, поништи одлука првостепеног органа и омогући
+                ми приступ траженој/им информацији/ма.
+            </p>
+            <p>
+                Жалбу подносим благовремено, у законском року утврђеном у члану 22.ст. 1. Закона о слободном
+                приступу информацијама од јавног значаја. 
+            </p>
+            <podaci_o_trenutku>
+                У
+                <mesto></mesto>
+                ,дана
+                <dan></dan>
+                ,202
+                <godina></godina> године
+            </podaci_o_trenutku>
+        </zalba>
+    </tekst_zalbe>
+    <napomena>
+        Напомена:
+        <tacke>
+            <tacka broj="1">
+                У жалби се мора навести одлука која се побија( решење, закњучак, обавештење)
+                назив органа који је одлуку донео, као и број и датум одлуке. Довољно је да жалилац
+                наведе у жалби у ком погледу је незадовољан одлуком, с тим да жалбу не мора посебно
+                приложити. 
+            </tacka>
+            <tacka broj ="2">
+                Уз жалбу обавезно приложити копију поднетог захтева и доказ
+                о његовој предаји-упућивању органу као и копију одлуке органа која се оспорава жалбом.
+            </tacka>
+        </tacke>
+    </napomena>
+</zalba_odluke>

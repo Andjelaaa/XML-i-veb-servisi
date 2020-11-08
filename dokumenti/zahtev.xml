@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zahtev>
+    <podnosilac_zahteva>
+        <naziv_podnosioca>
+            <ime></ime>
+            <prezime></prezime>
+            <naziv_firme></naziv_firme>
+        </naziv_podnosioca>
+        <adresa>
+            <ulica></ulica>
+            <broj></broj>
+            <postanski_broj></postanski_broj>
+            <grad></grad>
+        </adresa>
+        <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
+        <potpis></potpis>
+    </podnosilac_zahteva>
+    <organ_vlasti>
+        <naziv_organa_vlasti></naziv_organa_vlasti>
+        <sediste_organa></sediste_organa>
+    </organ_vlasti>
+    <tekst_zahteva>
+        <naslov>
+            ЗАХТЕВ
+            за приступ информацији од јавног значаја
+        </naslov>
+        <p>
+            На основу члана 15. ст. 1. Закона о слободном приступу информацијама од 
+            јавног значаја („Службени гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10),
+            од горе наведеног органа захтевам:*
+        </p>
+        <p>
+            <izbori>
+                <izbor broj="1">обавештење да ли поседује тражену информацију;</izbor>
+                <izbor broj="2">увид у документ који садржи тражену информацију;</izbor>
+                <izbor broj="3">копију документа који садржи тражену информацију;</izbor>
+                <izbor broj="4">достављање копије документа који садржи тражену информацију:**</izbor>
+                <podizbori izbor="4">
+                    <podizbor broj="1">поштом</podizbor>
+                    <podizbor broj="2">електронском поштом</podizbor>
+                    <podizbor broj="3">факсом</podizbor>
+                    <podizbor broj="4">на други начин:***</podizbor>
+                    <drugi_nacin></drugi_nacin>
+                </podizbori>
+            </izbori>
+        </p>
+        <p>
+            Овај захтев се односи на следеће информације:
+            <trazene_informacije></trazene_informacije>
+        </p>
+        <podaci_o_vremenu_i_mestu_podnosenja_zahteva>
+            У
+            <mesto></mesto><br/>
+            ,дана
+            <dan></dan>
+            202
+            <godina></godina> године
+        </podaci_o_vremenu_i_mestu_podnosenja_zahteva>
+        <fusnote>
+            <fusnota broj="1">* У кућици означити која законска права на приступ информацијама желите да остварите.</fusnota>
+            <fusnota broj="2">** У кућици означити начин достављања копије докумената.</fusnota>
+            <fusnota broj="3">*** Када захтевате други начин достављања обавезно уписати који начин достављања захтевате.</fusnota>
+        </fusnote>
+    </tekst_zahteva>
+</zahtev>
