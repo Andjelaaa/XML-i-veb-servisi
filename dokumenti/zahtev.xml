@@ -13,7 +13,6 @@
             <grad></grad>
         </adresa>
         <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
-        <potpis></potpis>
     </podnosilac_zahteva>
     <organ_vlasti>
         <naziv_organa_vlasti></naziv_organa_vlasti>
@@ -29,28 +28,28 @@
             јавног значаја („Службени гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10),
             од горе наведеног органа захтевам:*
         </p>
-        <p>
-            <izbori>
-                <izbor broj="1">обавештење да ли поседује тражену информацију;</izbor>
-                <izbor broj="2">увид у документ који садржи тражену информацију;</izbor>
-                <izbor broj="3">копију документа који садржи тражену информацију;</izbor>
-                <izbor broj="4">достављање копије документа који садржи тражену информацију:**</izbor>
-                <podizbori izbor="4">
-                    <podizbor broj="1">поштом</podizbor>
-                    <podizbor broj="2">електронском поштом</podizbor>
-                    <podizbor broj="3">факсом</podizbor>
-                    <podizbor broj="4">на други начин:***</podizbor>
-                    <drugi_nacin></drugi_nacin>
-                </podizbori>
-            </izbori>
-        </p>
+       <izbori>
+           <izbor broj="1">обавештење да ли поседује тражену информацију;</izbor>
+           <izbor broj="2">увид у документ који садржи тражену информацију;</izbor>
+           <izbor broj="3">копију документа који садржи тражену информацију;</izbor>
+           <izbor broj="4">достављање копије документа који садржи тражену информацију:**
+                 <podizbori>
+                     <podizbor broj="1">поштом</podizbor>
+                     <podizbor broj="2">електронском поштом</podizbor>
+                     <podizbor broj="3">факсом</podizbor>
+                     <podizbor broj="4">на други начин:***</podizbor>
+                     <drugi_nacin></drugi_nacin>
+                 </podizbori>
+           </izbor>
+       </izbori>
+        
         <p>
             Овај захтев се односи на следеће информације:
-            <trazene_informacije></trazene_informacije>
         </p>
+        <trazene_informacije></trazene_informacije>
         <podaci_o_vremenu_i_mestu_podnosenja_zahteva>
             У
-            <mesto></mesto><br/>
+            <mesto></mesto>
             ,дана
             <dan></dan>
             202
