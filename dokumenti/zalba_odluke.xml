@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zalba_odluke>
+<zalba_odluke xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="zalba_odluke.xsd">
     <podnosilac_zalbe>
         <naziv_podnosioca>
             <ime></ime>
@@ -9,33 +9,31 @@
         <adresa>
             <ulica></ulica>
             <broj></broj>
-            <postanski_broj></postanski_broj>
             <grad></grad>
         </adresa>
         <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
-        <potpis></potpis>
+        
     </podnosilac_zalbe>
     <poverenik>
         <naziv_poverenika>
                 Повереникy за информације од јавног значаја и заштиту података о личности
         </naziv_poverenika>
         <sediste_poverenika>
-            Aдреса за пошту:
-            <grad>
-            Београд 
-            </grad>,
+            Aдреса за пошту:  
             <ulica>Булевар краља Александра</ulica>
             бр.
             <broj>15</broj> 
+            <grad>
+                Београд 
+            </grad>
         </sediste_poverenika>
     </poverenik>
     <naslov>
            ЖАЛБА ПРОТИВ ОДЛУКЕ ОРГАНА ВЛАСТИ КОЈОМ ЈЕ ОДБИЈЕН ИЛИ ОДБАЧЕН ЗАТЕВ ЗА ПРИСТУП ИНФОРМАЦИЈИ
     </naslov>
     <tekst_zalbe>
-        <zalba>
             Жалбa
-            <zalilac>
+            <podnosilac_zalbe>
                 <naziv_podnosioca>
                     <ime></ime>
                     <prezime></prezime>
@@ -44,12 +42,11 @@
                 <adresa>
                     <ulica></ulica>
                     <broj></broj>
-                    <postanski_broj></postanski_broj>
                     <grad></grad>
                 </adresa>
                 <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
-                <potpis></potpis>
-            </zalilac>
+                
+            </podnosilac_zalbe>
             против решења-закључка
             <organ_vlasti>
                 <naziv_organa></naziv_organa>
@@ -69,7 +66,7 @@
                 године и тако ми ускраћено-онемогућено остваривање уставног и законског права на 
                 слободан приступ информацијама од јавног значаја. Одлуку побијам у целости, односно 
                 у делу којим
-                <razlog> </razlog>
+                <razlog></razlog>
                 јер није заснована на Закону о слободном приступу информацијама од јавног значаја.
             </p>
             <p>
@@ -84,11 +81,9 @@
                 У
                 <mesto></mesto>
                 ,дана
-                <dan></dan>
-                ,202
-                <godina></godina> године
+                <datum></datum> године
             </podaci_o_trenutku>
-        </zalba>
+        
     </tekst_zalbe>
     <napomena>
         Напомена:
