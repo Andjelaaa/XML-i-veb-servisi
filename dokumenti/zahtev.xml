@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zahtev>
+<zahtev
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="zahtev.xsd">
     <podnosilac_zahteva>
         <naziv_podnosioca>
             <ime></ime>
@@ -9,7 +11,6 @@
         <adresa>
             <ulica></ulica>
             <broj></broj>
-            <postanski_broj></postanski_broj>
             <grad></grad>
         </adresa>
         <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
@@ -28,21 +29,22 @@
             јавног значаја („Службени гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10),
             од горе наведеног органа захтевам:*
         </p>
-       <izbori>
-           <izbor broj="1">обавештење да ли поседује тражену информацију;</izbor>
-           <izbor broj="2">увид у документ који садржи тражену информацију;</izbor>
-           <izbor broj="3">копију документа који садржи тражену информацију;</izbor>
-           <izbor broj="4">достављање копије документа који садржи тражену информацију:**
-                 <podizbori>
-                     <podizbor broj="1">поштом</podizbor>
-                     <podizbor broj="2">електронском поштом</podizbor>
-                     <podizbor broj="3">факсом</podizbor>
-                     <podizbor broj="4">на други начин:***</podizbor>
-                     <drugi_nacin></drugi_nacin>
-                 </podizbori>
-           </izbor>
-       </izbori>
-        
+        <p>
+            <izbori>
+                <izbor broj="1">обавештење да ли поседује тражену информацију;</izbor>
+                <izbor broj="2">увид у документ који садржи тражену информацију;</izbor>
+                <izbor broj="3">копију документа који садржи тражену информацију;</izbor>
+                <izbor broj="4">достављање копије документа који садржи тражену информацију:**
+                    <podizbori>
+                        <podizbor broj="1">поштом</podizbor>
+                        <podizbor broj="2">електронском поштом</podizbor>
+                        <podizbor broj="3">факсом</podizbor>
+                        <podizbor broj="4">на други начин:***</podizbor>
+                        <drugi_nacin></drugi_nacin>
+                    </podizbori>
+                </izbor>
+            </izbori>
+        </p>
         <p>
             Овај захтев се односи на следеће информације:
         </p>
@@ -51,9 +53,8 @@
             У
             <mesto></mesto>
             ,дана
-            <dan></dan>
-            202
-            <godina></godina> године
+            <datum></datum>
+            године
         </podaci_o_vremenu_i_mestu_podnosenja_zahteva>
         <fusnote>
             <fusnota broj="1">* У кућици означити која законска права на приступ информацијама желите да остварите.</fusnota>

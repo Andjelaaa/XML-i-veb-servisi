@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<obavestenje>
+<obavestenje
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="obavestenje.xsd">
     <podnosilac_zahteva>
         <naziv_podnosioca>
             <ime></ime>
@@ -9,14 +11,12 @@
         <adresa>
             <ulica></ulica>
             <broj></broj>
-            <postanski_broj></postanski_broj>
             <grad></grad>
         </adresa>
     </podnosilac_zahteva>
     <organ_vlasti>
         <naziv_organa_vlasti></naziv_organa_vlasti>
         <sediste_organa></sediste_organa>
-        <potpis></potpis>
     </organ_vlasti>
     <dostavljeno>
         Достављено:
@@ -34,8 +34,8 @@
                 тражену информацију и о изради копије
         </naslov>
         <p>
-            На основу члана 16. ст. 1. Закона о слободном приступу информацијама од јавног<br/>
-            значаја, поступајући по вашем захтеву за слободан приступ информацијама од <br/>
+            На основу члана 16. ст. 1. Закона о слободном приступу информацијама од јавног
+            значаја, поступајући по вашем захтеву за слободан приступ информацијама од
             <godina></godina>
             год.,којим сте тражили увид у документ/е са информацијама о / у вези са:
             <trazena_informacija></trazena_informacija>
