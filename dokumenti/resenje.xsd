@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:element name="dokument_resenje">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="naziv_resenja">
+                    <xs:complexType mixed="true">
+                        <xs:sequence>
+                            <xs:element name="odluka" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="zaglavlje" type="TZaglavlje"/>
+                <xs:element maxOccurs="unbounded" name="opis_postupka" type="xs:string"/>
+                <xs:element name="tekst_resenja" type="TTekst"/>
+                <xs:element name="tekst_obrazlozenja" type="TTekst"/>
+                <xs:element name="potpis_poverenika">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="40"/>
+                            <xs:minLength value="1"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="TZaglavlje" mixed="true">
+        <xs:sequence>
+            <xs:element name="broj_resenja" type="xs:string"/>
+            <xs:element name="datum">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string"> </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TTekst" mixed="true">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="p" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

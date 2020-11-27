@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dokument_resenje>
-    <naziv_resenja >
+<dokument_resenje
+    xsi:noNamespaceSchemaLocation="resenje.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <naziv_resenja>
         Решење <odluka>када је жалба основана – налаже се:</odluka>
     </naziv_resenja>
     <zaglavlje> 
