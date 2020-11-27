@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zalba_cutanje>
+<zalba_cutanje xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="zalba_cutanje.xsd">
     <podnosilac_zalbe>
         <naziv_podnosioca>
             <ime></ime>
@@ -7,13 +7,11 @@
             <naziv_firme></naziv_firme>
         </naziv_podnosioca>
         <adresa>
+            <grad></grad>
             <ulica></ulica>
             <broj></broj>
-            <postanski_broj></postanski_broj>
-            <grad></grad>
         </adresa>
         <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
-        <potpis></potpis>
     </podnosilac_zalbe>
     <poverenik>
         <naziv_poverenika>
@@ -21,63 +19,55 @@
         </naziv_poverenika>
         <sediste_poverenika>
             Aдреса за пошту: 
-            <grad>
-            Београд
-            </grad>
+            <grad>Београд</grad>
             , 
-            <ulica>
-            Булевар краља Александра
-            </ulica>
+            <ulica>Булевар краља Александра</ulica>
             бр.
-            <broj>
-            15
-            </broj>
+            <broj>15</broj>
         </sediste_poverenika>
     </poverenik>
     <naslov>
-        <b><center>
-            ЖАЛБА КАДА ОРГАН ВЛАСТИ НИЈЕ ПОСТУПИО/ није поступио у целости/ ПО ЗАХТЕВУ  ТРАЖИОЦА У ЗАКОНСКОМ 
-            РОКУ  (ЋУТАЊЕ УПРАВЕ)
-        </center></b>
+         ЖАЛБА КАДА ОРГАН ВЛАСТИ НИЈЕ ПОСТУПИО/ није поступио у целости/ ПО ЗАХТЕВУ  ТРАЖИОЦА У ЗАКОНСКОМ 
+         РОКУ  (ЋУТАЊЕ УПРАВЕ)
     </naslov>
     <tekst_zalbe>
+        <p>
         У складу са чланом 22. Закона о слободном приступу информација од јавног значаја подносим:
-        <zalba>
             Жалбу
             против
             <naziv_organa></naziv_organa>
-            <p>
+        </p>
+        
+        <p>
                 због тога што орган власти:
                 није поступио/ није поступио у целости/ у законском року
-            </p>
-            <p>
+         </p>
+         <p>
                 по мом захтеву за слободан приступ информацијама од јавног значаја
                 који сам поднео том органу дана
                 <datum></datum>
                 године, а којим сам тражио/ла да ми се у складу са Законом о слободном 
                 приступу информацијама од јавног значаја омогући увид- копија документа 
                 који садржи информације о/у вези са:
-                <podaci_o_zahtevu_i_informacijama></podaci_o_zahtevu_i_informacijama>
-            </p>
-            <p>
+                <podaci_o_zahtevu_i_informacijama></podaci_o_zahtevu_i_informacijama>              
+         </p>
+         <p>
                 На основу изнетог, предлажем да Повереник уважи моју жалбу и омогући ми
                 приступ траженој/им информацији/ма.
-            </p>
-            <p>
+         </p>
+         <p>
                 Као доказ, уз жалбу због непоступању по захтеву у целости, треба приложити и добијени одговор
                 органа власти.
-            </p>
-            <p>
+         </p>
+         <p>
                 Напомена: Код жалбе  због непоступању по захтеву у целости, треба приложити и добијени одговор органа власти. 
-            </p>
-            <podaci_o_vremenu_i_mestu_podnosenja_zalbe>
+         </p>
+         <podaci_o_vremenu_i_mestu_podnosenja_zalbe>
                 У
                 <mesto></mesto>
                 ,дана
-                <dan></dan>
-                202
-                <godina></godina> године
-            </podaci_o_vremenu_i_mestu_podnosenja_zalbe>
-        </zalba>
+                <datum></datum>
+                године
+          </podaci_o_vremenu_i_mestu_podnosenja_zalbe>
     </tekst_zalbe>
 </zalba_cutanje>
