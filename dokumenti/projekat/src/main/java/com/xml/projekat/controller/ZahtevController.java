@@ -3,6 +3,7 @@ package com.xml.projekat.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +23,9 @@ public class ZahtevController {
 		this.service = service;
 	}
 
-	@PostMapping()
-	public ResponseEntity<ZahtevDTO> getChangedXML(@RequestBody ZahtevDTO dto) throws Exception{
-		String response = service.playWithXML(dto);
+	@GetMapping()
+	public ResponseEntity<ZahtevDTO> parseZahtev() throws Exception{
+		String response = service.parseZahtev();
 		return new ResponseEntity<ZahtevDTO>(new ZahtevDTO(response), HttpStatus.OK);
 	}
 	/*

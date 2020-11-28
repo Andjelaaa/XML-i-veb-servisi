@@ -1,16 +1,12 @@
 package com.xml.projekat.service;
 
 
-import javax.xml.bind.JAXBContext;
-
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 import com.xml.projekat.dom.DOMParser;
-import com.xml.projekat.dto.ZahtevDTO;
 import com.xml.projekat.jaxb.JaxB;
+import com.xml.projekat.model.Zahtev;
 
 @Service
 public class ZahtevService {
@@ -22,18 +18,9 @@ public class ZahtevService {
 		this.jaxB = jaxB;
 	}
 
-	public String playWithXML(ZahtevDTO dto) throws Exception {
-		Document document = domParser.buildDocumentFromText(dto.getText());
-		NodeList profesori = document.getElementsByTagName("profesor");
-
-		for (int i = 0; i < profesori.getLength(); i++) {
-			Element profesor = (Element) profesori.item(i);
-			profesor.setAttribute("id", "prof" + i);
-
-			Element titula = document.createElement("Titila");
-			titula.appendChild(document.createTextNode("Profesor"));
-			profesor.appendChild(titula);
-		}
+	public String parseZahtev() throws Exception {
+		Document document = domParser.buildDocumentFromFile("C:\\Users\\teodo\\Desktop\\XML-i-veb-servisi\\dokumenti\\zahtev.xml");
+		Zahtev zahtev= domParser.parseZahtev(document);
 
 		return domParser.getDocumentAsString(document);
 

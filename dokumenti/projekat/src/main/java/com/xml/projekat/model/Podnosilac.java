@@ -15,6 +15,11 @@ public class Podnosilac {
 		this.prezime = prezime;
 		this.nazivFirme = nazivFirme;
 	}
+
+	@Override
+	public String toString() {
+		return "Podnosilac [ime=" + ime + ", prezime=" + prezime + ", nazivFirme=" + nazivFirme + "]";
+	}
 	
 	
 }

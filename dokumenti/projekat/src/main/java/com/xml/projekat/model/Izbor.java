@@ -20,6 +20,12 @@ public class Izbor {
 		this.podizbori = podizbori;
 		this.drugiNacin = drugiNacin;
 	}
+
+	@Override
+	public String toString() {
+		return "Izbor [broj=" + broj + ", tekst=" + tekst + ", podizbori=" + podizbori + ", drugiNacin=" + drugiNacin
+				+ "]";
+	}
 	
 	
 	

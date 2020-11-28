@@ -1,11 +1,21 @@
 package com.xml.projekat.dom;
 
+import static org.apache.xerces.jaxp.JAXPConstants.JAXP_SCHEMA_LANGUAGE;
+import static org.apache.xerces.jaxp.JAXPConstants.W3C_XML_SCHEMA;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -26,14 +36,11 @@ import org.w3c.dom.Text;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import static org.apache.xerces.jaxp.JAXPConstants.JAXP_SCHEMA_LANGUAGE;
-import static org.apache.xerces.jaxp.JAXPConstants.W3C_XML_SCHEMA;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.util.Scanner;;
+import com.xml.projekat.model.Adresa;
+import com.xml.projekat.model.Izbor;
+import com.xml.projekat.model.PZahtev;
+import com.xml.projekat.model.Podnosilac;
+import com.xml.projekat.model.Zahtev;;
 
 
 @Component
@@ -80,6 +87,80 @@ public class DOMParser {
 		
 	}
 	
+	public Zahtev parseZahtev(Document document) {
+		
+		String drugiPodaciZaKontakt = document.getElementsByTagName("drugi_podaci_za_kontakt").item(0).getTextContent();
+		String nazivOrganaVlasti = document.getElementsByTagName("naziv_organa_vlasti").item(0).getTextContent();
+		String sedisteOrgana = document.getElementsByTagName("sediste_organa").item(0).getTextContent();
+		String naslov = document.getElementsByTagName("naslov").item(0).getTextContent();
+		String trazeneInformacije = document.getElementsByTagName("trazene_informacije").item(0).getTextContent();
+		String datum = document.getElementsByTagName("datum").item(0).getTextContent();
+		String mesto = document.getElementsByTagName("mesto").item(0).getTextContent();
+		NodeList fusnote = document.getElementsByTagName("fusnota");
+		ArrayList<String> fusnoteLista = new ArrayList<String>();
+		for(int i = 0; i<fusnote.getLength(); i++) {
+			fusnoteLista.add(fusnote.item(i).getTextContent());
+		}
+		
+		NodeList paragrafi = document.getElementsByTagName("p");
+		ArrayList<PZahtev> paragrafiLista = new ArrayList<PZahtev>();
+		for(int i = 0; i<paragrafi.getLength(); i++) {			
+			String paragrafTekst = paragrafi.item(i).getTextContent();
+			NodeList izbori = paragrafi.item(i).getChildNodes();
+			ArrayList<Izbor> izborLista = new ArrayList<Izbor>();
+			if(izbori.getLength() != 0) {
+				System.out.println("TU SAMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"+i+" "+izbori.getLength());
+				
+				
+				NodeList izbor = izbori.item(0).getChildNodes();
+				for(int l = 0; l<izbori.getLength();l++) {
+					System.out.println(izbori.item(l).toString()+"elementtttt"+l);
+				}
+				
+				for(int j=0;j<izbor.getLength();j++) {
+					int broj = Integer.parseInt(izbor.item(j).getAttributes().getNamedItem("broj").toString());
+					String tekst = izbor.item(j).getTextContent();
+					HashMap<Integer, String> podizboriMapa = new HashMap<Integer, String>();
+					String drugiNacin = null;
+					
+					Node podizbori =  izbor.item(j).getFirstChild();
+					System.out.println(podizbori+"dkjfskgjg");
+					if(podizbori != null) {
+						NodeList podizbori2 = podizbori.getChildNodes();					
+						for(int k = 0; i<podizbori2.getLength()-1; k++) {
+							String podizborString = podizbori2.item(k).getTextContent();
+							int podizborBroj = Integer.parseInt(podizbori2.item(k).getAttributes().getNamedItem("broj").toString());
+							podizboriMapa.put(podizborBroj, podizborString);
+							
+							
+						}
+						drugiNacin = podizbori2.item(podizbori2.getLength()-1).getTextContent();				
+					}
+					
+					Izbor izborModel = new Izbor(broj, tekst, podizboriMapa, drugiNacin);
+					izborLista.add(izborModel);
+				}
+				
+			}
+			PZahtev paragraf = new PZahtev(paragrafTekst, izborLista);
+			paragrafiLista.add(paragraf);
+		}
+		
+		
+		String ulica = document.getElementsByTagName("ulica").item(0).getTextContent();
+		String broj = document.getElementsByTagName("broj").item(0).getTextContent();
+		String grad = document.getElementsByTagName("grad").item(0).getTextContent();
+		Adresa adresa = new Adresa(ulica, broj, grad);
+		
+		String ime = document.getElementsByTagName("ime").item(0).getTextContent();
+		String prezime = document.getElementsByTagName("prezime").item(0).getTextContent();
+		String nazivFirme = document.getElementsByTagName("naziv_firme").item(0).getTextContent();
+		Podnosilac podnosilac = new Podnosilac(ime, prezime, nazivFirme);
+		
+		Zahtev z = new Zahtev(podnosilac, adresa, drugiPodaciZaKontakt, nazivOrganaVlasti, sedisteOrgana, naslov, paragrafiLista, trazeneInformacije, datum, mesto, fusnoteLista);
+		System.out.println(z);
+		return z;
+	}
 	
 	public void printElement() {
 		

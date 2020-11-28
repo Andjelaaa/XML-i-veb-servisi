@@ -1,6 +1,8 @@
 package com.xml.projekat.model;
 
 public class Adresa {
+	
+
 	private String ulica;
 	private String broj;
 	private String grad;
@@ -16,5 +18,8 @@ public class Adresa {
 		this.grad = grad;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Adresa [ulica=" + ulica + ", broj=" + broj + ", grad=" + grad + "]";
+	}
 }
