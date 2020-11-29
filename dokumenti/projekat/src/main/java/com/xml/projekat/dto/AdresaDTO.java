@@ -1,31 +1,21 @@
-package com.xml.projekat.model;
+package com.xml.projekat.dto;
 
-import com.xml.projekat.dto.AdresaDTO;
-
-public class Adresa {
-	
-
+public class AdresaDTO {
 	private String ulica;
 	private String broj;
 	private String grad;
 	
-	public Adresa() {
+	public AdresaDTO() {
 		super();
 	}
 
-	public Adresa(String ulica, String broj, String grad) {
+	public AdresaDTO(String ulica, String broj, String grad) {
 		super();
 		this.ulica = ulica;
 		this.broj = broj;
 		this.grad = grad;
 	}
 	
-	public Adresa(AdresaDTO adresa) {
-		this.ulica = adresa.getUlica();
-		this.broj = adresa.getBroj();
-		this.grad =adresa.getGrad();
-	}
-
 	@Override
 	public String toString() {
 		return "Adresa [ulica=" + ulica + ", broj=" + broj + ", grad=" + grad + "]";
@@ -54,6 +44,5 @@ public class Adresa {
 	public void setGrad(String grad) {
 		this.grad = grad;
 	}
-	
-}
 
+}

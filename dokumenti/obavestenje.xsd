@@ -54,7 +54,8 @@
                                         <xs:element name="godina" maxOccurs="1" minOccurs="0"/>
                                         <xs:element name="trazena_informacija" maxOccurs="1"
                                             minOccurs="0" type="xs:string"/>
-                                        <xs:element name="dan" maxOccurs="1" minOccurs="0"/>
+                                        <xs:element name="dan" maxOccurs="1" minOccurs="0"
+                                            type="xs:string"/>
                                         <xs:element name="sati" maxOccurs="1" minOccurs="0"/>
                                         <xs:element name="od" maxOccurs="1" minOccurs="0"/>
                                         <xs:element name="do" maxOccurs="1" minOccurs="0"/>
@@ -73,7 +74,6 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:attribute name="stil " type="xs:string"/>
     <xs:complexType name="TPodnosilac">
         <xs:sequence>
             <xs:element name="ime" type="xs:string"/>

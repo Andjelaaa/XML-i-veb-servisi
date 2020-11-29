@@ -38,6 +38,8 @@ import org.xml.sax.SAXException;
 
 import com.xml.projekat.model.Adresa;
 import com.xml.projekat.model.Izbor;
+import com.xml.projekat.model.Obavestenje;
+import com.xml.projekat.model.PObavestenje;
 import com.xml.projekat.model.PZahtev;
 import com.xml.projekat.model.Podnosilac;
 import com.xml.projekat.model.Zahtev;;
@@ -220,6 +222,72 @@ public class DOMParser {
 	    
 		scanner.close();
 		System.out.println("[INFO] Kraj.");
+	}
+	public Obavestenje parseObavestenje(Document document) {
+		
+		String nazivOrganaVlasti = document.getElementsByTagName("naziv_organa_vlasti").item(0).getTextContent();
+		String sedisteOrgana = document.getElementsByTagName("sediste_organa").item(0).getTextContent();
+		String datum = document.getElementsByTagName("datum").item(0).getTextContent();
+		String naslov = document.getElementsByTagName("naslov").item(0).getTextContent();
+		String brojPredmeta = document.getElementsByTagName("broj_predmeta").item(0).getTextContent();
+		String mestoPecata = document.getElementsByTagName("mesto_pecata").item(0).getTextContent();
+
+		String ulica = document.getElementsByTagName("ulica").item(0).getTextContent();
+		String broj = document.getElementsByTagName("broj").item(0).getTextContent();
+		String grad = document.getElementsByTagName("grad").item(0).getTextContent();
+		Adresa adresa = new Adresa(ulica, broj, grad);
+		
+		String ime = document.getElementsByTagName("ime").item(0).getTextContent();
+		String prezime = document.getElementsByTagName("prezime").item(0).getTextContent();
+		String nazivFirme = document.getElementsByTagName("naziv_firme").item(0).getTextContent();
+		Podnosilac podnosilac = new Podnosilac(ime, prezime, nazivFirme);
+		
+		NodeList dostavljenoXML = document.getElementsByTagName("dostavljeno");
+		ArrayList<String> dostavljeno = new ArrayList<String>();
+		for(int i = 0; i<dostavljenoXML.getLength(); i++) {
+			dostavljeno.add(dostavljenoXML.item(i).getTextContent());
+		}
+		
+		//jos paragrafi
+		NodeList paragrafiXML =  document.getElementsByTagName("p");
+		ArrayList<PObavestenje> paragrafi = new ArrayList<PObavestenje>();
+		
+		for(int i = 0; i<paragrafiXML.getLength(); i++) {
+				String text = paragrafiXML.item(i).getTextContent().trim();
+				if(((Element) paragrafiXML.item(i)).getElementsByTagName("novcana_naknada").item(0)!= null && paragrafiXML.item(i) instanceof Element) {
+					System.out.println("pukni zoro necu kuci skoro");
+					String novcanaNaknada = ((Element) paragrafiXML.item(i)).getElementsByTagName("novcana_naknada").item(0).getTextContent();
+
+					PObavestenje pObavestenje = new PObavestenje(text,novcanaNaknada);
+					System.out.println(pObavestenje.toString1() +" DDDDDDDDDDD");
+					paragrafi.add(pObavestenje);
+				}
+				else if(((Element) paragrafiXML.item(i)).getElementsByTagName("godina").item(0)!= null &&  paragrafiXML.item(i) instanceof Element) {
+					
+					String godina = ((Element) paragrafiXML.item(i)).getElementsByTagName("godina").item(0).getTextContent();
+					String trazenaInformacija = ((Element) paragrafiXML.item(i)).getElementsByTagName("trazena_informacija").item(0).getTextContent();
+					String dan = ((Element) paragrafiXML.item(i)).getElementsByTagName("dan").item(0).getTextContent();
+					String sati = ((Element) paragrafiXML.item(i)).getElementsByTagName("sati").item(0).getTextContent();
+					String odSati = ((Element) paragrafiXML.item(i)).getElementsByTagName("od").item(0).getTextContent();
+					String doSati = ((Element) paragrafiXML.item(i)).getElementsByTagName("do").item(0).getTextContent();
+					String mesto =((Element) paragrafiXML.item(i)).getElementsByTagName("mesto").item(0).getTextContent();
+					String ulicaOb = ((Element) paragrafiXML.item(i)).getElementsByTagName("ulica").item(0).getTextContent();
+					String brojZgrade = ((Element) paragrafiXML.item(i)).getElementsByTagName("broj_zgrade").item(0).getTextContent();
+					String brojKancelarije = ((Element) paragrafiXML.item(i)).getElementsByTagName("broj_kancelarije").item(0).getTextContent();
+					
+					
+					PObavestenje pObavestenje = new PObavestenje(text, godina,trazenaInformacija,dan,sati, odSati, doSati, mesto, ulicaOb,
+							brojZgrade, brojKancelarije);
+				    System.out.println(pObavestenje);
+				    paragrafi.add(pObavestenje);
+				
+				}
+		}
+			
+		Obavestenje obavestenje = new Obavestenje(podnosilac, adresa, nazivOrganaVlasti, sedisteOrgana,dostavljeno,datum, naslov,
+				brojPredmeta,paragrafi, mestoPecata);
+		System.out.println(obavestenje);
+		return obavestenje;
 	}
 	
 	/**

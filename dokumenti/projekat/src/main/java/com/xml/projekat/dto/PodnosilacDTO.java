@@ -1,27 +1,23 @@
-package com.xml.projekat.model;
+package com.xml.projekat.dto;
 
-import com.xml.projekat.dto.PodnosilacDTO;
-
-public class Podnosilac {
+public class PodnosilacDTO {
 	private String ime;
 	private String prezime;
 	private String nazivFirme;
 	
-	public Podnosilac() {
+	public PodnosilacDTO() {
 		super();
 	}
 
-	public Podnosilac(String ime, String prezime, String nazivFirme) {
+	public PodnosilacDTO(String ime, String prezime, String nazivFirme) {
 		super();
 		this.ime = ime;
 		this.prezime = prezime;
 		this.nazivFirme = nazivFirme;
 	}
-
-	public Podnosilac(PodnosilacDTO podnosilac) {
-		this.ime = podnosilac.getIme();
-		this.prezime = podnosilac.getPrezime();
-		this.nazivFirme = podnosilac.getNazivFirme();
+	public PodnosilacDTO(String nazivFirme) {
+		super();
+		this.nazivFirme = nazivFirme;
 	}
 
 	@Override
@@ -53,5 +49,5 @@ public class Podnosilac {
 		this.nazivFirme = nazivFirme;
 	}
 	
-	
+
 }
