@@ -45,11 +45,13 @@ import com.xml.projekat.model.NazivOdluka;
 import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.model.PObavestenje;
 import com.xml.projekat.model.PZahtev;
+import com.xml.projekat.model.PZalbaOdluke;
 import com.xml.projekat.model.Podnosilac;
 import com.xml.projekat.model.Resenje;
 import com.xml.projekat.model.TTekst;
 import com.xml.projekat.model.TZaglavlje;
-import com.xml.projekat.model.Zahtev;;
+import com.xml.projekat.model.Zahtev;
+import com.xml.projekat.model.ZalbaOdluke;;
 
 
 @Component
@@ -96,7 +98,7 @@ public class DOMParser {
 		
 	}
 	
-	public Zahtev parseZahtev(Document document) {
+public Zahtev parseZahtev(Document document) {
 		
 		String drugiPodaciZaKontakt = document.getElementsByTagName("drugi_podaci_za_kontakt").item(0).getTextContent();
 		String nazivOrganaVlasti = document.getElementsByTagName("naziv_organa_vlasti").item(0).getTextContent();
@@ -114,40 +116,39 @@ public class DOMParser {
 		NodeList paragrafi = document.getElementsByTagName("p");
 		ArrayList<PZahtev> paragrafiLista = new ArrayList<PZahtev>();
 		for(int i = 0; i<paragrafi.getLength(); i++) {			
-			String paragrafTekst = paragrafi.item(i).getTextContent();
+			String paragrafTekst = ((Element)paragrafi.item(i)).getFirstChild().getTextContent();
+			
 			NodeList izbori = paragrafi.item(i).getChildNodes();
 			ArrayList<Izbor> izborLista = new ArrayList<Izbor>();
-			if(izbori.getLength() != 0) {
-				System.out.println("TU SAMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"+i+" "+izbori.getLength());
-				
-				
-				NodeList izbor = izbori.item(0).getChildNodes();
-				for(int l = 0; l<izbori.getLength();l++) {
-					System.out.println(izbori.item(l).toString()+"elementtttt"+l);
-				}
-				
-				for(int j=0;j<izbor.getLength();j++) {
-					int broj = Integer.parseInt(izbor.item(j).getAttributes().getNamedItem("broj").toString());
-					String tekst = izbor.item(j).getTextContent();
-					HashMap<Integer, String> podizboriMapa = new HashMap<Integer, String>();
-					String drugiNacin = null;
-					
-					Node podizbori =  izbor.item(j).getFirstChild();
-					System.out.println(podizbori+"dkjfskgjg");
-					if(podizbori != null) {
-						NodeList podizbori2 = podizbori.getChildNodes();					
-						for(int k = 0; i<podizbori2.getLength()-1; k++) {
-							String podizborString = podizbori2.item(k).getTextContent();
-							int podizborBroj = Integer.parseInt(podizbori2.item(k).getAttributes().getNamedItem("broj").toString());
-							podizboriMapa.put(podizborBroj, podizborString);
+			if(izbori.getLength() > 1) {
 							
+				NodeList izbor = izbori.item(1).getChildNodes();				
+				for(int j=0;j<izbor.getLength();j++) {
+					if(izbor.item(j) instanceof Element) {
+						int broj = Integer.parseInt(izbor.item(j).getAttributes().getNamedItem("broj").getTextContent());
+						String tekst = izbor.item(j).getFirstChild().getTextContent();
+						HashMap<Integer, String> podizboriMapa = new HashMap<Integer, String>();
+						String drugiNacin = null;
+						
+						NodeList podizboriAllChildren =  izbor.item(j).getChildNodes();
+						Node podizbori = podizboriAllChildren.item(1);
+						
+						if(podizbori != null) {
+							Element podizboriEl = (Element)podizbori;
+							NodeList podizbori2 = podizboriEl.getElementsByTagName("podizbor");
+							for(int k = 0; k<podizbori2.getLength(); k++) {		
+								int podizborBroj = Integer.parseInt(podizbori2.item(k).getAttributes().getNamedItem("broj").getTextContent());
+								String podizborString = podizbori2.item(k).getTextContent();
+								podizboriMapa.put(podizborBroj, podizborString);			
+							}
+							
+							drugiNacin = podizboriEl.getElementsByTagName("drugi_nacin").item(0).getTextContent();
 							
 						}
-						drugiNacin = podizbori2.item(podizbori2.getLength()-1).getTextContent();				
+						
+						Izbor izborModel = new Izbor(broj, tekst, podizboriMapa, drugiNacin);
+						izborLista.add(izborModel);
 					}
-					
-					Izbor izborModel = new Izbor(broj, tekst, podizboriMapa, drugiNacin);
-					izborLista.add(izborModel);
 				}
 				
 			}
@@ -213,6 +214,70 @@ public class DOMParser {
 				tekstObrazlozenja, potpisPoverenika);
 		System.out.println(r);
 		return r;
+	}
+	
+	public ZalbaOdluke parseZalbaOdluke(Document document)
+	{
+		String ime = document.getElementsByTagName("ime").item(0).getTextContent();
+		String prezime = document.getElementsByTagName("prezime").item(0).getTextContent();
+		String nazivFirme = document.getElementsByTagName("naziv_firme").item(0).getTextContent();
+		Podnosilac podnosilac = new Podnosilac(ime, prezime, nazivFirme);
+		
+		String drugiPodaciZaKontakt = document.getElementsByTagName("drugi_podaci_za_kontakt").item(0).getTextContent();
+		String nazivPoverenika = document.getElementsByTagName("naziv_poverenika").item(0).getTextContent();
+		
+		Element adresaElement = (Element)document.getElementsByTagName("adresa").item(0);
+		String ulica = adresaElement.getElementsByTagName("ulica").item(0).getTextContent();
+		String broj = adresaElement.getElementsByTagName("broj").item(0).getTextContent();
+		String grad = adresaElement.getElementsByTagName("grad").item(0).getTextContent();
+		Adresa adresa = new Adresa(ulica, broj, grad);
+		
+		Element sedisteElement = (Element)document.getElementsByTagName("sediste_poverenika").item(0);
+		String ulicaSediste = sedisteElement.getElementsByTagName("ulica").item(0).getTextContent();
+		String brojSediste = sedisteElement.getElementsByTagName("broj").item(0).getTextContent();
+		String gradSediste = sedisteElement.getElementsByTagName("grad").item(0).getTextContent();
+		Adresa adresaSediste = new Adresa(ulicaSediste, brojSediste, gradSediste);
+		
+		String naslov = document.getElementsByTagName("naslov").item(0).getTextContent();
+		String nazivOrganaVlasti = document.getElementsByTagName("naziv_organa").item(0).getTextContent();
+		
+		NodeList paragrafi = document.getElementsByTagName("p");
+		ArrayList<PZalbaOdluke> paragrafiLista = new ArrayList<PZalbaOdluke>();
+		for(int i = 0; i<paragrafi.getLength(); i++) 
+		{			
+			String paragrafTekst = paragrafi.item(i).getTextContent().trim();
+			String datum = null;
+			String razlog = null;
+			String brojZalbe = null;
+			String godinaOdbijanja = null;
+			if(((Element)paragrafi.item(i)).getElementsByTagName("datum").item(0)!=null) 
+				datum = ((Element)paragrafi.item(i)).getElementsByTagName("datum").item(0).getTextContent();
+			if(((Element)paragrafi.item(i)).getElementsByTagName("razlog").item(0)!=null) 
+				razlog = ((Element)paragrafi.item(i)).getElementsByTagName("razlog").item(0).getTextContent();
+			if(((Element)paragrafi.item(i)).getElementsByTagName("broj_zalbe").item(0)!=null)
+				brojZalbe = ((Element)paragrafi.item(i)).getElementsByTagName("broj_zalbe").item(0).getTextContent();
+			if(((Element)paragrafi.item(i)).getElementsByTagName("godina_odbijanja").item(0)!=null)
+				godinaOdbijanja = ((Element)paragrafi.item(i)).getElementsByTagName("godina_odbijanja").item(0).getTextContent();	
+
+			PZalbaOdluke pzo = new PZalbaOdluke(paragrafTekst, datum, razlog, brojZalbe, godinaOdbijanja);
+			paragrafiLista.add(pzo);
+			
+		}
+		
+		Element podaciDatumMesto = (Element)document.getElementsByTagName("podaci_o_trenutku").item(0);
+		
+		String datum = podaciDatumMesto.getElementsByTagName("datum").item(0).getTextContent();
+		String mesto = podaciDatumMesto.getElementsByTagName("mesto").item(0).getTextContent();
+		
+		NodeList tacke = document.getElementsByTagName("tacka");
+		ArrayList<String> tackeLista = new ArrayList<String>();
+		for(int j = 0; j<tacke.getLength();j++) {
+			tackeLista.add(tacke.item(j).getTextContent());
+		}
+
+		ZalbaOdluke zalba = new ZalbaOdluke(podnosilac, adresa, drugiPodaciZaKontakt, nazivPoverenika, adresaSediste, naslov, nazivOrganaVlasti, paragrafiLista, mesto, datum, tackeLista);
+		System.out.println(zalba);
+		return zalba;
 	}
 
 	
