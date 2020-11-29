@@ -304,6 +304,8 @@ public Zahtev parseZahtev(Document document) {
 		String gradSediste = sedisteElement.getElementsByTagName("grad").item(0).getTextContent();
 		Adresa adresaSediste = new Adresa(ulicaSediste, brojSediste, gradSediste);
 		
+		String naslov = document.getElementsByTagName("naslov").item(0).getTextContent();
+		
 		NodeList paragrafi = document.getElementsByTagName("p");
 		ArrayList<PZalbaCutanje> paragrafiLista = new ArrayList<PZalbaCutanje>();
 		for(int i = 0; i<paragrafi.getLength(); i++) 
@@ -315,15 +317,20 @@ public Zahtev parseZahtev(Document document) {
 				String podaciOZahtevuIInformacijama = ((Element)paragrafi.item(i)).getElementsByTagName("podaci_o_zahtevu_i_informacijama").item(0).getTextContent();
 				PZalbaCutanje paragraf = new PZalbaCutanje(paragrafTekst, datum, podaciOZahtevuIInformacijama);
 				paragrafiLista.add(paragraf);
-			}else
+			
+			}else if(((Element)paragrafi.item(i)).getElementsByTagName("naziv_organa").item(0)!=null)
+			{
+				String nazivOrgana = ((Element)paragrafi.item(i)).getElementsByTagName("naziv_organa").item(0).getTextContent();
+				PZalbaCutanje paragraf = new PZalbaCutanje(paragrafTekst, nazivOrgana);
+				paragrafiLista.add(paragraf);
+			}
+			else
 			{
 				PZalbaCutanje paragraf = new PZalbaCutanje(paragrafTekst);
 				paragrafiLista.add(paragraf);
 			}
 			
 		}
-		
-		String naslov = "";
 		
 		Element podaciDatumMesto = (Element)document.getElementsByTagName("podaci_o_vremenu_i_mestu_podnosenja_zalbe").item(0);
 		
