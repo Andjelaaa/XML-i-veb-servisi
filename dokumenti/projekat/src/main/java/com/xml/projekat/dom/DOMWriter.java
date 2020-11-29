@@ -1,6 +1,7 @@
 package com.xml.projekat.dom;
 
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -19,6 +20,7 @@ import org.w3c.dom.Element;
 
 import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.model.PObavestenje;
+import com.xml.projekat.model.Resenje;
 
 /**
  * 
@@ -139,7 +141,64 @@ public class DOMWriter {
 		
 	}
 	
-	
+	public void generateResenje(Resenje resenje) {
+		createDocument();
+		SimpleDateFormat formatter = new SimpleDateFormat("MM.dd.yyyy.");
+		
+		Element dokumentResenje = document.createElement("dokument_resenje");
+		document.appendChild(dokumentResenje);
+		
+		dokumentResenje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation", "C:\\Users\\Admin\\Desktop\\VII semestar\\XML I VEB SERVISI\\XML-i-veb-servisi\\dokumenti\\resenje.xsd");
+		
+		Element nazivResenja = document.createElement("naziv_resenja");
+		nazivResenja.appendChild(document.createTextNode(resenje.getNazivOdluka().getNazivResenja()));
+		Element odluka = document.createElement("odluka");
+		odluka.appendChild(document.createTextNode(resenje.getNazivOdluka().getOdluka()));
+		
+		nazivResenja.appendChild(odluka);
+		
+		Element zaglavlje = document.createElement("zaglavlje");
+		zaglavlje.appendChild(document.createTextNode("BR"));
+		Element brojResenja = document.createElement("broj_resenja");
+		brojResenja.appendChild(document.createTextNode(resenje.getZaglavlje().getBrojResenja()));
+		Element datum = document.createElement("datum");
+		datum.appendChild(document.createTextNode(formatter.format(resenje.getZaglavlje().getDatum())));
+		
+		zaglavlje.appendChild(brojResenja);
+		zaglavlje.appendChild(document.createTextNode("Datum"));
+		zaglavlje.appendChild(datum);
+		
+		Element opisPostupka = document.createElement("opis_postupka");
+		opisPostupka.appendChild(document.createTextNode(resenje.getOpisPostupka()));
+		Element potpisPoverenika = document.createElement("potpis_poverenika");
+		potpisPoverenika.appendChild(document.createTextNode(resenje.getPotpisPoverenika()));
+		
+		Element tekstResenja = document.createElement("tekst_resenja");
+		tekstResenja.appendChild(document.createTextNode(resenje.getTekstResenja().getTekst()));
+		
+		Element tekstObrazlozenja= document.createElement("tekst_obrazlozenja");
+		tekstObrazlozenja.appendChild(document.createTextNode(resenje.getTekstObrazlozenja().getTekst()));
+		
+		Element paragraf = document.createElement("p");
+		
+		for(int i = 0; i<resenje.getTekstResenja().getParagrafi().size(); i++) {
+			tekstResenja.appendChild(paragraf);
+			paragraf.appendChild(document.createTextNode(resenje.getTekstResenja().getParagrafi().get(i)));
+		}
+		
+		for(int i = 0; i<resenje.getTekstObrazlozenja().getParagrafi().size(); i++) {
+			tekstObrazlozenja.appendChild(paragraf);
+			paragraf.appendChild(document.createTextNode(resenje.getTekstObrazlozenja().getParagrafi().get(i)));
+		}
+		
+		dokumentResenje.appendChild(nazivResenja);
+		dokumentResenje.appendChild(zaglavlje);
+		dokumentResenje.appendChild(opisPostupka);
+		dokumentResenje.appendChild(tekstResenja);
+		dokumentResenje.appendChild(tekstObrazlozenja);
+		dokumentResenje.appendChild(potpisPoverenika);
+		
+	}
 	
 	public void generateDOMObavestenje(Obavestenje ob) {
 		

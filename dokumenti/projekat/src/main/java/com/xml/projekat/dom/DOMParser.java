@@ -7,7 +7,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -38,10 +41,14 @@ import org.xml.sax.SAXException;
 
 import com.xml.projekat.model.Adresa;
 import com.xml.projekat.model.Izbor;
+import com.xml.projekat.model.NazivOdluka;
 import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.model.PObavestenje;
 import com.xml.projekat.model.PZahtev;
 import com.xml.projekat.model.Podnosilac;
+import com.xml.projekat.model.Resenje;
+import com.xml.projekat.model.TTekst;
+import com.xml.projekat.model.TZaglavlje;
 import com.xml.projekat.model.Zahtev;;
 
 
@@ -163,6 +170,51 @@ public class DOMParser {
 		System.out.println(z);
 		return z;
 	}
+	
+	public Resenje parseResenje(Document document) throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat("MM.dd.yyyy."); 
+		
+		String opisPostupka = document.getElementsByTagName("opis_postupka").item(0).getTextContent();
+		
+		String brojResenja = document.getElementsByTagName("broj_resenja").item(0).getTextContent();
+		String datumString = document.getElementsByTagName("datum").item(0).getTextContent();
+		
+		Date datum = formatter.parse(datumString.replaceAll("\\s",""));
+		TZaglavlje zaglavlje = new TZaglavlje(brojResenja, datum);
+		
+		String nazivResenja = document.getElementsByTagName("naziv_resenja").item(0).getChildNodes().item(0).getTextContent();
+		String odluka = document.getElementsByTagName("odluka").item(0).getTextContent();
+		NazivOdluka nazivOdluka = new NazivOdluka(nazivResenja, odluka);
+		
+		String potpisPoverenika = document.getElementsByTagName("potpis_poverenika").item(0).getTextContent();
+		
+		String txtResenja = document.getElementsByTagName("tekst_resenja").item(0).getChildNodes().item(0).getTextContent();
+		String txtObrazlozenja = document.getElementsByTagName("tekst_obrazlozenja").item(0).getChildNodes().item(0).getTextContent();
+		
+		ArrayList<String> paragrafiResenja = new ArrayList<String>();
+		ArrayList<String> paragrafiObrazlozenja = new ArrayList<String>();
+		
+		NodeList paragrafi= document.getElementsByTagName("p");
+		
+		for(int i = 0; i<paragrafi.getLength(); i++) {
+			if (paragrafi.item(i).getParentNode().equals(document.getElementsByTagName("tekst_resenja").item(0))) {
+				paragrafiResenja.add(paragrafi.item(i).getTextContent());
+			}
+			else {
+				paragrafiObrazlozenja.add(paragrafi.item(i).getTextContent());
+			}
+		}
+		
+		TTekst tekstResenja = new TTekst(txtResenja,paragrafiResenja);
+		TTekst tekstObrazlozenja = new TTekst(txtObrazlozenja,paragrafiObrazlozenja);
+		
+		
+		Resenje r = new Resenje(nazivOdluka, zaglavlje, opisPostupka, tekstResenja,
+				tekstObrazlozenja, potpisPoverenika);
+		System.out.println(r);
+		return r;
+	}
+
 	
 	public void printElement() {
 		
