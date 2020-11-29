@@ -45,12 +45,14 @@ import com.xml.projekat.model.NazivOdluka;
 import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.model.PObavestenje;
 import com.xml.projekat.model.PZahtev;
+import com.xml.projekat.model.PZalbaCutanje;
 import com.xml.projekat.model.PZalbaOdluke;
 import com.xml.projekat.model.Podnosilac;
 import com.xml.projekat.model.Resenje;
 import com.xml.projekat.model.TTekst;
 import com.xml.projekat.model.TZaglavlje;
 import com.xml.projekat.model.Zahtev;
+import com.xml.projekat.model.ZalbaCutanje;
 import com.xml.projekat.model.ZalbaOdluke;;
 
 
@@ -280,6 +282,58 @@ public Zahtev parseZahtev(Document document) {
 		return zalba;
 	}
 
+	public ZalbaCutanje parseZalbaCutanje(Document document)
+	{
+		String ime = document.getElementsByTagName("ime").item(0).getTextContent();
+		String prezime = document.getElementsByTagName("prezime").item(0).getTextContent();
+		String nazivFirme = document.getElementsByTagName("naziv_firme").item(0).getTextContent();
+		Podnosilac podnosilac = new Podnosilac(ime, prezime, nazivFirme);
+		
+		String drugiPodaciZaKontakt = document.getElementsByTagName("drugi_podaci_za_kontakt").item(0).getTextContent();
+		String nazivPoverenika = document.getElementsByTagName("naziv_poverenika").item(0).getTextContent();
+		
+		Element adresaElement = (Element)document.getElementsByTagName("adresa").item(0);
+		String ulica = adresaElement.getElementsByTagName("ulica").item(0).getTextContent();
+		String broj = adresaElement.getElementsByTagName("broj").item(0).getTextContent();
+		String grad = adresaElement.getElementsByTagName("grad").item(0).getTextContent();
+		Adresa adresa = new Adresa(ulica, broj, grad);
+		
+		Element sedisteElement = (Element)document.getElementsByTagName("sediste_poverenika").item(0);
+		String ulicaSediste = sedisteElement.getElementsByTagName("ulica").item(0).getTextContent();
+		String brojSediste = sedisteElement.getElementsByTagName("broj").item(0).getTextContent();
+		String gradSediste = sedisteElement.getElementsByTagName("grad").item(0).getTextContent();
+		Adresa adresaSediste = new Adresa(ulicaSediste, brojSediste, gradSediste);
+		
+		NodeList paragrafi = document.getElementsByTagName("p");
+		ArrayList<PZalbaCutanje> paragrafiLista = new ArrayList<PZalbaCutanje>();
+		for(int i = 0; i<paragrafi.getLength(); i++) 
+		{			
+			String paragrafTekst = paragrafi.item(i).getTextContent().trim();
+			if(((Element)paragrafi.item(i)).getElementsByTagName("datum").item(0)!=null)
+			{
+				String datum = ((Element)paragrafi.item(i)).getElementsByTagName("datum").item(0).getTextContent();
+				String podaciOZahtevuIInformacijama = ((Element)paragrafi.item(i)).getElementsByTagName("podaci_o_zahtevu_i_informacijama").item(0).getTextContent();
+				PZalbaCutanje paragraf = new PZalbaCutanje(paragrafTekst, datum, podaciOZahtevuIInformacijama);
+				paragrafiLista.add(paragraf);
+			}else
+			{
+				PZalbaCutanje paragraf = new PZalbaCutanje(paragrafTekst);
+				paragrafiLista.add(paragraf);
+			}
+			
+		}
+		
+		String naslov = "";
+		
+		Element podaciDatumMesto = (Element)document.getElementsByTagName("podaci_o_vremenu_i_mestu_podnosenja_zalbe").item(0);
+		
+		String datum = podaciDatumMesto.getElementsByTagName("datum").item(0).getTextContent();
+		String mesto = podaciDatumMesto.getElementsByTagName("mesto").item(0).getTextContent();
+
+		ZalbaCutanje zalba = new ZalbaCutanje(podnosilac, adresa, drugiPodaciZaKontakt, nazivPoverenika, adresaSediste, naslov, paragrafiLista, datum, mesto);
+		System.out.println(zalba);
+		return zalba;
+	}
 	
 	public void printElement() {
 		

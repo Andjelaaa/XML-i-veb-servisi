@@ -20,8 +20,10 @@ import org.w3c.dom.Element;
 
 import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.model.PObavestenje;
+import com.xml.projekat.model.PZalbaCutanje;
 import com.xml.projekat.model.PZalbaOdluke;
 import com.xml.projekat.model.Resenje;
+import com.xml.projekat.model.ZalbaCutanje;
 import com.xml.projekat.model.ZalbaOdluke;
 
 /**
@@ -580,6 +582,120 @@ public class DOMWriter {
 		return document;
 	
 	}
+	
+	public Document generateZalbaCutanje(ZalbaCutanje zc)
+	{
+		createDocument();
+		// Kreiranje i postavljanje korenskog elementa
+		Element zalbaCutanje = document.createElement("zalba_cutanje");
+		document.appendChild(zalbaCutanje);
+		
+		Element podnosilacZalbe = document.createElement("podnosilac_zalbe");		
+		Element nazivPodnosioca = document.createElement("naziv_podnosioca");		
+		Element ime = document.createElement("ime");
+		ime.appendChild(document.createTextNode(zc.getPodnosilac().getIme()));
+		nazivPodnosioca.appendChild(ime);		
+		Element prezime = document.createElement("prezime");
+		prezime.appendChild(document.createTextNode(zc.getPodnosilac().getPrezime()));
+		nazivPodnosioca.appendChild(prezime);	
+		Element naziv_firme = document.createElement("naziv_firme");
+		naziv_firme.appendChild(document.createTextNode(zc.getPodnosilac().getNazivFirme()));
+		nazivPodnosioca.appendChild(naziv_firme);
+		podnosilacZalbe.appendChild(nazivPodnosioca);
+		
+		Element adresaPodnosioca = document.createElement("adresa");
+		Element ulica = document.createElement("ulica");
+		ulica.appendChild(document.createTextNode(zc.getAdresa().getUlica()));
+		adresaPodnosioca.appendChild(ulica);
+		Element broj = document.createElement("broj");
+		broj.appendChild(document.createTextNode(zc.getAdresa().getBroj()));
+		adresaPodnosioca.appendChild(broj);
+		Element grad = document.createElement("grad");
+		grad.appendChild(document.createTextNode(zc.getAdresa().getGrad()));
+		adresaPodnosioca.appendChild(grad);
+		podnosilacZalbe.appendChild(adresaPodnosioca);
+		Element drugiPodaciZaKontakt = document.createElement("drugi_podaci_za_kontakt");
+		drugiPodaciZaKontakt.appendChild(document.createTextNode(zc.getDrugiPodaciZaKontakt()));
+		podnosilacZalbe.appendChild(drugiPodaciZaKontakt);
+		zalbaCutanje.appendChild(podnosilacZalbe);
+		
+		Element poverenik = document.createElement("poverenik");
+		Element nazivPoverenika = document.createElement("naziv_poverenika");
+		nazivPoverenika.appendChild(document.createTextNode(zc.getNazivPoverenika()));
+		poverenik.appendChild(nazivPoverenika);
+		Element sedistePoverenika = document.createElement("sediste_poverenika");
+		sedistePoverenika.appendChild(document.createTextNode("Aдреса за пошту:"));
+		Element ulica2 = document.createElement("ulica");
+		ulica2.appendChild(document.createTextNode(zc.getSedistePoverenika().getUlica()));
+		Element broj2 = document.createElement("broj");
+		broj2.appendChild(document.createTextNode(zc.getSedistePoverenika().getBroj()));
+		Element grad2 = document.createElement("grad");
+		grad2.appendChild(document.createTextNode(zc.getSedistePoverenika().getGrad()));
+		sedistePoverenika.appendChild(ulica2);
+		sedistePoverenika.appendChild(document.createTextNode("бр."));
+		sedistePoverenika.appendChild(broj2);
+		sedistePoverenika.appendChild(grad2);
+		poverenik.appendChild(sedistePoverenika);
+		zalbaCutanje.appendChild(poverenik);
+		
+		Element naslov = document.createElement("naslov");
+		naslov.appendChild(document.createTextNode(zc.getNaslov()));
+		zalbaCutanje.appendChild(naslov);
+		
+		Element tekstZalbe = document.createElement("tekst_zalbe");
+		for (PZalbaCutanje pzc : zc.getParagrafi()) 
+		{
+			Element p = document.createElement("p");
+			if(pzc.getNazivOrgana() != null) {
+				p.appendChild(document.createTextNode(pzc.getText()));
+				Element organ = document.createElement("naziv_organa");
+				organ.appendChild(document.createTextNode(pzc.getNazivOrgana()));
+				p.appendChild(organ);
+				
+			}else if(pzc.getDatum()!= null && pzc.getPodaciOZahtevuIInformacijama() != null) {
+				p.appendChild(document.createTextNode(pzc.getText()));
+				Element datum = document.createElement("datum");
+				datum.appendChild(document.createTextNode(pzc.getDatum()));
+				p.appendChild(datum);
+				p.appendChild(document.createTextNode("године, а којим сам тражио/ла да ми се у складу са Законом о слободном \r\n"
+						+ "                приступу информацијама од јавног значаја омогући увид- копија документа \r\n"
+						+ "                који садржи информације о/у вези са:"));
+				Element informacije = document.createElement("podaci_o_zahtevu_i_informacijama");
+				informacije.appendChild(document.createTextNode(pzc.getPodaciOZahtevuIInformacijama()));
+				p.appendChild(informacije);
+				
+			}else {
+				p.appendChild(document.createTextNode(pzc.getText()));
+			}
+			
+			tekstZalbe.appendChild(p);
+		}
+		
+		Element podaciOTrenutku = document.createElement("podaci_o_vremenu_i_mestu_podnosenja_zalbe");
+		podaciOTrenutku.appendChild(document.createTextNode("У"));
+		Element mesto = document.createElement("mesto");
+		mesto.appendChild(document.createTextNode(zc.getMestoZalbe()));
+		podaciOTrenutku.appendChild(mesto);
+		podaciOTrenutku.appendChild(document.createTextNode(",дана"));
+		Element datum = document.createElement("datum");
+		datum.appendChild(document.createTextNode(zc.getDatumZalbe()));
+		podaciOTrenutku.appendChild(datum);
+		podaciOTrenutku.appendChild(document.createTextNode(" године"));
+		tekstZalbe.appendChild(podaciOTrenutku);
+		
+		transform(System.out);
+		
+		// stampa u fajl po izboru
+//		try {
+//			transform(new FileOutputStream("C:\\Users\\teodo\\Desktop\\NOVIXMLZALBA.xml"));
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+		
+		return document;
+
+	}
+	
 	/**
 	 * Serializes DOM tree to an arbitrary OutputStream.
 	 */
