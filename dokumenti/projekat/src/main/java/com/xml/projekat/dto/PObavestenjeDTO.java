@@ -1,9 +1,13 @@
 package com.xml.projekat.dto;
 
+import java.util.ArrayList;
+
+import com.xml.projekat.model.PObavestenje;
+
 public class PObavestenjeDTO {
+	
 	private String godina;
 	private String trazenaInformacija;
-
 	private String dan;
 	private String sati;
 	private String odSati;
@@ -32,18 +36,26 @@ public class PObavestenjeDTO {
 		this.brojKancelarije = brojKancelarije;
 		this.novcanaNaknada = novcanaNaknada;
 	}
-	public PObavestenjeDTO(PObavestenjeDTO pObavestenjeDTO) {
-		this.godina = pObavestenjeDTO.getGodina();
-		this.trazenaInformacija = pObavestenjeDTO.getTrazenaInformacija();
-		this.dan = pObavestenjeDTO.getDan();
-		this.sati = pObavestenjeDTO.getSati();
-		this.odSati = pObavestenjeDTO.getOdSati();
-		this.doSati = pObavestenjeDTO.getDoSati();
-		this.mesto = pObavestenjeDTO.getMesto();
-		this.ulica = pObavestenjeDTO.getUlica();
-		this.brojZgrade = pObavestenjeDTO.getBrojZgrade();
-		this.brojKancelarije = pObavestenjeDTO.getBrojKancelarije();
-		this.novcanaNaknada = pObavestenjeDTO.getNovcanaNaknada();
+	
+	public static ArrayList<PObavestenjeDTO> konverter(ArrayList<PObavestenje> pobavestenjeDTO) {
+		ArrayList<PObavestenjeDTO> dto = new ArrayList<PObavestenjeDTO>();
+		for(PObavestenje p: pobavestenjeDTO) {
+			PObavestenjeDTO po = new PObavestenjeDTO();
+			po.setGodina(p.getGodina());
+			po.setTrazenaInformacija(p.getTrazenaInformacija());
+			po.setDan(p.getDan());
+			po.setOdSati(p.getOdSati());
+			po.setDoSati(p.getDoSati());
+			po.setMesto(p.getMesto());
+			po.setUlica(p.getUlica());
+			po.setBrojZgrade(p.getBrojZgrade());
+			po.setBrojKancelarije(p.getBrojKancelarije());
+			po.setNovcanaNaknada(p.getNovcanaNaknada());
+			dto.add(po);
+			
+		}
+		return dto;	
+		
 	}
 	public String getDoSati() {
 		return doSati;
@@ -113,6 +125,13 @@ public class PObavestenjeDTO {
 	}
 	public void setNovcanaNaknada(String novcanaNaknada) {
 		this.novcanaNaknada = novcanaNaknada;
+	}
+	@Override
+	public String toString() {
+		return "PObavestenjeDTO [godina=" + godina + ", trazenaInformacija=" + trazenaInformacija + ", dan=" + dan
+				+ ", sati=" + sati + ", odSati=" + odSati + ", doSati=" + doSati + ", mesto=" + mesto + ", ulica="
+				+ ulica + ", brojZgrade=" + brojZgrade + ", brojKancelarije=" + brojKancelarije + ", novcanaNaknada="
+				+ novcanaNaknada + "]";
 	}
 	
 	

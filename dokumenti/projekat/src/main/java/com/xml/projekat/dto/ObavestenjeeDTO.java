@@ -1,40 +1,54 @@
 package com.xml.projekat.dto;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import com.xml.projekat.model.Adresa;
+import com.xml.projekat.model.Obavestenje;
+import com.xml.projekat.model.PObavestenje;
+import com.xml.projekat.model.Podnosilac;
 
 public class ObavestenjeeDTO {
-	@Override
-	public String toString() {
-		return "ObavestenjeeDTO [podnosilac=" + podnosilac + ", adresa=" + adresa + ", nazivOrganaVlasti="
-				+ nazivOrganaVlasti + ", sedisteOrgana=" + sedisteOrgana + ", dostavljeno=" + dostavljeno + ", datum="
-				+ datum + ", naslov=" + naslov + ", brojPredmeta=" + brojPredmeta + ", mestoPecata=" + mestoPecata
-				+ ", listaPObavestanja =" + listaPObavestenja + ", getPodnosilac()=" + getPodnosilac() + ", getAdresa()="
-				+ getAdresa() + ", getNazivOrganaVlasti()=" + getNazivOrganaVlasti() + ", getSedisteOrgana()="
-				+ getSedisteOrgana() + ", getDostavljeno()=" + getDostavljeno() + ", getDatum()=" + getDatum()
-				+ ", getNaslov()=" + getNaslov() + ", getBrojPredmeta()=" + getBrojPredmeta() + ", getMestoPecata()="
-				+ getMestoPecata() + ", getPObavestenjeDTO()=" + getPObavestenjeDTO() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-	}
-
 	private PodnosilacDTO podnosilac;
 	private AdresaDTO adresa;
 	
 	private String nazivOrganaVlasti;
 	private String sedisteOrgana;
 	
-	private String dostavljeno;
+	private ArrayList<String> dostavljeno;
 	
 	private String datum;
 	private String naslov;
 	private String brojPredmeta;
 
 	private String mestoPecata;
-	private List<PObavestenjeDTO> listaPObavestenja;
+	private ArrayList<PObavestenjeDTO> pobavestenjeDTO;
 
+	
 	public ObavestenjeeDTO() {
 		super();
 	}
+  
+	public ObavestenjeeDTO(Obavestenje o) {
+		this(o.getPodnosilac(),o.getAdresa(),o.getNazivOrganaVlasti(),o.getSedisteOrgana(),
+				o.getDostavljeno(),o.getDatum(),o.getNaslov(),o.getBrojPredmeta(),o.getMestoPecata(),o.getParagrafi());
+	}
+	public ObavestenjeeDTO(Podnosilac podnosilac, Adresa adresa, String nazivOrganaVlasti, String sedisteOrgana,
+			ArrayList<String> dostavljeno, String datum, String naslov, String brojPredmeta, String mestoPecata,
+			ArrayList<PObavestenje> pobavestenje) {
+		// TODO Auto-generated constructor stub
+		this.podnosilac = new PodnosilacDTO(podnosilac);
+		this.adresa = new AdresaDTO(adresa);
+		this.nazivOrganaVlasti = nazivOrganaVlasti;
+		this.sedisteOrgana = sedisteOrgana;
+		this.dostavljeno = dostavljeno;
+		this.datum = datum;
+		this.naslov = naslov;
+		this.brojPredmeta = brojPredmeta;
+		this.mestoPecata = mestoPecata;
+		this.pobavestenjeDTO = PObavestenjeDTO.konverter(pobavestenje);
+		
+	}
+	
 
 	public PodnosilacDTO getPodnosilac() {
 		return podnosilac;
@@ -68,11 +82,11 @@ public class ObavestenjeeDTO {
 		this.sedisteOrgana = sedisteOrgana;
 	}
 
-	public String getDostavljeno() {
+	public ArrayList<String> getDostavljeno() {
 		return dostavljeno;
 	}
 
-	public void setDostavljeno(String dostavljeno) {
+	public void setDostavljeno(ArrayList<String> dostavljeno) {
 		this.dostavljeno = dostavljeno;
 	}
 
@@ -108,12 +122,21 @@ public class ObavestenjeeDTO {
 		this.mestoPecata = mestoPecata;
 	}
 
-	public List<PObavestenjeDTO> getPObavestenjeDTO() {
-		return this.listaPObavestenja;
+
+	public ArrayList<PObavestenjeDTO> getPobavestenjeDTO() {
+		return pobavestenjeDTO;
 	}
 
-	public void setPObavestenjeDTO(List<PObavestenjeDTO> pObavestenjeDTO) {
-		this.listaPObavestenja = pObavestenjeDTO;
+	public void setPobavestenjeDTO(ArrayList<PObavestenjeDTO> pobavestenjeDTO) {
+		this.pobavestenjeDTO = pobavestenjeDTO;
 	}
+
+	public String toString() {
+		return "ObavestenjeeDTO [podnosilac=" + podnosilac + ", adresa=" + adresa + ", nazivOrganaVlasti="
+				+ nazivOrganaVlasti + ", sedisteOrgana=" + sedisteOrgana + ", dostavljeno=" + dostavljeno + ", datum="
+				+ datum + ", naslov=" + naslov + ", brojPredmeta=" + brojPredmeta + ", mestoPecata=" + mestoPecata
+				+ "\n, klasa sa atributima =" + pobavestenjeDTO +  "]";
+	}
+
 
 }

@@ -76,75 +76,7 @@ public class DOMWriter {
 	 * Generates sample document object model 
 	 * programmatically using DOM API methods. 
 	 */
-	public void generateDOM() {
-		// Kreiranje i postavljanje korenskog elementa
-		Element rad = document.createElementNS(TARGET_NAMESPACE, "rad");
-		document.appendChild(rad);
 		
-		rad.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation", "http://www.ftn.uns.ac.rs/zavrsni_rad ../xsd/zavrsni_rad.xsd");
-		rad.setAttribute("vrsta_rada", "Diplomski rad");		
-		
-		Element naslovnaStrana = document.createElementNS(TARGET_NAMESPACE, "naslovna_strana");
-		rad.appendChild(naslovnaStrana);
-		
-		Element institucija = document.createElementNS(TARGET_NAMESPACE, "institucija");
-		naslovnaStrana.appendChild(institucija);
-		
-		Element univerzitet = document.createElementNS(TARGET_NAMESPACE, "univerzitet");
-		univerzitet.appendChild(document.createTextNode("Univerzitet u Novom Sadu"));
-		institucija.appendChild(univerzitet);
-
-		Element fakultet = document.createElementNS(TARGET_NAMESPACE, "fakultet");
-		fakultet.appendChild(document.createTextNode("Fakultet tehničkih nauka"));
-		institucija.appendChild(fakultet);
-		
-		Element departman = document.createElementNS(TARGET_NAMESPACE, "departman");
-		departman.appendChild(document.createTextNode("Računarstvo i automatika"));
-		institucija.appendChild(departman);
-
-		Element katedra = document.createElementNS(TARGET_NAMESPACE, "katedra");
-		katedra.appendChild(document.createTextNode("Katedra za informatiku"));
-		institucija.appendChild(katedra);
-		
-		Element autor = document.createElementNS(TARGET_NAMESPACE, "autor");
-		naslovnaStrana.appendChild(autor);
-		
-		Element ime = document.createElementNS(TARGET_NAMESPACE, "ime");
-		ime.appendChild(document.createTextNode("Petar"));
-		autor.appendChild(ime);
-		
-		Element prezime = document.createElementNS(TARGET_NAMESPACE, "prezime");
-		prezime.appendChild(document.createTextNode("Petrović"));
-		autor.appendChild(prezime);
-		
-		Element broj_indeksa = document.createElementNS(TARGET_NAMESPACE, "broj_indeksa");
-		broj_indeksa.appendChild(document.createTextNode("RA 1/2012"));
-		autor.appendChild(broj_indeksa);
-		
-		Element temaSrpski = document.createElementNS(TARGET_NAMESPACE, "tema_rada");
-		temaSrpski.setAttribute("jezik", "srpski");
-		temaSrpski.appendChild(document.createTextNode("Implementacija podsistema banke u okviru sistema platnog prometa."));
-		naslovnaStrana.appendChild(temaSrpski);
-
-		Element temaEngleski = document.createElementNS(TARGET_NAMESPACE, "tema_rada");
-		temaEngleski.setAttribute("jezik", "engleski");
-		temaEngleski.appendChild(document.createTextNode("Implementation of banking subsystem in an electronic payment system."));
-		naslovnaStrana.appendChild(temaEngleski);
-		
-		Element nivoStudija = document.createElementNS(TARGET_NAMESPACE, "nivo_studija");
-		nivoStudija.appendChild(document.createTextNode("OAS"));
-		naslovnaStrana.appendChild(nivoStudija);
-		
-		Element sadrzaj = document.createElementNS(TARGET_NAMESPACE, "sadrzaj");
-		sadrzaj.appendChild(document.createComment("Generisati \"sadrzaj\" analogno."));
-		rad.appendChild(sadrzaj);
-		
-		Element poglavlja = document.createElementNS(TARGET_NAMESPACE, "poglavlja");
-		poglavlja.appendChild(document.createComment("Generisati \"poglavlja\" analogno."));
-		rad.appendChild(poglavlja);
-		
-	}
-	
 	public void generateResenje(Resenje resenje) {
 		createDocument();
 		SimpleDateFormat formatter = new SimpleDateFormat("MM.dd.yyyy.");
@@ -207,23 +139,20 @@ public class DOMWriter {
 	public void generateDOMObavestenje(Obavestenje ob) {
 		
 		// Kreiranje i postavljanje korenskog elementa
+		createDocument();
 		Element obavestenje = document.createElement("obavestenje");
 		document.appendChild(obavestenje);
-	
-//		obavestenje.setAttribute("xsi:noNamespaceSchemaLocation", 
-//				"C:\\Users\\Korisnik\\Desktop\\XML-i-veb-servisi\\dokumenti\\obavestenjee.xsd");
 
-		//------
-		//sad treba popuniti elemente
+		obavestenje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation", "C:\\Users\\Korisnik\\Desktop\\XML-i-veb-servisi\\dokumenti\\obavestenjee.xsd");
 		Element podnosilacZaheva = document.createElement("podnosilac_zahteva");
-		document.appendChild(podnosilacZaheva);
+		
+		obavestenje.appendChild(podnosilacZaheva);
 		
 		Element nazivPodnosioca = document.createElement("naziv_podnosioca");
 		podnosilacZaheva.appendChild(nazivPodnosioca);
 
 		Element ime = document.createElement("ime");
 		ime.appendChild(document.createTextNode(ob.getPodnosilac().getIme()));
-		
 		nazivPodnosioca.appendChild(ime);
 		Element prezime = document.createElement("prezime");
 		prezime.appendChild(document.createTextNode(ob.getPodnosilac().getPrezime()));
@@ -251,7 +180,7 @@ public class DOMWriter {
 		
 		//------
 		Element organVlasti = document.createElement("organ_vlasti");
-		document.appendChild(organVlasti);
+		obavestenje.appendChild(organVlasti);
 		
 		Element nazivOrganaVlasti = document.createElement("naziv_organa_vlasti");
 		nazivOrganaVlasti.appendChild(document.createTextNode(ob.getNazivOrganaVlasti()));
@@ -265,7 +194,7 @@ public class DOMWriter {
 		
 		Element dostavljeno = document.createElement("dostavljeno");
 		dostavljeno.appendChild(document.createTextNode("Достављено:"));
-		document.appendChild(dostavljeno);
+		obavestenje.appendChild(dostavljeno);
 		
 
 		Element listaPonudjenih = document.createElement( "lista");
@@ -275,9 +204,10 @@ public class DOMWriter {
 		element1.appendChild(document.createTextNode("Именованом"));
 		element1.setAttribute("broj", "1");
 		listaPonudjenih.appendChild(element1);
-		
+
 		Element element2 = document.createElement( "element");
 		element2.appendChild(document.createTextNode("Архиви"));
+
 		element2.setAttribute("broj", "2");
 		listaPonudjenih.appendChild(element2);
 		
@@ -286,7 +216,7 @@ public class DOMWriter {
 		
 		//-------
 		Element tekstObavestenja = document.createElement("tekst_obavestenja");
-		document.appendChild(tekstObavestenja);
+		obavestenje.appendChild(tekstObavestenja);
 		
 		Element brojPredmeta = document.createElement("broj_predmeta");
 		brojPredmeta.appendChild(document.createTextNode(ob.getBrojPredmeta()));
@@ -295,28 +225,29 @@ public class DOMWriter {
 		Element datum = document.createElement("datum");
 		datum.appendChild(document.createTextNode(ob.getDatum()));
 		tekstObavestenja.appendChild(datum);
-		
+
 		//ovde ide tekst za naslov
 		Element naslov = document.createElement("naslov");
-		naslov.appendChild(document.createTextNode(" ОБАВЕШТЕЊЕ\r\n" + 
-				"                о стављању на увид документа који садржи \r\n" + 
+		naslov.appendChild(document.createTextNode(" ОБАВЕШТЕЊЕ" + 
+				"                о стављању на увид документа који садржи" + 
 				"                тражену информацију и о изради копије"));
 		tekstObavestenja.appendChild(naslov);
 		
 		
 		//paragrafi
 		Element paragraf = document.createElement("p");
-		paragraf.appendChild(document.createTextNode("На основу члана 16. ст. 1. Закона о слободном приступу информацијама од јавног\r\n" + 
+		paragraf.appendChild(document.createTextNode("На основу члана 16. ст. 1. Закона о слободном приступу информацијама од јавног" + 
 				"            значаја, поступајући по вашем захтеву за слободан приступ информацијама од\r\n"));
 		tekstObavestenja.appendChild(paragraf);
-
+		String naknada = null;
 		for(Object o : ob.getParagrafi()) {
 			if(o instanceof PObavestenje) {
+				naknada =((PObavestenje)o).getNovcanaNaknada();
 				Element godina = document.createElement("godina");
 				godina.appendChild(document.createTextNode(((PObavestenje)o).getGodina()));
 				paragraf.appendChild(godina);
 				
-				paragraf.appendChild(document.createTextNode("год.,којим сте тражили увид у документ/е са информацијама о / у вези са:\r\n" ));
+				paragraf.appendChild(document.createTextNode("год.,којим сте тражили увид у документ/е са информацијама о / у вези са:" ));
 						
 				Element trazenaInformacija = document.createElement("trazena_informacija");
 				trazenaInformacija.appendChild(document.createTextNode(((PObavestenje)o).getTrazenaInformacija()));
@@ -377,18 +308,17 @@ public class DOMWriter {
 		}
 		
 		///------
-
 		Element paragraf2 = document.createElement("p");
-		paragraf2.appendChild(document.createTextNode("Том приликом, на ваш захтев, може вам се издати и копија документа са траженом \r\n" + 
+		paragraf2.appendChild(document.createTextNode("Том приликом, на ваш захтев, може вам се издати и копија документа са траженом" + 
 				"            информацијом."));
 		tekstObavestenja.appendChild(paragraf2);
 
 		
 	    Element paragraf3 = document.createElement("p");
-	    paragraf3.appendChild(document.createTextNode("Трошкови су утврђени Уредбом Владе Републике Србије („Сл. гласник РС“, бр. 8/06), и\r\n" + 
-	    		"            то: копија стране А4 формата износи 3 динара, А3 формата 6 динара, CD 35 динара, \r\n" + 
-	    		"            дискете 20 динара, DVD 40 динара, аудио-касета – 150 динара, видео-касета 300 динара,\r\n" + 
-	    		"            претварање једне стране документа из физичког у електронски облик – 30 динара.\r\n" + 
+	    paragraf3.appendChild(document.createTextNode("Трошкови су утврђени Уредбом Владе Републике Србије („Сл. гласник РС“, бр. 8/06), и " + 
+	    		"            то: копија стране А4 формата износи 3 динара, А3 формата 6 динара, CD 35 динара, " + 
+	    		"            дискете 20 динара, DVD 40 динара, аудио-касета – 150 динара, видео-касета 300 динара," + 
+	    		"            претварање једне стране документа из физичког у електронски облик – 30 динара. " + 
 	    		"        "));
 		tekstObavestenja.appendChild(paragraf3);
 		
@@ -397,14 +327,18 @@ public class DOMWriter {
 		tekstObavestenja.appendChild(paragraf4);
 		paragraf4.appendChild(document.createTextNode("Износ укупних трошкова израде копије документа по вашем захтеву износи "));
 		Element novcanaNaknada = document.createElement("novcana_naknada");
-		paragraf4.appendChild(document.createTextNode(" динара и уплаћује се на жиро-рачун Буџета Републике Србије бр. 840-742328-843-30, с позивом на број 97 – ознака шифре општине/града где се налази орган власти (из Правилника о условима и начину вођења рачуна – „Сл. гласник РС“, 20/07... 40/10). "));
+
+	    novcanaNaknada.appendChild(document.createTextNode(naknada));
+
 		paragraf4.appendChild(novcanaNaknada);
+		paragraf4.appendChild(document.createTextNode("динара и уплаћује се на жиро-рачун Буџета Републике Србије бр. 840-742328-843-30, с позивом на број 97 – ознака шифре општине/града где се налази орган власти (из Правилника о условима и начину вођења рачуна – „Сл. гласник РС“, 20/07... 40/10). "));
+	
 		
 		Element mestoPecata = document.createElement( "mesto_pecata");
 		mestoPecata.appendChild(document.createTextNode("(М.П.)"));
 		
-		document.appendChild(mestoPecata);
-		
+		obavestenje.appendChild(mestoPecata);
+		transform(System.out);
 		
 	}
 	
@@ -749,7 +683,7 @@ public class DOMWriter {
 		handler.createDocument();
 
 		// Generisanje DOM stabla
-		handler.generateDOM();
+		//handler.generateDOM();
 		
 		// Prikaz sadržaja (isprobati sa FileOutputStream-om)
 		handler.transform(System.out);

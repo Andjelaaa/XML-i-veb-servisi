@@ -33,6 +33,23 @@ public class PObavestenje {
 		this.brojKancelarije = brojKancelarije;
 		
 	}
+	public PObavestenje(String text, String godina, String trazenaInformacija, String dan, String sati, String odSati, String doSati,
+			String mesto, String ulica, String brojZgrade, String brojKancelarije, String novcanaNaknada) {
+		super();
+		this.text = text;
+		this.godina = godina;
+		this.trazenaInformacija = trazenaInformacija;
+		this.dan = dan;
+		this.sati = sati;
+		this.odSati = odSati;
+		this.doSati = doSati;
+		this.mesto = mesto;
+		this.ulica = ulica;
+		this.brojZgrade = brojZgrade;
+		this.brojKancelarije = brojKancelarije;
+		this.novcanaNaknada = novcanaNaknada;
+		
+	}
 	public PObavestenje(String text,String novcanaNaknada) {
 		super();
 		this.text = text;
@@ -50,9 +67,13 @@ public class PObavestenje {
 		this.ulica = po.getUlica();
 		this.brojZgrade = po.getBrojZgrade();
 		this.brojKancelarije = po.getBrojKancelarije();
+		this.novcanaNaknada = po.getNovcanaNaknada();
 	}
-	@Override
-	public String toString() {
+	public PObavestenje() {
+		super();
+	}
+	
+	public String toString2() {
 		return "PObavestenje [text=" + text + ", godina=" + godina + ", trazenaInformacija=" + trazenaInformacija
 				+ ", dan=" + dan + ", sati=" + sati + ", odSati=" + odSati + ", doSati=" + doSati + ", mesto=" + mesto
 				+ ", ulica=" + ulica + ", brojZgrade=" + brojZgrade + ", brojKancelarije=" + brojKancelarije
@@ -60,6 +81,12 @@ public class PObavestenje {
 	}
 	public String toString1() {
 		return "PObavestenje [text=" + text + "novcanaNaknada= " + novcanaNaknada + "]";
+	}@Override
+	public String toString() {
+		return "PObavestenje [text=" + text + ", godina=" + godina + ", trazenaInformacija=" + trazenaInformacija
+				+ ", dan=" + dan + ", sati=" + sati + ", odSati=" + odSati + ", doSati=" + doSati + ", mesto=" + mesto
+				+ ", ulica=" + ulica + ", brojZgrade=" + brojZgrade + ", brojKancelarije=" + brojKancelarije
+				+ "novcanaNaknada= " + novcanaNaknada + "]";
 	}
 	public String getText() {
 		return text;

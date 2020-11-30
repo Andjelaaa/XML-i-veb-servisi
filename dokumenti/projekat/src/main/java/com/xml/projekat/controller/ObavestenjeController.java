@@ -33,18 +33,17 @@ public class ObavestenjeController {
 		return new ResponseEntity<ObavestenjeDTO>(new ObavestenjeDTO(response), HttpStatus.OK);
 	}
 	
-	@PostMapping(value = "/novo_obavestenje/")
-	public ResponseEntity<ObavestenjeDTO> makeObavestenje(@RequestBody ObavestenjeeDTO obavestenjeDTO) throws Exception{
-		//convert DTO TO obican 
-		Obavestenje ob = new Obavestenje(obavestenjeDTO);
+	@PostMapping(value = "/novo_obavestenje")
+	public ResponseEntity<ObavestenjeeDTO> makeObavestenje(@RequestBody ObavestenjeeDTO dto) throws Exception{
+		Obavestenje ob = new Obavestenje(dto);
 		
 		 try {
 			 service.makeObavestenje(ob);
 	        }catch(Exception e) {
-	         return new ResponseEntity<>(new ObavestenjeDTO(), HttpStatus.BAD_REQUEST);
+	         return new ResponseEntity<>(new ObavestenjeeDTO(ob),HttpStatus.BAD_REQUEST);
 	     }
 			
-		return new ResponseEntity<>(new ObavestenjeDTO(), HttpStatus.CREATED);
+		return new ResponseEntity<>(new ObavestenjeeDTO(ob),HttpStatus.CREATED);
 	}
 
 }

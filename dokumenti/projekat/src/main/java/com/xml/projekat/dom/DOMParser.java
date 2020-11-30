@@ -437,7 +437,6 @@ public Zahtev parseZahtev(Document document) {
 					String novcanaNaknada = ((Element) paragrafiXML.item(i)).getElementsByTagName("novcana_naknada").item(0).getTextContent();
 
 					PObavestenje pObavestenje = new PObavestenje(text,novcanaNaknada);
-					System.out.println(pObavestenje.toString1() +" DDDDDDDDDDD");
 					paragrafi.add(pObavestenje);
 				}
 				else if(((Element) paragrafiXML.item(i)).getElementsByTagName("godina").item(0)!= null &&  paragrafiXML.item(i) instanceof Element) {

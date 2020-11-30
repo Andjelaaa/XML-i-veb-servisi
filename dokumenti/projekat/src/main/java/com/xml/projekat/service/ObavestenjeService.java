@@ -27,8 +27,8 @@ public class ObavestenjeService {
 	}
 
 	public void makeObavestenje(Obavestenje obavestenje) {
+		System.out.println(obavestenje.getParagrafi().toString());
 		domWriter.generateDOMObavestenje(obavestenje);
-		domWriter.transform(System.out);
 	}
 	
 }

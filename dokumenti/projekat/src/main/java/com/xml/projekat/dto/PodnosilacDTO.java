@@ -1,5 +1,7 @@
 package com.xml.projekat.dto;
 
+import com.xml.projekat.model.Podnosilac;
+
 public class PodnosilacDTO {
 	private String ime;
 	private String prezime;
@@ -18,6 +20,13 @@ public class PodnosilacDTO {
 	public PodnosilacDTO(String nazivFirme) {
 		super();
 		this.nazivFirme = nazivFirme;
+	}
+
+	public PodnosilacDTO(Podnosilac podnosilac) {
+		// TODO Auto-generated constructor stub
+		this.ime = podnosilac.getIme();
+		this.prezime =  podnosilac.getPrezime();
+		this.nazivFirme = podnosilac.getNazivFirme();
 	}
 
 	@Override

@@ -42,18 +42,18 @@ public class Obavestenje {
 	}
 	
 
-	public Obavestenje(ObavestenjeeDTO obavestenjeDTO) {
+	public Obavestenje(ObavestenjeeDTO dto) {
 		super();
-		this.podnosilac = new Podnosilac(obavestenjeDTO.getPodnosilac());
-		this.adresa = new Adresa(obavestenjeDTO.getAdresa());
-		this.nazivOrganaVlasti = obavestenjeDTO.getNazivOrganaVlasti();
-		this.sedisteOrgana = obavestenjeDTO.getSedisteOrgana();;
-		//this.dostavljeno = obavestenjeDTO.getDostavljeno();
-		this.datum = obavestenjeDTO.getDatum();
-		this.brojPredmeta = obavestenjeDTO.getBrojPredmeta();;
-		//this.mestoPecata = mestoPecata;
+		this.podnosilac = new Podnosilac(dto.getPodnosilac());
+		this.adresa = new Adresa(dto.getAdresa());
+		this.nazivOrganaVlasti = dto.getNazivOrganaVlasti();
+		this.sedisteOrgana = dto.getSedisteOrgana();;
+		this.dostavljeno = dto.getDostavljeno();
+		this.datum = dto.getDatum();
+		this.brojPredmeta = dto.getBrojPredmeta();
 		this.paragrafi = new ArrayList<PObavestenje>();
-		for(PObavestenjeDTO po: obavestenjeDTO.getPObavestenjeDTO()) {
+		
+		for(PObavestenjeDTO po: dto.getPobavestenjeDTO()) {
 			PObavestenje p = new PObavestenje(po);
 			this.paragrafi.add(p);
 		}		
