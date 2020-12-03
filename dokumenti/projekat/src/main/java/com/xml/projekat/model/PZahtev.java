@@ -2,6 +2,9 @@ package com.xml.projekat.model;
 
 import java.util.ArrayList;
 
+import com.xml.projekat.dto.IzborDTO;
+import com.xml.projekat.dto.PZahtevDTO;
+
 public class PZahtev {
 	
 	private String text;
@@ -12,6 +15,14 @@ public class PZahtev {
 		this.izbori = izbori;
 	}
 	
+	public PZahtev(PZahtevDTO pzdto) {
+		this.text = pzdto.getText();
+		this.izbori = new ArrayList<Izbor>();
+		for (IzborDTO i : pzdto.getIzbori()) {
+			this.izbori.add(new Izbor(i));
+		}
+	}
+
 	public String getText() {
 		return text;
 	}

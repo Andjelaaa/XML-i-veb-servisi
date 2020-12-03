@@ -22,33 +22,14 @@ public class ZahtevService {
 	}
 
 	public String parseZahtev() throws Exception {
-		Document document = domParser.buildDocumentFromFile("C:\\Users\\Admin\\Desktop\\VII semestar\\XML I VEB SERVISI\\XML-i-veb-servisi\\dokumenti\\zahtev.xml");
+		Document document = domParser.buildDocumentFromFile("C:\\Users\\teodo\\Desktop\\XML-i-veb-servisi\\dokumenti\\zahtev.xml");
 		Zahtev zahtev= domParser.parseZahtev(document);
 
 		return domParser.getDocumentAsString(document);
-
 	}
 	
-	public String createZahtev() throws Exception {
-		Document document = domParser.buildDocumentFromFile("C:\\Users\\Admin\\Desktop\\VII semestar\\XML I VEB SERVISI\\XML-i-veb-servisi\\dokumenti\\zahtev.xml");
-		Zahtev zahtev = domParser.parseZahtev(document);
-		domWriter.generateZahtev(zahtev);
-		return domParser.getDocumentAsString(document);
+	public void createZahtev(Zahtev z) throws Exception {
+		domWriter.generateZahtev(z);
+	}
 
-	}
-/*
-	public String jaxBTest(ZahtevDTO dto) throws Exception {
-		JAXBContext context = JAXBContext.newInstance(User.class);
-		
-		
-		User user = (User) jaxB.unmarshall(User.class, dto.getText());
-		user.name = "novo ime";
-		user.email = "novi email";
-		System.out.println(user.id);
-		
-		return jaxB.marshall(User.class, user);
-		
-		
-	}
-	*/
 }

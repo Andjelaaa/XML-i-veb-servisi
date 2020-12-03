@@ -1,19 +1,19 @@
-package com.xml.projekat.model;
+package com.xml.projekat.dto;
 
-import com.xml.projekat.dto.PZalbaCutanjeDTO;
+import com.xml.projekat.model.PZalbaCutanje;
 
-public class PZalbaCutanje {
-	
+public class PZalbaCutanjeDTO {
+
 	private String text;
 	private String nazivOrgana;
 	private String datum;
 	private String podaciOZahtevuIInformacijama;
 	
-	public PZalbaCutanje() {
+	public PZalbaCutanjeDTO() {
 		super();
 	}
 
-	public PZalbaCutanje(String text, String nazivOrgana,String datum, String podaciOZahtevuIInformacijama) {
+	public PZalbaCutanjeDTO(String text, String nazivOrgana,String datum, String podaciOZahtevuIInformacijama) {
 		super();
 		this.text = text;
 		this.nazivOrgana = nazivOrgana;
@@ -21,19 +21,19 @@ public class PZalbaCutanje {
 		this.podaciOZahtevuIInformacijama = podaciOZahtevuIInformacijama;
 	}
 	
-	public PZalbaCutanje(String text,String datum, String podaciOZahtevuIInformacijama) {
+	public PZalbaCutanjeDTO(String text,String datum, String podaciOZahtevuIInformacijama) {
 		super();
 		this.text = text;
 		this.datum = datum;
 		this.podaciOZahtevuIInformacijama = podaciOZahtevuIInformacijama;
 	}
 
-	public PZalbaCutanje(String text) {
+	public PZalbaCutanjeDTO(String text) {
 		super();
 		this.text = text;
 	}
 	
-	public PZalbaCutanje(String text, String nazivOrgana) {
+	public PZalbaCutanjeDTO(String text, String nazivOrgana) {
 		super();
 		this.text = text;
 		this.nazivOrgana = nazivOrgana;
@@ -41,11 +41,11 @@ public class PZalbaCutanje {
 	
 	
 	
-	public PZalbaCutanje(PZalbaCutanjeDTO pzc) {
-		this.text = pzc.getText();
-		this.nazivOrgana = pzc.getNazivOrgana();
-		this.datum = pzc.getDatum();
-		this.podaciOZahtevuIInformacijama = pzc.getPodaciOZahtevuIInformacijama();
+	public PZalbaCutanjeDTO(PZalbaCutanje p) {
+		this.text = p.getText();
+		this.nazivOrgana = p.getNazivOrgana();
+		this.datum = p.getDatum();
+		this.podaciOZahtevuIInformacijama = p.getPodaciOZahtevuIInformacijama();
 	}
 
 	public String getText() {
@@ -84,5 +84,4 @@ public class PZalbaCutanje {
 	public String toString() {
 		return "PZalbaCutanje [text=" + text + ", nazivOrgana="+ nazivOrgana + ", datum=" + datum + ", podaciOZahtevuIInformacijama=" + podaciOZahtevuIInformacijama + "]";
 	}
-	
 }

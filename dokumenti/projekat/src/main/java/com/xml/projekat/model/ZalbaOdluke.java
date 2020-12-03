@@ -2,6 +2,9 @@ package com.xml.projekat.model;
 
 import java.util.ArrayList;
 
+import com.xml.projekat.dto.PZalbaOdlukeDTO;
+import com.xml.projekat.dto.ZalbaOdlukaDTO;
+
 public class ZalbaOdluke {
 	private Podnosilac nazivPodnosioca;
 	private Adresa adresaPodnosioca;
@@ -32,6 +35,22 @@ public class ZalbaOdluke {
 		this.mesto = mesto;
 		this.datum = datum;
 		this.tackeNapomene = tackeNapomene;
+	}
+	public ZalbaOdluke(ZalbaOdlukaDTO dto) {
+		this.nazivPodnosioca = new Podnosilac(dto.getNazivPodnosioca());
+		this.adresaPodnosioca = new Adresa(dto.getAdresaPodnosioca());
+		this.drugiPodaciZaKontakt = dto.getDrugiPodaciZaKontakt();
+		this.nazivPoverenika = dto.getNazivPoverenika();
+		this.sedistePoverenika = new Adresa(dto.getSedistePoverenika());
+		this.naslov = dto.getNaslov();
+		this.nazivOrganaVlasti = dto.getNazivOrganaVlasti();
+		this.paragrafi = new ArrayList<PZalbaOdluke>();
+		for (PZalbaOdlukeDTO pzo : dto.getParagrafi()) {
+			this.paragrafi.add(new PZalbaOdluke(pzo));
+		}
+		this.mesto = dto.getMesto();
+		this.datum = dto.getDatum();
+		this.tackeNapomene = dto.getTackeNapomene();
 	}
 	@Override
 	public String toString() {

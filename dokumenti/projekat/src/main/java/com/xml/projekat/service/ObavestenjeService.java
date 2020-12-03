@@ -5,7 +5,6 @@ import org.w3c.dom.Document;
 
 import com.xml.projekat.dom.DOMParser;
 import com.xml.projekat.dom.DOMWriter;
-import com.xml.projekat.dto.ObavestenjeDTO;
 import com.xml.projekat.model.Obavestenje;
 
 @Service
@@ -20,14 +19,12 @@ public class ObavestenjeService {
 	}
 
 	public String parseObavestenje() throws Exception {
-		Document document = domParser.buildDocumentFromFile("C:\\Users\\Korisnik\\Desktop\\XML-i-veb-servisi\\dokumenti\\obavestenje.xml");
+		Document document = domParser.buildDocumentFromFile("C:\\Users\\teodo\\Desktop\\XML-i-veb-servisi\\dokumenti\\obavestenje.xml");
 		Obavestenje obavestenje = domParser.parseObavestenje(document);
 		return domParser.getDocumentAsString(document);
-
 	}
 
 	public void makeObavestenje(Obavestenje obavestenje) {
-		System.out.println(obavestenje.getParagrafi().toString());
 		domWriter.generateDOMObavestenje(obavestenje);
 	}
 	

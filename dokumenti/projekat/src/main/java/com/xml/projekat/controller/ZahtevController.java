@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xml.projekat.dto.ResenjeDTO;
 import com.xml.projekat.dto.ZahtevDTO;
+import com.xml.projekat.model.Zahtev;
 import com.xml.projekat.service.ZahtevService;
 
 
@@ -30,16 +30,17 @@ public class ZahtevController {
 		return new ResponseEntity<ZahtevDTO>(new ZahtevDTO(response), HttpStatus.OK);
 	}
 	
-	@GetMapping("/create")
-	public ResponseEntity<ZahtevDTO> createResenje() throws Exception{
-		String response = service.createZahtev();
-		return new ResponseEntity<ZahtevDTO>(new ZahtevDTO(response), HttpStatus.OK);
+	@PostMapping("/create")
+	public ResponseEntity<ZahtevDTO> createResenje(@RequestBody ZahtevDTO dto) throws Exception{
+		Zahtev z = new Zahtev(dto);
+		
+		 try {
+			 service.createZahtev(z);
+	        }catch(Exception e) {
+	         return new ResponseEntity<ZahtevDTO>(new ZahtevDTO(z),HttpStatus.BAD_REQUEST);
+	     }
+			
+		return new ResponseEntity<ZahtevDTO>(new ZahtevDTO(z),HttpStatus.CREATED);
 	}
-	/*
-	@PostMapping("/jaxB")
-	public ResponseEntity<ZahtevDTO> getChangedXMLJaxB(@RequestBody ZahtevDTO dto) throws Exception{
-		String response = service.jaxBTest(dto);
-		return new ResponseEntity<ZahtevDTO>(new ZahtevDTO(response), HttpStatus.OK);
-	}
-	*/
+
 }

@@ -3,6 +3,7 @@ package com.xml.projekat.dto;
 import java.util.ArrayList;
 
 import com.xml.projekat.model.Izbor;
+import com.xml.projekat.model.PZahtev;
 
 public class PZahtevDTO {
 	
@@ -17,6 +18,14 @@ public class PZahtevDTO {
 		super();
 		this.text = text;
 		this.izbori = izbori;
+	}
+
+	public PZahtevDTO(PZahtev pz) {
+		this.text = pz.getText();
+		this.izbori = new ArrayList<IzborDTO>();
+		for (Izbor izbor : pz.getIzbori()) {
+			this.izbori.add(new IzborDTO(izbor));
+		}
 	}
 
 	public String getText() {

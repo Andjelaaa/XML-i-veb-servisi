@@ -152,7 +152,7 @@ public class DOMWriter {
 		document.appendChild(obavestenje);
 
 		obavestenje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
-				"C:\\Users\\Korisnik\\Desktop\\XML-i-veb-servisi\\dokumenti\\obavestenjee.xsd");
+				"C:\\Users\\teodo\\Desktop\\XML-i-veb-servisi\\dokumenti\\obavestenjee.xsd");
 		Element podnosilacZaheva = document.createElement("podnosilac_zahteva");
 
 		obavestenje.appendChild(podnosilacZaheva);
@@ -448,14 +448,14 @@ public class DOMWriter {
 
 		for (PZalbaOdluke pzo : zo.getParagrafi()) {
 			Element p = document.createElement("p");
-			if (pzo.getBroj_zalbe() != null && pzo.getGodina_odbijanja() != null) {
+			if (pzo.getBrojZalbe() != null && pzo.getGodinaOdbijanja() != null) {
 				p.appendChild(document.createTextNode("Број"));
 				Element brojZalbe = document.createElement("broj_zalbe");
-				brojZalbe.appendChild(document.createTextNode(pzo.getBroj_zalbe()));
+				brojZalbe.appendChild(document.createTextNode(pzo.getBrojZalbe()));
 				p.appendChild(brojZalbe);
 				p.appendChild(document.createTextNode("од"));
 				Element godOdbijanja = document.createElement("godina_odbijanja");
-				godOdbijanja.appendChild(document.createTextNode(pzo.getGodina_odbijanja()));
+				godOdbijanja.appendChild(document.createTextNode(pzo.getGodinaOdbijanja()));
 				p.appendChild(godOdbijanja);
 				p.appendChild(document.createTextNode("године."));
 
@@ -748,6 +748,7 @@ public class DOMWriter {
 		podaciOTrenutku.appendChild(datum);
 		podaciOTrenutku.appendChild(document.createTextNode(" године"));
 		tekstZalbe.appendChild(podaciOTrenutku);
+		zalbaCutanje.appendChild(tekstZalbe);
 
 		transform(System.out);
 

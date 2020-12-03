@@ -1,9 +1,8 @@
 package com.xml.projekat.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
-import com.xml.projekat.dto.ObavestenjeeDTO;
+import com.xml.projekat.dto.ObavestenjeDTO;
 import com.xml.projekat.dto.PObavestenjeDTO;
 
 public class Obavestenje {
@@ -42,7 +41,7 @@ public class Obavestenje {
 	}
 	
 
-	public Obavestenje(ObavestenjeeDTO dto) {
+	public Obavestenje(ObavestenjeDTO dto) {
 		super();
 		this.podnosilac = new Podnosilac(dto.getPodnosilac());
 		this.adresa = new Adresa(dto.getAdresa());

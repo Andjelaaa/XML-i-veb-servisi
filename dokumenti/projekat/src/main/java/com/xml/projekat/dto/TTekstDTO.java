@@ -1,25 +1,25 @@
-package com.xml.projekat.model;
+package com.xml.projekat.dto;
 
 import java.util.ArrayList;
 
-import com.xml.projekat.dto.TTekstDTO;
+import com.xml.projekat.model.TTekst;
 
-public class TTekst {
-	
+public class TTekstDTO {
+
 	private String tekst;
 	private ArrayList<String> paragrafi;
 	
-	public TTekst() {
+	public TTekstDTO() {
 		super();
 	}
 
-	public TTekst(String tekst, ArrayList<String> paragrafi) {
+	public TTekstDTO(String tekst, ArrayList<String> paragrafi) {
 		super();
 		this.tekst = tekst;
 		this.paragrafi = paragrafi;
 	}
 
-	public TTekst(TTekstDTO tekstResenja) {
+	public TTekstDTO(TTekst tekstResenja) {
 		this.tekst = tekstResenja.getTekst();
 		this.paragrafi = tekstResenja.getParagrafi();
 	}
@@ -44,6 +44,5 @@ public class TTekst {
 	public String toString() {
 		return "TTekst [tekst=" + tekst + ", paragrafi=" + paragrafi + "]";
 	}
-	
 	
 }

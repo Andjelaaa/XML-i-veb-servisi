@@ -1,6 +1,6 @@
 package com.xml.projekat.model;
 
-
+import com.xml.projekat.dto.ResenjeDTO;
 
 public class Resenje {
 	
@@ -24,6 +24,15 @@ public class Resenje {
 		this.tekstResenja = tekstResenja;
 		this.tekstObrazlozenja = tekstObrazlozenja;
 		this.potpisPoverenika = potpisPoverenika;
+	}
+
+	public Resenje(ResenjeDTO dto) {
+		this.nazivOdluka = new NazivOdluka(dto.getNaziv(), dto.getOdluka());
+		this.zaglavlje = new TZaglavlje(dto.getZaglavlje());
+		this.opisPostupka = dto.getOpisPostupka();
+		this.tekstResenja = new TTekst(dto.getTekstResenja());
+		this.tekstObrazlozenja = new TTekst(dto.getTekstObrazlozenja());
+		this.potpisPoverenika = dto.getPotpisPoverenika();
 	}
 
 	public NazivOdluka getNazivOdluka() {

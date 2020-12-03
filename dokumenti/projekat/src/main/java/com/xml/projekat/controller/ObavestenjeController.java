@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xml.projekat.dom.DOMWriter;
 import com.xml.projekat.dto.ObavestenjeDTO;
-import com.xml.projekat.dto.ObavestenjeeDTO;
 import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.service.ObavestenjeService;
 
@@ -33,17 +31,17 @@ public class ObavestenjeController {
 		return new ResponseEntity<ObavestenjeDTO>(new ObavestenjeDTO(response), HttpStatus.OK);
 	}
 	
-	@PostMapping(value = "/novo_obavestenje")
-	public ResponseEntity<ObavestenjeeDTO> makeObavestenje(@RequestBody ObavestenjeeDTO dto) throws Exception{
+	@PostMapping(value = "/create")
+	public ResponseEntity<ObavestenjeDTO> makeObavestenje(@RequestBody ObavestenjeDTO dto) throws Exception{
 		Obavestenje ob = new Obavestenje(dto);
 		
 		 try {
 			 service.makeObavestenje(ob);
 	        }catch(Exception e) {
-	         return new ResponseEntity<>(new ObavestenjeeDTO(ob),HttpStatus.BAD_REQUEST);
+	         return new ResponseEntity<>(new ObavestenjeDTO(ob),HttpStatus.BAD_REQUEST);
 	     }
 			
-		return new ResponseEntity<>(new ObavestenjeeDTO(ob),HttpStatus.CREATED);
+		return new ResponseEntity<>(new ObavestenjeDTO(ob),HttpStatus.CREATED);
 	}
 
 }

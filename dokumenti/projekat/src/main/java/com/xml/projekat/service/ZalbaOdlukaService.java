@@ -25,15 +25,9 @@ public class ZalbaOdlukaService {
 		ZalbaOdluke zalba= domParser.parseZalbaOdluke(document);
 
 		return domParser.getDocumentAsString(document);
-
 	}
 	
-	public String createZalbaOdluke() throws Exception {
-		Document document = domParser.buildDocumentFromFile("C:\\Users\\teodo\\Desktop\\XML-i-veb-servisi\\dokumenti\\zalba_odluke.xml");
-		ZalbaOdluke zalba= domParser.parseZalbaOdluke(document);
-		Document doc = domWriter.generateZalbaOdluke(zalba);
-
-		return domParser.getDocumentAsString(document);
-
+	public void createZalbaOdluke(ZalbaOdluke zo) throws Exception {
+		Document doc = domWriter.generateZalbaOdluke(zo);
 	}
 }

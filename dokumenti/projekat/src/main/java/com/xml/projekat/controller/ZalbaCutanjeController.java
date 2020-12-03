@@ -4,11 +4,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xml.projekat.dto.ZahtevDTO;
 import com.xml.projekat.dto.ZalbaCutanjeDTO;
+import com.xml.projekat.model.ZalbaCutanje;
 import com.xml.projekat.service.ZalbaCutanjeService;
 
 @RestController
@@ -25,5 +27,18 @@ public class ZalbaCutanjeController {
 	public ResponseEntity<ZalbaCutanjeDTO> parseZalbaCutanje() throws Exception{
 		String response = service.parseZalbaCutanje();
 		return new ResponseEntity<ZalbaCutanjeDTO>(new ZalbaCutanjeDTO(response), HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/create")
+	public ResponseEntity<ZalbaCutanjeDTO> makeZalbaCutanje(@RequestBody ZalbaCutanjeDTO dto) throws Exception{
+		ZalbaCutanje zc = new ZalbaCutanje(dto);
+		
+		 try {
+			 service.makeZalbaCutanje(zc);
+	        }catch(Exception e) {
+	         return new ResponseEntity<>(new ZalbaCutanjeDTO(zc),HttpStatus.BAD_REQUEST);
+	     }
+			
+		return new ResponseEntity<>(new ZalbaCutanjeDTO(zc),HttpStatus.CREATED);
 	}
 }

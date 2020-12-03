@@ -1,14 +1,17 @@
-package com.xml.projekat.model;
+package com.xml.projekat.dto;
 
-import com.xml.projekat.dto.PZalbaOdlukeDTO;
+import com.xml.projekat.model.PZalbaOdluke;
 
-public class PZalbaOdluke {
+public class PZalbaOdlukeDTO {
 	private String tekst;
 	private String datum;
 	private String razlog;
 	private String brojZalbe;
 	private String godinaOdbijanja;
-	public PZalbaOdluke(String tekst, String datum, String razlog, String brojZalbe, String godinaOdbijanja) {
+	
+	public PZalbaOdlukeDTO() {}
+	
+	public PZalbaOdlukeDTO(String tekst, String datum, String razlog, String brojZalbe, String godinaOdbijanja) {
 		super();
 		this.tekst = tekst;
 		this.datum = datum;
@@ -16,7 +19,7 @@ public class PZalbaOdluke {
 		this.brojZalbe = brojZalbe;
 		this.godinaOdbijanja = godinaOdbijanja;
 	}
-	public PZalbaOdluke(PZalbaOdlukeDTO pzo) {
+	public PZalbaOdlukeDTO(PZalbaOdluke pzo) {
 		this.tekst = pzo.getTekst();
 		this.datum = pzo.getDatum();
 		this.razlog = pzo.getRazlog();

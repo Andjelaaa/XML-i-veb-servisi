@@ -1,26 +1,26 @@
-package com.xml.projekat.model;
+package com.xml.projekat.dto;
 
 import java.util.Date;
 
-import com.xml.projekat.dto.TZaglavljeDTO;
+import com.xml.projekat.model.TZaglavlje;
 
-public class TZaglavlje {
+public class TZaglavljeDTO {
 	private String brojResenja;
 	private Date datum;
 	
-	public TZaglavlje() {
+	public TZaglavljeDTO() {
 		super();
 	}
 	
-	public TZaglavlje(String brojResenja, Date datum) {
+	public TZaglavljeDTO(String brojResenja, Date datum) {
 		super();
 		this.brojResenja = brojResenja;
 		this.datum = datum;
 	}
 
-	public TZaglavlje(TZaglavljeDTO zaglavlje) {
+	public TZaglavljeDTO(TZaglavlje zaglavlje) {
 		this.brojResenja = zaglavlje.getBrojResenja();
-		this.datum = zaglavlje.getDatum();	
+		this.datum = zaglavlje.getDatum();
 	}
 
 	public String getBrojResenja() {
@@ -41,7 +41,6 @@ public class TZaglavlje {
 
 	@Override
 	public String toString() {
-		return "TZaglavlje [brojResenja=" + brojResenja + ", datum=" + datum + "]";
+		return "TZaglavljeDTO [brojResenja=" + brojResenja + ", datum=" + datum + "]";
 	}
-	
 }

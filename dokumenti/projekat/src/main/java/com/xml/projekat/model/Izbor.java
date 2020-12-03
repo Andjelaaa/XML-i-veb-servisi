@@ -2,6 +2,8 @@ package com.xml.projekat.model;
 
 import java.util.HashMap;
 
+import com.xml.projekat.dto.IzborDTO;
+
 public class Izbor {
 	private int broj;
 	private String tekst;
@@ -21,6 +23,13 @@ public class Izbor {
 	}
 
 	
+	public Izbor(IzborDTO i) {
+		this.broj = i.getBroj();
+		this.tekst = i.getTekst();
+		this.podizbori = i.getPodizbori();
+		this.drugiNacin = i.getDrugiNacin();
+	}
+
 	public int getBroj() {
 		return broj;
 	}

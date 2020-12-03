@@ -2,6 +2,9 @@ package com.xml.projekat.model;
 
 import java.util.ArrayList;
 
+import com.xml.projekat.dto.PZahtevDTO;
+import com.xml.projekat.dto.ZahtevDTO;
+
 public class Zahtev {
 	
 	private Podnosilac podnosilac;
@@ -35,6 +38,23 @@ public class Zahtev {
 		this.fusnote = fusnote;
 	}
 	
+	public Zahtev(ZahtevDTO dto) {
+		this.podnosilac = new Podnosilac(dto.getPodnosilac());
+		this.adresa = new Adresa(dto.getAdresa());
+		this.drugiPodaciZaKontakt = dto.getDrugiPodaciZaKontakt();
+		this.nazivOrganaVlasti = dto.getNazivOrganaVlasti();
+		this.sedisteOrgana = dto.getSedisteOrgana();
+		this.naslov = dto.getNaslov();
+		this.paragrafi = new ArrayList<PZahtev>();
+		for (PZahtevDTO pzdto : dto.getParagrafi()) {
+			this.paragrafi.add(new PZahtev(pzdto));
+		}
+		this.trazeneInformacije = dto.getTrazeneInformacije();
+		this.datum = dto.getDatum();
+		this.mesto = dto.getMesto();
+		this.fusnote = dto.getFusnote();
+	}
+
 	public Podnosilac getPodnosilac() {
 		return podnosilac;
 	}

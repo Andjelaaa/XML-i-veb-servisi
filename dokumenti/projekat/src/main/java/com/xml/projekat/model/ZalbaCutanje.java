@@ -2,6 +2,9 @@ package com.xml.projekat.model;
 
 import java.util.ArrayList;
 
+import com.xml.projekat.dto.PZalbaCutanjeDTO;
+import com.xml.projekat.dto.ZalbaCutanjeDTO;
+
 public class ZalbaCutanje {
 	private Podnosilac podnosilac;
 	private Adresa adresa;
@@ -36,6 +39,21 @@ public class ZalbaCutanje {
 	}
 
 	
+	public ZalbaCutanje(ZalbaCutanjeDTO dto) {
+		this.podnosilac = new Podnosilac(dto.getPodnosilacDTO());
+		this.adresa = new Adresa(dto.getAdresaDTO());
+		this.drugiPodaciZaKontakt = dto.getDrugiPodaciZaKontakt();
+		this.nazivPoverenika = dto.getNazivPoverenika();
+		this.sedistePoverenika = new Adresa(dto.getSedistePoverenika());
+		this.naslov = dto.getNaslov();
+		this.paragrafi = new ArrayList<PZalbaCutanje>();
+		for (PZalbaCutanjeDTO pzc : dto.getParagrafi()) {
+			this.paragrafi.add(new PZalbaCutanje(pzc));
+		}
+		this.datumZalbe = dto.getDatumZalbe();
+		this.mestoZalbe = dto.getMestoZalbe();
+	}
+
 	public String getNaslov() {
 		return naslov;
 	}
