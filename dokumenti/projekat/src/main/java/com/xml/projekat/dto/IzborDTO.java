@@ -1,18 +1,19 @@
-package com.xml.projekat.model;
+package com.xml.projekat.dto;
 
 import java.util.HashMap;
 
-public class Izbor {
+public class IzborDTO {
+	
 	private int broj;
 	private String tekst;
 	private HashMap<Integer,String> podizbori;
 	private String drugiNacin;
 	
-	public Izbor() {
+	public IzborDTO() {
 		super();
 	}
 
-	public Izbor(int broj, String tekst, HashMap<Integer, String> podizbori, String drugiNacin) {
+	public IzborDTO(int broj, String tekst, HashMap<Integer, String> podizbori, String drugiNacin) {
 		super();
 		this.broj = broj;
 		this.tekst = tekst;
@@ -20,7 +21,6 @@ public class Izbor {
 		this.drugiNacin = drugiNacin;
 	}
 
-	
 	public int getBroj() {
 		return broj;
 	}
@@ -52,14 +52,6 @@ public class Izbor {
 	public void setDrugiNacin(String drugiNacin) {
 		this.drugiNacin = drugiNacin;
 	}
-
-	@Override
-	public String toString() {
-		return "Izbor [broj=" + broj + ", tekst=" + tekst + ", podizbori=" + podizbori + ", drugiNacin=" + drugiNacin
-				+ "]";
-	}
-	
-	
 	
 	
 }

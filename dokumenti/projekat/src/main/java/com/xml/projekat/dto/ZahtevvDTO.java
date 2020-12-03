@@ -1,26 +1,32 @@
-package com.xml.projekat.model;
+package com.xml.projekat.dto;
 
 import java.util.ArrayList;
 
-public class Zahtev {
+
+public class ZahtevvDTO {
 	
-	private Podnosilac podnosilac;
-	private Adresa adresa;
+	private PodnosilaccDTO podnosilac;
+	private AdresaaDTO adresa;
 	private String drugiPodaciZaKontakt;
 	
 	private String nazivOrganaVlasti;
 	private String sedisteOrgana;
 	
 	private String naslov;
-	private ArrayList<PZahtev> paragrafi;
+	private ArrayList<PZahtevDTO> paragrafi;
 	private String trazeneInformacije;
 	
 	private String datum;
 	private String mesto;
 	private ArrayList<String> fusnote;
-	public Zahtev(Podnosilac podnosilac, Adresa adresa, String drugiPodaciZaKontakt, String nazivOrganaVlasti,
-			String sedisteOrgana, String naslov, ArrayList<PZahtev> paragrafi, String trazeneInformacije, String datum,
-			String mesto, ArrayList<String> fusnote) {
+	
+	public ZahtevvDTO() {
+		super();
+	}
+
+	public ZahtevvDTO(PodnosilaccDTO podnosilac, AdresaaDTO adresa, String drugiPodaciZaKontakt,
+			String nazivOrganaVlasti, String sedisteOrgana, String naslov, ArrayList<PZahtevDTO> paragrafi,
+			String trazeneInformacije, String datum, String mesto, ArrayList<String> fusnote) {
 		super();
 		this.podnosilac = podnosilac;
 		this.adresa = adresa;
@@ -34,20 +40,20 @@ public class Zahtev {
 		this.mesto = mesto;
 		this.fusnote = fusnote;
 	}
-	
-	public Podnosilac getPodnosilac() {
+
+	public PodnosilaccDTO getPodnosilac() {
 		return podnosilac;
 	}
 
-	public void setPodnosilac(Podnosilac podnosilac) {
+	public void setPodnosilac(PodnosilaccDTO podnosilac) {
 		this.podnosilac = podnosilac;
 	}
 
-	public Adresa getAdresa() {
+	public AdresaaDTO getAdresa() {
 		return adresa;
 	}
 
-	public void setAdresa(Adresa adresa) {
+	public void setAdresa(AdresaaDTO adresa) {
 		this.adresa = adresa;
 	}
 
@@ -83,11 +89,11 @@ public class Zahtev {
 		this.naslov = naslov;
 	}
 
-	public ArrayList<PZahtev> getParagrafi() {
+	public ArrayList<PZahtevDTO> getParagrafi() {
 		return paragrafi;
 	}
 
-	public void setParagrafi(ArrayList<PZahtev> paragrafi) {
+	public void setParagrafi(ArrayList<PZahtevDTO> paragrafi) {
 		this.paragrafi = paragrafi;
 	}
 
@@ -122,14 +128,7 @@ public class Zahtev {
 	public void setFusnote(ArrayList<String> fusnote) {
 		this.fusnote = fusnote;
 	}
-
-	@Override
-	public String toString() {
-		return "Zahtev [podnosilac=" + podnosilac + ", adresa=" + adresa + ", drugiPodaciZaKontakt="
-				+ drugiPodaciZaKontakt + ", nazivOrganaVlasti=" + nazivOrganaVlasti + ", sedisteOrgana=" + sedisteOrgana
-				+ ", naslov=" + naslov + ", paragrafi=" + paragrafi + ", trazeneInformacije=" + trazeneInformacije
-				+ ", datum=" + datum + ", mesto=" + mesto + ", fusnote=" + fusnote + "]";
-	}
 	
-
+	
+	
 }

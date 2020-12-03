@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.xml.projekat.dto.ResenjeDTO;
 import com.xml.projekat.dto.ZahtevDTO;
 import com.xml.projekat.service.ZahtevService;
 
@@ -26,6 +27,12 @@ public class ZahtevController {
 	@GetMapping()
 	public ResponseEntity<ZahtevDTO> parseZahtev() throws Exception{
 		String response = service.parseZahtev();
+		return new ResponseEntity<ZahtevDTO>(new ZahtevDTO(response), HttpStatus.OK);
+	}
+	
+	@GetMapping("/create")
+	public ResponseEntity<ZahtevDTO> createResenje() throws Exception{
+		String response = service.createZahtev();
 		return new ResponseEntity<ZahtevDTO>(new ZahtevDTO(response), HttpStatus.OK);
 	}
 	/*
