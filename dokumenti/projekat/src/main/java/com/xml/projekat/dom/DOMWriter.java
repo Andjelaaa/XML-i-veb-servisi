@@ -88,7 +88,7 @@ public class DOMWriter {
 		document.appendChild(dokumentResenje);
 
 		dokumentResenje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
-				"C:\\Users\\Admin\\Desktop\\VII semestar\\XML I VEB SERVISI\\XML-i-veb-servisi\\dokumenti\\resenje.xsd");
+				"./../resenje.xsd");
 
 		Element nazivResenja = document.createElement("naziv_resenja");
 		nazivResenja.appendChild(document.createTextNode(resenje.getNazivOdluka().getNazivResenja()));
@@ -152,7 +152,7 @@ public class DOMWriter {
 		document.appendChild(obavestenje);
 
 		obavestenje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
-				"C:\\Users\\teodo\\Desktop\\XML-i-veb-servisi\\dokumenti\\obavestenjee.xsd");
+				"./../obavestenje.xsd");
 		Element podnosilacZaheva = document.createElement("podnosilac_zahteva");
 
 		obavestenje.appendChild(podnosilacZaheva);
@@ -351,6 +351,8 @@ public class DOMWriter {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
 		Element zalbaOdluke = document.createElement("zalba_odluke");
+		zalbaOdluke.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
+				"./../zalba_odluke.xsd");
 		document.appendChild(zalbaOdluke);
 
 		Element podnosilacZalbe = document.createElement("podnosilac_zalbe");
@@ -530,7 +532,7 @@ public class DOMWriter {
 		document.appendChild(zahtev);
 
 		zahtev.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
-				"C:\\Users\\Admin\\Desktop\\VII semestar\\XML I VEB SERVISI\\XML-i-veb-servisi\\dokumenti\\zahtev.xsd");
+				"./../zahtev.xsd");
 
 		Element podnosilacZahteva = document.createElement("podnosilac_zahteva");
 
@@ -654,6 +656,8 @@ public class DOMWriter {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
 		Element zalbaCutanje = document.createElement("zalba_cutanje");
+		zalbaCutanje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
+				"./../zalba_cutanje.xsd");
 		document.appendChild(zalbaCutanje);
 
 		Element podnosilacZalbe = document.createElement("podnosilac_zalbe");

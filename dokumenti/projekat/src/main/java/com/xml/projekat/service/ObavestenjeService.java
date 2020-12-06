@@ -19,7 +19,7 @@ public class ObavestenjeService {
 	}
 
 	public String parseObavestenje() throws Exception {
-		Document document = domParser.buildDocumentFromFile("C:\\Users\\teodo\\Desktop\\XML-i-veb-servisi\\dokumenti\\obavestenje.xml");
+		Document document = domParser.buildDocumentFromFile("./../obavestenje.xml");
 		Obavestenje obavestenje = domParser.parseObavestenje(document);
 		return domParser.getDocumentAsString(document);
 	}

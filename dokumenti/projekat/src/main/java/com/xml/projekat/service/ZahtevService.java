@@ -22,7 +22,7 @@ public class ZahtevService {
 	}
 
 	public String parseZahtev() throws Exception {
-		Document document = domParser.buildDocumentFromFile("C:\\Users\\teodo\\Desktop\\XML-i-veb-servisi\\dokumenti\\zahtev.xml");
+		Document document = domParser.buildDocumentFromFile("./../zahtev.xml");
 		Zahtev zahtev= domParser.parseZahtev(document);
 
 		return domParser.getDocumentAsString(document);

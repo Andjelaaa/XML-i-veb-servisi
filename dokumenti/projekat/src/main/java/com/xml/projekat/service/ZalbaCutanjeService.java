@@ -21,7 +21,7 @@ public class ZalbaCutanjeService {
 	}
 	
 	public String parseZalbaCutanje() throws Exception {
-		Document document = domParser.buildDocumentFromFile("C:\\Users\\teodo\\Desktop\\XML-i-veb-servisi\\dokumenti\\zalba_cutanje.xml");
+		Document document = domParser.buildDocumentFromFile("./../zalba_cutanje.xml");
 		ZalbaCutanje zalbaCutanje= domParser.parseZalbaCutanje(document);
 
 		return domParser.getDocumentAsString(document);

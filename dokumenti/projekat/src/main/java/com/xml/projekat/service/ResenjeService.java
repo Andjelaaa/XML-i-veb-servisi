@@ -21,7 +21,7 @@ public class ResenjeService {
 	}
 	
 	public String parseResenje() throws Exception {
-		Document document = domParser.buildDocumentFromFile("C:\\Users\\teodo\\Desktop\\XML-i-veb-servisi\\dokumenti\\resenje.xml");
+		Document document = domParser.buildDocumentFromFile("./../resenje.xml");
 		Resenje resenje = domParser.parseResenje(document);
 		return domParser.getDocumentAsString(document);
 	}
