@@ -12,11 +12,9 @@ import com.xml.projekat.model.Resenje;
 public class ResenjeService {
 	private final DOMParser domParser;
 	private final DOMWriter domWriter;
-	private final JaxB jaxB;
 	
-	public ResenjeService(DOMParser domParser, JaxB jaxB, DOMWriter domWriter) {
+	public ResenjeService(DOMParser domParser, DOMWriter domWriter) {
 		this.domParser = domParser;
-		this.jaxB = jaxB;
 		this.domWriter = domWriter;
 	}
 	

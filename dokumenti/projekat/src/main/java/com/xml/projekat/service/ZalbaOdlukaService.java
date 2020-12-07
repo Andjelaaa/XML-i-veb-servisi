@@ -12,11 +12,9 @@ import com.xml.projekat.model.ZalbaOdluke;
 public class ZalbaOdlukaService {
 	private final DOMParser domParser;
 	private final DOMWriter domWriter;
-	private final JaxB jaxB;
 
-	public ZalbaOdlukaService(DOMParser domParser, JaxB jaxB, DOMWriter domWriter) {
+	public ZalbaOdlukaService(DOMParser domParser, DOMWriter domWriter) {
 		this.domParser = domParser;
-		this.jaxB = jaxB;
 		this.domWriter = domWriter;
 	}
 

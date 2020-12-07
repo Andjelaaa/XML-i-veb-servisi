@@ -13,12 +13,10 @@ import com.xml.projekat.model.Zahtev;
 public class ZahtevService {
 	private final DOMParser domParser;
 	private final DOMWriter domWriter;
-	private final JaxB jaxB;
 
-	public ZahtevService(DOMParser domParser, JaxB jaxB, DOMWriter domWriter) {
+	public ZahtevService(DOMParser domParser, DOMWriter domWriter) {
 		this.domParser = domParser;
 		this.domWriter = domWriter;
-		this.jaxB = jaxB;
 	}
 
 	public String parseZahtev() throws Exception {

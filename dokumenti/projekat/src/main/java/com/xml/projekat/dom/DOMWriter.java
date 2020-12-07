@@ -39,7 +39,7 @@ import com.xml.projekat.model.ZalbaOdluke;
 @Component
 public class DOMWriter {
 
-	private static String TARGET_NAMESPACE = "zavrsni_rad";
+	private static String TARGET_NAMESPACE = "dokumenti";
 
 	private static String XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance";
 
@@ -87,8 +87,8 @@ public class DOMWriter {
 		Element dokumentResenje = document.createElement("dokument_resenje");
 		document.appendChild(dokumentResenje);
 
-		dokumentResenje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
-				"./../resenje.xsd");
+//		dokumentResenje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
+//				"./../resenje.xsd");
 
 		Element nazivResenja = document.createElement("naziv_resenja");
 		nazivResenja.appendChild(document.createTextNode(resenje.getNazivOdluka().getNazivResenja()));
@@ -151,8 +151,8 @@ public class DOMWriter {
 		Element obavestenje = document.createElement("obavestenje");
 		document.appendChild(obavestenje);
 
-		obavestenje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
-				"./../obavestenje.xsd");
+//		obavestenje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
+//				"./../obavestenje.xsd");
 		Element podnosilacZaheva = document.createElement("podnosilac_zahteva");
 
 		obavestenje.appendChild(podnosilacZaheva);
@@ -351,8 +351,8 @@ public class DOMWriter {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
 		Element zalbaOdluke = document.createElement("zalba_odluke");
-		zalbaOdluke.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
-				"./../zalba_odluke.xsd");
+//		zalbaOdluke.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
+//				"./../zalba_odluke.xsd");
 		document.appendChild(zalbaOdluke);
 
 		Element podnosilacZalbe = document.createElement("podnosilac_zalbe");
@@ -516,7 +516,7 @@ public class DOMWriter {
 
 		// stampa u fajl po izboru
 //		try {
-//			transform(new FileOutputStream("C:\\Users\\teodo\\Desktop\\NOVIXMLZALBA.xml"));
+//			transform(new FileOutputStream(".\..\NOVIXMLZALBA.xml"));
 //		} catch (FileNotFoundException e) {
 //			e.printStackTrace();
 //		}
@@ -531,8 +531,8 @@ public class DOMWriter {
 		Element zahtev = document.createElement("zahtev");
 		document.appendChild(zahtev);
 
-		zahtev.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
-				"./../zahtev.xsd");
+//		zahtev.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
+//				"./../zahtev.xsd");
 
 		Element podnosilacZahteva = document.createElement("podnosilac_zahteva");
 
@@ -656,8 +656,8 @@ public class DOMWriter {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
 		Element zalbaCutanje = document.createElement("zalba_cutanje");
-		zalbaCutanje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
-				"./../zalba_cutanje.xsd");
+//		zalbaCutanje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
+//				"./../zalba_cutanje.xsd");
 		document.appendChild(zalbaCutanje);
 
 		Element podnosilacZalbe = document.createElement("podnosilac_zalbe");
@@ -758,7 +758,7 @@ public class DOMWriter {
 
 		// stampa u fajl po izboru
 //		try {
-//			transform(new FileOutputStream("C:\\Users\\teodo\\Desktop\\NOVIXMLZALBA.xml"));
+//			transform(new FileOutputStream(".\..\NOVIXMLZALBA.xml"));
 //		} catch (FileNotFoundException e) {
 //			e.printStackTrace();
 //		}
@@ -798,37 +798,5 @@ public class DOMWriter {
 		}
 	}
 
-	public static void main(String args[]) {
-//
-//		String filePath = null;
-//
-//		System.out.println("[INFO] DOM Parser");
-//
-//		if (args.length != 1) {
-//
-//			filePath = "data/xml/zavrsni_rad.xml";
-//
-//			System.out.println("[INFO] No input file, using default \""	+ filePath + "\"");
-//
-//		} else {
-//			filePath = args[0];
-//		}
 
-		DOMWriter handler = new DOMWriter();
-
-		// Kreiranje Document čvora
-		handler.createDocument();
-
-		// Generisanje DOM stabla
-		// handler.generateDOM();
-
-		// Prikaz sadržaja (isprobati sa FileOutputStream-om)
-		handler.transform(System.out);
-
-		/*
-		 * try { handler.transform(new
-		 * FileOutputStream("data/xml/zavrsni_rad_out_3.xml")); } catch
-		 * (FileNotFoundException e) { e.printStackTrace(); }
-		 */
-	}
 }
