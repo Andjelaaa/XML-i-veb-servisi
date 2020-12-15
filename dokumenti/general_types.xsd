@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:complexType name="TPodnosilac">
+        <xs:sequence>
+            <xs:element name="ime" type="xs:string"/>
+            <xs:element name="prezime" type="xs:string"/>
+            <xs:element name="naziv_firme" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="TAdresa">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="ulica" type="xs:string"/>
+            <xs:element minOccurs="0" name="broj" nillable="false">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="grad" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TPoverenik">
+        <xs:sequence>
+            <xs:element name="naziv_poverenika">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="2"/>
+                        <xs:maxLength value="100"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="sediste_poverenika" type="TAdresa"> </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="TDatumMesto">
+        <xs:sequence>
+            <xs:element name="mesto" type="xs:string"/>
+            <xs:element name="datum">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="11"/>
+                        <xs:pattern value="\d{2}\.\d{2}\.\d{4}\." />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="TZaglavlje">
+        <xs:sequence>
+            <xs:element name="broj_resenja" >
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/> 
+                        <xs:pattern value="[0123456789\-/]+"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="datum">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="11"/>
+                        <xs:pattern value="\d{2}\.\d{2}\.\d{4}\." />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="TTekst">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="p" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

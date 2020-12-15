@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-
+    <xs:include schemaLocation="general_types.xsd"/>
     <xs:element name="zahtev">
         <xs:complexType>
             <xs:sequence>
@@ -101,24 +101,4 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:complexType name="TDatumMesto" mixed="true">
-        <xs:sequence>
-            <xs:element name="mesto" type="xs:string"/>
-            <xs:element name="datum" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="TPodnosilac">
-        <xs:sequence>
-            <xs:element name="ime" type="xs:string"/>
-            <xs:element name="prezime" type="xs:string"/>
-            <xs:element name="naziv_firme" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="TAdresa">
-        <xs:sequence>
-            <xs:element name="ulica" type="xs:string"/>
-            <xs:element name="broj"/>
-            <xs:element name="grad" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
 </xs:schema>

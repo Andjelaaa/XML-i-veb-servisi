@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-
+    <xs:include schemaLocation="general_types.xsd"/>
     <xs:element name="dokument_resenje">
         <xs:complexType>
             <xs:sequence>
@@ -26,19 +26,4 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:complexType name="TZaglavlje" mixed="true">
-        <xs:sequence>
-            <xs:element name="broj_resenja" type="xs:string"/>
-            <xs:element name="datum">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string"> </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="TTekst" mixed="true">
-        <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="p" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
 </xs:schema>

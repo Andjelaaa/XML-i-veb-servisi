@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-
+    <xs:include schemaLocation="general_types.xsd"/>
     <xs:element name="obavestenje">
         <xs:complexType>
             <xs:sequence>
@@ -45,25 +45,89 @@
                 <xs:element name="tekst_obavestenja">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="broj_predmeta"/>
-                            <xs:element name="datum" type="xs:string"/>
+                            <xs:element name="broj_predmeta">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:minLength value="1"/>
+                                        <xs:pattern value="[0123456789\-/]+"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="datum">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:length value="11"/>
+                                        <xs:pattern value="\d{2}\.\d{2}\.\d{4}\." />
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
                             <xs:element name="naslov" type="xs:string"/>
                             <xs:element name="p" maxOccurs="unbounded" minOccurs="1">
                                 <xs:complexType mixed="true">
                                     <xs:sequence>
-                                        <xs:element name="godina" maxOccurs="1" minOccurs="0"/>
+                                        <xs:element name="godina" maxOccurs="1" minOccurs="0">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:length value="5"/>
+                                                  <xs:pattern value="\d{4}\." />
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
                                         <xs:element name="trazena_informacija" maxOccurs="1"
                                             minOccurs="0" type="xs:string"/>
-                                        <xs:element name="dan" maxOccurs="1" minOccurs="0"
-                                            type="xs:string"/>
-                                        <xs:element name="sati" maxOccurs="1" minOccurs="0"/>
-                                        <xs:element name="od" maxOccurs="1" minOccurs="0"/>
-                                        <xs:element name="do" maxOccurs="1" minOccurs="0"/>
+                                        <xs:element name="dan" maxOccurs="1" minOccurs="0">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:length value="6"/>
+                                                  <xs:pattern value="\d{2}\.\d{2}\." />
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="sati" maxOccurs="1" minOccurs="0">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="2"/>
+                                                  <xs:maxLength value="5"/>
+                                                  <xs:pattern value="\d{2}:\d{2}" />
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="od" maxOccurs="1" minOccurs="0">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="2"/>
+                                                  <xs:maxLength value="5"/>
+                                                  <xs:pattern value="\d{2}:\d{2}" />
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="do" maxOccurs="1" minOccurs="0">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="2"/>
+                                                  <xs:maxLength value="5"/>
+                                                  <xs:pattern value="\d{2}:\d{2}" />
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
                                         <xs:element name="mesto" minOccurs="0" type="xs:string"/>
                                         <xs:element name="ulica" minOccurs="0" type="xs:string"/>
-                                        <xs:element name="broj_zgrade" minOccurs="0"/>
-                                        <xs:element name="broj_kancelarije" minOccurs="0"/>
-                                        <xs:element name="novcana_naknada" minOccurs="0"/>
+                                        <xs:element name="broj_zgrade" minOccurs="0">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="broj_kancelarije" minOccurs="0">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="novcana_naknada" minOccurs="0"
+                                            type="xs:string"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -74,18 +138,4 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:complexType name="TPodnosilac">
-        <xs:sequence>
-            <xs:element name="ime" type="xs:string"/>
-            <xs:element name="prezime" type="xs:string"/>
-            <xs:element name="naziv_firme" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="TAdresa">
-        <xs:sequence>
-            <xs:element name="ulica" type="xs:string"/>
-            <xs:element name="broj"/>
-            <xs:element name="grad" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
 </xs:schema>
