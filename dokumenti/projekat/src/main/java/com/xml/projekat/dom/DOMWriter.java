@@ -1,6 +1,7 @@
 package com.xml.projekat.dom;
 
 import java.io.OutputStream;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -139,12 +140,12 @@ public class DOMWriter {
 		dokumentResenje.appendChild(tekstResenja);
 		dokumentResenje.appendChild(tekstObrazlozenja);
 		dokumentResenje.appendChild(potpisPoverenika);
-		transform(System.out);
+		//transform(System.out);
 		
 
 	}
 
-	public void generateDOMObavestenje(Obavestenje ob) {
+	public String generateDOMObavestenje(Obavestenje ob) {
 
 		// Kreiranje i postavljanje korenskog elementa
 		createDocument();
@@ -343,7 +344,10 @@ public class DOMWriter {
 		mestoPecata.appendChild(document.createTextNode("(М.П.)"));
 
 		obavestenje.appendChild(mestoPecata);
-		transform(System.out);
+		//transform(System.out);
+		StringWriter sw = new StringWriter();
+		transform(sw);
+		return sw.toString();
 
 	}
 
@@ -512,7 +516,7 @@ public class DOMWriter {
 		}
 
 		// stampa na konzolu
-		transform(System.out);
+		//transform(System.out);
 
 		// stampa u fajl po izboru
 //		try {
@@ -648,7 +652,7 @@ public class DOMWriter {
 		zahtev.appendChild(organVlasti);
 		zahtev.appendChild(tekstZahteva);
 
-		transform(System.out);
+		//transform(System.out);
 		return document;
 	}
 
@@ -754,7 +758,7 @@ public class DOMWriter {
 		tekstZalbe.appendChild(podaciOTrenutku);
 		zalbaCutanje.appendChild(tekstZalbe);
 
-		transform(System.out);
+		//transform(System.out);
 
 		// stampa u fajl po izboru
 //		try {
@@ -770,7 +774,7 @@ public class DOMWriter {
 	/**
 	 * Serializes DOM tree to an arbitrary OutputStream.
 	 */
-	public void transform(OutputStream out) {
+	public void transform(StringWriter sw) {
 		try {
 
 			// Kreiranje instance objekta zaduzenog za serijalizaciju DOM modela
@@ -784,7 +788,7 @@ public class DOMWriter {
 			DOMSource source = new DOMSource(document);
 
 			// Rezultujući stream (argument metode)
-			StreamResult result = new StreamResult(out);
+			StreamResult result = new StreamResult(sw);
 
 			// Poziv metode koja vrši opisanu transformaciju
 			transformer.transform(source, result);
