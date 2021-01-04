@@ -7,6 +7,7 @@ import org.xmldb.api.base.XMLDBException;
 
 import com.xml.projekat.dom.DOMParser;
 import com.xml.projekat.dom.DOMWriter;
+import com.xml.projekat.dto.RetrieveDTO;
 import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.repository.ObavestenjeRepository;
 
@@ -24,10 +25,12 @@ public class ObavestenjeService {
 		
 	}
 
-	public String parseObavestenje() throws Exception {
-		Document document = domParser.buildDocumentFromFile("./../obavestenje.xml");
+	public Obavestenje parseObavestenje(RetrieveDTO dto) throws Exception {
+		Document document = obavestenjeRepository.find(dto.getXpath());
+		//Document document = domParser.buildDocumentFromFile("./../obavestenje.xml");
 		Obavestenje obavestenje = domParser.parseObavestenje(document);
-		return domParser.getDocumentAsString(document);
+		//return domParser.getDocumentAsString(document);
+		return obavestenje;
 	}
 
 	public void makeObavestenje(Obavestenje obavestenje) throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException {

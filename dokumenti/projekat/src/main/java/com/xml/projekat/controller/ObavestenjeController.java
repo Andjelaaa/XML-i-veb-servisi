@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xml.projekat.dto.ObavestenjeDTO;
+import com.xml.projekat.dto.RetrieveDTO;
 import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.service.ObavestenjeService;
 
@@ -26,8 +27,8 @@ public class ObavestenjeController {
 	}
 
 	@GetMapping(value = "/")
-	public ResponseEntity<ObavestenjeDTO> parseObavestenje() throws Exception{
-		String response = service.parseObavestenje();
+	public ResponseEntity<ObavestenjeDTO> parseObavestenje(@RequestBody RetrieveDTO dto) throws Exception{
+		Obavestenje response = service.parseObavestenje(dto);
 		return new ResponseEntity<ObavestenjeDTO>(new ObavestenjeDTO(response), HttpStatus.OK);
 	}
 	

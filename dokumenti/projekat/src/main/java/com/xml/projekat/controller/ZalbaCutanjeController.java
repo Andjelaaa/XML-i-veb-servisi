@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.xml.projekat.dto.RetrieveDTO;
 import com.xml.projekat.dto.ZalbaCutanjeDTO;
 import com.xml.projekat.model.ZalbaCutanje;
 import com.xml.projekat.service.ZalbaCutanjeService;
@@ -24,8 +25,8 @@ public class ZalbaCutanjeController {
 	}
 	
 	@GetMapping()
-	public ResponseEntity<ZalbaCutanjeDTO> parseZalbaCutanje() throws Exception{
-		String response = service.parseZalbaCutanje();
+	public ResponseEntity<ZalbaCutanjeDTO> parseZalbaCutanje(@RequestBody RetrieveDTO dto) throws Exception{
+		ZalbaCutanje response = service.parseZalbaCutanje(dto);
 		return new ResponseEntity<ZalbaCutanjeDTO>(new ZalbaCutanjeDTO(response), HttpStatus.OK);
 	}
 	

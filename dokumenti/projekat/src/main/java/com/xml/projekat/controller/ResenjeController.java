@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xml.projekat.dto.ResenjeDTO;
+import com.xml.projekat.dto.RetrieveDTO;
 import com.xml.projekat.model.Resenje;
 import com.xml.projekat.service.ResenjeService;
 
@@ -25,8 +26,8 @@ public class ResenjeController {
 	}
 
 	@GetMapping()
-	public ResponseEntity<ResenjeDTO> parseResenje() throws Exception{
-		String response = service.parseResenje();
+	public ResponseEntity<ResenjeDTO> parseResenje(@RequestBody RetrieveDTO dto) throws Exception{
+		Resenje response = service.parseResenje(dto);
 		return new ResponseEntity<ResenjeDTO>(new ResenjeDTO(response), HttpStatus.OK);
 	}
 	

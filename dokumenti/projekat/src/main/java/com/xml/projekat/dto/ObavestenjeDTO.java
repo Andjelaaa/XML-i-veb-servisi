@@ -38,6 +38,7 @@ public class ObavestenjeDTO {
 		this(o.getPodnosilac(),o.getAdresa(),o.getNazivOrganaVlasti(),o.getSedisteOrgana(),
 				o.getDostavljeno(),o.getDatum(),o.getNaslov(),o.getBrojPredmeta(),o.getMestoPecata(),o.getParagrafi());
 	}
+	
 	public ObavestenjeDTO(Podnosilac podnosilac, Adresa adresa, String nazivOrganaVlasti, String sedisteOrgana,
 			ArrayList<String> dostavljeno, String datum, String naslov, String brojPredmeta, String mestoPecata,
 			ArrayList<PObavestenje> pobavestenje) {

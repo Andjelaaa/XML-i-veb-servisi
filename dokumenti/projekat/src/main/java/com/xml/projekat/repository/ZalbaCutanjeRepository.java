@@ -10,12 +10,12 @@ import com.xml.projekat.database.ExistManager;
 
 
 @Repository
-public class ObavestenjeRepository {
+public class ZalbaCutanjeRepository {
 
 	@Autowired
 	private ExistManager existMenager;
 
-	private String collectionId = "/db/documents/obavestenja";
+	private String collectionId = "/db/documents/zalbeCutanja";
 	
 	public Document find(String name) {
 		Document document = null;
