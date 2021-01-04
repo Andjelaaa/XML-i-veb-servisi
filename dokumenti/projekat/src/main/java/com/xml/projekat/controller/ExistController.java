@@ -65,10 +65,10 @@ public class ExistController {
 	@GetMapping(value = "/initiateData")
 	public void initiateDate()
 			throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException, IOException {
-		Resource resource = new ClassPathResource("data");
+		Resource resource = new ClassPathResource("podaci");
 		URI a = resource.getURI();
 
-//		existManager.store("/db/paperShare/users", "Users.xml", a.getPath() + "/Users.xml");
+		existManager.store("/db/dokumenti/korisnici", "korisnici.xml", a.getPath() + "/korisnici.xml");
 //		existManager.store("/db/paperShare/CoverLetters", "CoverLetters.xml", a.getPath() + "/CoverLetters.xml");
 //		existManager.store("/db/paperShare/reviews", "rev1.xml", a.getPath() + "/rev1.xml");
 //		existManager.store("/db/paperShare/reviews", "rev2.xml", a.getPath() + "/rev2.xml");
