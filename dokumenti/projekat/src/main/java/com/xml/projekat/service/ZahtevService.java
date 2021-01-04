@@ -33,7 +33,8 @@ public class ZahtevService {
 	}
 	
 	public void createZahtev(Zahtev z) throws Exception {
-		domWriter.generateZahtev(z);
+		String documentContent = domWriter.generateZahtev(z);
+		zahtevRepository.save(documentContent, z.getSedisteOrgana()+".xml");
 	}
 
 }

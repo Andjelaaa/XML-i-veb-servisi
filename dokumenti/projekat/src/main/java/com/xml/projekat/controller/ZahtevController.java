@@ -25,7 +25,7 @@ public class ZahtevController {
 		this.service = service;
 	}
 
-	@GetMapping()
+	@PostMapping()
 	public ResponseEntity<ZahtevDTO> parseZahtev(@RequestBody RetrieveDTO dto) throws Exception{
 		Zahtev response = service.parseZahtev(dto);
 		return new ResponseEntity<ZahtevDTO>(new ZahtevDTO(response), HttpStatus.OK);

@@ -15,7 +15,7 @@ public class ZalbaCutanjeRepository {
 	@Autowired
 	private ExistManager existMenager;
 
-	private String collectionId = "/db/documents/zalbeCutanja";
+	private String collectionId = "/db/dokumenti/zalbeCutanja";
 	
 	public Document find(String name) {
 		Document document = null;

@@ -81,7 +81,7 @@ public class DOMWriter {
 	 * methods.
 	 */
 
-	public void generateResenje(Resenje resenje) {
+	public String generateResenje(Resenje resenje) {
 		createDocument();
 		SimpleDateFormat formatter = new SimpleDateFormat("MM.dd.yyyy.");
 
@@ -140,7 +140,11 @@ public class DOMWriter {
 		dokumentResenje.appendChild(tekstResenja);
 		dokumentResenje.appendChild(tekstObrazlozenja);
 		dokumentResenje.appendChild(potpisPoverenika);
-		//transform(System.out);
+
+
+		StringWriter sw = new StringWriter();
+		transform(sw);
+		return sw.toString();
 		
 
 	}
@@ -351,7 +355,7 @@ public class DOMWriter {
 
 	}
 
-	public Document generateZalbaOdluke(ZalbaOdluke zo) {
+	public String generateZalbaOdluke(ZalbaOdluke zo) {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
 		Element zalbaOdluke = document.createElement("zalba_odluke");
@@ -515,21 +519,13 @@ public class DOMWriter {
 			tacke.appendChild(tacka);
 		}
 
-		// stampa na konzolu
-		//transform(System.out);
-
-		// stampa u fajl po izboru
-//		try {
-//			transform(new FileOutputStream(".\..\NOVIXMLZALBA.xml"));
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
-
-		return document;
+		StringWriter sw = new StringWriter();
+		transform(sw);
+		return sw.toString();
 
 	}
 
-	public Document generateZahtev(Zahtev z) {
+	public String generateZahtev(Zahtev z) {
 		createDocument();
 
 		Element zahtev = document.createElement("zahtev");
@@ -652,11 +648,12 @@ public class DOMWriter {
 		zahtev.appendChild(organVlasti);
 		zahtev.appendChild(tekstZahteva);
 
-		//transform(System.out);
-		return document;
+		StringWriter sw = new StringWriter();
+		transform(sw);
+		return sw.toString();
 	}
 
-	public Document generateZalbaCutanje(ZalbaCutanje zc) {
+	public String generateZalbaCutanje(ZalbaCutanje zc) {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
 		Element zalbaCutanje = document.createElement("zalba_cutanje");
@@ -758,16 +755,9 @@ public class DOMWriter {
 		tekstZalbe.appendChild(podaciOTrenutku);
 		zalbaCutanje.appendChild(tekstZalbe);
 
-		//transform(System.out);
-
-		// stampa u fajl po izboru
-//		try {
-//			transform(new FileOutputStream(".\..\NOVIXMLZALBA.xml"));
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
-
-		return document;
+		StringWriter sw = new StringWriter();
+		transform(sw);
+		return sw.toString();
 
 	}
 

@@ -15,7 +15,7 @@ public class ZahtevRepository {
 	@Autowired
 	private ExistManager existMenager;
 
-	private String collectionId = "/db/documents/zahtevi";
+	private String collectionId = "/db/dokumenti/zahtevi";
 	
 	public Document find(String name) {
 		Document document = null;

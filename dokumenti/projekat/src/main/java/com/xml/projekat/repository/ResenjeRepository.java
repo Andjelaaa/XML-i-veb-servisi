@@ -15,7 +15,7 @@ public class ResenjeRepository {
 	@Autowired
 	private ExistManager existMenager;
 
-	private String collectionId = "/db/documents/resenja";
+	private String collectionId = "/db/dokumenti/resenja";
 	
 	public Document find(String name) {
 		Document document = null;
@@ -33,8 +33,8 @@ public class ResenjeRepository {
 	
 	public String save(String xmlEntity, String title)
 			throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+		
 		existMenager.storeXMLFromText(collectionId, title, xmlEntity);
-
 		return "OK";
 	}
 }

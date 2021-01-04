@@ -241,8 +241,8 @@ public class DOMParser {
 		Adresa adresaSediste = new Adresa(ulicaSediste, brojSediste, gradSediste);
 
 		String naslov = document.getElementsByTagName("naslov").item(0).getTextContent();
-		String nazivOrganaVlasti = document.getElementsByTagName("naziv_organa").item(0).getTextContent();
-
+		//String nazivOrganaVlasti = document.getElementsByTagName("naziv_organa").item(0).getTextContent();
+		String nazivOrganaVlasti = "asdf";
 		NodeList paragrafi = document.getElementsByTagName("p");
 		ArrayList<PZalbaOdluke> paragrafiLista = new ArrayList<PZalbaOdluke>();
 		for (int i = 0; i < paragrafi.getLength(); i++) {
@@ -437,7 +437,6 @@ public class DOMParser {
 			String text = paragrafiXML.item(i).getTextContent().trim();
 			if (((Element) paragrafiXML.item(i)).getElementsByTagName("novcana_naknada").item(0) != null
 					&& paragrafiXML.item(i) instanceof Element) {
-				System.out.println("pukni zoro necu kuci skoro");
 				String novcanaNaknada = ((Element) paragrafiXML.item(i)).getElementsByTagName("novcana_naknada").item(0)
 						.getTextContent();
 

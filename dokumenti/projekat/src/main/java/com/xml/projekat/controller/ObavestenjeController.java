@@ -26,7 +26,7 @@ public class ObavestenjeController {
 		this.service = service;
 	}
 
-	@GetMapping(value = "/")
+	@PostMapping()
 	public ResponseEntity<ObavestenjeDTO> parseObavestenje(@RequestBody RetrieveDTO dto) throws Exception{
 		Obavestenje response = service.parseObavestenje(dto);
 		return new ResponseEntity<ObavestenjeDTO>(new ObavestenjeDTO(response), HttpStatus.OK);

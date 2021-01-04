@@ -25,7 +25,7 @@ public class ResenjeController {
 		this.service = service;
 	}
 
-	@GetMapping()
+	@PostMapping()
 	public ResponseEntity<ResenjeDTO> parseResenje(@RequestBody RetrieveDTO dto) throws Exception{
 		Resenje response = service.parseResenje(dto);
 		return new ResponseEntity<ResenjeDTO>(new ResenjeDTO(response), HttpStatus.OK);
@@ -34,10 +34,9 @@ public class ResenjeController {
 	@PostMapping("/create")
 	public ResponseEntity<ResenjeDTO> createResenje(@RequestBody ResenjeDTO dto) throws Exception{
 		Resenje entity = new Resenje(dto);
-		
 		 try {
 			 service.createResenje(entity);
-	        }catch(Exception e) {
+	     }catch(Exception e) {
 	         return new ResponseEntity<ResenjeDTO>(new ResenjeDTO(entity),HttpStatus.BAD_REQUEST);
 	     }
 			

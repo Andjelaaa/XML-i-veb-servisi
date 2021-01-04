@@ -3,6 +3,7 @@ package com.xml.projekat.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+import org.xmldb.api.base.XMLDBException;
 
 import com.xml.projekat.dom.DOMParser;
 import com.xml.projekat.dom.DOMWriter;
@@ -33,8 +34,9 @@ public class ZalbaCutanjeService {
 		return zalbaCutanje;
 	}
 	
-	public void makeZalbaCutanje(ZalbaCutanje zc) {
-		domWriter.generateZalbaCutanje(zc);
+	public void makeZalbaCutanje(ZalbaCutanje zc) throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException {
+		String documentContent = domWriter.generateZalbaCutanje(zc);
+		zalbaCutanjeRepository.save(documentContent,"zalba.xml");
 	}
 	
 }

@@ -24,7 +24,7 @@ public class ZalbaCutanjeController {
 		this.service = service;
 	}
 	
-	@GetMapping()
+	@PostMapping()
 	public ResponseEntity<ZalbaCutanjeDTO> parseZalbaCutanje(@RequestBody RetrieveDTO dto) throws Exception{
 		ZalbaCutanje response = service.parseZalbaCutanje(dto);
 		return new ResponseEntity<ZalbaCutanjeDTO>(new ZalbaCutanjeDTO(response), HttpStatus.OK);
