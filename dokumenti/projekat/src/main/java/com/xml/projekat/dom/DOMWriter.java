@@ -88,9 +88,11 @@ public class DOMWriter {
 	/**
 	 * Generates sample document object model programmatically using DOM API
 	 * methods.
+	 * @throws TransformerException 
+	 * @throws IOException 
 	 */
 
-	public String generateResenje(Resenje resenje) {
+	public String generateResenje(Resenje resenje) throws TransformerException, IOException {
 		createDocument();
 		SimpleDateFormat formatter = new SimpleDateFormat("MM.dd.yyyy.");
 
@@ -100,6 +102,10 @@ public class DOMWriter {
 //		dokumentResenje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
 //				"./../resenje.xsd");
 
+		dokumentResenje.setAttribute("xmlns", "http://www.w3.org/ns/rdfa#");
+		dokumentResenje.setAttribute("xmlns:pred","http://www.ftn.uns.ac.rs/rdf/examples/predicate/");		
+		dokumentResenje.setAttribute("xmlns:xs","http://www.w3.org/2001/XMLSchema#");
+		
 		Element nazivResenja = document.createElement("naziv_resenja");
 		nazivResenja.appendChild(document.createTextNode(resenje.getNazivOdluka().getNazivResenja()));
 		Element odluka = document.createElement("odluka");
@@ -110,8 +116,12 @@ public class DOMWriter {
 		Element zaglavlje = document.createElement("zaglavlje");
 		zaglavlje.appendChild(document.createTextNode("BR"));
 		Element brojResenja = document.createElement("broj_resenja");
+		brojResenja.setAttribute("property","pred:brojResenja");
+		brojResenja.setAttribute("datatype","xs:string");
 		brojResenja.appendChild(document.createTextNode(resenje.getZaglavlje().getBrojResenja()));
 		Element datum = document.createElement("datum");
+		datum.setAttribute("property","pred:datum");
+		datum.setAttribute("datatype","xs:string");
 		datum.appendChild(document.createTextNode(formatter.format(resenje.getZaglavlje().getDatum())));
 
 		zaglavlje.appendChild(brojResenja);
@@ -153,6 +163,13 @@ public class DOMWriter {
 
 		StringWriter sw = new StringWriter();
 		transform(sw);
+		
+		String rdfFilePath = "src/main/resources/podaci/rdf/resenje.rdf";
+		// extract metadata
+		
+		metadataExtractor.extractMetadata(sw.toString(), new FileOutputStream(new File(rdfFilePath)));
+		FusekiWriter.saveRDF(rdfFilePath, "/resenja");
+		
 		return sw.toString();
 		
 
@@ -231,8 +248,6 @@ public class DOMWriter {
 		element2.appendChild(document.createTextNode("Архиви"));
 
 		element2.setAttribute("broj", "2");
-//		element2.setAttribute("property","pred:number");
-//		element2.setAttribute("datatype","xs:string");
 		listaPonudjenih.appendChild(element2);
 
 		// -------
@@ -381,12 +396,17 @@ public class DOMWriter {
 
 	}
 
-	public String generateZalbaOdluke(ZalbaOdluke zo) {
+	public String generateZalbaOdluke(ZalbaOdluke zo) throws TransformerException, IOException {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
 		Element zalbaOdluke = document.createElement("zalba_odluke");
 //		zalbaOdluke.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
 //				"./../zalba_odluke.xsd");
+		
+		zalbaOdluke.setAttribute("xmlns", "http://www.w3.org/ns/rdfa#");
+		zalbaOdluke.setAttribute("xmlns:pred","http://www.ftn.uns.ac.rs/rdf/examples/predicate/");		
+		zalbaOdluke.setAttribute("xmlns:xs","http://www.w3.org/2001/XMLSchema#");
+		
 		document.appendChild(zalbaOdluke);
 
 		Element podnosilacZalbe = document.createElement("podnosilac_zalbe");
@@ -527,6 +547,8 @@ public class DOMWriter {
 		podaciOTrenutku.appendChild(mesto);
 		podaciOTrenutku.appendChild(document.createTextNode(",дана"));
 		Element datum = document.createElement("datum");
+		datum.setAttribute("property","pred:datum");
+		datum.setAttribute("datatype","xs:string");
 		datum.appendChild(document.createTextNode(zo.getDatum()));
 		podaciOTrenutku.appendChild(datum);
 		podaciOTrenutku.appendChild(document.createTextNode(" године"));
@@ -547,14 +569,24 @@ public class DOMWriter {
 
 		StringWriter sw = new StringWriter();
 		transform(sw);
+		String rdfFilePath = "src/main/resources/podaci/rdf/zalbaOdluke.rdf";
+		// extract metadata
+		
+		metadataExtractor.extractMetadata(sw.toString(), new FileOutputStream(new File(rdfFilePath)));
+		FusekiWriter.saveRDF(rdfFilePath, "/zalbeOdluke");
+		
 		return sw.toString();
 
 	}
 
-	public String generateZahtev(Zahtev z) {
+	public String generateZahtev(Zahtev z) throws TransformerException, IOException {
 		createDocument();
 
 		Element zahtev = document.createElement("zahtev");
+		zahtev.setAttribute("xmlns", "http://www.w3.org/ns/rdfa#");
+		zahtev.setAttribute("xmlns:pred","http://www.ftn.uns.ac.rs/rdf/examples/predicate/");		
+		zahtev.setAttribute("xmlns:xs","http://www.w3.org/2001/XMLSchema#");
+		
 		document.appendChild(zahtev);
 
 //		zahtev.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
@@ -647,6 +679,8 @@ public class DOMWriter {
 		Element mesto = document.createElement("mesto");
 		mesto.appendChild(document.createTextNode(z.getMesto()));
 		Element datum = document.createElement("datum");
+		datum.setAttribute("property","pred:datum");
+		datum.setAttribute("datatype","xs:string");
 		datum.appendChild(document.createTextNode(z.getDatum()));
 
 		vremeMesto.appendChild(document.createTextNode("У"));
@@ -676,13 +710,21 @@ public class DOMWriter {
 
 		StringWriter sw = new StringWriter();
 		transform(sw);
+		String rdfFilePath = "src/main/resources/podaci/rdf/zahtev.rdf";
+		// extract metadata
+		
+		metadataExtractor.extractMetadata(sw.toString(), new FileOutputStream(new File(rdfFilePath)));
+		FusekiWriter.saveRDF(rdfFilePath, "/zahtevi");
 		return sw.toString();
 	}
 
-	public String generateZalbaCutanje(ZalbaCutanje zc) {
+	public String generateZalbaCutanje(ZalbaCutanje zc) throws TransformerException, IOException {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
 		Element zalbaCutanje = document.createElement("zalba_cutanje");
+		zalbaCutanje.setAttribute("xmlns", "http://www.w3.org/ns/rdfa#");
+		zalbaCutanje.setAttribute("xmlns:pred","http://www.ftn.uns.ac.rs/rdf/examples/predicate/");		
+		zalbaCutanje.setAttribute("xmlns:xs","http://www.w3.org/2001/XMLSchema#");
 //		zalbaCutanje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
 //				"./../zalba_cutanje.xsd");
 		document.appendChild(zalbaCutanje);
@@ -775,6 +817,8 @@ public class DOMWriter {
 		podaciOTrenutku.appendChild(mesto);
 		podaciOTrenutku.appendChild(document.createTextNode(",дана"));
 		Element datum = document.createElement("datum");
+		datum.setAttribute("property","pred:datum");
+		datum.setAttribute("datatype","xs:string");
 		datum.appendChild(document.createTextNode(zc.getDatumZalbe()));
 		podaciOTrenutku.appendChild(datum);
 		podaciOTrenutku.appendChild(document.createTextNode(" године"));
@@ -783,6 +827,11 @@ public class DOMWriter {
 
 		StringWriter sw = new StringWriter();
 		transform(sw);
+		String rdfFilePath = "src/main/resources/podaci/rdf/zalbaCutanje.rdf";
+		// extract metadata
+		
+		metadataExtractor.extractMetadata(sw.toString(), new FileOutputStream(new File(rdfFilePath)));
+		FusekiWriter.saveRDF(rdfFilePath, "/zalbeCutanje");
 		return sw.toString();
 
 	}

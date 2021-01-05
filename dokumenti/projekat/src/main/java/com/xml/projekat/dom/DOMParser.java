@@ -101,7 +101,7 @@ public class DOMParser {
 
 	}
 
-	public Zahtev parseZahtev(Document document) {
+	public Zahtev parseZahtev(Document document) throws IOException {
 
 		String drugiPodaciZaKontakt = document.getElementsByTagName("drugi_podaci_za_kontakt").item(0).getTextContent();
 		String nazivOrganaVlasti = document.getElementsByTagName("naziv_organa_vlasti").item(0).getTextContent();
@@ -172,10 +172,11 @@ public class DOMParser {
 		Zahtev z = new Zahtev(podnosilac, adresa, drugiPodaciZaKontakt, nazivOrganaVlasti, sedisteOrgana, naslov,
 				paragrafiLista, trazeneInformacije, datum, mesto, fusnoteLista);
 		System.out.println(z);
+		FusekiReader.executeQuery("/zahtevi");
 		return z;
 	}
 
-	public Resenje parseResenje(Document document) throws ParseException {
+	public Resenje parseResenje(Document document) throws ParseException, IOException {
 		SimpleDateFormat formatter = new SimpleDateFormat("MM.dd.yyyy.");
 
 		String opisPostupka = document.getElementsByTagName("opis_postupka").item(0).getTextContent();
@@ -217,10 +218,11 @@ public class DOMParser {
 		Resenje r = new Resenje(nazivOdluka, zaglavlje, opisPostupka, tekstResenja, tekstObrazlozenja,
 				potpisPoverenika);
 		System.out.println(r);
+		FusekiReader.executeQuery("/resenja");
 		return r;
 	}
 
-	public ZalbaOdluke parseZalbaOdluke(Document document) {
+	public ZalbaOdluke parseZalbaOdluke(Document document) throws IOException {
 		String ime = document.getElementsByTagName("ime").item(0).getTextContent();
 		String prezime = document.getElementsByTagName("prezime").item(0).getTextContent();
 		String nazivFirme = document.getElementsByTagName("naziv_firme").item(0).getTextContent();
@@ -281,10 +283,11 @@ public class DOMParser {
 		ZalbaOdluke zalba = new ZalbaOdluke(podnosilac, adresa, drugiPodaciZaKontakt, nazivPoverenika, adresaSediste,
 				naslov, nazivOrganaVlasti, paragrafiLista, mesto, datum, tackeLista);
 		System.out.println(zalba);
+		FusekiReader.executeQuery("/zalbeOdluke");
 		return zalba;
 	}
 
-	public ZalbaCutanje parseZalbaCutanje(Document document) {
+	public ZalbaCutanje parseZalbaCutanje(Document document) throws IOException {
 		String ime = document.getElementsByTagName("ime").item(0).getTextContent();
 		String prezime = document.getElementsByTagName("prezime").item(0).getTextContent();
 		String nazivFirme = document.getElementsByTagName("naziv_firme").item(0).getTextContent();
@@ -339,6 +342,7 @@ public class DOMParser {
 		ZalbaCutanje zalba = new ZalbaCutanje(podnosilac, adresa, drugiPodaciZaKontakt, nazivPoverenika, adresaSediste,
 				naslov, paragrafiLista, datum, mesto);
 		System.out.println(zalba);
+		FusekiReader.executeQuery("/zalbeCutanje");
 		return zalba;
 	}
 

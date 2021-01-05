@@ -27,7 +27,7 @@ public class FusekiReader {
 	private FusekiReader() {}
 
 	public static void executeQuery(String metadataGraphUri) throws IOException {
-		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties(metadataGraphUri);
 		// Querying the first named graph with a simple SPARQL query
 			System.out.println("[INFO] Selecting the triples from the named graph \"" + metadataGraphUri + "\".");
 			String sparqlQuery = SparqlUtil.selectData(conn.dataEndpoint + metadataGraphUri, "?s ?p ?o");

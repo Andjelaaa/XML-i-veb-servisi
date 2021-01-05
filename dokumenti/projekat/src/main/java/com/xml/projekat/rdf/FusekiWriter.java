@@ -20,15 +20,11 @@ public class FusekiWriter {
 	public static void saveRDF(String rdfFilePath, String metadataGraphUri) throws IOException {
 		
 		System.out.println("[INFO] Loading triples from an RDF/XML to a model...");
-		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
-		System.out.println("[INFO] Rendering model aaaaaa");
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties(metadataGraphUri);
 		// Creates a default model
 		Model model = ModelFactory.createDefaultModel();
-		System.out.println("[INFO] Rendering model as RDF/XML.bbbbbbbbbbbbbb.");
 		model.read(rdfFilePath);
-		System.out.println("[INFO] Rendering model as RDF/XMcccccccccccccccccc.");
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		System.out.println("[INFO] Rendering modeldvdgggdg");
 		model.write(out, SparqlUtil.NTRIPLES);
 
 		System.out.println("[INFO] Rendering model as RDF/XML...");
