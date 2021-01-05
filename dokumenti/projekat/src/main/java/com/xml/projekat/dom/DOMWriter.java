@@ -1,6 +1,9 @@
 package com.xml.projekat.dom;
 
-import java.io.OutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,6 +33,8 @@ import com.xml.projekat.model.Resenje;
 import com.xml.projekat.model.Zahtev;
 import com.xml.projekat.model.ZalbaCutanje;
 import com.xml.projekat.model.ZalbaOdluke;
+import com.xml.projekat.rdf.FusekiWriter;
+import com.xml.projekat.rdf.MetadataExtractor;
 
 /**
  * 
@@ -49,6 +55,9 @@ public class DOMWriter {
 	private static TransformerFactory transformerFactory;
 
 	private Document document;
+	
+	@Autowired
+	private MetadataExtractor metadataExtractor;
 
 	/*
 	 * Factory initialization static-block
@@ -149,7 +158,7 @@ public class DOMWriter {
 
 	}
 
-	public String generateDOMObavestenje(Obavestenje ob) {
+	public String generateDOMObavestenje(Obavestenje ob) throws TransformerException, IOException {
 
 		// Kreiranje i postavljanje korenskog elementa
 		createDocument();
@@ -158,6 +167,10 @@ public class DOMWriter {
 
 //		obavestenje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
 //				"./../obavestenje.xsd");
+		obavestenje.setAttribute("xmlns", "http://www.w3.org/ns/rdfa#");
+		obavestenje.setAttribute("xmlns:pred","http://www.ftn.uns.ac.rs/rdf/examples/predicate/");		
+		obavestenje.setAttribute("xmlns:xs","http://www.w3.org/2001/XMLSchema#");
+
 		Element podnosilacZaheva = document.createElement("podnosilac_zahteva");
 
 		obavestenje.appendChild(podnosilacZaheva);
@@ -218,6 +231,8 @@ public class DOMWriter {
 		element2.appendChild(document.createTextNode("Архиви"));
 
 		element2.setAttribute("broj", "2");
+//		element2.setAttribute("property","pred:number");
+//		element2.setAttribute("datatype","xs:string");
 		listaPonudjenih.appendChild(element2);
 
 		// -------
@@ -225,10 +240,14 @@ public class DOMWriter {
 		obavestenje.appendChild(tekstObavestenja);
 
 		Element brojPredmeta = document.createElement("broj_predmeta");
+		brojPredmeta.setAttribute("property","pred:brojPredmeta");
+		brojPredmeta.setAttribute("datatype","xs:string");
 		brojPredmeta.appendChild(document.createTextNode(ob.getBrojPredmeta()));
 		tekstObavestenja.appendChild(brojPredmeta);
 
 		Element datum = document.createElement("datum");
+		datum.setAttribute("property","pred:datum");
+		datum.setAttribute("datatype","xs:string");
 		datum.appendChild(document.createTextNode(ob.getDatum()));
 		tekstObavestenja.appendChild(datum);
 
@@ -351,6 +370,13 @@ public class DOMWriter {
 		//transform(System.out);
 		StringWriter sw = new StringWriter();
 		transform(sw);
+		
+		String rdfFilePath = "src/main/resources/podaci/rdf/obavestenje.rdf";
+		// extract metadata
+		
+		metadataExtractor.extractMetadata(sw.toString(), new FileOutputStream(new File(rdfFilePath)));
+		FusekiWriter.saveRDF(rdfFilePath, "/obavestenja");
+		
 		return sw.toString();
 
 	}

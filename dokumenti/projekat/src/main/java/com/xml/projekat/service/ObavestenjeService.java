@@ -1,5 +1,10 @@
 package com.xml.projekat.service;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javax.xml.transform.TransformerException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -33,7 +38,7 @@ public class ObavestenjeService {
 		return obavestenje;
 	}
 
-	public void makeObavestenje(Obavestenje obavestenje) throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException {
+	public void makeObavestenje(Obavestenje obavestenje) throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException, TransformerException, IOException {
 		String documentContent = domWriter.generateDOMObavestenje(obavestenje);
 		obavestenjeRepository.save(documentContent, obavestenje.getBrojPredmeta()+".xml");
 	}

@@ -53,7 +53,8 @@ import com.xml.projekat.model.TTekst;
 import com.xml.projekat.model.TZaglavlje;
 import com.xml.projekat.model.Zahtev;
 import com.xml.projekat.model.ZalbaCutanje;
-import com.xml.projekat.model.ZalbaOdluke;;
+import com.xml.projekat.model.ZalbaOdluke;
+import com.xml.projekat.rdf.FusekiReader;;
 
 @Component
 public class DOMParser {
@@ -404,7 +405,7 @@ public class DOMParser {
 		System.out.println("[INFO] Kraj.");
 	}
 
-	public Obavestenje parseObavestenje(Document document) {
+	public Obavestenje parseObavestenje(Document document) throws IOException {
 
 		String nazivOrganaVlasti = document.getElementsByTagName("naziv_organa_vlasti").item(0).getTextContent();
 		String sedisteOrgana = document.getElementsByTagName("sediste_organa").item(0).getTextContent();
@@ -472,6 +473,8 @@ public class DOMParser {
 		Obavestenje obavestenje = new Obavestenje(podnosilac, adresa, nazivOrganaVlasti, sedisteOrgana, dostavljeno,
 				datum, naslov, brojPredmeta, paragrafi, mestoPecata);
 		System.out.println(obavestenje);
+		
+		FusekiReader.executeQuery("/obavestenja");
 		return obavestenje;
 	}
 
