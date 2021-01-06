@@ -40,8 +40,8 @@ public class ZalbaCutanje {
 
 	
 	public ZalbaCutanje(ZalbaCutanjeDTO dto) {
-		this.podnosilac = new Podnosilac(dto.getPodnosilacDTO());
-		this.adresa = new Adresa(dto.getAdresaDTO());
+		this.podnosilac = new Podnosilac(dto.getPodnosilac());
+		this.adresa = new Adresa(dto.getAdresa());
 		this.drugiPodaciZaKontakt = dto.getDrugiPodaciZaKontakt();
 		this.nazivPoverenika = dto.getNazivPoverenika();
 		this.sedistePoverenika = new Adresa(dto.getSedistePoverenika());

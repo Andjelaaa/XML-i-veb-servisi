@@ -73,22 +73,6 @@ public class ZalbaCutanjeDTO {
 		this.drugiPodaciZaKontakt = drugiPodaciZaKontakt;
 	}
 
-	public PodnosilacDTO getPodnosilacDTO() {
-		return podnosilac;
-	}
-
-	public void setPodnosilacDTO(PodnosilacDTO podnosilac) {
-		this.podnosilac = podnosilac;
-	}
-
-	public AdresaDTO getAdresaDTO() {
-		return adresa;
-	}
-
-	public void setAdresaDTO(AdresaDTO adresa) {
-		this.adresa = adresa;
-	}
-
 	public String getDrugiPodaciZaKontakt() {
 		return drugiPodaciZaKontakt;
 	}

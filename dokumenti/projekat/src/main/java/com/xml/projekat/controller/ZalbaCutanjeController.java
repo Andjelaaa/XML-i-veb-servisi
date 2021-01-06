@@ -33,10 +33,10 @@ public class ZalbaCutanjeController {
 	@PostMapping(value = "/create")
 	public ResponseEntity<ZalbaCutanjeDTO> makeZalbaCutanje(@RequestBody ZalbaCutanjeDTO dto) throws Exception{
 		ZalbaCutanje zc = new ZalbaCutanje(dto);
-		
-		 try {
+		try {
 			 service.makeZalbaCutanje(zc);
 	        }catch(Exception e) {
+	         e.printStackTrace();
 	         return new ResponseEntity<>(new ZalbaCutanjeDTO(zc),HttpStatus.BAD_REQUEST);
 	     }
 			
