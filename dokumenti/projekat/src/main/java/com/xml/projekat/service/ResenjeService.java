@@ -33,7 +33,8 @@ public class ResenjeService {
 	
 	public void createResenje(Resenje r) throws Exception {
 		String documentContent = domWriter.generateResenje(r);
-		resenjeRepository.save(documentContent, r.getZaglavlje().getBrojResenja()+".xml");
+		String naziv = (resenjeRepository.getSize()+1) + ".xml";
+		resenjeRepository.save(documentContent, naziv);
 	}
 
 }

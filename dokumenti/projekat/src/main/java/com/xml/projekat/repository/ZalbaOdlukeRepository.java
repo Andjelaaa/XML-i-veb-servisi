@@ -13,7 +13,7 @@ import com.xml.projekat.database.ExistManager;
 public class ZalbaOdlukeRepository {
 
 	@Autowired
-	private ExistManager existMenager;
+	private ExistManager existManager;
 
 	private String collectionId = "/db/dokumenti/zalbeOdluke";
 	
@@ -23,7 +23,7 @@ public class ZalbaOdlukeRepository {
 			name = name + ".xml";
 		}
 		try {
-			XMLResource xmlResource = existMenager.load(collectionId, name.replace(" ", "_"));
+			XMLResource xmlResource = existManager.load(collectionId, name.replace(" ", "_"));
 			document = (Document) xmlResource.getContentAsDOM();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -33,8 +33,12 @@ public class ZalbaOdlukeRepository {
 	
 	public String save(String xmlEntity, String title)
 			throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		existMenager.storeXMLFromText(collectionId, title, xmlEntity);
+		existManager.storeXMLFromText(collectionId, title, xmlEntity);
 
 		return "OK";
+	}
+	
+	public Integer getSize() throws XMLDBException {
+		return existManager.getCollectionSize(collectionId);
 	}
 }

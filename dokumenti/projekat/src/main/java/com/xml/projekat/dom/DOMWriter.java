@@ -1,7 +1,6 @@
 package com.xml.projekat.dom;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -23,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xmldb.api.base.XMLDBException;
 
 import com.xml.projekat.model.Izbor;
 import com.xml.projekat.model.Obavestenje;
@@ -35,6 +35,11 @@ import com.xml.projekat.model.ZalbaCutanje;
 import com.xml.projekat.model.ZalbaOdluke;
 import com.xml.projekat.rdf.FusekiWriter;
 import com.xml.projekat.rdf.MetadataExtractor;
+import com.xml.projekat.repository.ObavestenjeRepository;
+import com.xml.projekat.repository.ResenjeRepository;
+import com.xml.projekat.repository.ZahtevRepository;
+import com.xml.projekat.repository.ZalbaCutanjeRepository;
+import com.xml.projekat.repository.ZalbaOdlukeRepository;
 
 /**
  * 
@@ -59,6 +64,21 @@ public class DOMWriter {
 	@Autowired
 	private MetadataExtractor metadataExtractor;
 
+	@Autowired
+	private ObavestenjeRepository obavestenjeRepository;
+	
+	@Autowired
+	private ResenjeRepository resenjeRepository;
+	
+	@Autowired
+	private ZahtevRepository zahtevRepository;
+	
+	@Autowired
+	private ZalbaOdlukeRepository zalbaOdlukeRepository;
+	
+	@Autowired
+	private ZalbaCutanjeRepository zalbaCutanjeRepository;
+	
 	/*
 	 * Factory initialization static-block
 	 */
@@ -90,9 +110,10 @@ public class DOMWriter {
 	 * methods.
 	 * @throws TransformerException 
 	 * @throws IOException 
+	 * @throws XMLDBException 
 	 */
 
-	public String generateResenje(Resenje resenje) throws TransformerException, IOException {
+	public String generateResenje(Resenje resenje) throws TransformerException, IOException, XMLDBException {
 		createDocument();
 		SimpleDateFormat formatter = new SimpleDateFormat("MM.dd.yyyy.");
 
@@ -164,7 +185,8 @@ public class DOMWriter {
 		StringWriter sw = new StringWriter();
 		transform(sw);
 		
-		String rdfFilePath = "src/main/resources/podaci/rdf/resenje.rdf";
+		String naziv = (resenjeRepository.getSize()+1) + ".rdf";
+		String rdfFilePath = "src/main/resources/podaci/rdf/"+naziv;
 		// extract metadata
 		
 		metadataExtractor.extractMetadata(sw.toString(), new FileOutputStream(new File(rdfFilePath)));
@@ -175,7 +197,7 @@ public class DOMWriter {
 
 	}
 
-	public String generateDOMObavestenje(Obavestenje ob) throws TransformerException, IOException {
+	public String generateDOMObavestenje(Obavestenje ob) throws TransformerException, IOException, XMLDBException {
 
 		// Kreiranje i postavljanje korenskog elementa
 		createDocument();
@@ -386,7 +408,8 @@ public class DOMWriter {
 		StringWriter sw = new StringWriter();
 		transform(sw);
 		
-		String rdfFilePath = "src/main/resources/podaci/rdf/obavestenje.rdf";
+		String naziv = (obavestenjeRepository.getSize()+1) + ".rdf";
+		String rdfFilePath = "src/main/resources/podaci/rdf/"+naziv;
 		// extract metadata
 		
 		metadataExtractor.extractMetadata(sw.toString(), new FileOutputStream(new File(rdfFilePath)));
@@ -396,7 +419,7 @@ public class DOMWriter {
 
 	}
 
-	public String generateZalbaOdluke(ZalbaOdluke zo) throws TransformerException, IOException {
+	public String generateZalbaOdluke(ZalbaOdluke zo) throws TransformerException, IOException, XMLDBException {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
 		Element zalbaOdluke = document.createElement("zalba_odluke");
@@ -569,7 +592,8 @@ public class DOMWriter {
 
 		StringWriter sw = new StringWriter();
 		transform(sw);
-		String rdfFilePath = "src/main/resources/podaci/rdf/zalbaOdluke.rdf";
+		String naziv = (zalbaOdlukeRepository.getSize()+1) + ".rdf";
+		String rdfFilePath = "src/main/resources/podaci/rdf/"+naziv;
 		// extract metadata
 		
 		metadataExtractor.extractMetadata(sw.toString(), new FileOutputStream(new File(rdfFilePath)));
@@ -579,7 +603,7 @@ public class DOMWriter {
 
 	}
 
-	public String generateZahtev(Zahtev z) throws TransformerException, IOException {
+	public String generateZahtev(Zahtev z) throws TransformerException, IOException, XMLDBException {
 		createDocument();
 
 		Element zahtev = document.createElement("zahtev");
@@ -710,7 +734,8 @@ public class DOMWriter {
 
 		StringWriter sw = new StringWriter();
 		transform(sw);
-		String rdfFilePath = "src/main/resources/podaci/rdf/zahtev.rdf";
+		String naziv = (zahtevRepository.getSize()+1) + ".rdf";
+		String rdfFilePath = "src/main/resources/podaci/rdf/"+naziv;
 		// extract metadata
 		
 		metadataExtractor.extractMetadata(sw.toString(), new FileOutputStream(new File(rdfFilePath)));
@@ -718,7 +743,7 @@ public class DOMWriter {
 		return sw.toString();
 	}
 
-	public String generateZalbaCutanje(ZalbaCutanje zc) throws TransformerException, IOException {
+	public String generateZalbaCutanje(ZalbaCutanje zc) throws TransformerException, IOException, XMLDBException {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
 		Element zalbaCutanje = document.createElement("zalba_cutanje");
@@ -827,7 +852,8 @@ public class DOMWriter {
 
 		StringWriter sw = new StringWriter();
 		transform(sw);
-		String rdfFilePath = "src/main/resources/podaci/rdf/zalbaCutanje.rdf";
+		String naziv = (zalbaCutanjeRepository.getSize()+1) + ".rdf";
+		String rdfFilePath = "src/main/resources/podaci/rdf/"+naziv;
 		// extract metadata
 		
 		metadataExtractor.extractMetadata(sw.toString(), new FileOutputStream(new File(rdfFilePath)));

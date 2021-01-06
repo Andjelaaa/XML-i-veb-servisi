@@ -242,6 +242,22 @@ public class ExistManager {
 //				}
 //			}
 //		}
+		
+		public Integer getCollectionSize(String collectionUri) throws XMLDBException  {
+
+			Integer collectionSize = 0;
+			Collection col = DatabaseManager.getCollection(authUtil.getUri() + collectionUri, authUtil.getUser(),
+					authUtil.getPassword());
+
+			// create the collection if it does not exist
+			if (col == null) {
+				return collectionSize;
+			} else {
+				collectionSize = col.getChildCollectionCount();
+				System.out.println(collectionSize+" DUZINAAAAAAA");
+				return collectionSize;
+			}
+		}
 
 		private Collection getOrCreateCollection(String collectionUri, int pathSegmentOffset) throws XMLDBException {
 

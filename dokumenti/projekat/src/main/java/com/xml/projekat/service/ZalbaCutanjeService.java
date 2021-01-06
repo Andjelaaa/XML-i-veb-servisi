@@ -40,7 +40,8 @@ public class ZalbaCutanjeService {
 	
 	public void makeZalbaCutanje(ZalbaCutanje zc) throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException, TransformerException, IOException {
 		String documentContent = domWriter.generateZalbaCutanje(zc);
-		zalbaCutanjeRepository.save(documentContent,"zalba.xml");
+		String naziv = (zalbaCutanjeRepository.getSize()+1) + ".xml";
+		zalbaCutanjeRepository.save(documentContent,naziv);
 	}
 	
 }

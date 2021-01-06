@@ -34,7 +34,8 @@ public class ZahtevService {
 	
 	public void createZahtev(Zahtev z) throws Exception {
 		String documentContent = domWriter.generateZahtev(z);
-		zahtevRepository.save(documentContent, z.getSedisteOrgana()+".xml");
+		String naziv = (zahtevRepository.getSize()+1) + ".xml";
+		zahtevRepository.save(documentContent, naziv);
 	}
 
 }

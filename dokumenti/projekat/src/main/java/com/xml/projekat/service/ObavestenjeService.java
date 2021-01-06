@@ -40,7 +40,8 @@ public class ObavestenjeService {
 
 	public void makeObavestenje(Obavestenje obavestenje) throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException, TransformerException, IOException {
 		String documentContent = domWriter.generateDOMObavestenje(obavestenje);
-		obavestenjeRepository.save(documentContent, obavestenje.getBrojPredmeta()+".xml");
+		String naziv = (obavestenjeRepository.getSize()+1) + ".xml";
+		obavestenjeRepository.save(documentContent, naziv);
 	}
 	
 }

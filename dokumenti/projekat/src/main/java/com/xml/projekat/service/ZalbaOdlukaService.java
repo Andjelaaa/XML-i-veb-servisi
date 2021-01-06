@@ -33,6 +33,7 @@ public class ZalbaOdlukaService {
 	
 	public void createZalbaOdluke(ZalbaOdluke zo) throws Exception {
 		String documentContent = domWriter.generateZalbaOdluke(zo);
-		zalbaOdlukeRepository.save(documentContent, "zalbaaaa.xml");
+		String naziv = (zalbaOdlukeRepository.getSize()+1) + ".xml";
+		zalbaOdlukeRepository.save(documentContent, naziv);
 	}
 }
