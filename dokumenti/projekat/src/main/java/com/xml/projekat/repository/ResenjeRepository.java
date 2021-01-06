@@ -38,7 +38,7 @@ public class ResenjeRepository {
 		return "OK";
 	}
 	
-	public Integer getSize() throws XMLDBException {
+	public Integer getSize() throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return existManager.getCollectionSize(collectionId);
 	}
 }

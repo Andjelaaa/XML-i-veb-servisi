@@ -243,18 +243,17 @@ public class ExistManager {
 //			}
 //		}
 		
-		public Integer getCollectionSize(String collectionUri) throws XMLDBException  {
-
+		public Integer getCollectionSize(String collectionUri) throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException  {
+			createConnection();
 			Integer collectionSize = 0;
 			Collection col = DatabaseManager.getCollection(authUtil.getUri() + collectionUri, authUtil.getUser(),
 					authUtil.getPassword());
-
-			// create the collection if it does not exist
 			if (col == null) {
+				col.close();
 				return collectionSize;
 			} else {
-				collectionSize = col.getChildCollectionCount();
-				System.out.println(collectionSize+" DUZINAAAAAAA");
+				collectionSize = col.getResourceCount();
+				col.close();
 				return collectionSize;
 			}
 		}
@@ -263,8 +262,7 @@ public class ExistManager {
 
 			Collection col = DatabaseManager.getCollection(authUtil.getUri() + collectionUri, authUtil.getUser(),
 					authUtil.getPassword());
-
-			// create the collection if it does not exist
+          	// create the collection if it does not exist
 			if (col == null) {
 
 				if (collectionUri.startsWith("/")) {

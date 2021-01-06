@@ -32,9 +32,7 @@ public class ObavestenjeService {
 
 	public Obavestenje parseObavestenje(RetrieveDTO dto) throws Exception {
 		Document document = obavestenjeRepository.find(dto.getXpath());
-		//Document document = domParser.buildDocumentFromFile("./../obavestenje.xml");
 		Obavestenje obavestenje = domParser.parseObavestenje(document);
-		//return domParser.getDocumentAsString(document);
 		return obavestenje;
 	}
 

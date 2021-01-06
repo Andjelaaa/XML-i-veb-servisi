@@ -111,9 +111,12 @@ public class DOMWriter {
 	 * @throws TransformerException 
 	 * @throws IOException 
 	 * @throws XMLDBException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws ClassNotFoundException 
 	 */
 
-	public String generateResenje(Resenje resenje) throws TransformerException, IOException, XMLDBException {
+	public String generateResenje(Resenje resenje) throws TransformerException, IOException, XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		createDocument();
 		SimpleDateFormat formatter = new SimpleDateFormat("MM.dd.yyyy.");
 
@@ -197,7 +200,7 @@ public class DOMWriter {
 
 	}
 
-	public String generateDOMObavestenje(Obavestenje ob) throws TransformerException, IOException, XMLDBException {
+	public String generateDOMObavestenje(Obavestenje ob) throws TransformerException, IOException, XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
 		// Kreiranje i postavljanje korenskog elementa
 		createDocument();
@@ -419,7 +422,7 @@ public class DOMWriter {
 
 	}
 
-	public String generateZalbaOdluke(ZalbaOdluke zo) throws TransformerException, IOException, XMLDBException {
+	public String generateZalbaOdluke(ZalbaOdluke zo) throws TransformerException, IOException, XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
 		Element zalbaOdluke = document.createElement("zalba_odluke");
@@ -603,7 +606,7 @@ public class DOMWriter {
 
 	}
 
-	public String generateZahtev(Zahtev z) throws TransformerException, IOException, XMLDBException {
+	public String generateZahtev(Zahtev z) throws TransformerException, IOException, XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		createDocument();
 
 		Element zahtev = document.createElement("zahtev");
@@ -743,7 +746,7 @@ public class DOMWriter {
 		return sw.toString();
 	}
 
-	public String generateZalbaCutanje(ZalbaCutanje zc) throws TransformerException, IOException, XMLDBException {
+	public String generateZalbaCutanje(ZalbaCutanje zc) throws TransformerException, IOException, XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
 		Element zalbaCutanje = document.createElement("zalba_cutanje");
