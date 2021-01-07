@@ -5,7 +5,6 @@ import java.io.File;
 import javax.xml.transform.OutputKeys;
 
 import org.exist.xmldb.EXistResource;
-import org.exist.xupdate.XUpdateProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.DatabaseManager;
@@ -17,7 +16,6 @@ import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
 import org.xmldb.api.modules.XPathQueryService;
-import org.xmldb.api.modules.XUpdateQueryService;
 
 
 @Service
@@ -249,7 +247,6 @@ public class ExistManager {
 			Collection col = DatabaseManager.getCollection(authUtil.getUri() + collectionUri, authUtil.getUser(),
 					authUtil.getPassword());
 			if (col == null) {
-				col.close();
 				return collectionSize;
 			} else {
 				collectionSize = col.getResourceCount();

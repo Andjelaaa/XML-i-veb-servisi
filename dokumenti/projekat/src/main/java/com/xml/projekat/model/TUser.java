@@ -122,6 +122,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 @XmlRootElement(name = "user", namespace = "https://github.com/Andjelaaa/XML-i-veb-servisi")
 public class TUser implements UserDetails{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@XmlElement(namespace = "https://github.com/Andjelaaa/XML-i-veb-servisi", required = true)
 	protected String username;
 	@XmlElement(namespace = "https://github.com/Andjelaaa/XML-i-veb-servisi", required = true)

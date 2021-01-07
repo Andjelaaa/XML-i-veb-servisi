@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
 
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -19,11 +17,7 @@ import com.xml.projekat.rdf.AuthenticationUtilities.ConnectionProperties;
 
 
 public class FusekiReader {
-	
-	private static final String QUERY_FILEPATH = "src/main/resources/data/rdf/searchQuery.rq";
-	
-	//private static final String DOKUMENTI_METADATA_GRAPH_URI = "/dokumenti";
-	
+		
 	private FusekiReader() {}
 
 	public static void executeQuery(String metadataGraphUri) throws IOException {

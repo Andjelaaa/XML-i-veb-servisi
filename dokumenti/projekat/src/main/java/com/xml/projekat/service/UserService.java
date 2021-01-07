@@ -1,25 +1,18 @@
 package com.xml.projekat.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.xml.projekat.dto.JwtResponseDTO;
 import com.xml.projekat.dto.LoginDTO;
 import com.xml.projekat.dto.UserTokenStateDTO;
 import com.xml.projekat.model.TUser;
 import com.xml.projekat.repository.UserRepository;
 import com.xml.projekat.security.TokenUtils;
-
-
 
 @Service
 public class UserService {
