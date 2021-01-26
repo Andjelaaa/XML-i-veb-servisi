@@ -1,0 +1,44 @@
+package com.xml.poverenik.service;
+
+import java.io.IOException;
+
+import javax.xml.transform.TransformerException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
+import org.xmldb.api.base.XMLDBException;
+
+import com.xml.poverenik.dom.DOMParser;
+import com.xml.poverenik.dom.DOMWriter;
+import com.xml.poverenik.dto.RetrieveDTO;
+import com.xml.poverenik.model.Obavestenje;
+import com.xml.poverenik.repository.ObavestenjeRepository;
+
+@Service
+public class ObavestenjeService {
+	private final DOMParser domParser;
+	private final DOMWriter domWriter;
+	
+	@Autowired
+	private ObavestenjeRepository obavestenjeRepository;
+	
+	public ObavestenjeService(DOMParser domParser,DOMWriter domWriter) {
+		this.domParser = domParser;
+		this.domWriter = domWriter;
+		
+	}
+
+	public Obavestenje parseObavestenje(RetrieveDTO dto) throws Exception {
+		Document document = obavestenjeRepository.find(dto.getXpath());
+		Obavestenje obavestenje = domParser.parseObavestenje(document);
+		return obavestenje;
+	}
+
+	public void makeObavestenje(Obavestenje obavestenje) throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException, TransformerException, IOException {
+		String documentContent = domWriter.generateDOMObavestenje(obavestenje);
+		String naziv = (obavestenjeRepository.getSize()+1) + ".xml";
+		obavestenjeRepository.save(documentContent, naziv);
+	}
+	
+}
