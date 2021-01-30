@@ -16,7 +16,7 @@ import com.xml.projekat.model.ZalbaOdluke;
 import com.xml.projekat.service.ZalbaOdlukaService;
 
 @RestController
-@RequestMapping(value = "api/zalbaodluke", produces = MediaType.APPLICATION_JSON_VALUE, consumes =  MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/zalbaodluke", produces = MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
 public class ZalbaOdlukaController {
 	private ZalbaOdlukaService service;
 
@@ -33,8 +33,8 @@ public class ZalbaOdlukaController {
 	
 	@PostMapping("/create")
 	public ResponseEntity<Object> createZalbaOdluke(@RequestBody ZalbaOdlukaDTO dto) throws Exception{
-		if(!validate(dto))
-			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
+//		if(!validate(dto))
+//			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
 	     
 		ZalbaOdluke zo = new ZalbaOdluke(dto);
 		

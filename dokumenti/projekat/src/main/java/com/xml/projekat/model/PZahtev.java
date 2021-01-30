@@ -18,8 +18,10 @@ public class PZahtev {
 	public PZahtev(PZahtevDTO pzdto) {
 		this.text = pzdto.getText();
 		this.izbori = new ArrayList<Izbor>();
-		for (IzborDTO i : pzdto.getIzbori()) {
-			this.izbori.add(new Izbor(i));
+		if(pzdto.getIzbori() != null) {
+			for (IzborDTO i : pzdto.getIzbori()) {
+				this.izbori.add(new Izbor(i));
+			}
 		}
 	}
 

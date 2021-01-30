@@ -8,14 +8,14 @@ public class IzborDTO {
 	
 	private int broj;
 	private String tekst;
-	private HashMap<Integer,String> podizbori;
+	private HashMap<String,String> podizbori;
 	private String drugiNacin;
 	
 	public IzborDTO() {
 		super();
 	}
 
-	public IzborDTO(int broj, String tekst, HashMap<Integer, String> podizbori, String drugiNacin) {
+	public IzborDTO(int broj, String tekst, HashMap<String, String> podizbori, String drugiNacin) {
 		super();
 		this.broj = broj;
 		this.tekst = tekst;
@@ -46,11 +46,11 @@ public class IzborDTO {
 		this.tekst = tekst;
 	}
 
-	public HashMap<Integer, String> getPodizbori() {
+	public HashMap<String, String> getPodizbori() {
 		return podizbori;
 	}
 
-	public void setPodizbori(HashMap<Integer, String> podizbori) {
+	public void setPodizbori(HashMap<String, String> podizbori) {
 		this.podizbori = podizbori;
 	}
 

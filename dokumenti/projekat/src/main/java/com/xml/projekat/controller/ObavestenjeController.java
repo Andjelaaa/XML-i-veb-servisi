@@ -17,7 +17,7 @@ import com.xml.projekat.service.ObavestenjeService;
 
 
 @RestController
-@RequestMapping(value = "api/obavestenje", produces = MediaType.APPLICATION_JSON_VALUE, consumes =  MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/obavestenje", produces = MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
 public class ObavestenjeController {
 	
 	private ObavestenjeService service;

@@ -682,10 +682,10 @@ public class DOMWriter {
 					if (j == 3) {
 						Element podizbori = document.createElement("podizbori");
 						izbor.appendChild(podizbori);
-						for (Integer key : izboriLista.get(3).getPodizbori().keySet()) {
+						for (String key : izboriLista.get(3).getPodizbori().keySet()) {
 							Element podizbor = document.createElement("podizbor");
 							podizbor.appendChild(document.createTextNode(izboriLista.get(3).getPodizbori().get(key)));
-							podizbor.setAttribute("broj", Integer.toString(key));
+							podizbor.setAttribute("broj", key);
 							podizbori.appendChild(podizbor);
 						}
 						Element drugiNacin = document.createElement("drugi_nacin");

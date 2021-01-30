@@ -130,7 +130,7 @@ public class DOMParser {
 					if (izbor.item(j) instanceof Element) {
 						int broj = Integer.parseInt(izbor.item(j).getAttributes().getNamedItem("broj").getTextContent());
 						String tekst = izbor.item(j).getFirstChild().getTextContent();
-						HashMap<Integer, String> podizboriMapa = new HashMap<Integer, String>();
+						HashMap<String, String> podizboriMapa = new HashMap<String, String>();
 						String drugiNacin = null;
 
 						NodeList podizboriAllChildren = izbor.item(j).getChildNodes();
@@ -140,7 +140,7 @@ public class DOMParser {
 							Element podizboriEl = (Element) podizbori;
 							NodeList podizbori2 = podizboriEl.getElementsByTagName("podizbor");
 							for (int k = 0; k < podizbori2.getLength(); k++) {
-								int podizborBroj = Integer.parseInt(podizbori2.item(k).getAttributes().getNamedItem("broj").getTextContent());
+								String podizborBroj = podizbori2.item(k).getAttributes().getNamedItem("broj").getTextContent();
 								String podizborString = podizbori2.item(k).getTextContent();
 								podizboriMapa.put(podizborBroj, podizborString);
 							}

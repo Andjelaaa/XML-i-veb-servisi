@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.xml</groupId>
-	<artifactId>projekat</artifactId>
+	<artifactId>poverenik</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>projekat</name>
+	<name>poverenik</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -69,6 +69,18 @@
 			<groupId>org.apache.jena</groupId>
 			<artifactId>jena-rdfconnection</artifactId>
 			<version>3.11.0</version>
+		</dependency>
+
+		<!-- API, java.xml.bind module -->
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.dataformat</groupId>
+		    <artifactId>jackson-dataformat-xml</artifactId>
+		    
 		</dependency>
 	</dependencies>
 

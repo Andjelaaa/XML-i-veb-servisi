@@ -17,7 +17,7 @@ import com.xml.projekat.service.ZahtevService;
 
 
 @RestController
-@RequestMapping(value = "api/zahtev", produces = MediaType.APPLICATION_JSON_VALUE, consumes =  MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/zahtev", produces = MediaType.APPLICATION_XML_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
 public class ZahtevController {
 	private ZahtevService service;
 

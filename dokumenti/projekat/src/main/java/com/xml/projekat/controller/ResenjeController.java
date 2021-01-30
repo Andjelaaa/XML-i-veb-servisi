@@ -17,7 +17,7 @@ import com.xml.projekat.service.ResenjeService;
 
 
 @RestController
-@RequestMapping(value = "api/resenje", produces = MediaType.APPLICATION_JSON_VALUE, consumes =  MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/resenje", produces =MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
 public class ResenjeController {
 	private ResenjeService service;
 
