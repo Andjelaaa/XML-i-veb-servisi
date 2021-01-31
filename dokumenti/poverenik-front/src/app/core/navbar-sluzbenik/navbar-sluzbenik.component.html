@@ -1,0 +1,17 @@
+<mat-toolbar class="flexSpaceBetween">
+	<div>
+		<a id="home" [routerLink]="['/']">
+			<mat-icon class="material-icons"  inline="true" >home</mat-icon>
+		</a>
+	</div>
+	<span>
+		<a id="news" mat-button [routerLink]="['/posts']"> News </a>
+		<a id="categoryPage" mat-button [routerLink]="['/categoriesAndTypes']"> Categories and types </a>
+		<!-- <button id="addNewBtn" class="addNew"  mat-button [matMenuTriggerFor]="addNew" > Add new</button>
+        <mat-menu  #addNew="matMenu">
+        </mat-menu> -->
+		
+		<!-- <a mat-button (click)="signOut()" id="signOut"> Sign out </a> -->
+	</span>
+	
+</mat-toolbar>

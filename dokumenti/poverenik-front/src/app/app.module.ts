@@ -1,27 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
+
+import { MaterialModule } from './material-module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
-import { MaterialModule } from './material-module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Interceptor } from './interceptors/intercept.service';
-import { CommonModule } from '@angular/common';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { NavbarGradjaninComponent } from './core/navbar-gradjanin/navbar-gradjanin.component';
+import { NavbarSluzbenikComponent } from './core/navbar-sluzbenik/navbar-sluzbenik.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginPageComponent,
+    NavbarGradjaninComponent,
+    NavbarSluzbenikComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    CommonModule,
     MaterialModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true}],
-  bootstrap: [AppComponent],
-  schemas: [NO_ERRORS_SCHEMA]
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
