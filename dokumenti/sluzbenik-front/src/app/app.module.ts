@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
-import { MaterialModule } from './pages/material-module';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { NavbarGradjaninComponent } from './core/navbar-gradjanin/navbar-gradjanin.component';
-import { NavbarPoverenikComponent } from './core/navbar-poverenik/navbar-poverenik.component';
+import { NavbarSluzbenikComponent } from './core/navbar-sluzbenik/navbar-sluzbenik.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Interceptor } from './interceptors/intercept.service';
 
 @NgModule({
   declarations: [
@@ -15,14 +16,14 @@ import { NavbarPoverenikComponent } from './core/navbar-poverenik/navbar-poveren
     LoginPageComponent,
     RegisterPageComponent,
     NavbarGradjaninComponent,
-    NavbarPoverenikComponent
+    NavbarSluzbenikComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    MaterialModule
+    AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true}],
+  bootstrap: [AppComponent],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule { }

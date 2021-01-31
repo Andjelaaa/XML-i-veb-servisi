@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "poverenik-front": {
+    "sluzbenik-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/poverenik-front",
+            "outputPath": "dist/sluzbenik-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -65,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "poverenik-front:build"
+            "browserTarget": "sluzbenik-front:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "poverenik-front:build:production"
+              "browserTarget": "sluzbenik-front:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "poverenik-front:build"
+            "browserTarget": "sluzbenik-front:build"
           }
         },
         "test": {
@@ -113,19 +113,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "poverenik-front:serve"
+            "devServerTarget": "sluzbenik-front:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "poverenik-front:serve:production"
+              "devServerTarget": "sluzbenik-front:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "poverenik-front",
+  "defaultProject": "sluzbenik-front",
   "cli": {
-    "analytics": "101b4f13-7ed4-482a-8840-b78b6b61909f"
+    "analytics": "173251a5-e5a3-49ee-a374-30e5afc57a9b"
   }
 }
