@@ -31,6 +31,19 @@ public class ZahtevRepository {
 		return document;
 	}
 	
+	public String findZahtev(String name) throws XMLDBException {
+		XMLResource xmlResource = null;
+		if (!name.endsWith(".xml")) {
+			name = name + ".xml";
+		}
+		try {
+			xmlResource = existManager.load(collectionId, name.replace(" ", "_"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (String) xmlResource.getContent();
+	}
+	
 	public String save(String xmlEntity, String title)
 			throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		existManager.storeXMLFromText(collectionId, title, xmlEntity);
@@ -41,4 +54,5 @@ public class ZahtevRepository {
 	public Integer getSize() throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return existManager.getCollectionSize(collectionId);
 	}
+
 }

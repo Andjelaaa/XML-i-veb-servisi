@@ -21,12 +21,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.ProcessingInstruction;
 import org.xmldb.api.base.XMLDBException;
 
-import com.xml.projekat.model.*;
+import com.xml.projekat.model.Izbor;
+import com.xml.projekat.model.Obavestenje;
+import com.xml.projekat.model.PObavestenje;
+import com.xml.projekat.model.Zahtev;
 import com.xml.projekat.rdf.FusekiWriter;
 import com.xml.projekat.rdf.MetadataExtractor;
-import com.xml.projekat.repository.*;
+import com.xml.projekat.repository.ObavestenjeRepository;
+import com.xml.projekat.repository.ZahtevRepository;
 
 /**
  * 
@@ -340,32 +345,36 @@ public class DOMWriter {
 
 	public String generateZahtev(Zahtev z) throws TransformerException, IOException, XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		createDocument();
+		
+		ProcessingInstruction newPI = document.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"src/main/resources/podaci/xsl/zahtev.xsl\"");
+		document.insertBefore(newPI, document.getDocumentElement());
+		Element zahtev = document.createElement("d:zahtev");
 
-		Element zahtev = document.createElement("zahtev");
 		
 		zahtev.setAttribute("xmlns", "http://www.w3.org/ns/rdfa#");
 		zahtev.setAttribute("xmlns:pred","http://www.ftn.uns.ac.rs/rdf/examples/predicate/");		
 		zahtev.setAttribute("xmlns:xs","http://www.w3.org/2001/XMLSchema#");
+		zahtev.setAttribute("xmlns:d","http://www.ftn.uns.ac.rs/xpath/examples");
 		
 		
 		document.appendChild(zahtev);
 
-		Element uri = document.createElement("URI");
+		Element uri = document.createElement("d:URI");
 		uri.setAttribute("property","pred:URI");
 		uri.setAttribute("datatype","xs:string");
 		uri.appendChild(document.createTextNode(""+(zahtevRepository.getSize()+1)));
 		
-		Element podnosilacZahteva = document.createElement("podnosilac_zahteva");
+		Element podnosilacZahteva = document.createElement("d:podnosilac_zahteva");
 		
 		
-		Element nazivPodnosioca = document.createElement("naziv_podnosioca");
-		Element ime = document.createElement("ime");
+		Element nazivPodnosioca = document.createElement("d:naziv_podnosioca");
+		Element ime = document.createElement("d:ime");
 		ime.appendChild(document.createTextNode(z.getPodnosilac().getIme()));
-		Element prezime = document.createElement("prezime");
+		Element prezime = document.createElement("d:prezime");
 		prezime.appendChild(document.createTextNode(z.getPodnosilac().getPrezime()));
-		Element nazivFirme = document.createElement("naziv_firme");
+		Element nazivFirme = document.createElement("d:naziv_firme");
 		nazivFirme.appendChild(document.createTextNode(z.getPodnosilac().getNazivFirme()));
-		Element korisnickoIme = document.createElement("korisnicko_ime");
+		Element korisnickoIme = document.createElement("d:korisnicko_ime");
 		korisnickoIme.setAttribute("property","pred:korisnicko_ime");
 		korisnickoIme.setAttribute("datatype","xs:string");
 		korisnickoIme.appendChild(document.createTextNode(z.getPodnosilac().getKorisnickoIme()));
@@ -376,40 +385,40 @@ public class DOMWriter {
 		nazivPodnosioca.appendChild(nazivFirme);
 		nazivPodnosioca.appendChild(korisnickoIme);
 		
-		Element adresa = document.createElement("adresa");
-		Element ulica = document.createElement("ulica");
+		Element adresa = document.createElement("d:adresa");
+		Element ulica = document.createElement("d:ulica");
 		ulica.appendChild(document.createTextNode(z.getAdresa().getUlica()));
-		Element broj = document.createElement("broj");
+		Element broj = document.createElement("d:broj");
 		broj.appendChild(document.createTextNode(z.getAdresa().getBroj()));
-		Element grad = document.createElement("grad");
+		Element grad = document.createElement("d:grad");
 		grad.appendChild(document.createTextNode(z.getAdresa().getGrad()));
 
 		adresa.appendChild(ulica);
 		adresa.appendChild(broj);
 		adresa.appendChild(grad);
 
-		Element drugiPodaciZaKontakt = document.createElement("drugi_podaci_za_kontakt");
+		Element drugiPodaciZaKontakt = document.createElement("d:drugi_podaci_za_kontakt");
 		drugiPodaciZaKontakt.appendChild(document.createTextNode(z.getDrugiPodaciZaKontakt()));
 
 		podnosilacZahteva.appendChild(nazivPodnosioca);
 		podnosilacZahteva.appendChild(adresa);
 		podnosilacZahteva.appendChild(drugiPodaciZaKontakt);
 
-		Element organVlasti = document.createElement("organ_vlasti");
+		Element organVlasti = document.createElement("d:organ_vlasti");
 		
-		Element nazivOrgana = document.createElement("naziv_organa_vlasti");
+		Element nazivOrgana = document.createElement("d:naziv_organa_vlasti");
 		nazivOrgana.setAttribute("property","pred:naziv_organa_vlasti");
 		nazivOrgana.setAttribute("datatype","xs:string");
 		nazivOrgana.appendChild(document.createTextNode(z.getNazivOrganaVlasti()));
-		Element sedisteOrgana = document.createElement("sediste_organa");
+		Element sedisteOrgana = document.createElement("d:sediste_organa");
 		sedisteOrgana.appendChild(document.createTextNode(z.getSedisteOrgana()));
 		
 
 		organVlasti.appendChild(nazivOrgana);
 		organVlasti.appendChild(sedisteOrgana);
 
-		Element tekstZahteva = document.createElement("tekst_zahteva");
-		Element naslov = document.createElement("naslov");
+		Element tekstZahteva = document.createElement("d:tekst_zahteva");
+		Element naslov = document.createElement("d:naslov");
 		naslov.appendChild(document.createTextNode(z.getNaslov()));
 
 		tekstZahteva.appendChild(naslov);
@@ -419,23 +428,23 @@ public class DOMWriter {
 			if (z.getParagrafi().get(i).getIzbori().size() == 0) {
 				paragraf.appendChild(document.createTextNode(z.getParagrafi().get(i).getText()));
 			} else {
-				Element izbori = document.createElement("izbori");
+				Element izbori = document.createElement("d:izbori");
 				ArrayList<Izbor> izboriLista = z.getParagrafi().get(i).getIzbori();
 				for (int j = 0; j < z.getParagrafi().get(i).getIzbori().size(); j++) {
-					Element izbor = document.createElement("izbor");
+					Element izbor = document.createElement("d:izbor");
 					izbor.appendChild(document.createTextNode(z.getParagrafi().get(i).getIzbori().get(j).getTekst()));
 					izbor.setAttribute("broj", Integer.toString(j + 1));
 
 					if (j == 3) {
-						Element podizbori = document.createElement("podizbori");
+						Element podizbori = document.createElement("d:podizbori");
 						izbor.appendChild(podizbori);
 						for (String key : izboriLista.get(3).getPodizbori().keySet()) {
-							Element podizbor = document.createElement("podizbor");
+							Element podizbor = document.createElement("d:podizbor");
 							podizbor.appendChild(document.createTextNode(izboriLista.get(3).getPodizbori().get(key)));
-							podizbor.setAttribute("broj", key);
+							podizbor.setAttribute("d:broj", key);
 							podizbori.appendChild(podizbor);
 						}
-						Element drugiNacin = document.createElement("drugi_nacin");
+						Element drugiNacin = document.createElement("d:drugi_nacin");
 						podizbori.appendChild(drugiNacin);
 					}
 					izbori.appendChild(izbor);
@@ -446,13 +455,13 @@ public class DOMWriter {
 		}
 
 
-		Element trazeneInformacije = document.createElement("trazene_informacije");
+		Element trazeneInformacije = document.createElement("d:trazene_informacije");
 		trazeneInformacije.appendChild(document.createTextNode(z.getTrazeneInformacije()));
 		
-		Element vremeMesto = document.createElement("podaci_o_vremenu_i_mestu_podnosenja_zahteva");
-		Element mesto = document.createElement("mesto");
+		Element vremeMesto = document.createElement("d:podaci_o_vremenu_i_mestu_podnosenja_zahteva");
+		Element mesto = document.createElement("d:mesto");
 		mesto.appendChild(document.createTextNode(z.getMesto()));
-		Element datum = document.createElement("datum");
+		Element datum = document.createElement("d:datum");
 		datum.setAttribute("property","pred:datum");
 		datum.setAttribute("datatype","xs:string");
 		datum.appendChild(document.createTextNode(z.getDatum()));
@@ -463,13 +472,13 @@ public class DOMWriter {
 		vremeMesto.appendChild(datum);
 		vremeMesto.appendChild(document.createTextNode("године"));
 
-		Element fusnote = document.createElement("fusnote");
+		Element fusnote = document.createElement("d:fusnote");
 		
 
 		for (int i = 0; i<z.getFusnote().size(); i++) {
-			Element fusnota = document.createElement("fusnota");
+			Element fusnota = document.createElement("d:fusnota");
 			fusnota.appendChild(document.createTextNode(z.getFusnote().get(i)));
-			fusnota.setAttribute("broj", Integer.toString(i+1));
+			fusnota.setAttribute("d:broj", Integer.toString(i+1));
 			fusnote.appendChild(fusnota);
 		}
 		

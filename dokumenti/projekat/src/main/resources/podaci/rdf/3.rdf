@@ -1,17 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
   <rdf:Description rdf:about="">
-    <pred:zahtev_uri xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4</pred:zahtev_uri>
+    <pred:URI xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3</pred:URI>
   </rdf:Description>
   <rdf:Description rdf:about="">
     <pred:korisnicko_ime xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:naziv_organa_vlasti xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NOV</pred:naziv_organa_vlasti>
+    <pred:naziv_organa_vlasti xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SOPV</pred:naziv_organa_vlasti>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:brojPredmeta xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">12</pred:brojPredmeta>
-  </rdf:Description>
-  <rdf:Description rdf:about="">
-    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21.11.2019.</pred:datum>
+    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21.11.2020.</pred:datum>
   </rdf:Description>
 </rdf:RDF>

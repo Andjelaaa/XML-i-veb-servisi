@@ -1,10 +1,15 @@
 package com.xml.projekat.controller;
 
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +52,19 @@ public class ZahtevController {
 			
 		return new ResponseEntity<>(new ZahtevDTO(z),HttpStatus.CREATED);
 	}
+	
+	@GetMapping(value = "/{name}/pdf", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> getPdf(@PathVariable("name") String name) throws Exception {
+		
+		System.out.println("aklskdlskdasldk");
+		Resource resource = service.getPdf(name);
+		
+//		return new ResponseEntity<>(new ZahtevDTO(),HttpStatus.OK);
+		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
+	}
+	
 
 	private boolean validate(ZahtevDTO dto) {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
