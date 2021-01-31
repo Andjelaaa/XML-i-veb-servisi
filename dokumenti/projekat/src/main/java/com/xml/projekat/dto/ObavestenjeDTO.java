@@ -8,6 +8,8 @@ import com.xml.projekat.model.PObavestenje;
 import com.xml.projekat.model.Podnosilac;
 
 public class ObavestenjeDTO {
+	private String URI;
+	private String zahtevURI;
 	private String text;
 	private PodnosilacDTO podnosilac;
 	private AdresaDTO adresa;
@@ -36,12 +38,13 @@ public class ObavestenjeDTO {
   
 	public ObavestenjeDTO(Obavestenje o) {
 		this(o.getPodnosilac(),o.getAdresa(),o.getNazivOrganaVlasti(),o.getSedisteOrgana(),
-				o.getDostavljeno(),o.getDatum(),o.getNaslov(),o.getBrojPredmeta(),o.getMestoPecata(),o.getParagrafi());
+				o.getDostavljeno(),o.getDatum(),o.getNaslov(),o.getBrojPredmeta(),o.getMestoPecata(),o.getParagrafi(), o.getZahtevURI());
 	}
 	
 	public ObavestenjeDTO(Podnosilac podnosilac, Adresa adresa, String nazivOrganaVlasti, String sedisteOrgana,
 			ArrayList<String> dostavljeno, String datum, String naslov, String brojPredmeta, String mestoPecata,
-			ArrayList<PObavestenje> pobavestenje) {
+			ArrayList<PObavestenje> pobavestenje, String zahtevURI) {
+		this.zahtevURI = zahtevURI;
 		this.podnosilac = new PodnosilacDTO(podnosilac);
 		this.adresa = new AdresaDTO(adresa);
 		this.nazivOrganaVlasti = nazivOrganaVlasti;
@@ -71,6 +74,22 @@ public class ObavestenjeDTO {
 		this.text = text;		
 	}
 	
+
+	public String getZahtevURI() {
+		return zahtevURI;
+	}
+
+	public void setZahtevURI(String zahtevURI) {
+		this.zahtevURI = zahtevURI;
+	}
+
+	public String getURI() {
+		return URI;
+	}
+
+	public void setURI(String uRI) {
+		URI = uRI;
+	}
 
 	public PodnosilacDTO getPodnosilac() {
 		return podnosilac;

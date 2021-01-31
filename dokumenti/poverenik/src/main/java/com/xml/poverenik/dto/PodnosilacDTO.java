@@ -6,6 +6,7 @@ public class PodnosilacDTO {
 	private String ime;
 	private String prezime;
 	private String nazivFirme;
+	private String korisnickoIme;
 	
 	public PodnosilacDTO() {
 		super();
@@ -21,6 +22,15 @@ public class PodnosilacDTO {
 		super();
 		this.nazivFirme = nazivFirme;
 	}
+	
+
+	public PodnosilacDTO(String ime, String prezime, String nazivFirme, String korisnickoIme) {
+		super();
+		this.ime = ime;
+		this.prezime = prezime;
+		this.nazivFirme = nazivFirme;
+		this.korisnickoIme = korisnickoIme;
+	}
 
 	public PodnosilacDTO(Podnosilac podnosilac) {
 		// TODO Auto-generated constructor stub
@@ -32,6 +42,16 @@ public class PodnosilacDTO {
 	@Override
 	public String toString() {
 		return "Podnosilac [ime=" + ime + ", prezime=" + prezime + ", nazivFirme=" + nazivFirme + "]";
+	}
+	
+	
+
+	public String getKorisnickoIme() {
+		return korisnickoIme;
+	}
+
+	public void setKorisnickoIme(String korisnickoIme) {
+		this.korisnickoIme = korisnickoIme;
 	}
 
 	public String getIme() {

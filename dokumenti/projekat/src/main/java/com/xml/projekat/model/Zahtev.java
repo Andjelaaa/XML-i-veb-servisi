@@ -7,6 +7,8 @@ import com.xml.projekat.dto.ZahtevDTO;
 
 public class Zahtev {
 	
+	private String URI;
+	
 	private Podnosilac podnosilac;
 	private Adresa adresa;
 	private String drugiPodaciZaKontakt;
@@ -53,6 +55,15 @@ public class Zahtev {
 		this.datum = dto.getDatum();
 		this.mesto = dto.getMesto();
 		this.fusnote = dto.getFusnote();
+	}
+
+	
+	public String getURI() {
+		return URI;
+	}
+
+	public void setURI(String uRI) {
+		URI = uRI;
 	}
 
 	public Podnosilac getPodnosilac() {
