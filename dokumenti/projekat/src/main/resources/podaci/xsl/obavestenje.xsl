@@ -64,7 +64,7 @@
                     <fo:block font-family="sans-serif" font-size="24px" font-weight="bold" padding="10px" text-align="center">
                         O B A V E S T E NJ E             
                     </fo:block>
-                    <fo:block font-family="sans-serif" font-size="24px" font-weight="bold" padding="10px" text-align="center">
+                    <fo:block font-family="sans-serif" font-size="12px" font-weight="bold" padding="10px" text-align="center">
                         o stavljanju na uvid dokumenta koji sadrzi trazenu informaciju i o izradi kopije            
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="12px" padding="10px">
