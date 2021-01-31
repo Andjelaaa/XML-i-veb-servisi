@@ -104,121 +104,124 @@ public class DOMWriter {
 
 		// Kreiranje i postavljanje korenskog elementa
 		createDocument();
-		Element obavestenje = document.createElement("obavestenje");
+		ProcessingInstruction newPI = document.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"src/main/resources/podaci/xsl/obavestenje.xsl\"");
+		document.insertBefore(newPI, document.getDocumentElement());
+		Element obavestenje = document.createElement("d:obavestenje");
 		document.appendChild(obavestenje);
 		
 		obavestenje.setAttribute("xmlns", "http://www.w3.org/ns/rdfa#");
 		obavestenje.setAttribute("xmlns:pred","http://www.ftn.uns.ac.rs/rdf/examples/predicate/");		
 		obavestenje.setAttribute("xmlns:xs","http://www.w3.org/2001/XMLSchema#");
+		obavestenje.setAttribute("xmlns:d","http://www.ftn.uns.ac.rs/xpath/examples");
 
-		Element uri = document.createElement("URI");
+		Element uri = document.createElement("d:URI");
 		uri.setAttribute("property","pred:URI");
 		uri.setAttribute("datatype","xs:string");
 		uri.appendChild(document.createTextNode(""+(obavestenjeRepository.getSize()+1)));
 		
 		obavestenje.appendChild(uri);
 		
-		Element zahtevUri = document.createElement("zahtev_uri");
+		Element zahtevUri = document.createElement("d:zahtev_uri");
 		zahtevUri.setAttribute("property","pred:zahtev_uri");
 		zahtevUri.setAttribute("datatype","xs:string");
 		zahtevUri.appendChild(document.createTextNode(ob.getZahtevURI()));
 		
 		obavestenje.appendChild(zahtevUri);
 		
-		Element podnosilacZaheva = document.createElement("podnosilac_zahteva");
+		Element podnosilacZaheva = document.createElement("d:podnosilac_zahteva");
 
 		obavestenje.appendChild(podnosilacZaheva);
 
-		Element nazivPodnosioca = document.createElement("naziv_podnosioca");
+		Element nazivPodnosioca = document.createElement("d:naziv_podnosioca");
 		podnosilacZaheva.appendChild(nazivPodnosioca);
 
-		Element ime = document.createElement("ime");
+		Element ime = document.createElement("d:ime");
 		ime.appendChild(document.createTextNode(ob.getPodnosilac().getIme()));
 		nazivPodnosioca.appendChild(ime);
-		Element prezime = document.createElement("prezime");
+		Element prezime = document.createElement("d:prezime");
 		prezime.appendChild(document.createTextNode(ob.getPodnosilac().getPrezime()));
 		nazivPodnosioca.appendChild(prezime);
-		Element nazivFirme = document.createElement("naziv_firme");
+		Element nazivFirme = document.createElement("d:naziv_firme");
 		nazivFirme.appendChild(document.createTextNode(ob.getPodnosilac().getNazivFirme()));
 		nazivPodnosioca.appendChild(nazivFirme);
-		Element korisnickoIme = document.createElement("korisnicko_ime");
+		Element korisnickoIme = document.createElement("d:korisnicko_ime");
 		korisnickoIme.setAttribute("property","pred:korisnicko_ime");
 		korisnickoIme.setAttribute("datatype","xs:string");
 		korisnickoIme.appendChild(document.createTextNode(ob.getPodnosilac().getKorisnickoIme()));
 		nazivPodnosioca.appendChild(korisnickoIme);
 		
-		Element adresa = document.createElement("adresa");
+		Element adresa = document.createElement("d:adresa");
 
 		podnosilacZaheva.appendChild(adresa);
 
-		Element ulica = document.createElement("ulica");
+		Element ulica = document.createElement("d:ulica");
 		ulica.appendChild(document.createTextNode(ob.getAdresa().getUlica()));
 		adresa.appendChild(ulica);
-		Element broj = document.createElement("broj");
+		Element broj = document.createElement("d:broj");
 		broj.appendChild(document.createTextNode(ob.getAdresa().getBroj()));
 		adresa.appendChild(broj);
-		Element grad = document.createElement("grad");
+		Element grad = document.createElement("d:grad");
 		grad.appendChild(document.createTextNode(ob.getAdresa().getGrad()));
 		adresa.appendChild(grad);
 
 		// ------
-		Element organVlasti = document.createElement("organ_vlasti");
+		Element organVlasti = document.createElement("d:organ_vlasti");
 		obavestenje.appendChild(organVlasti);
 
-		Element nazivOrganaVlasti = document.createElement("naziv_organa_vlasti");
+		Element nazivOrganaVlasti = document.createElement("d:naziv_organa_vlasti");
 		nazivOrganaVlasti.setAttribute("property","pred:naziv_organa_vlasti");
 		nazivOrganaVlasti.setAttribute("datatype","xs:string");
 		nazivOrganaVlasti.appendChild(document.createTextNode(ob.getNazivOrganaVlasti()));
 		organVlasti.appendChild(nazivOrganaVlasti);
-		Element sedisteOrgana = document.createElement("sediste_organa");		
+		Element sedisteOrgana = document.createElement("d:sediste_organa");		
 		sedisteOrgana.appendChild(document.createTextNode(ob.getSedisteOrgana()));
 		organVlasti.appendChild(sedisteOrgana);
 
 		// -----
 
-		Element dostavljeno = document.createElement("dostavljeno");
+		Element dostavljeno = document.createElement("d:dostavljeno");
 		dostavljeno.appendChild(document.createTextNode("Достављено:"));
 		obavestenje.appendChild(dostavljeno);
 
-		Element listaPonudjenih = document.createElement("lista");
+		Element listaPonudjenih = document.createElement("d:lista");
 		dostavljeno.appendChild(listaPonudjenih);
 
-		Element element1 = document.createElement("element");
+		Element element1 = document.createElement("d:element");
 		element1.appendChild(document.createTextNode("Именованом"));
 		element1.setAttribute("broj", "1");
 		listaPonudjenih.appendChild(element1);
 
-		Element element2 = document.createElement("element");
+		Element element2 = document.createElement("d:element");
 		element2.appendChild(document.createTextNode("Архиви"));
 
 		element2.setAttribute("broj", "2");
 		listaPonudjenih.appendChild(element2);
 
 		// -------
-		Element tekstObavestenja = document.createElement("tekst_obavestenja");
+		Element tekstObavestenja = document.createElement("d:tekst_obavestenja");
 		obavestenje.appendChild(tekstObavestenja);
 
-		Element brojPredmeta = document.createElement("broj_predmeta");
+		Element brojPredmeta = document.createElement("d:broj_predmeta");
 		brojPredmeta.setAttribute("property","pred:brojPredmeta");
 		brojPredmeta.setAttribute("datatype","xs:string");
 		brojPredmeta.appendChild(document.createTextNode(ob.getBrojPredmeta()));
 		tekstObavestenja.appendChild(brojPredmeta);
 
-		Element datum = document.createElement("datum");
+		Element datum = document.createElement("d:datum");
 		datum.setAttribute("property","pred:datum");
 		datum.setAttribute("datatype","xs:string");
 		datum.appendChild(document.createTextNode(ob.getDatum()));
 		tekstObavestenja.appendChild(datum);
 
 		// ovde ide tekst za naslov
-		Element naslov = document.createElement("naslov");
+		Element naslov = document.createElement("d:naslov");
 		naslov.appendChild(
 				document.createTextNode(" ОБАВЕШТЕЊЕ" + "                о стављању на увид документа који садржи"
 						+ "                тражену информацију и о изради копије"));
 		tekstObavestenja.appendChild(naslov);
 
 		// paragrafi
-		Element paragraf = document.createElement("p");
+		Element paragraf = document.createElement("d:p");
 		paragraf.appendChild(
 				document.createTextNode("На основу члана 16. ст. 1. Закона о слободном приступу информацијама од јавног"
 						+ "            значаја, поступајући по вашем захтеву за слободан приступ информацијама од\r\n"));
@@ -227,62 +230,62 @@ public class DOMWriter {
 		for (Object o : ob.getParagrafi()) {
 			if (o instanceof PObavestenje) {
 				naknada = ((PObavestenje) o).getNovcanaNaknada();
-				Element godina = document.createElement("godina");
+				Element godina = document.createElement("d:godina");
 				godina.appendChild(document.createTextNode(((PObavestenje) o).getGodina()));
 				paragraf.appendChild(godina);
 
 				paragraf.appendChild(document
 						.createTextNode("год.,којим сте тражили увид у документ/е са информацијама о / у вези са:"));
 
-				Element trazenaInformacija = document.createElement("trazena_informacija");
+				Element trazenaInformacija = document.createElement("d:trazena_informacija");
 				trazenaInformacija.appendChild(document.createTextNode(((PObavestenje) o).getTrazenaInformacija()));
 				paragraf.appendChild(trazenaInformacija);
 
 				paragraf.appendChild(document.createTextNode("обавештавамо вас да дана "));
 
-				Element dan = document.createElement("dan");
+				Element dan = document.createElement("d:dan");
 				dan.appendChild(document.createTextNode(((PObavestenje) o).getDan()));
 				paragraf.appendChild(dan);
 
 				paragraf.appendChild(document.createTextNode(", у"));
 
-				Element sati = document.createElement("sati");
+				Element sati = document.createElement("d:sati");
 				sati.appendChild(document.createTextNode(((PObavestenje) o).getSati()));
 				paragraf.appendChild(sati);
 
 				paragraf.appendChild(document.createTextNode(" часова, односно у времену од"));
 
-				Element odSati = document.createElement("od");
+				Element odSati = document.createElement("d:od");
 				odSati.appendChild(document.createTextNode(((PObavestenje) o).getOdSati()));
 				paragraf.appendChild(odSati);
 
 				paragraf.appendChild(document.createTextNode("до"));
 
-				Element doSati = document.createElement("do");
+				Element doSati = document.createElement("d:do");
 				doSati.appendChild(document.createTextNode(((PObavestenje) o).getDoSati()));
 				paragraf.appendChild(doSati);
 
 				paragraf.appendChild(document.createTextNode("часова, у просторијама органа у"));
 
-				Element mesto = document.createElement("mesto");
+				Element mesto = document.createElement("d:mesto");
 				mesto.appendChild(document.createTextNode(((PObavestenje) o).getMesto()));
 				paragraf.appendChild(mesto);
 
 				paragraf.appendChild(document.createTextNode("ул."));
 
-				Element ulicaOb = document.createElement("ulica");
+				Element ulicaOb = document.createElement("d:ulica");
 				ulicaOb.appendChild(document.createTextNode(((PObavestenje) o).getUlica()));
 				paragraf.appendChild(ulicaOb);
 
 				paragraf.appendChild(document.createTextNode("бр."));
 
-				Element brojZgrade = document.createElement("broj_zgrade");
+				Element brojZgrade = document.createElement("d:broj_zgrade");
 				brojZgrade.appendChild(document.createTextNode(((PObavestenje) o).getBrojZgrade()));
 				paragraf.appendChild(brojZgrade);
 
 				paragraf.appendChild(document.createTextNode(", канцеларија бр."));
 
-				Element brojKancelarije = document.createElement("broj_kancelarije");
+				Element brojKancelarije = document.createElement("d:broj_kancelarije");
 				brojKancelarije.appendChild(document.createTextNode(((PObavestenje) o).getBrojKancelarije()));
 				paragraf.appendChild(brojKancelarije);
 
@@ -294,13 +297,13 @@ public class DOMWriter {
 		}
 
 		/// ------
-		Element paragraf2 = document.createElement("p");
+		Element paragraf2 = document.createElement("d:p");
 		paragraf2.appendChild(
 				document.createTextNode("Том приликом, на ваш захтев, може вам се издати и копија документа са траженом"
 						+ "            информацијом."));
 		tekstObavestenja.appendChild(paragraf2);
 
-		Element paragraf3 = document.createElement("p");
+		Element paragraf3 = document.createElement("d:p");
 		paragraf3.appendChild(document
 				.createTextNode("Трошкови су утврђени Уредбом Владе Републике Србије („Сл. гласник РС“, бр. 8/06), и "
 						+ "            то: копија стране А4 формата износи 3 динара, А3 формата 6 динара, CD 35 динара, "
@@ -310,11 +313,11 @@ public class DOMWriter {
 		tekstObavestenja.appendChild(paragraf3);
 
 		// dodaj tekst
-		Element paragraf4 = document.createElement("p");
+		Element paragraf4 = document.createElement("d:p");
 		tekstObavestenja.appendChild(paragraf4);
 		paragraf4.appendChild(
 				document.createTextNode("Износ укупних трошкова израде копије документа по вашем захтеву износи "));
-		Element novcanaNaknada = document.createElement("novcana_naknada");
+		Element novcanaNaknada = document.createElement("d:novcana_naknada");
 
 		novcanaNaknada.appendChild(document.createTextNode(naknada));
 
@@ -322,7 +325,7 @@ public class DOMWriter {
 		paragraf4.appendChild(document.createTextNode(
 				"динара и уплаћује се на жиро-рачун Буџета Републике Србије бр. 840-742328-843-30, с позивом на број 97 – ознака шифре општине/града где се налази орган власти (из Правилника о условима и начину вођења рачуна – „Сл. гласник РС“, 20/07... 40/10). "));
 
-		Element mestoPecata = document.createElement("mesto_pecata");
+		Element mestoPecata = document.createElement("d:mesto_pecata");
 		mestoPecata.appendChild(document.createTextNode("(М.П.)"));
 
 		obavestenje.appendChild(mestoPecata);
