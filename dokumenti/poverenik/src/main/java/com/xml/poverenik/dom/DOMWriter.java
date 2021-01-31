@@ -110,7 +110,7 @@ public class DOMWriter {
 		createDocument();
 		SimpleDateFormat formatter = new SimpleDateFormat("MM.dd.yyyy.");
 
-		ProcessingInstruction newPI = document.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"src/main/resources/podaci/xsl/zahtev.xsl\"");
+		ProcessingInstruction newPI = document.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"src/main/resources/podaci/xsl/resenje.xsl\"");
 		document.insertBefore(newPI, document.getDocumentElement());
 		
 		Element dokumentResenje = document.createElement("d:dokument_resenje");
@@ -195,6 +195,9 @@ public class DOMWriter {
 	public String generateZalbaOdluke(ZalbaOdluke zo) throws TransformerException, IOException, XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		createDocument();
 
+		ProcessingInstruction newPI = document.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"src/main/resources/podaci/xsl/zalba_odluke.xsl\"");
+		document.insertBefore(newPI, document.getDocumentElement());
+		
 		Element zalbaOdluke = document.createElement("d:zalba_odluke");
 		
 		zalbaOdluke.setAttribute("xmlns", "http://www.w3.org/ns/rdfa#");
@@ -387,60 +390,64 @@ public class DOMWriter {
 	public String generateZalbaCutanje(ZalbaCutanje zc) throws TransformerException, IOException, XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		createDocument();
 		// Kreiranje i postavljanje korenskog elementa
-		Element zalbaCutanje = document.createElement("zalba_cutanje");
+		ProcessingInstruction newPI = document.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"src/main/resources/podaci/xsl/zalba_cutanje.xsl\"");
+		document.insertBefore(newPI, document.getDocumentElement());
+		
+		Element zalbaCutanje = document.createElement("d:zalba_cutanje");
 		zalbaCutanje.setAttribute("xmlns", "http://www.w3.org/ns/rdfa#");
 		zalbaCutanje.setAttribute("xmlns:pred","http://www.ftn.uns.ac.rs/rdf/examples/predicate/");		
 		zalbaCutanje.setAttribute("xmlns:xs","http://www.w3.org/2001/XMLSchema#");
-
+		zalbaCutanje.setAttribute("xmlns:d","http://www.ftn.uns.ac.rs/xpath/examples");
+		
 		document.appendChild(zalbaCutanje);
 
-		Element podnosilacZalbe = document.createElement("podnosilac_zalbe");
-		Element nazivPodnosioca = document.createElement("naziv_podnosioca");
-		Element ime = document.createElement("ime");
+		Element podnosilacZalbe = document.createElement("d:podnosilac_zalbe");
+		Element nazivPodnosioca = document.createElement("d:naziv_podnosioca");
+		Element ime = document.createElement("d:ime");
 		ime.appendChild(document.createTextNode(zc.getPodnosilac().getIme()));
 		nazivPodnosioca.appendChild(ime);
-		Element prezime = document.createElement("prezime");
+		Element prezime = document.createElement("d:prezime");
 		prezime.appendChild(document.createTextNode(zc.getPodnosilac().getPrezime()));
 		nazivPodnosioca.appendChild(prezime);
-		Element naziv_firme = document.createElement("naziv_firme");
+		Element naziv_firme = document.createElement("d:naziv_firme");
 		naziv_firme.appendChild(document.createTextNode(zc.getPodnosilac().getNazivFirme()));
 		nazivPodnosioca.appendChild(naziv_firme);
-		Element korisnicko_ime = document.createElement("korisnicko_ime");
+		Element korisnicko_ime = document.createElement("d:korisnicko_ime");
 		korisnicko_ime.setAttribute("property","pred:korisnicko_ime");
 		korisnicko_ime.setAttribute("datatype","xs:string");
 		korisnicko_ime.appendChild(document.createTextNode(zc.getPodnosilac().getKorisnickoIme()));
 		nazivPodnosioca.appendChild(korisnicko_ime);
 		podnosilacZalbe.appendChild(nazivPodnosioca);
 
-		Element adresaPodnosioca = document.createElement("adresa");
-		Element ulica = document.createElement("ulica");
+		Element adresaPodnosioca = document.createElement("d:adresa");
+		Element ulica = document.createElement("d:ulica");
 		ulica.appendChild(document.createTextNode(zc.getAdresa().getUlica()));
 		adresaPodnosioca.appendChild(ulica);
-		Element broj = document.createElement("broj");
+		Element broj = document.createElement("d:broj");
 		broj.appendChild(document.createTextNode(zc.getAdresa().getBroj()));
 		adresaPodnosioca.appendChild(broj);
-		Element grad = document.createElement("grad");
+		Element grad = document.createElement("d:grad");
 		grad.appendChild(document.createTextNode(zc.getAdresa().getGrad()));
 		adresaPodnosioca.appendChild(grad);
 		podnosilacZalbe.appendChild(adresaPodnosioca);
-		Element drugiPodaciZaKontakt = document.createElement("drugi_podaci_za_kontakt");
+		Element drugiPodaciZaKontakt = document.createElement("d:drugi_podaci_za_kontakt");
 		drugiPodaciZaKontakt.appendChild(document.createTextNode(zc.getDrugiPodaciZaKontakt()));
 		podnosilacZalbe.appendChild(drugiPodaciZaKontakt);
 		zalbaCutanje.appendChild(podnosilacZalbe);
 
-		Element poverenik = document.createElement("poverenik");
-		Element nazivPoverenika = document.createElement("naziv_poverenika");
+		Element poverenik = document.createElement("d:poverenik");
+		Element nazivPoverenika = document.createElement("d:naziv_poverenika");
 		nazivPoverenika.setAttribute("property","pred:naziv_poverenika");
 		nazivPoverenika.setAttribute("datatype","xs:string");
 		nazivPoverenika.appendChild(document.createTextNode(zc.getNazivPoverenika()));
 		poverenik.appendChild(nazivPoverenika);
-		Element sedistePoverenika = document.createElement("sediste_poverenika");
+		Element sedistePoverenika = document.createElement("d:sediste_poverenika");
 		sedistePoverenika.appendChild(document.createTextNode("Aдреса за пошту:"));
-		Element ulica2 = document.createElement("ulica");
+		Element ulica2 = document.createElement("d:ulica");
 		ulica2.appendChild(document.createTextNode(zc.getSedistePoverenika().getUlica()));
-		Element broj2 = document.createElement("broj");
+		Element broj2 = document.createElement("d:broj");
 		broj2.appendChild(document.createTextNode(zc.getSedistePoverenika().getBroj()));
-		Element grad2 = document.createElement("grad");
+		Element grad2 = document.createElement("d:grad");
 		grad2.appendChild(document.createTextNode(zc.getSedistePoverenika().getGrad()));
 		sedistePoverenika.appendChild(ulica2);
 		sedistePoverenika.appendChild(document.createTextNode("бр."));
@@ -449,29 +456,29 @@ public class DOMWriter {
 		poverenik.appendChild(sedistePoverenika);
 		zalbaCutanje.appendChild(poverenik);
 
-		Element naslov = document.createElement("naslov");
+		Element naslov = document.createElement("d:naslov");
 		naslov.appendChild(document.createTextNode(zc.getNaslov()));
 		zalbaCutanje.appendChild(naslov);
 
-		Element tekstZalbe = document.createElement("tekst_zalbe");
+		Element tekstZalbe = document.createElement("d:tekst_zalbe");
 		for (PZalbaCutanje pzc : zc.getParagrafi()) {
-			Element p = document.createElement("p");
+			Element p = document.createElement("d:p");
 			if (pzc.getNazivOrgana() != null) {
 				p.appendChild(document.createTextNode(pzc.getText()));
-				Element organ = document.createElement("naziv_organa");
+				Element organ = document.createElement("d:naziv_organa");
 				organ.appendChild(document.createTextNode(pzc.getNazivOrgana()));
 				p.appendChild(organ);
 
 			} else if (pzc.getDatum() != null && pzc.getPodaciOZahtevuIInformacijama() != null) {
 				p.appendChild(document.createTextNode(pzc.getText()));
-				Element datum = document.createElement("datum");
+				Element datum = document.createElement("d:datum");
 				datum.appendChild(document.createTextNode(pzc.getDatum()));
 				p.appendChild(datum);
 				p.appendChild(document
 						.createTextNode("године, а којим сам тражио/ла да ми се у складу са Законом о слободном \r\n"
 								+ "                приступу информацијама од јавног значаја омогући увид- копија документа \r\n"
 								+ "                који садржи информације о/у вези са:"));
-				Element informacije = document.createElement("podaci_o_zahtevu_i_informacijama");
+				Element informacije = document.createElement("d:podaci_o_zahtevu_i_informacijama");
 				informacije.appendChild(document.createTextNode(pzc.getPodaciOZahtevuIInformacijama()));
 				p.appendChild(informacije);
 
@@ -482,13 +489,13 @@ public class DOMWriter {
 			tekstZalbe.appendChild(p);
 		}
 
-		Element podaciOTrenutku = document.createElement("podaci_o_vremenu_i_mestu_podnosenja_zalbe");
+		Element podaciOTrenutku = document.createElement("d:podaci_o_vremenu_i_mestu_podnosenja_zalbe");
 		podaciOTrenutku.appendChild(document.createTextNode("У"));
-		Element mesto = document.createElement("mesto");
+		Element mesto = document.createElement("d:mesto");
 		mesto.appendChild(document.createTextNode(zc.getMestoZalbe()));
 		podaciOTrenutku.appendChild(mesto);
 		podaciOTrenutku.appendChild(document.createTextNode(",дана"));
-		Element datum = document.createElement("datum");
+		Element datum = document.createElement("d:datum");
 		datum.setAttribute("property","pred:datum");
 		datum.setAttribute("datatype","xs:string");
 		datum.appendChild(document.createTextNode(zc.getDatumZalbe()));
