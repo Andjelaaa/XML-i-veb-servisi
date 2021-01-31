@@ -17,6 +17,19 @@ public class ResenjeRepository {
 
 	private String collectionId = "/db/poverenik/resenja";
 	
+	public String findResenje(String name) throws XMLDBException {
+		XMLResource xmlResource = null;
+		if (!name.endsWith(".xml")) {
+			name = name + ".xml";
+		}
+		try {
+			xmlResource = existManager.load(collectionId, name.replace(" ", "_"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (String) xmlResource.getContent();
+	}
+	
 	public Document find(String name) {
 		Document document = null;
 		if (!name.endsWith(".xml")) {

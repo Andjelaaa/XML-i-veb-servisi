@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.ProcessingInstruction;
 import org.xmldb.api.base.XMLDBException;
 
 import com.xml.poverenik.model.Izbor;
@@ -109,30 +110,32 @@ public class DOMWriter {
 		createDocument();
 		SimpleDateFormat formatter = new SimpleDateFormat("MM.dd.yyyy.");
 
-		Element dokumentResenje = document.createElement("dokument_resenje");
+		ProcessingInstruction newPI = document.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"src/main/resources/podaci/xsl/zahtev.xsl\"");
+		document.insertBefore(newPI, document.getDocumentElement());
+		
+		Element dokumentResenje = document.createElement("d:dokument_resenje");
 		document.appendChild(dokumentResenje);
 
-//		dokumentResenje.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation",
-//				"./../resenje.xsd");
 
 		dokumentResenje.setAttribute("xmlns", "http://www.w3.org/ns/rdfa#");
 		dokumentResenje.setAttribute("xmlns:pred","http://www.ftn.uns.ac.rs/rdf/examples/predicate/");		
 		dokumentResenje.setAttribute("xmlns:xs","http://www.w3.org/2001/XMLSchema#");
+		dokumentResenje.setAttribute("xmlns:d","http://www.ftn.uns.ac.rs/xpath/examples");
 		
-		Element nazivResenja = document.createElement("naziv_resenja");
+		Element nazivResenja = document.createElement("d:naziv_resenja");
 		nazivResenja.appendChild(document.createTextNode(resenje.getNazivOdluka().getNazivResenja()));
-		Element odluka = document.createElement("odluka");
+		Element odluka = document.createElement("d:odluka");
 		odluka.appendChild(document.createTextNode(resenje.getNazivOdluka().getOdluka()));
 
 		nazivResenja.appendChild(odluka);
 
-		Element zaglavlje = document.createElement("zaglavlje");
+		Element zaglavlje = document.createElement("d:zaglavlje");
 		zaglavlje.appendChild(document.createTextNode("BR"));
-		Element brojResenja = document.createElement("broj_resenja");
+		Element brojResenja = document.createElement("d:broj_resenja");
 		brojResenja.setAttribute("property","pred:brojResenja");
 		brojResenja.setAttribute("datatype","xs:string");
 		brojResenja.appendChild(document.createTextNode(resenje.getZaglavlje().getBrojResenja()));
-		Element datum = document.createElement("datum");
+		Element datum = document.createElement("d:datum");
 		datum.setAttribute("property","pred:datum");
 		datum.setAttribute("datatype","xs:string");
 		datum.appendChild(document.createTextNode(formatter.format(resenje.getZaglavlje().getDatum())));
@@ -141,27 +144,27 @@ public class DOMWriter {
 		zaglavlje.appendChild(document.createTextNode("Datum"));
 		zaglavlje.appendChild(datum);
 
-		Element opisPostupka = document.createElement("opis_postupka");
+		Element opisPostupka = document.createElement("d:opis_postupka");
 		opisPostupka.appendChild(document.createTextNode(resenje.getOpisPostupka()));
-		Element potpisPoverenika = document.createElement("potpis_poverenika");
+		Element potpisPoverenika = document.createElement("d:potpis_poverenika");
 		potpisPoverenika.appendChild(document.createTextNode(resenje.getPotpisPoverenika()));
 
-		Element tekstResenja = document.createElement("tekst_resenja");
+		Element tekstResenja = document.createElement("d:tekst_resenja");
 		tekstResenja.appendChild(document.createTextNode(resenje.getTekstResenja().getTekst()));
 
-		Element tekstObrazlozenja = document.createElement("tekst_obrazlozenja");
+		Element tekstObrazlozenja = document.createElement("d:tekst_obrazlozenja");
 		tekstObrazlozenja.appendChild(document.createTextNode(resenje.getTekstObrazlozenja().getTekst()));
 
 		
 
 		for (int i = 0; i < resenje.getTekstResenja().getParagrafi().size(); i++) {
-			Element paragraf = document.createElement("p");
+			Element paragraf = document.createElement("d:p");
 			paragraf.appendChild(document.createTextNode(resenje.getTekstResenja().getParagrafi().get(i)));
 			tekstResenja.appendChild(paragraf);
 		}
 
 		for (int i = 0; i < resenje.getTekstObrazlozenja().getParagrafi().size(); i++) {
-			Element paragraf = document.createElement("p");
+			Element paragraf = document.createElement("d:p");
 			paragraf.appendChild(document.createTextNode(resenje.getTekstObrazlozenja().getParagrafi().get(i)));
 			tekstObrazlozenja.appendChild(paragraf);
 		}
