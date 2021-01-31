@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "poverenik-front"
+  "defaultProject": "poverenik-front",
+  "cli": {
+    "analytics": "ddc087c3-b939-4452-b441-4a07681de7ca"
+  }
 }
