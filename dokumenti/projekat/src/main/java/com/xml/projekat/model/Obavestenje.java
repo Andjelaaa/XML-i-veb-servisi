@@ -7,6 +7,8 @@ import com.xml.projekat.dto.PObavestenjeDTO;
 
 public class Obavestenje {
 	
+	private String URI;
+	private String zahtevURI;
 	private Podnosilac podnosilac;
 	private Adresa adresa;
 	
@@ -43,6 +45,7 @@ public class Obavestenje {
 
 	public Obavestenje(ObavestenjeDTO dto) {
 		super();
+		this.zahtevURI = dto.getZahtevURI();
 		this.podnosilac = new Podnosilac(dto.getPodnosilac());
 		this.adresa = new Adresa(dto.getAdresa());
 		this.nazivOrganaVlasti = dto.getNazivOrganaVlasti();
@@ -66,6 +69,27 @@ public class Obavestenje {
 				+ nazivOrganaVlasti + ", sedisteOrgana=" + sedisteOrgana + ", dostavljeno=" + dostavljeno + ", datum="
 				+ datum + ", naslov=" + naslov + ", brojPredmeta=" + brojPredmeta + ", paragrafi=" + paragrafi
 				+ ", mestoPecata=" + mestoPecata + "]";
+	}
+
+	
+	
+	public String getZahtevURI() {
+		return zahtevURI;
+	}
+
+
+	public void setZahtevURI(String zahtevURI) {
+		this.zahtevURI = zahtevURI;
+	}
+
+
+	public String getURI() {
+		return URI;
+	}
+
+
+	public void setURI(String uRI) {
+		URI = uRI;
 	}
 
 

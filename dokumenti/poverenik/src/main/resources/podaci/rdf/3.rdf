@@ -1,8 +1,13 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
   <rdf:Description rdf:about="">
-    <pred:brojPredmeta xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">12</pred:brojPredmeta>
+    <pred:korisnicko_ime xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21.11.2019.</pred:datum>
+    <pred:naziv_poverenika xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+                Повереникy за информације од јавног значаја и заштиту података о личности
+        </pred:naziv_poverenika>
+  </rdf:Description>
+  <rdf:Description rdf:about="">
+    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21.11.2002.</pred:datum>
   </rdf:Description>
 </rdf:RDF>

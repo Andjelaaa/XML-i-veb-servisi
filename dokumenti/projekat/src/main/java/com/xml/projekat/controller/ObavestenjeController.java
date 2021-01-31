@@ -39,7 +39,6 @@ public class ObavestenjeController {
 			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
 		}
 		Obavestenje ob = new Obavestenje(dto);
-		
 		 try {
 			 service.makeObavestenje(ob);
 	        }catch(Exception e) {
