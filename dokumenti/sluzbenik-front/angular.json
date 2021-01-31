@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "sluzbenik-front"
+  "defaultProject": "sluzbenik-front",
+  "cli": {
+    "analytics": "173251a5-e5a3-49ee-a374-30e5afc57a9b"
+  }
 }

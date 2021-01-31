@@ -1,0 +1,76 @@
+<!-- <div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+            <form class="login100-form validate-form flex-sb flex-w" [formGroup]="formRegister" (ngSubmit)="submit()">
+                <span class="login100-form-title p-b-32">
+                    Registracija
+                </span>
+
+                <span class="txt1 p-b-11">
+                    Ime
+                </span>
+                <small class="text-danger" id="imeError"  *ngIf="formRegister.controls.ime.touched && formRegister.controls.ime.errors?.required">
+                    Polje mora biti popunjeno!</small>
+                <div class="wrap-input100 validate-input m-b-36" data-validate = "Ime je obavezno!">
+                    <input type="text" class="input100" id="ime" name="ime" formControlName = "ime">
+                    <span class="focus-input100"></span>
+                </div>
+                <span class="txt1 p-b-11">
+                    Prezime
+                </span>
+                <small class="text-danger" id="prezimeError"  *ngIf="formRegister.controls.prezime.touched && formRegister.controls.prezime.errors?.required">
+                    Polje mora biti popunjeno!</small>
+                <div class="wrap-input100 validate-input m-b-36" data-validate = "Prezime je obavezno!">
+                    <input type="text" class="input100" id="prezime" name="prezime" formControlName = "prezime">
+                    <span class="focus-input100"></span>
+                </div>
+                <span class="txt1 p-b-11">
+                    Email
+                </span>
+                <small class="text-danger" id="emailError"  *ngIf="formRegister.controls.email.touched && formRegister.controls.email.errors?.required">
+                    Polje mora biti popunjeno!</small>
+                <div class="wrap-input100 validate-input m-b-36" data-validate = "Email je obavezan!">
+                    <input type="text" class="input100" id="email" name="email" formControlName = "email">
+                    <span class="focus-input100"></span>
+                </div>
+                
+                <span class="txt1 p-b-11">
+                    Lozinka
+                </span>
+                <small class="text-danger" id="passwordError" *ngIf="formRegister.controls.password.touched && formRegister.controls.password.errors?.required">
+                    Polje mora biti popunjeno!</small>
+            
+                <div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+                    <span class="btn-show-pass">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                    <input class="input100" type="password" name="pass" id="password" formControlName = "password">
+                    <span class="focus-input100"></span>
+                </div>
+                <span class="txt1 p-b-11">
+                    Ponovi lozinku
+                </span>
+                <small class="text-danger" id="passwordRepeatError" *ngIf="formRegister.controls.passwordRepeat.touched && formRegister.controls.passwordRepeat.errors?.required">
+                    Polje mora biti popunjeno!</small>
+            
+                <div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+                    <span class="btn-show-pass">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                    <input class="input100" type="password" name="passwordRepeat" id="passwordRepeat" formControlName = "passwordRepeat">
+                    <span class="focus-input100"></span>
+                </div>
+                   
+                <br>
+
+                <div class="container-login100-form-btn">
+                    <button type="submit" id="submit" class="login100-form-btn" [disabled]="formRegister.invalid">
+                        Registracija
+                    </button>
+                    <a style="margin-left: 160px;" href="/login">Imaš nalog? Prijavi se.</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div> -->
