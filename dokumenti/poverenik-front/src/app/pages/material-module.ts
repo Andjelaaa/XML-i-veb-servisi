@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {A11yModule} from '@angular/cdk/a11y';
-import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {PortalModule} from '@angular/cdk/portal';
 import {ScrollingModule} from '@angular/cdk/scrolling';
@@ -42,8 +41,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
-//import { MaterialFileInputModule } from 'ngx-material-file-input';
-//import { ButtonsModule, CarouselModule } from 'angular-bootstrap-md';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -61,7 +59,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
     A11yModule,
-    ClipboardModule,
     CdkStepperModule,
     CdkTableModule,
     CdkTreeModule,

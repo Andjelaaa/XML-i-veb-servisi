@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar-gradjanin',
   templateUrl: './navbar-gradjanin.component.html',
-  styleUrls: ['./navbar-gradjanin.component.scss']
+  styleUrls: ['./navbar-gradjanin.component.css']
 })
 export class NavbarGradjaninComponent implements OnInit {
 

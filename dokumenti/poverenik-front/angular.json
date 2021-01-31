@@ -6,9 +6,6 @@
     "poverenik-front": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        },
         "@schematics/angular:application": {
           "strict": true
         }
@@ -31,7 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -94,7 +91,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css"
             ],
             "scripts": []
           }
@@ -129,6 +126,6 @@
   },
   "defaultProject": "poverenik-front",
   "cli": {
-    "analytics": "ddc087c3-b939-4452-b441-4a07681de7ca"
+    "analytics": "101b4f13-7ed4-482a-8840-b78b6b61909f"
   }
 }

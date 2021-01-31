@@ -6,27 +6,25 @@ import { UserService } from 'src/app/services/user-service/user.service';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
-
-  form: FormGroup;
-
+    form!: FormGroup;
     constructor(
         private fb: FormBuilder,
         private userService: UserService,
         private router: Router
     ) {
+        this.createForm();
+    }
+    ngOnInit(): void {
+    }
+    createForm(): void{
         this.form = this.fb.group({
             username : [null, Validators.required],
             password: [null, Validators.required]
     });
-
     }
-
-    ngOnInit(): void {
-    }
-
     submit(): void {
         const auth: any = {};
         auth.username = this.form.value.username;

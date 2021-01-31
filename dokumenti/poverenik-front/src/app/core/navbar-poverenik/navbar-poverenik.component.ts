@@ -3,11 +3,11 @@ import {MatDialog} from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-navbar-sluzbenik',
-  templateUrl: './navbar-sluzbenik.component.html',
-  styleUrls: ['./navbar-sluzbenik.component.scss']
+  selector: 'app-navbar-poverenik',
+  templateUrl: './navbar-poverenik.component.html',
+  styleUrls: ['./navbar-poverenik.component.css']
 })
-export class NavbarSluzbenikComponent implements OnInit {
+export class NavbarPoverenikComponent implements OnInit {
 
 
   constructor(public dialog: MatDialog, private router: Router) {}

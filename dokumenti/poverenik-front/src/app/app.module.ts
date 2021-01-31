@@ -1,19 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MaterialModule } from './material-module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
+import { MaterialModule } from './pages/material-module';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { NavbarGradjaninComponent } from './core/navbar-gradjanin/navbar-gradjanin.component';
-import { NavbarSluzbenikComponent } from './core/navbar-sluzbenik/navbar-sluzbenik.component';
+import { NavbarPoverenikComponent } from './core/navbar-poverenik/navbar-poverenik.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
+    RegisterPageComponent,
     NavbarGradjaninComponent,
-    NavbarSluzbenikComponent
+    NavbarPoverenikComponent
   ],
   imports: [
     BrowserModule,

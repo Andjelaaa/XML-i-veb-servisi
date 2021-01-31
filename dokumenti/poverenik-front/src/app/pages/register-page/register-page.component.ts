@@ -6,26 +6,28 @@ import { UserService } from 'src/app/services/user-service/user.service';
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss']
+  styleUrls: ['./register-page.component.css']
 })
 export class RegisterPageComponent implements OnInit {
-  form: FormGroup;
+  formRegister!: FormGroup;
 
   constructor(
       private fb: FormBuilder,
       private userService: UserService,
   ) {
-      this.form = this.fb.group({
-          ime: [null, Validators.required],
-          prezime: [null, Validators.required],
-          email: [null, Validators.required],
-          password: [null, Validators.required],
-          passwordRepeat: [null, Validators.required]
-      });
-
+      this.createForm();
   }
 
   ngOnInit(): void {
   }
-  submit(){}
+  createForm(): void{
+    this.formRegister = this.fb.group({
+        ime: [null, Validators.required],
+        prezime: [null, Validators.required],
+        email: [null, Validators.required],
+        password: [null, Validators.required],
+        passwordRepeat: [null, Validators.required]
+    });
+  }
+  submit(): void{}
 }
