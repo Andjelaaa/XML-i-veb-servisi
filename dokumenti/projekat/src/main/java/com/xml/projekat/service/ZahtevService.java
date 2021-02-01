@@ -18,6 +18,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+import org.xmldb.api.base.XMLDBException;
 
 import com.xml.projekat.dom.XSLTransformer;
 import com.xml.projekat.dom.DOMParser;
@@ -32,6 +33,7 @@ public class ZahtevService {
 	private final DOMWriter domWriter;
 	
 	private static String xslFOPath = "src/main/resources/podaci/xsl/zahtev.xsl";
+	private static String xslPathHTML = "src/main/resources/podaci/xsl/zahtevHTML.xsl";
 
 	@Autowired
 	private ZahtevRepository zahtevRepository;
@@ -68,6 +70,11 @@ public class ZahtevService {
 		Files.write(file, outputStream.toByteArray());
 
 		return new UrlResource(file.toUri());
+	}
+	
+	public String convertXMLtoHTML(String id) throws XMLDBException {
+		String xml = zahtevRepository.findZahtev(id);
+		return xslTransformer.convertXMLtoHTML(xslPathHTML, xml);
 	}
 
 }

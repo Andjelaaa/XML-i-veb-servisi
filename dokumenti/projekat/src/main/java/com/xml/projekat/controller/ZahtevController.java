@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.xmldb.api.base.XMLDBException;
 
 import com.xml.projekat.dto.RetrieveDTO;
 import com.xml.projekat.dto.ZahtevDTO;
@@ -60,6 +61,12 @@ public class ZahtevController {
 		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
 				.body(resource);
+	}
+	
+	@GetMapping(value = "/{name}", produces = MediaType.TEXT_HTML_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> getHTML(@PathVariable("name") String name) throws XMLDBException {
+		String result = service.convertXMLtoHTML(name);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 	
 
