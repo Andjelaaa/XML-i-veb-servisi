@@ -27,7 +27,7 @@ public class ZalbaCutanjeService {
 	private final DOMParser domParser;
 	private final DOMWriter domWriter;	
 	
-	private static String xslFOPath = "src/main/resources/podaci/xsl/zalbaCutanje.xsl";
+	private static String xslFOPath = "src/main/resources/podaci/xsl/zalba_cutanje.xsl";
 
 	@Autowired
 	private ZalbaCutanjeRepository zalbaCutanjeRepository;
