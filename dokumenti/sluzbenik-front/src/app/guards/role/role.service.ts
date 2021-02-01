@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, CanActivate } from '@angular/router';
-// import { AuthenticationService } from '../../core/services/authentication/authentication.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserService } from 'src/app/services/user-service/user.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class RoleGuard implements CanActivate {
     constructor(
-        public auth: AuthenticationService,
+        public service: UserService,
         public router: Router
     ) { }
 
@@ -17,7 +17,7 @@ export class RoleGuard implements CanActivate {
 
         const token = localStorage.getItem('user') || '';
         const jwt: JwtHelperService = new JwtHelperService();
-        const accessToken = JSON.parse(token);
+        const accessToken = token;
         if (!token) {
             this.router.navigate(['/login']);
             return false;
@@ -25,8 +25,8 @@ export class RoleGuard implements CanActivate {
         const roles: string[] = expectedRoles.split('|', 2);
         const info = jwt.decodeToken(token);
 
-        if (roles.indexOf(info.role) === -1) {
-            this.router.navigate(['/']);
+        if (roles.indexOf(info.type) === -1) {
+            this.router.navigate(['/login']);
             return false;
         }
         return true;

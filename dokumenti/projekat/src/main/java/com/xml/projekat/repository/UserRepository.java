@@ -27,22 +27,29 @@ import com.xml.projekat.model.TUser;
 @Repository
 public class UserRepository {
 
-	private ExistManager existMenager;
+	private ExistManager existManager;
 	private DOMParser domParser;
 
 	public UserRepository(ExistManager existMenager, DOMParser domParser) {
-		this.existMenager = existMenager;
+		this.existManager = existMenager;
 		this.domParser = domParser;
 	}
 
 	private String collectionId = "/db/dokumenti/korisnici";
 	
+	public String save(TUser t)
+		throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+		existManager.storeXMLUser(collectionId, t);
+
+		return "OK";
+	}
 	public TUser findOneByUsername(String username) {
 
 		String xPathExpression = String.format("/Users/user[username='%s']", username);
 		TUser foundUser = null;
 		try {
-			ResourceSet result = existMenager.retrieve(collectionId, xPathExpression);
+			ResourceSet result = existManager.retrieve(collectionId, xPathExpression);
+			
 			if (result == null) {
 				return null;
 			}
@@ -74,7 +81,7 @@ public class UserRepository {
 		List<String> usernames = new ArrayList<>();
 
 		String xPathExpression = String.format("/Users/user/username");
-		ResourceSet result = existMenager.retrieve(collectionId, xPathExpression);
+		ResourceSet result = existManager.retrieve(collectionId, xPathExpression);
 		ResourceIterator i = result.getIterator();
 		XMLResource resource = null;
 		while (i.hasMoreResources()) {
@@ -121,5 +128,40 @@ public class UserRepository {
 		}
 		return user;
 	}
+	
+	public TUser findOne(String username) {
+		
+		String xPathExpression = String.format("/Users/user[username='%s']", username);
+		TUser foundUser = null;
+		try {
+			ResourceSet result = existManager.retrieve(collectionId, xPathExpression);
+			
+			if (result == null) {
+				return null;
+			}
+			ResourceIterator i = result.getIterator();
+			XMLResource resource = null;
+
+			while (i.hasMoreResources()) {
+				try {
+					resource = (XMLResource) i.nextResource();
+					foundUser = unmarshal(resource);
+				
+				} finally {
+					try {
+						((EXistResource) resource).freeResources();
+					} catch (XMLDBException xe) {
+						xe.printStackTrace();
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(foundUser.getUsername());
+		return foundUser;
+	}
+
+	
 
 }

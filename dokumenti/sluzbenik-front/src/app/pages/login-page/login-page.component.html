@@ -11,7 +11,7 @@
                 </span>
                 <small class="text-danger" id="usernameError"  *ngIf="form.controls.username.touched && form.controls.username.errors?.required">
                     Polje mora biti popunjeno!</small>
-                <div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
+                <div class="wrap-input100 validate-input m-b-36" data-validate = "Korisnicko ime je obavezno">
                     <input type="text" class="input100" id="username" name="username" formControlName = "username">
                     <span class="focus-input100"></span>
                 </div>
@@ -21,7 +21,7 @@
                 <small class="text-danger" id="passwordError" *ngIf="form.controls.password.touched && form.controls.password.errors?.required">
                     Polje mora biti popunjeno!</small>
             
-                <div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+                <div class="wrap-input100 validate-input m-b-12" data-validate = "Lozinka je obavezna">
                     <span class="btn-show-pass">
                         <i class="fa fa-eye"></i>
                     </span>
