@@ -11,6 +11,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+import org.xmldb.api.base.XMLDBException;
 
 import com.xml.poverenik.dom.DOMParser;
 import com.xml.poverenik.dom.DOMWriter;
@@ -24,7 +25,9 @@ public class ResenjeService {
 	private final DOMParser domParser;
 	private final DOMWriter domWriter;
 	
-	private static String xslFOPath = "src/main/resources/podaci/xsl/resenje.xsl";
+	private static String xslFOPath = "src/main/resources/podaci/xsl/resenje.xsl";	
+	private static String xslPathHTML = "src/main/resources/podaci/xsl/resenjeHTML.xsl";
+
 	
 	@Autowired
 	private ResenjeRepository resenjeRepository;
@@ -59,5 +62,10 @@ public class ResenjeService {
 		Files.write(file, outputStream.toByteArray());
 
 		return new UrlResource(file.toUri());
+	}
+	
+	public String convertXMLtoHTML(String id) throws XMLDBException {
+		String xml = resenjeRepository.findResenje(id);
+		return xslTransformer.convertXMLtoHTML(xslPathHTML, xml);
 	}
 }
