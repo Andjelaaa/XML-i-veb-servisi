@@ -9,6 +9,7 @@ export const environment = {
       signOut:  'api/user/sign-out',
       register:  'api/user/register',
       newRequest:  'api/zahtev/create',
-      newInformation: 'api/obavestenje/create',
-  };
+		newInformation: 'api/obavestenje/create',
+		obavestenje: 'api/obavestenje',
+      	zahtev: 'api/zahtev'  };
 
