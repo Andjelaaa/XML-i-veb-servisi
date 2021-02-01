@@ -3,10 +3,10 @@
     <ns2:user xmlns:ns2="https://github.com/Andjelaaa/XML-i-veb-servisi">
         <ns2:username>jova</ns2:username>
         <ns2:password>$2a$10$RVzuprKddsjdq6P8QWmqF.sCj2uYPIUlbFVB.b7tJ9RdFNOOBNoXO</ns2:password>
-        <ns2:email>mira@mail.com</ns2:email>
+        <ns2:email>jovanic@mail.com</ns2:email>
         <ns2:firstName>Jova</ns2:firstName>
         <ns2:lastName>Jovic</ns2:lastName>
-        <ns2:type>POVERENIK</ns2:type>
+        <ns2:type>GRADJANIN</ns2:type>
         <ns2:role>ROLE_USER</ns2:role>
     </ns2:user>
     <ns2:user xmlns:ns2="https://github.com/Andjelaaa/XML-i-veb-servisi">
@@ -15,7 +15,7 @@
         <ns2:email>jova@mail.com</ns2:email>
         <ns2:firstName>Jova</ns2:firstName>
         <ns2:lastName>Jovic</ns2:lastName>
-        <ns2:type>SLUZBENIK</ns2:type>
+        <ns2:type>POVERENIK</ns2:type>
         <ns2:role>ROLE_USER</ns2:role>
     </ns2:user>
 </Users>

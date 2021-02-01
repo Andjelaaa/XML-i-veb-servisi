@@ -29,6 +29,7 @@ import com.xml.poverenik.model.Izbor;
 import com.xml.poverenik.model.PZalbaCutanje;
 import com.xml.poverenik.model.PZalbaOdluke;
 import com.xml.poverenik.model.Resenje;
+import com.xml.poverenik.model.TUser;
 import com.xml.poverenik.model.ZalbaCutanje;
 import com.xml.poverenik.model.ZalbaOdluke;
 import com.xml.poverenik.rdf.FusekiWriter;
@@ -545,6 +546,43 @@ public class DOMWriter {
 		} catch (TransformerException e) {
 			e.printStackTrace();
 		}
+	}
+
+		public String generateUser(TUser t) {
+		createDocument();
+		
+		Element dokumentUs = document.createElement("ns2:user");
+
+		dokumentUs.setAttribute("xmlns:ns2","https://github.com/Andjelaaa/XML-i-veb-servisi");
+		document.appendChild(dokumentUs);
+		Element korisnickoIme = document.createElement("ns2:username");
+		korisnickoIme.appendChild(document.createTextNode(t.getUsername()));
+		Element sifra = document.createElement("ns2:password");
+		sifra.appendChild(document.createTextNode(t.getPassword()));
+		Element email = document.createElement("ns2:email");
+		email.appendChild(document.createTextNode(t.getEmail()));
+		Element ime = document.createElement("ns2:firstName");
+		ime.appendChild(document.createTextNode(t.getFirstName()));
+		Element prezime = document.createElement("ns2:lastName");
+		prezime.appendChild(document.createTextNode(t.getLastName()));
+		
+		Element tip = document.createElement("ns2:type");
+		tip.appendChild(document.createTextNode(t.getTitle()));
+		Element rola = document.createElement("ns2:role");
+		rola.appendChild(document.createTextNode(t.getRole()));
+		
+		
+		dokumentUs.appendChild(korisnickoIme);
+		dokumentUs.appendChild(sifra);
+		dokumentUs.appendChild(email);
+		dokumentUs.appendChild(ime);
+		dokumentUs.appendChild(prezime);
+		dokumentUs.appendChild(tip);
+		dokumentUs.appendChild(rola);
+		
+		StringWriter sw = new StringWriter();
+		transform(sw);
+		return sw.toString();
 	}
 
 

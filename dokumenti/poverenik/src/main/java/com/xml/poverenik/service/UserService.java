@@ -13,10 +13,11 @@ import com.xml.poverenik.dto.UserTokenStateDTO;
 import com.xml.poverenik.model.TUser;
 import com.xml.poverenik.repository.UserRepository;
 import com.xml.poverenik.security.TokenUtils;
+import com.xml.poverenik.dom.DOMWriter;
 
 @Service
 public class UserService {
-
+	private final DOMWriter domWriter = new DOMWriter();
 	@Autowired
 	private UserRepository userRepository;
 
@@ -46,11 +47,29 @@ public class UserService {
         
         // Kreiraj token za tog korisnika
         TUser user = (TUser) authentication.getPrincipal();
-        String jwt = tokenUtils.generateToken(user.getUsername()); // prijavljujemo se na sistem sa email adresom
+        String jwt = tokenUtils.generateToken(user); 
         int expiresIn = tokenUtils.getExpiredIn();
         
         // Vrati token kao odgovor na uspesnu autentifikaciju
         return new UserTokenStateDTO(jwt, expiresIn);
+	}
+
+	public void create(TUser user) throws Exception {
+		
+		TUser tUser = userRepository.findOne(user.getUsername());
+		if (tUser != null)
+			throw new Exception("User with given username already exist");
+		TUser t = new TUser();
+		t.setFirstName(user.getFirstName());
+		t.setLastName(user.getLastName());
+		t.setEmail(user.getEmail());
+		t.setUsername(user.getUsername());
+		t.setPassword(passwordEncoder.encode(user.getPassword()));
+		t.setTitle(user.getTitle());
+		t.setRole(user.getRole());
+		String documentContent = domWriter.generateUser(t);
+        userRepository.save(documentContent, t.getUsername());
+		
 	}
 
 }

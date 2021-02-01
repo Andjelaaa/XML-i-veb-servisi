@@ -1,6 +1,8 @@
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/services/user-service/user.service';
 
 @Component({
@@ -14,6 +16,8 @@ export class RegisterPageComponent implements OnInit {
   constructor(
       private fb: FormBuilder,
       private userService: UserService,
+      private router: Router,
+      private toastr: ToastrService
   ) {
       this.createForm();
   }
@@ -22,12 +26,46 @@ export class RegisterPageComponent implements OnInit {
   }
   createForm(): void{
     this.formRegister = this.fb.group({
-        ime: [null, Validators.required],
-        prezime: [null, Validators.required],
-        email: [null, Validators.required],
-        password: [null, Validators.required],
-        passwordRepeat: [null, Validators.required]
+        name: ['', Validators.required],
+        surname: ['', Validators.required],
+        username: ['', Validators.required],
+        email: ['', Validators.required],
+        password: ['', Validators.required],
+        passwordRepeat: ['', Validators.required]
     });
   }
-  submit(): void{}
+  submit(): void {
+    if (this.formRegister.invalid){
+        console.log('ssssssssssssss');
+        this.toastr.error('Sva polja su obavezna.');
+        return;
+    }
+    if (this.formRegister.value.password !== this.formRegister.value.passwordRepeat){
+        this.toastr.error('Šifre nisu iste.');
+        return;
+    }
+    const user: any = {};
+    const newUser = { _declaration:
+        { _attributes: { version: '1.0', encoding: 'utf-8' } },
+      root: {
+        username: { _text: '' }, password: { _text: '' }, lastName: { _text: '' },
+        firstName: { _text: '' }, email: { _text: '' } } };
+    newUser.root.username = this.formRegister.value.username;
+    newUser.root.password = this.formRegister.value.password;
+    newUser.root.lastName = this.formRegister.value.surname;
+    newUser.root.firstName = this.formRegister.value.name;
+    newUser.root.email = this.formRegister.value.email;
+    const convert = require('xml-js');
+
+    const convertXML = convert.js2xml(newUser, {compact: true, ignoreComment: true, spaces: 4});
+    this.userService.register(convertXML).subscribe(
+      result => {
+        const userToken = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
+        this.router.navigate(['/login']);
+      },
+      error => {
+        this.toastr.error('Zauzeto korisničko ime.');
+      }
+    );
+  }
 }

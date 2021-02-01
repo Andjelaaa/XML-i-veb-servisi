@@ -39,7 +39,6 @@ export class LoginPageComponent implements OnInit {
         const convert = require('xml-js');
 
         const signInUserXML = convert.js2xml(signInUser, {compact: true, ignoreComment: true, spaces: 4});
-        console.log(signInUserXML);
         this.userService.login(signInUserXML).subscribe(
           result => {
             const userToken = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
