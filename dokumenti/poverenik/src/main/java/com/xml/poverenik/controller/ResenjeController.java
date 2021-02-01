@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.xmldb.api.base.XMLDBException;
 
 import com.xml.poverenik.dto.ResenjeDTO;
 import com.xml.poverenik.dto.RetrieveDTO;
@@ -34,6 +35,12 @@ public class ResenjeController {
 	public ResponseEntity<ResenjeDTO> parseResenje(@RequestBody RetrieveDTO dto) throws Exception{
 		Resenje response = service.parseResenje(dto);
 		return new ResponseEntity<ResenjeDTO>(new ResenjeDTO(response), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/{name}", produces = MediaType.TEXT_HTML_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> getHTML(@PathVariable("name") String name) throws XMLDBException {
+		String result = service.convertXMLtoHTML(name);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 	
 	@PostMapping("/create")

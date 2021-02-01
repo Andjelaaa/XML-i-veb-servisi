@@ -55,21 +55,32 @@
 					<br></br>
 
 					<fo:block font-family="sans-serif" font-size="12px"
-						padding="1px" text-align="center">
-						<xsl:value-of
-							select="d:dokument_resenje/d:tekst_resenja" />
+						padding="5px" text-align="center">
+						RESENJE
 					</fo:block>
-					<br></br>
+
+					<xsl:for-each
+						select="d:dokument_resenje/d:tekst_resenja/d:p">
+						<fo:block font-family="sans-serif" font-size="12px"
+						padding="5px" text-align="left">
+										<xsl:value-of select="text()"></xsl:value-of>	
+						</fo:block>
+					</xsl:for-each>
+										
 					
-					<br>
-					</br>
 					<fo:block font-family="sans-serif" font-size="12px"
-						padding="1px" text-align="center">
-						<xsl:value-of
-							select="d:dokument_resenje/d:tekst_obrazlozenja" />
+						padding="5px" text-align="center">
+						Obrazlozenje
 					</fo:block>
 					<br></br>
 					
+					<xsl:for-each
+						select="d:dokument_resenje/d:tekst_obrazlozenja/d:p">
+						<fo:block font-family="sans-serif" font-size="12px"
+						padding="5px" text-align="left">
+										<xsl:value-of select="text()"></xsl:value-of>	
+						</fo:block>
+					</xsl:for-each>
 					
 					<fo:block text-align="right">
 						POVERENIK
