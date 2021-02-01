@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.xmldb.api.base.XMLDBException;
 
 import com.xml.poverenik.dto.RetrieveDTO;
 import com.xml.poverenik.dto.ZalbaOdlukaDTO;
@@ -33,6 +34,12 @@ public class ZalbaOdlukaController {
 	public ResponseEntity<ZalbaOdlukaDTO> parseZalbaOdluke(@RequestBody RetrieveDTO dto) throws Exception{
 		ZalbaOdluke response = service.parseZalbaOdluke(dto);
 		return new ResponseEntity<ZalbaOdlukaDTO>(new ZalbaOdlukaDTO(response), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/{name}", produces = MediaType.TEXT_HTML_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> getHTML(@PathVariable("name") String name) throws XMLDBException {
+		String result = service.convertXMLtoHTML(name);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 	
 	@PostMapping("/create")
