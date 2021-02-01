@@ -10,6 +10,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+import org.xmldb.api.base.XMLDBException;
 
 import com.xml.poverenik.dom.DOMParser;
 import com.xml.poverenik.dom.DOMWriter;
@@ -24,6 +25,8 @@ public class ZalbaOdlukaService {
 	private final DOMWriter domWriter;
 
 	private static String xslFOPath = "src/main/resources/podaci/xsl/zalba_odluke.xsl";
+	private static String xslPathHTML = "src/main/resources/podaci/xsl/zalba_odlukeHTML.xsl";
+
 
 	
 	@Autowired
@@ -59,5 +62,10 @@ public class ZalbaOdlukaService {
 		Files.write(file, outputStream.toByteArray());
 
 		return new UrlResource(file.toUri());
+	}
+	
+	public String convertXMLtoHTML(String id) throws XMLDBException {
+		String xml = zalbaOdlukeRepository.findZalbaOdluke(id);
+		return xslTransformer.convertXMLtoHTML(xslPathHTML, xml);
 	}
 }

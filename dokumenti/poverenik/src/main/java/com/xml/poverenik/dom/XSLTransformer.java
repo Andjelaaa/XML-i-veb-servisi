@@ -30,20 +30,21 @@ public class XSLTransformer {
 	private String fopPath = "src/main/resources/podaci/conf/fop.xconf";
 	
 	public static final String OUTPUT_FILE = "src/main/resources/podaci/conf/";
-	public String convertXMLtoHTML(String xslFileName, Document xml) {
+	public String convertXMLtoHTML(String xslFileName, String xml) {
 		
-		String xmlString = XMLToString(xml);
-	
+		
 		TransformerFactory factory = TransformerFactory.newInstance();
 		StreamSource xslStream = new StreamSource(new File(xslFileName));
 		
-		StreamSource in = new StreamSource(new StringReader(xmlString));
+		StreamSource in = new StreamSource(new StringReader(xml));
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 		Result out = new StreamResult(outStream);
 		
 		try {
 			Transformer transformer = factory.newTransformer(xslStream);
 			transformer.transform(in, out);
+			
+			System.out.println(outStream.toString());
 			return outStream.toString();
 		} catch (TransformerException e) {
 			e.printStackTrace();
