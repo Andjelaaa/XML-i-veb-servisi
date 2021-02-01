@@ -28,9 +28,12 @@ public class ZalbaCutanjeService {
 	private final DOMWriter domWriter;	
 	
 	private static String xslFOPath = "src/main/resources/podaci/xsl/zalba_cutanje.xsl";
+	private static String xslPathHTML = "src/main/resources/podaci/xsl/zalba_cutanjeHTML.xsl";
+
 
 	@Autowired
 	private ZalbaCutanjeRepository zalbaCutanjeRepository;
+	
 	
 	@Autowired
 	private com.xml.poverenik.dom.XSLTransformer xslTransformer;
@@ -63,5 +66,9 @@ public class ZalbaCutanjeService {
 		Files.write(file, outputStream.toByteArray());
 
 		return new UrlResource(file.toUri());
+	}
+	public String convertXMLtoHTML(String id) throws XMLDBException {
+		String xml = zalbaCutanjeRepository.findZalbaCutanje(id);
+		return xslTransformer.convertXMLtoHTML(xslPathHTML, xml);
 	}
 }
