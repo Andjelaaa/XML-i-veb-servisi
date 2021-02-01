@@ -28,6 +28,7 @@ public class ObavestenjeService {
 	private final DOMWriter domWriter;
 	
 	private static String xslFOPath = "src/main/resources/podaci/xsl/obavestenje.xsl";
+	private static String xslPathHTML = "src/main/resources/podaci/xsl/obavestenjeHTML.xsl";
 	
 	@Autowired
 	private ObavestenjeRepository obavestenjeRepository;
@@ -61,6 +62,10 @@ public class ObavestenjeService {
 		Files.write(file, outputStream.toByteArray());
 
 		return new UrlResource(file.toUri());
+	}
+	public String convertXMLtoHTML(String id) throws XMLDBException {
+		String xml = obavestenjeRepository.findObavestenje(id);
+		return xslTransformer.convertXMLtoHTML(xslPathHTML, xml);
 	}
 	
 }
