@@ -27,6 +27,12 @@ public class PZahtevDTO {
 			this.izbori.add(new IzborDTO(izbor));
 		}
 	}
+	
+
+	@Override
+	public String toString() {
+		return "PZahtevDTO [text=" + text + ", izbori=" + izbori + "]";
+	}
 
 	public String getText() {
 		return text;

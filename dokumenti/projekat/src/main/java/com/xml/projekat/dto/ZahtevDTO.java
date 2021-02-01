@@ -65,6 +65,17 @@ public class ZahtevDTO {
 		this.mesto = z.getMesto();
 		this.fusnote = z.getFusnote();
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "ZahtevDTO [text=" + text + ", podnosilac=" + podnosilac + ", adresa=" + adresa
+				+ ", drugiPodaciZaKontakt=" + drugiPodaciZaKontakt + ", nazivOrganaVlasti=" + nazivOrganaVlasti
+				+ ", sedisteOrgana=" + sedisteOrgana + ", naslov=" + naslov + ", paragrafi=" + paragrafi
+				+ ", trazeneInformacije=" + trazeneInformacije + ", datum=" + datum + ", mesto=" + mesto + ", fusnote="
+				+ fusnote + "]";
+	}
 
 	public PodnosilacDTO getPodnosilac() {
 		return podnosilac;

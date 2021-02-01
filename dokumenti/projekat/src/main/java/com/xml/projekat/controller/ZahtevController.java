@@ -39,7 +39,7 @@ public class ZahtevController {
 	}
 	
 	@PostMapping("/create")
-	public ResponseEntity<Object> createResenje(@RequestBody ZahtevDTO dto) throws Exception{
+	public ResponseEntity<Object> createZahtev(@RequestBody ZahtevDTO dto) throws Exception{
 		if(!validate(dto)) {
 			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);     
 		}

@@ -475,18 +475,17 @@ public class DOMWriter {
 					Element izbor = document.createElement("d:izbor");
 					izbor.appendChild(document.createTextNode(z.getParagrafi().get(i).getIzbori().get(j).getTekst()));
 					izbor.setAttribute("broj", Integer.toString(j + 1));
-
-					if (j == 3) {
+					if (z.getParagrafi().get(i).getIzbori().get(j).getPodizbori() != null) {
 						Element podizbori = document.createElement("d:podizbori");
 						izbor.appendChild(podizbori);
-						for (String key : izboriLista.get(3).getPodizbori().keySet()) {
+						for (String key : izboriLista.get(j).getPodizbori().keySet()) {
 							Element podizbor = document.createElement("d:podizbor");
-							podizbor.appendChild(document.createTextNode(izboriLista.get(3).getPodizbori().get(key)));
+							podizbor.appendChild(document.createTextNode(izboriLista.get(j).getPodizbori().get(key)));
 							podizbor.setAttribute("d:broj", key);
 							podizbori.appendChild(podizbor);
 						}
-						Element drugiNacin = document.createElement("d:drugi_nacin");
-						podizbori.appendChild(drugiNacin);
+//						Element drugiNacin = document.createElement("d:drugi_nacin");
+//						podizbori.appendChild(drugiNacin);
 					}
 					izbori.appendChild(izbor);
 				}

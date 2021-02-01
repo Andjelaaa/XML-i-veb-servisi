@@ -5,7 +5,7 @@ import java.util.HashMap;
 import com.xml.projekat.dto.IzborDTO;
 
 public class Izbor {
-	private int broj;
+	private String broj;
 	private String tekst;
 	private HashMap<String,String> podizbori;
 	private String drugiNacin;
@@ -14,7 +14,7 @@ public class Izbor {
 		super();
 	}
 
-	public Izbor(int broj, String tekst, HashMap<String, String> podizbori, String drugiNacin) {
+	public Izbor(String broj, String tekst, HashMap<String, String> podizbori, String drugiNacin) {
 		super();
 		this.broj = broj;
 		this.tekst = tekst;
@@ -30,11 +30,11 @@ public class Izbor {
 		this.drugiNacin = i.getDrugiNacin();
 	}
 
-	public int getBroj() {
+	public String getBroj() {
 		return broj;
 	}
 
-	public void setBroj(int broj) {
+	public void setBroj(String broj) {
 		this.broj = broj;
 	}
 

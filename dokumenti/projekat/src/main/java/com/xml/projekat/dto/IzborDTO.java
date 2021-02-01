@@ -6,7 +6,7 @@ import com.xml.projekat.model.Izbor;
 
 public class IzborDTO {
 	
-	private int broj;
+	private String broj;
 	private String tekst;
 	private HashMap<String,String> podizbori;
 	private String drugiNacin;
@@ -15,7 +15,7 @@ public class IzborDTO {
 		super();
 	}
 
-	public IzborDTO(int broj, String tekst, HashMap<String, String> podizbori, String drugiNacin) {
+	public IzborDTO(String broj, String tekst, HashMap<String, String> podizbori, String drugiNacin) {
 		super();
 		this.broj = broj;
 		this.tekst = tekst;
@@ -30,11 +30,11 @@ public class IzborDTO {
 		this.drugiNacin = izbor.getDrugiNacin();
 	}
 
-	public int getBroj() {
+	public String getBroj() {
 		return broj;
 	}
 
-	public void setBroj(int broj) {
+	public void setBroj(String broj) {
 		this.broj = broj;
 	}
 

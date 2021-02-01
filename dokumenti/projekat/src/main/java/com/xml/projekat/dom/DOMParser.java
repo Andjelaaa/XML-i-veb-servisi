@@ -115,7 +115,7 @@ public class DOMParser {
 				NodeList izbor = izbori.item(1).getChildNodes();
 				for (int j = 0; j < izbor.getLength(); j++) {
 					if (izbor.item(j) instanceof Element) {
-						int broj = Integer.parseInt(izbor.item(j).getAttributes().getNamedItem("broj").getTextContent());
+						String broj = izbor.item(j).getAttributes().getNamedItem("broj").getTextContent();
 						String tekst = izbor.item(j).getFirstChild().getTextContent();
 						HashMap<String, String> podizboriMapa = new HashMap<String, String>();
 						String drugiNacin = null;
