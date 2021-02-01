@@ -2,6 +2,7 @@ import { XmlParser } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/services/user-service/user.service';
 @Component({
   selector: 'app-login-page',
@@ -10,10 +11,12 @@ import { UserService } from 'src/app/services/user-service/user.service';
 })
 export class LoginPageComponent implements OnInit {
     form!: FormGroup;
+
     constructor(
         private fb: FormBuilder,
         private userService: UserService,
-        private router: Router
+        private router: Router,
+        private toastr: ToastrService
     ) {
         this.createForm();
     }
@@ -35,18 +38,16 @@ export class LoginPageComponent implements OnInit {
             username: { _text: '' }, password: { _text: '' } } };
         signInUser.root.username = auth.username;
         signInUser.root.password = auth.password;
-
         const convert = require('xml-js');
         const signInUserXML = convert.js2xml(signInUser, {compact: true, ignoreComment: true, spaces: 4});
-        console.log(signInUserXML);
         this.userService.login(signInUserXML).subscribe(
           result => {
             const userToken = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-            console.log(userToken);
             localStorage.setItem('user', userToken.UserTokenStateDTO.accessToken._text);
-            this.router.navigate(['/']);
+            this.router.navigate(['/home']);
           },
           error => {
+            this.toastr.error('Pogrešno korisničko ime ili šifra.');
           }
         );
       }

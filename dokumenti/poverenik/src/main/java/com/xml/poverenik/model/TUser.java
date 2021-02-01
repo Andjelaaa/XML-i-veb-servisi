@@ -18,6 +18,8 @@ import javax.xml.bind.annotation.XmlType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.xml.poverenik.dto.TUserDTO;
+
 /**
  * <p>
  * Java class for TUser complex type.
@@ -156,6 +158,15 @@ public class TUser implements UserDetails{
 		this.type = type;
 	}
 
+	public TUser(TUserDTO dto) {
+		this.username = dto.getUsername();
+		this.password = dto.getPassword();
+		this.email = dto.getEmail();
+		this.firstName =  dto.getFirstName();
+		this.lastName = dto.getLastName();
+		this.type =  "GRADJANIN";
+		this.role =  "ROLE_USER";
+	}
 	/**
 	 * Gets the value of the username property.
 	 * 

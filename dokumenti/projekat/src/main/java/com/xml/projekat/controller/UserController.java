@@ -26,7 +26,7 @@ public class UserController {
 
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
-	public @ResponseBody ResponseEntity<UserTokenStateDTO> login(@RequestBody LoginDTO dto)
+	public ResponseEntity<UserTokenStateDTO> login(@RequestBody LoginDTO dto)
 			throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException {
 		UserTokenStateDTO jwt = userService.login(dto);
 		if (jwt != null) {
@@ -36,7 +36,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
-	public @ResponseBody ResponseEntity<?> register(@RequestBody TUserDTO dto)
+	public ResponseEntity<?> register(@RequestBody TUserDTO dto)
 			throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException {
 		
 		TUser user;

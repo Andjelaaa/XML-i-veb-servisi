@@ -12,6 +12,9 @@ import { MaterialModule } from './pages/material-module';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RequestPageComponent } from './pages/request-page/request-page.component';
 import { InformationPageComponent } from './pages/information-page/information-page.component';
+import { ObavestenjePrikazComponent } from './pages/obavestenje-prikaz/obavestenje-prikaz.component';
+import { ZahtevPrikazComponent } from './pages/zahtev-prikaz/zahtev-prikaz.component';
+import { SafeHtmlPipe } from './safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { InformationPageComponent } from './pages/information-page/information-p
     NavbarGradjaninComponent,
     HomePageComponent,
     RequestPageComponent,
-    InformationPageComponent
+    InformationPageComponent,
+    ObavestenjePrikazComponent,
+    ZahtevPrikazComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,

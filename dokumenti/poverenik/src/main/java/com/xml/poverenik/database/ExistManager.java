@@ -5,6 +5,7 @@ import java.io.File;
 import javax.xml.transform.OutputKeys;
 
 import org.exist.xmldb.EXistResource;
+import org.exist.xupdate.XUpdateProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.DatabaseManager;
@@ -16,17 +17,15 @@ import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
 import org.xmldb.api.modules.XPathQueryService;
+import org.xmldb.api.modules.XUpdateQueryService;
 
 
 @Service
 public class ExistManager {
 	private static final String TARGET_NAMESPACE = "https://github.com/Andjelaaa/XML-i-veb-servisi";
-//	public static final String UPDATE = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
-//			+ "\" xmlns=\"" + TARGET_NAMESPACE + "\">" + "<xu:update select=\"%1$s\">%2$s</xu:update>"
-//			+ "</xu:modifications>";
-//	public static final String APPEND = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
-//			+ "\" xmlns=\"" + TARGET_NAMESPACE + "\">" + "<xu:append select=\"%1$s\" child=\"last()\">%2$s</xu:append>"
-//			+ "</xu:modifications>";
+	public static final String APPEND = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
+			+ "\" xmlns=\"" + TARGET_NAMESPACE + "\">" + "<xu:append select=\"%1$s\" child=\"last()\">%2$s</xu:append>"
+			+ "</xu:modifications>";
 
 	@Autowired
 	AuthenticationUtilities authUtil;
@@ -196,51 +195,6 @@ public class ExistManager {
 			}
 		}
 
-//		public void update(int template, String collectionId, String documentId, String contextXPath, String patch)
-//				throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-//			createConnection();
-//
-//			Collection col = null;
-//			String chosenTemplate = null;
-//			switch (template) {
-//			case 0:
-//				chosenTemplate = UPDATE;
-//				break;
-//			case 1:
-//				chosenTemplate = APPEND;
-//				break;
-//			default:
-//				return;
-//			}
-//			try {
-//				// get the collection
-//				System.out.println("[INFO] Retrieving the collection: " + collectionId);
-//				col = DatabaseManager.getCollection(authUtil.getUri() + collectionId, authUtil.getUser(),
-//						authUtil.getPassword());
-//				col.setProperty("indent", "yes");
-//
-//				// get an instance of xupdate query service
-//				System.out.println("[INFO] Fetching XUpdate service for the collection.");
-//				XUpdateQueryService xupdateService = (XUpdateQueryService) col.getService("XUpdateQueryService", "1.0");
-//				xupdateService.setProperty("indent", "yes");
-//
-//				System.out.println("[INFO] Updating " + contextXPath + " node.");
-//				long mods = xupdateService.updateResource(documentId, String.format(chosenTemplate, contextXPath, patch));
-//				System.out.println("[INFO] " + mods + " modifications processed.");
-//				System.out.println("[TEMPLATE] " + chosenTemplate);
-//
-//			} finally {
-//				// don't forget to cleanup
-//				if (col != null) {
-//					try {
-//						col.close();
-//					} catch (XMLDBException xe) {
-//						xe.printStackTrace();
-//					}
-//				}
-//			}
-//		}
-		
 		public Integer getCollectionSize(String collectionUri) throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException  {
 			createConnection();
 			Integer collectionSize = 0;
@@ -322,6 +276,38 @@ public class ExistManager {
 				closeConnection(col, res);
 			}
 		}
+
+		public void appendUser(String collectionId, String documentId, String content, String username)
+		throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+			createConnection();
+			content = content.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
+			//String contextXPath1 = String.format("/Users/user[username='%s']", username);
+			String contextXPath1 = "/Users";
+			Collection col = null;
+			try {	
+				System.out.println("[INFO] Retrieving the collection: " + collectionId);
+				col = DatabaseManager.getCollection(authUtil.getUri() + collectionId, authUtil.getUser(),
+						authUtil.getPassword());
+				col.setProperty("indent", "yes");
+				System.out.println("[INFO] Fetching XUpdate service for the collection.");
+				XUpdateQueryService xupdateService = (XUpdateQueryService) col.getService("XUpdateQueryService", "1.0");
+				xupdateService.setProperty("indent", "yes");
+				System.out.println("[INFO] Fetching XUpdate service for the collection.");
+
+				long mods = xupdateService.updateResource(documentId, String.format(APPEND, contextXPath1, content));
+				System.out.println("[INFO] " + mods + " modifications processed.");
+			
+			} finally {
+				if (col != null) {
+					try {
+						col.close();
+					} catch (XMLDBException xe) {
+						xe.printStackTrace();
+					}
+				}
+				}
+		}
+		
 
 	}
 

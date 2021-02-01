@@ -33,12 +33,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         // ako se ne radi nasledjivanje, paziti gde sve treba da se proveri email
-        TUser user = userRepository.findOneByUsername(email);
+    	TUser user = userRepository.findOneByUsername(email);
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", email));
         } else {
             return user;
         }
+    	
     }
 
 

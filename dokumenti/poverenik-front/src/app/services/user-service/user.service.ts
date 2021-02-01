@@ -19,4 +19,14 @@ export class UserService {
     login(loginData: any): Observable<any>{
         return this.http.post(`${environment.baseUrl}/${environment.login}`, loginData, {headers: this.headers, responseType: 'text'});
     }
+    isLoggedIn(): boolean {
+        if (!localStorage.getItem('user')) {
+                return false;
+        }
+        return true;
+    }
+    register(registerData: any): Observable<any>{
+        return this.http.post(`${environment.baseUrl}/${environment.register}`,
+         registerData, {headers: this.headers, responseType: 'text'});
+    }
 }
