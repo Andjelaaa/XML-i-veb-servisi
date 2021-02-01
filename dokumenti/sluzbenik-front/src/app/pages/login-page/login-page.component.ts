@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user-service/user.service';
 })
 export class LoginPageComponent implements OnInit {
     form!: FormGroup;
+
     constructor(
         private fb: FormBuilder,
         private userService: UserService,
@@ -35,18 +36,17 @@ export class LoginPageComponent implements OnInit {
             username: { _text: '' }, password: { _text: '' } } };
         signInUser.root.username = auth.username;
         signInUser.root.password = auth.password;
-
         const convert = require('xml-js');
+
         const signInUserXML = convert.js2xml(signInUser, {compact: true, ignoreComment: true, spaces: 4});
-        console.log(signInUserXML);
         this.userService.login(signInUserXML).subscribe(
           result => {
             const userToken = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-            console.log(userToken);
             localStorage.setItem('user', userToken.UserTokenStateDTO.accessToken._text);
-            this.router.navigate(['/']);
+            this.router.navigate(['/home']);
           },
           error => {
+              console.log(error);
           }
         );
       }

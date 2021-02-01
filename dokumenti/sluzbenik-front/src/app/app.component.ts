@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sluzbenik-front';
+  public type!: string| undefined;
+
+  constructor(private router: Router) {}
+
+  checkType(): void {
+    const item = localStorage.getItem('user');
+
+    if (!item) {
+        this.type = undefined;
+        return;
+    }
+
+    const jwt: JwtHelperService = new JwtHelperService();
+    this.type = jwt.decodeToken(item).type;
+  }
+
 }

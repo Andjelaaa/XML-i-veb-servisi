@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.xmldb.api.base.XMLDBException;
 
 import com.xml.projekat.dto.LoginDTO;
+import com.xml.projekat.dto.TUserDTO;
 import com.xml.projekat.dto.UserTokenStateDTO;
+import com.xml.projekat.model.TUser;
 import com.xml.projekat.service.UserService;
 
 @RestController
@@ -32,5 +34,36 @@ public class UserController {
 		}
 		return new ResponseEntity<UserTokenStateDTO>(jwt, HttpStatus.BAD_REQUEST);
 	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
+	public @ResponseBody ResponseEntity<?> register(@RequestBody TUserDTO dto)
+			throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException {
+		
+		TUser user;
+		if(!this.validate(dto))
+    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        try {
+        	user = new TUser(dto);
+        	userService.create(user);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
+        return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+
+	private boolean validate(TUserDTO dto) {
+		if(dto.getFirstName().isEmpty())
+			return false;
+		if(dto.getLastName().isEmpty())
+			return false;
+		if(dto.getPassword().isEmpty())
+			return false;
+		if(dto.getEmail().isEmpty())
+			return false;
+		if(dto.getUsername().isEmpty())
+			return false;
+		return true;
+	}
+	
 }

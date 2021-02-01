@@ -17,6 +17,8 @@ import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
 import org.xmldb.api.modules.XPathQueryService;
 
+import com.xml.projekat.model.TUser;
+
 
 @Service
 public class ExistManager {
@@ -122,7 +124,7 @@ public class ExistManager {
 
 				// Done
 				System.out.println("[INFO] Done! ");
-
+                
 			} finally {
 
 				// don't forget to cleanup
@@ -321,6 +323,25 @@ public class ExistManager {
 
 				closeConnection(col, res);
 			}
+		}
+
+		public void storeXMLUser(String collectionId, TUser t) throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException {
+			createConnection();
+
+			Collection col = null;
+			XMLResource res = null;
+			try {
+
+				col = getOrCreateCollection(collectionId, 0);
+				res = (XMLResource) col.createResource(collectionId, XMLResource.RESOURCE_TYPE);
+				res.setContent(t);
+				col.storeResource(res);
+
+			} finally {
+
+				closeConnection(col, res);
+			}
+			
 		}
 
 	}

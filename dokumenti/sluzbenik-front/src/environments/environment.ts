@@ -5,7 +5,9 @@
 export const environment = {
     production: false,
       baseUrl: 'http://localhost:8081',
-      login: 'api/user/login'
+      login: 'api/user/login',
+      signOut:  'api/user/sign-out',
+      register:  'api/user/register',
   };
 
   /*

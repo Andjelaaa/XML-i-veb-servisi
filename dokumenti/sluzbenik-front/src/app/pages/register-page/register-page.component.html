@@ -1,4 +1,4 @@
-<!-- <div class="limiter">
+<div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
             <form class="login100-form validate-form flex-sb flex-w" [formGroup]="formRegister" (ngSubmit)="submit()">
@@ -9,19 +9,28 @@
                 <span class="txt1 p-b-11">
                     Ime
                 </span>
-                <small class="text-danger" id="imeError"  *ngIf="formRegister.controls.ime.touched && formRegister.controls.ime.errors?.required">
+                <small class="text-danger" id="imeError"  *ngIf="formRegister.controls.name.touched && formRegister.controls.name.errors?.required">
                     Polje mora biti popunjeno!</small>
                 <div class="wrap-input100 validate-input m-b-36" data-validate = "Ime je obavezno!">
-                    <input type="text" class="input100" id="ime" name="ime" formControlName = "ime">
+                    <input type="text" class="input100" id="name" name="name" formControlName = "name">
                     <span class="focus-input100"></span>
                 </div>
                 <span class="txt1 p-b-11">
                     Prezime
                 </span>
-                <small class="text-danger" id="prezimeError"  *ngIf="formRegister.controls.prezime.touched && formRegister.controls.prezime.errors?.required">
+                <small class="text-danger" id="prezimeError"  *ngIf="formRegister.controls.surname.touched && formRegister.controls.surname.errors?.required">
                     Polje mora biti popunjeno!</small>
                 <div class="wrap-input100 validate-input m-b-36" data-validate = "Prezime je obavezno!">
-                    <input type="text" class="input100" id="prezime" name="prezime" formControlName = "prezime">
+                    <input type="text" class="input100" id="surname" name="surname" formControlName = "surname">
+                    <span class="focus-input100"></span>
+                </div>
+                <span class="txt1 p-b-11">
+                    Korisnicko ime
+                </span>
+                <small class="text-danger" id="prezimeError"  *ngIf="formRegister.controls.username.touched && formRegister.controls.username.errors?.required">
+                    Polje mora biti popunjeno!</small>
+                <div class="wrap-input100 validate-input m-b-36" data-validate = "Prezime je obavezno!">
+                    <input type="text" class="input100" id="username" name="username" formControlName = "username">
                     <span class="focus-input100"></span>
                 </div>
                 <span class="txt1 p-b-11">
@@ -40,7 +49,7 @@
                 <small class="text-danger" id="passwordError" *ngIf="formRegister.controls.password.touched && formRegister.controls.password.errors?.required">
                     Polje mora biti popunjeno!</small>
             
-                <div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+                <div class="wrap-input100 validate-input m-b-12" data-validate = "Sifra je obavezna">
                     <span class="btn-show-pass">
                         <i class="fa fa-eye"></i>
                     </span>
@@ -53,7 +62,7 @@
                 <small class="text-danger" id="passwordRepeatError" *ngIf="formRegister.controls.passwordRepeat.touched && formRegister.controls.passwordRepeat.errors?.required">
                     Polje mora biti popunjeno!</small>
             
-                <div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+                <div class="wrap-input100 validate-input m-b-12" data-validate = "Potvrdite sifru!">
                     <span class="btn-show-pass">
                         <i class="fa fa-eye"></i>
                     </span>
@@ -69,8 +78,7 @@
                     </button>
                     <a style="margin-left: 160px;" href="/login">Imaš nalog? Prijavi se.</a>
                 </div>
-
             </form>
         </div>
     </div>
-</div> -->
+</div>

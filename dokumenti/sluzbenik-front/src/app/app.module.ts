@@ -5,10 +5,11 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
-import { NavbarGradjaninComponent } from './core/navbar-gradjanin/navbar-gradjanin.component';
-import { NavbarSluzbenikComponent } from './core/navbar-sluzbenik/navbar-sluzbenik.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NavbarGradjaninComponent } from './core/navbar/navbar.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './interceptors/intercept.service';
+import { MaterialModule } from './pages/material-module';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +17,12 @@ import { Interceptor } from './interceptors/intercept.service';
     LoginPageComponent,
     RegisterPageComponent,
     NavbarGradjaninComponent,
-    NavbarSluzbenikComponent
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterialModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true}],
   bootstrap: [AppComponent],

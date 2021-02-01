@@ -14,6 +14,7 @@ import com.xml.projekat.model.TUser;
 import com.xml.projekat.repository.UserRepository;
 import com.xml.projekat.security.TokenUtils;
 
+
 @Service
 public class UserService {
 
@@ -40,17 +41,33 @@ public class UserService {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
                         authenticationRequest.getPassword()));
-       
-        // Ubaci korisnika u trenutni security kontekst
+        
         SecurityContextHolder.getContext().setAuthentication(authentication);
         
         // Kreiraj token za tog korisnika
         TUser user = (TUser) authentication.getPrincipal();
-        String jwt = tokenUtils.generateToken(user.getUsername()); // prijavljujemo se na sistem sa email adresom
+        String jwt = tokenUtils.generateToken(user); // prijavljujemo se na sistem sa email adresom
         int expiresIn = tokenUtils.getExpiredIn();
         
         // Vrati token kao odgovor na uspesnu autentifikaciju
         return new UserTokenStateDTO(jwt, expiresIn);
+	}
+
+	public void create(TUser user) throws Exception {
+		
+		//TUser tUser = userRepository.findOne(user.getUsername());
+		//if (tUser != null)
+		//	throw new Exception("User with given username already exist");
+		TUser t = new TUser();
+		t.setFirstName(user.getFirstName());
+		t.setLastName(user.getLastName());
+		t.setEmail(user.getEmail());
+		t.setUsername(user.getUsername());
+		t.setPassword(passwordEncoder.encode(user.getPassword()));
+		t.setTitle(user.getTitle());
+		t.setRole(user.getRole());
+        userRepository.save(t);
+		
 	}
 
 }
