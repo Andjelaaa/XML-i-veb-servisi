@@ -55,11 +55,8 @@ public class ZahtevController {
 	
 	@GetMapping(value = "/{name}/pdf", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> getPdf(@PathVariable("name") String name) throws Exception {
-		
-		System.out.println("aklskdlskdasldk");
 		Resource resource = service.getPdf(name);
 		
-//		return new ResponseEntity<>(new ZahtevDTO(),HttpStatus.OK);
 		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
 				.body(resource);
