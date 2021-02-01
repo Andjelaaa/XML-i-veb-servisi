@@ -36,12 +36,11 @@ public class UserRepository {
 	}
 
 	private String collectionId = "/db/dokumenti/korisnici";
+	private String documentId = "korisnici.xml";
 	
-	public String save(TUser t)
+	public void save(String documentContent, String username)
 		throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		existManager.storeXMLUser(collectionId, t);
-
-		return "OK";
+		existManager.appendUser(collectionId, documentId, documentContent, username);
 	}
 	public TUser findOneByUsername(String username) {
 
@@ -161,7 +160,7 @@ public class UserRepository {
 		System.out.println(foundUser.getUsername());
 		return foundUser;
 	}
-
+	
 	
 
 }

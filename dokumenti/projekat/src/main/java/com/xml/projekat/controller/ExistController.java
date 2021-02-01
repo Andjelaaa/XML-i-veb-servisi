@@ -48,19 +48,7 @@ public class ExistController {
 			throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		existManager.retrieve(dto.getCollectionId(), dto.getXpath());
 	}
-
-//	@RequestMapping(value = "/remove", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-//	public void remove(@RequestBody XPathRetrieveDTO dto)
-//			throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException {
-//		existManager.remove(dto.getCollectionId(), dto.getXpath());
-//	}
-
-//	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-//	public void update(@RequestBody UpdateDTO dto)
-//			throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException {
-//		existManager.update(0, dto.getCollectionId(), dto.getDocumentId(), dto.getContextXPath(), dto.getPatch());
-//	}
-
+	
 	@GetMapping(value = "/initiateData")
 	public void initiateDate()
 			throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException, IOException {

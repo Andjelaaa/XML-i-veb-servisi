@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.xml.projekat.dom.DOMParser;
+import com.xml.projekat.dom.DOMWriter;
 import com.xml.projekat.dto.LoginDTO;
 import com.xml.projekat.dto.UserTokenStateDTO;
 import com.xml.projekat.model.TUser;
@@ -18,6 +20,8 @@ import com.xml.projekat.security.TokenUtils;
 @Service
 public class UserService {
 
+	private final DOMWriter domWriter = new DOMWriter();
+	
 	@Autowired
 	private UserRepository userRepository;
 
@@ -66,7 +70,8 @@ public class UserService {
 		t.setPassword(passwordEncoder.encode(user.getPassword()));
 		t.setTitle(user.getTitle());
 		t.setRole(user.getRole());
-        userRepository.save(t);
+		String documentContent = domWriter.generateUser(t);
+        userRepository.save(documentContent, t.getUsername());
 		
 	}
 

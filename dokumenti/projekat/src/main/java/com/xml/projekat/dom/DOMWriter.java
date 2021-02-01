@@ -24,9 +24,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.ProcessingInstruction;
 import org.xmldb.api.base.XMLDBException;
 
+import com.itextpdf.styledxmlparser.jsoup.nodes.XmlDeclaration;
 import com.xml.projekat.model.Izbor;
 import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.model.PObavestenje;
+import com.xml.projekat.model.TUser;
 import com.xml.projekat.model.Zahtev;
 import com.xml.projekat.rdf.FusekiWriter;
 import com.xml.projekat.rdf.MetadataExtractor;
@@ -344,7 +346,43 @@ public class DOMWriter {
 
 	}
 
-	
+	public String generateUser(TUser t) {
+		createDocument();
+		
+		Element dokumentUs = document.createElement("ns2:user");
+
+		dokumentUs.setAttribute("xmlns:ns2","https://github.com/Andjelaaa/XML-i-veb-servisi");
+		document.appendChild(dokumentUs);
+		Element korisnickoIme = document.createElement("ns2:username");
+		korisnickoIme.appendChild(document.createTextNode(t.getUsername()));
+		Element sifra = document.createElement("ns2:password");
+		sifra.appendChild(document.createTextNode(t.getPassword()));
+		Element email = document.createElement("ns2:email");
+		email.appendChild(document.createTextNode(t.getEmail()));
+		Element ime = document.createElement("ns2:firstName");
+		ime.appendChild(document.createTextNode(t.getFirstName()));
+		Element prezime = document.createElement("ns2:lastName");
+		prezime.appendChild(document.createTextNode(t.getLastName()));
+		
+		Element tip = document.createElement("ns2:type");
+		tip.appendChild(document.createTextNode(t.getTitle()));
+		Element rola = document.createElement("ns2:role");
+		rola.appendChild(document.createTextNode(t.getRole()));
+		
+		
+		dokumentUs.appendChild(korisnickoIme);
+		dokumentUs.appendChild(sifra);
+		dokumentUs.appendChild(email);
+		dokumentUs.appendChild(ime);
+		dokumentUs.appendChild(prezime);
+		dokumentUs.appendChild(tip);
+		dokumentUs.appendChild(rola);
+		
+		StringWriter sw = new StringWriter();
+		transform(sw);
+		return sw.toString();
+	}
+
 
 	public String generateZahtev(Zahtev z) throws TransformerException, IOException, XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		createDocument();
@@ -538,5 +576,6 @@ public class DOMWriter {
 		}
 	}
 
+	
 
 }

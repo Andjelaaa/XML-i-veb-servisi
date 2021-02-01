@@ -164,8 +164,8 @@ public class TUser implements UserDetails{
 		this.email = dto.getEmail();
 		this.firstName =  dto.getFirstName();
 		this.lastName = dto.getLastName();
-		this.type =  dto.getType();
-		this.role =  dto.getRole();
+		this.type =  "GRADJANIN";
+		this.role =  "ROLE_USER";
 	}
 
 	/**

@@ -58,8 +58,6 @@ export class RegisterPageComponent implements OnInit {
     this.userService.register(convertXML).subscribe(
       result => {
         const userToken = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        localStorage.setItem('user', userToken.UserTokenStateDTO.accessToken._text);
-        // nek se uloguje
         this.router.navigate(['/login']);
       },
       error => {
