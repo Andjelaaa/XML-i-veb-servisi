@@ -9,15 +9,7 @@ export const environment = {
       signOut:  'api/user/sign-out',
       register:  'api/user/register',
       newRequest:  'api/zahtev/create',
-      obavestenje: 'api/obavestenje',
-      zahtev: 'api/zahtev'
-  };
+		newInformation: 'api/obavestenje/create',
+		obavestenje: 'api/obavestenje',
+      	zahtev: 'api/zahtev'  };
 
-  /*
-   * For easier debugging in development mode, you can import the following file
-   * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
-   *
-   * This import should be commented out in production mode because it will have a negative impact
-   * on performance if an error is thrown.
-   */
-  // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
