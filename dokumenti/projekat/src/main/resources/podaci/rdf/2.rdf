@@ -3,7 +3,7 @@
     <pred:URI xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2</pred:URI>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:zahtev_uri xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
+    <pred:zahtev_uri xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1</pred:zahtev_uri>
   </rdf:Description>
   <rdf:Description rdf:about="">
     <pred:korisnicko_ime xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
