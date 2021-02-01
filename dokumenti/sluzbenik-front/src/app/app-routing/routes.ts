@@ -6,6 +6,8 @@ import { InformationPageComponent } from '../pages/information-page/information-
 import { LoginPageComponent } from '../pages/login-page/login-page.component';
 import { RegisterPageComponent } from '../pages/register-page/register-page.component';
 import { RequestPageComponent } from '../pages/request-page/request-page.component';
+import { ObavestenjePrikazComponent } from '../pages/obavestenje-prikaz/obavestenje-prikaz.component';
+import { ZahtevPrikazComponent } from '../pages/zahtev-prikaz/zahtev-prikaz.component'
 
 export const routes: Routes = [
     { path: '',
@@ -38,5 +40,17 @@ export const routes: Routes = [
         component: RequestPageComponent,
         canActivate: [RoleGuard],
         data: {expectedRoles: 'GRADJANIN'}
+    },
+    {
+        path: 'obavestenje/:id',
+        component: ObavestenjePrikazComponent,
+       // canActivate: [RoleGuard],
+      //  data: {expectedRoles: 'GRADJANIN'}
+    },
+    {
+        path: 'zahtev/:id',
+        component: ZahtevPrikazComponent,
+       // canActivate: [RoleGuard],
+      //  data: {expectedRoles: 'GRADJANIN'}
     }
 ];

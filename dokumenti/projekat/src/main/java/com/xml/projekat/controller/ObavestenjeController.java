@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,6 +64,7 @@ public class ObavestenjeController {
 				.body(resource);
 	}
 	@GetMapping(value = "/{name}", produces = MediaType.TEXT_HTML_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@CrossOrigin(origins = "http://localhost:8081")
 	public ResponseEntity<String> getHTML(@PathVariable("name") String name) throws XMLDBException {
 		String result = service.convertXMLtoHTML(name);
 		return new ResponseEntity<String>(result, HttpStatus.OK);

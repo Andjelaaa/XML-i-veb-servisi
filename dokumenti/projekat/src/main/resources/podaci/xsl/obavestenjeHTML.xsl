@@ -5,7 +5,7 @@
     <xsl:template match="/">
     	<html>
             <head>
-                <title>ZAHTEV</title>
+                <title>OBAVESTENJE</title>
                 <style type="text/css">
                     body {
 				        height: 842px;
