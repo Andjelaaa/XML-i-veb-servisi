@@ -10,6 +10,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './interceptors/intercept.service';
 import { MaterialModule } from './pages/material-module';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { RequestPageComponent } from './pages/request-page/request-page.component';
+import { InformationPageComponent } from './pages/information-page/information-page.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     LoginPageComponent,
     RegisterPageComponent,
     NavbarGradjaninComponent,
-    HomePageComponent
+    HomePageComponent,
+    RequestPageComponent,
+    InformationPageComponent
   ],
   imports: [
     BrowserModule,

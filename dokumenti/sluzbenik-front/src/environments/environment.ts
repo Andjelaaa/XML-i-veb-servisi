@@ -8,6 +8,7 @@ export const environment = {
       login: 'api/user/login',
       signOut:  'api/user/sign-out',
       register:  'api/user/register',
+      newRequest:  'api/zahtev/create',
   };
 
   /*
