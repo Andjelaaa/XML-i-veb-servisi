@@ -17,14 +17,14 @@ export class NewRequestsListComponent implements OnInit {
   constructor(private requestService: RequestService) { }
 
   ngOnInit(): void {
-    this.getUserRequests();
+    this.getNewRequests();
 
   }
   getHref(name: string) {
     return 'http://localhost:8081/api/zahtev/'+name+'/pdf';
   }
 
-  getUserRequests(){
+  getNewRequests(){
     const convert = require('xml-js');
     this.requestService.getNewRequests().subscribe(
       result => {

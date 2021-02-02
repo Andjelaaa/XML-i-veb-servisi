@@ -1,6 +1,7 @@
 package com.xml.projekat.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +19,7 @@ import org.xmldb.api.base.XMLDBException;
 
 import com.xml.projekat.dto.ObavestenjeDTO;
 import com.xml.projekat.dto.RetrieveDTO;
+import com.xml.projekat.dto.ZahtevDTO;
 import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.service.ObavestenjeService;
 
@@ -68,6 +70,19 @@ public class ObavestenjeController {
 	public ResponseEntity<String> getHTML(@PathVariable("name") String name) throws XMLDBException {
 		String result = service.convertXMLtoHTML(name);
 		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
+	@GetMapping(value = "/userInformations/{username}", produces = MediaType.APPLICATION_XML_VALUE)
+	@CrossOrigin(origins = "http://localhost:8081")
+	public ResponseEntity<List<ObavestenjeDTO>> userInformations(@PathVariable("username") String username) throws XMLDBException {
+		List<ObavestenjeDTO> obavestenjeList = service.findInformationsByUser(username);
+		return new ResponseEntity<List<ObavestenjeDTO>>(obavestenjeList, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/allInformations", produces = MediaType.APPLICATION_XML_VALUE)
+	@CrossOrigin(origins = "http://localhost:8081")
+	public ResponseEntity<List<ObavestenjeDTO>> allInformations() throws XMLDBException {
+		List<ObavestenjeDTO> obavestenjeList = service.findAllInformations();
+		return new ResponseEntity<List<ObavestenjeDTO>>(obavestenjeList, HttpStatus.OK);
 	}
 	
 	private boolean validate(ObavestenjeDTO dto) {

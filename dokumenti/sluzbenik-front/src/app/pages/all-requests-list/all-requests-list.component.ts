@@ -16,14 +16,14 @@ export class AllRequestsListComponent implements OnInit {
   constructor(private requestService: RequestService) { }
 
   ngOnInit(): void {
-    this.getUserRequests();
+    this.getAllRequests();
 
   }
   getHref(name: string) {
     return 'http://localhost:8081/api/zahtev/'+name+'/pdf';
   }
 
-  getUserRequests(){
+  getAllRequests(){
     const convert = require('xml-js');
     this.requestService.getAllRequests().subscribe(
       result => {

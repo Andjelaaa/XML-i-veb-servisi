@@ -18,6 +18,8 @@ import { SafeHtmlPipe } from './safe-html.pipe';
 import { RequestListComponent } from './pages/request-list/request-list.component';
 import { NewRequestsListComponent } from './pages/new-requests-list/new-requests-list.component';
 import { AllRequestsListComponent } from './pages/all-requests-list/all-requests-list.component';
+import { InformationListComponent } from './pages/information-list/information-list.component';
+import { AllInformationListComponent } from './pages/all-information-list/all-information-list.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { AllRequestsListComponent } from './pages/all-requests-list/all-requests
     SafeHtmlPipe,
     RequestListComponent,
     NewRequestsListComponent,
-    AllRequestsListComponent
+    AllRequestsListComponent,
+    InformationListComponent,
+    AllInformationListComponent
   ],
   imports: [
     BrowserModule,

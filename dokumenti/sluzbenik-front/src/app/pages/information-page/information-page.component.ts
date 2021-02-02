@@ -70,7 +70,7 @@ export class InformationPageComponent implements OnInit, AfterViewInit{
     <ime>Jova</ime>
     <nazivFirme>Firma doo</nazivFirme>
     <prezime>Jovic</prezime>
-    <korisnickoIme>Jocy</korisnickoIme>
+    <korisnickoIme>jova</korisnickoIme>
     </podnosilac>
     <text null="true" />
     </obavestenje>`;

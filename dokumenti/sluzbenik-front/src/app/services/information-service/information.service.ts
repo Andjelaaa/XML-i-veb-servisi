@@ -18,4 +18,14 @@ sendInformation(request: any): Observable < any > {
     return this.http.post(`${environment.baseUrl}/${environment.newInformation}`, request,
      {headers: this.headers, responseType: 'text'});
   }
+
+  getAllInformations(): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/${environment.allInformations}`,
+     {headers: this.headers, responseType: 'text'});
+  }
+
+  getUserInformations(username: string): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/${environment.userInformations}/${username}`,
+     {headers: this.headers, responseType: 'text'});
+  }
 }

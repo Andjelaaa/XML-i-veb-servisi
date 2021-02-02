@@ -1,0 +1,26 @@
+
+<div>
+    <h2>Obavestenja</h2>
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Organ vlasti</th>
+            <th>Trazena informacija</th>
+            <th>Preuzmi PDF</th>
+            <th>Prikaz obavestenja</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let obavestenje of list">
+            <td>{{obavestenje.datum._text}}</td>
+            <td>{{obavestenje.nazivOrganaVlasti._text}} {{obavestenje.sedisteOrgana._text}}</td>
+            <td>{{obavestenje.paragrafi.paragrafi[0].trazenaInformacija._text}}</td>
+            <td><button mat-button color="primary"><a href="{{getHref(obavestenje.uri._text)}}">Preuzmi PDF</a></button></td>
+            <td><button mat-button color="primary" ><a href="/obavestenje/{{obavestenje.uri._text}}">Prikaz obavestenja</a></button></td>
+        </tr>
+    </tbody>
+
+    </table>
+    
+</div>

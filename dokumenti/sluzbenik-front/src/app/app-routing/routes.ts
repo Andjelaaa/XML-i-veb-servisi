@@ -11,6 +11,8 @@ import { ZahtevPrikazComponent } from '../pages/request-review/request-review.co
 import { RequestListComponent } from '../pages/request-list/request-list.component';
 import { NewRequestsListComponent } from '../pages/new-requests-list/new-requests-list.component';
 import { AllRequestsListComponent } from '../pages/all-requests-list/all-requests-list.component';
+import { AllInformationListComponent } from '../pages/all-information-list/all-information-list.component';
+import { InformationListComponent } from '../pages/information-list/information-list.component';
 
 export const routes: Routes = [
     { path: '',
@@ -73,5 +75,17 @@ export const routes: Routes = [
         component: AllRequestsListComponent,
         canActivate: [RoleGuard],
         data: {expectedRoles: 'SLUZBENIK'}
+    },
+    {
+        path: 'informations',
+        component: AllInformationListComponent,
+       // canActivate: [RoleGuard],
+      //  data: {expectedRoles: 'GRADJANIN'}
+    },
+    {
+        path: 'user_informations',
+        component: InformationListComponent,
+       // canActivate: [RoleGuard],
+      //  data: {expectedRoles: 'GRADJANIN'}
     }
 ];
