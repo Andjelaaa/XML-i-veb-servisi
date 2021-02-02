@@ -389,7 +389,7 @@ public class DOMWriter {
 		
 		ProcessingInstruction newPI = document.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"src/main/resources/podaci/xsl/zahtev.xsl\"");
 		document.insertBefore(newPI, document.getDocumentElement());
-		Element zahtev = document.createElement("zahtev");
+		Element zahtev = document.createElement("d:zahtev");
 
 		
 		zahtev.setAttribute("xmlns", "http://www.w3.org/ns/rdfa#");

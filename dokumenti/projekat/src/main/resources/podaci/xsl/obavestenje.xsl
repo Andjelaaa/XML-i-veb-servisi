@@ -6,12 +6,12 @@
     <xsl:template match="/">
         <fo:root>
             <fo:layout-master-set>
-                <fo:simple-page-master master-name="obavestenje-page">
+                <fo:simple-page-master master-name="d:obavestenje-page">
                     <fo:region-body margin="0.75in"/>
                 </fo:simple-page-master>
             </fo:layout-master-set>
             
-            <fo:page-sequence master-reference="obavestenje-page">
+            <fo:page-sequence master-reference="d:obavestenje-page">
                 <fo:flow flow-name="xsl-region-body">
                     <fo:block font-family="sans-serif" font-size="12px" padding="1px"  text-decoration="underline" text-align="left">
                         <fo:inline >

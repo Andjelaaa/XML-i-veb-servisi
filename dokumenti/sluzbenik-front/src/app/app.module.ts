@@ -16,6 +16,8 @@ import { ObavestenjePrikazComponent } from './pages/information-review/informati
 import { ZahtevPrikazComponent } from './pages/request-review/request-review.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
 import { RequestListComponent } from './pages/request-list/request-list.component';
+import { NewRequestsListComponent } from './pages/new-requests-list/new-requests-list.component';
+import { AllRequestsListComponent } from './pages/all-requests-list/all-requests-list.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { RequestListComponent } from './pages/request-list/request-list.componen
     ObavestenjePrikazComponent,
     ZahtevPrikazComponent,
     SafeHtmlPipe,
-    RequestListComponent
+    RequestListComponent,
+    NewRequestsListComponent,
+    AllRequestsListComponent
   ],
   imports: [
     BrowserModule,

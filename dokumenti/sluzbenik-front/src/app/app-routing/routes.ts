@@ -9,6 +9,8 @@ import { RequestPageComponent } from '../pages/request-page/request-page.compone
 import { ObavestenjePrikazComponent } from '../pages/information-review/information-review.component';
 import { ZahtevPrikazComponent } from '../pages/request-review/request-review.component';
 import { RequestListComponent } from '../pages/request-list/request-list.component';
+import { NewRequestsListComponent } from '../pages/new-requests-list/new-requests-list.component';
+import { AllRequestsListComponent } from '../pages/all-requests-list/all-requests-list.component';
 
 export const routes: Routes = [
     { path: '',
@@ -31,7 +33,7 @@ export const routes: Routes = [
         data: {expectedRoles: 'SLUZBENIK|GRADJANIN'}
     },
     {
-        path: 'make_info',
+        path: 'make_info/:id',
         component: InformationPageComponent,
         canActivate: [RoleGuard],
         data: {expectedRoles: 'SLUZBENIK'}
@@ -55,9 +57,21 @@ export const routes: Routes = [
       //  data: {expectedRoles: 'GRADJANIN'}
     },
     {
-        path: 'zahtevpdf',
+        path: 'user_requests',
         component: RequestListComponent,
-       // canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'GRADJANIN'}
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'GRADJANIN'}
+    },
+    {
+        path: 'new_requests',
+        component: NewRequestsListComponent,
+       canActivate: [RoleGuard],
+       data: {expectedRoles: 'SLUZBENIK'}
+    },
+    {
+        path: 'requests',
+        component: AllRequestsListComponent,
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'SLUZBENIK'}
     }
 ];

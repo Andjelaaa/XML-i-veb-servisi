@@ -22,10 +22,11 @@ export class InformationPageComponent implements OnInit, AfterViewInit{
   }
   ngAfterViewInit(): void {
     //podatke o podnosiocu dobija iz zahteva
+    const zahtev_uri = this.route.snapshot.paramMap.get('id');
     const element = document.getElementById('obavestenje');
     const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
     <obavestenje>
-    <zahtevURI>${1}</zahtevURI>
+    <zahtevURI>${zahtev_uri}</zahtevURI>
     <adresa>
     <broj>123</broj>
     <grad>Novi Sad</grad>

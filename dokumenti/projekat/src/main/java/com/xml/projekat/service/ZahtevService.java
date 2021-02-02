@@ -2,38 +2,31 @@ package com.xml.projekat.service;
 
 
 import java.io.ByteArrayOutputStream;
-import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
-import com.xml.projekat.dom.XSLTransformer;
 import com.xml.projekat.dom.DOMParser;
 import com.xml.projekat.dom.DOMWriter;
+import com.xml.projekat.dom.XSLTransformer;
+import com.xml.projekat.dto.ObavestenjeDTO;
 import com.xml.projekat.dto.RetrieveDTO;
 import com.xml.projekat.dto.ZahtevDTO;
+import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.model.Zahtev;
+import com.xml.projekat.repository.ObavestenjeRepository;
 import com.xml.projekat.repository.ZahtevRepository;
 
 @Service
@@ -46,6 +39,9 @@ public class ZahtevService {
 
 	@Autowired
 	private ZahtevRepository zahtevRepository;
+	
+	@Autowired 
+	private ObavestenjeRepository obavestenjeRepository;
 	
 	@Autowired
 	private XSLTransformer xslTransformer;
@@ -87,8 +83,6 @@ public class ZahtevService {
 	}
 	
 	public ArrayList<ZahtevDTO> findRequestsByUser(String username) throws XMLDBException {
-		//String username = getLoggedUser();
-		System.out.println("tu sammm");
 		String xPathExpression = "/";
 		ResourceSet result = zahtevRepository.findZahtevi(xPathExpression);		
 		
@@ -102,15 +96,7 @@ public class ZahtevService {
 		}
 		return filtriranaListaZahteva;
 	}
-	
-	private String getLoggedUser() {
-		String username = null;
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-			username = authentication.getName();
-		}
-		return username;
-	}
+
 	
 	private ArrayList<ZahtevDTO> extractDataFromRequests(ResourceSet resourceSet) {
 		ArrayList<ZahtevDTO> zahteviList = new ArrayList<ZahtevDTO>();
@@ -129,6 +115,61 @@ public class ZahtevService {
 			e.printStackTrace();
 		}
 		return zahteviList;
+	}
+	
+	private ArrayList<ObavestenjeDTO> extractDataFromInformations(ResourceSet resourceSet) {
+		ArrayList<ObavestenjeDTO> obavestenjeList = new ArrayList<ObavestenjeDTO>();
+		ResourceIterator i;
+		try {
+			i = resourceSet.getIterator();
+			while (i.hasMoreResources()) {
+				XMLResource resource = (XMLResource) i.nextResource();
+				
+				Document document = domParser.buildDocumentFromText(resource.getContent().toString());
+				Obavestenje o = domParser.parseObavestenje(document);
+				
+				obavestenjeList.add(new ObavestenjeDTO(o));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return obavestenjeList;
+	}
+
+	public List<ZahtevDTO> findAllRequests() {
+		String xPathExpression = "/";
+		ResourceSet result = zahtevRepository.findZahtevi(xPathExpression);		
+		
+		ArrayList<ZahtevDTO> zahteviList = extractDataFromRequests(result);	
+		return zahteviList;
+	}
+	
+	public List<ZahtevDTO> findNewRequests() {
+		String xPathExpression = "/";
+		ResourceSet result = zahtevRepository.findZahtevi(xPathExpression);	
+		ArrayList<ZahtevDTO> zahteviList = extractDataFromRequests(result);	
+		
+		ResourceSet result2 = obavestenjeRepository.findObavestenja(xPathExpression);	
+		ArrayList<ObavestenjeDTO> obavestenjaList = extractDataFromInformations(result2);	
+		
+		ArrayList<ZahtevDTO> filtriranaListaZahteva = new ArrayList<ZahtevDTO>();
+		
+		
+		
+		for (ZahtevDTO zahtevDTO : zahteviList) {
+			boolean found = false;
+			for(ObavestenjeDTO obDTO: obavestenjaList) {
+				if(zahtevDTO.getURI().equals(obDTO.getZahtevURI())) {
+					found = true;
+					break;
+				}
+			}
+			if(!found) {
+				filtriranaListaZahteva.add(zahtevDTO);
+			}
+		
+		}
+		return filtriranaListaZahteva;
 	}
 
 }

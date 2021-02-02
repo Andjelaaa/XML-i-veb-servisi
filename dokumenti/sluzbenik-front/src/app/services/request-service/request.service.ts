@@ -31,4 +31,15 @@ toHtml(id: String){
 
   return this.http.get(`${environment.baseUrl}/${environment.zahtev}/` + id ,{headers: headersJson, responseType: 'text'});
 }
+
+getNewRequests(): Observable<any> {
+  return this.http.get(`${environment.baseUrl}/api/zahtev/newRequests`,
+     {headers: this.headers, responseType: 'text'});
+
+}
+getAllRequests(): Observable<any> {
+  return this.http.get(`${environment.baseUrl}/api/zahtev/allRequests`,
+     {headers: this.headers, responseType: 'text'});
+
+}
 }

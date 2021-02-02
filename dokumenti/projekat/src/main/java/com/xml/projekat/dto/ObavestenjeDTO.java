@@ -38,12 +38,13 @@ public class ObavestenjeDTO {
   
 	public ObavestenjeDTO(Obavestenje o) {
 		this(o.getPodnosilac(),o.getAdresa(),o.getNazivOrganaVlasti(),o.getSedisteOrgana(),
-				o.getDostavljeno(),o.getDatum(),o.getNaslov(),o.getBrojPredmeta(),o.getMestoPecata(),o.getParagrafi(), o.getZahtevURI());
+				o.getDostavljeno(),o.getDatum(),o.getNaslov(),o.getBrojPredmeta(),o.getMestoPecata(),o.getParagrafi(), o.getZahtevURI(), o.getURI());
 	}
 	
 	public ObavestenjeDTO(Podnosilac podnosilac, Adresa adresa, String nazivOrganaVlasti, String sedisteOrgana,
 			ArrayList<String> dostavljeno, String datum, String naslov, String brojPredmeta, String mestoPecata,
-			ArrayList<PObavestenje> pobavestenje, String zahtevURI) {
+			ArrayList<PObavestenje> pobavestenje, String zahtevURI, String uri) {
+		this.URI = uri;
 		this.zahtevURI = zahtevURI;
 		this.podnosilac = new PodnosilacDTO(podnosilac);
 		this.adresa = new AdresaDTO(adresa);

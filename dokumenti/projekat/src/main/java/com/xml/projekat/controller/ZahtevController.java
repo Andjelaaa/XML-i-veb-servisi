@@ -73,11 +73,20 @@ public class ZahtevController {
 	}
 	
 	@GetMapping(value = "/userRequests/{username}", produces = MediaType.APPLICATION_XML_VALUE)
-//	@PreAuthorize(hasRole="GRADJANIN")
-	//@CrossOrigin(origins = "http://localhost:8081")
 	public ResponseEntity<List<ZahtevDTO>> userRequests(@PathVariable("username") String username) throws XMLDBException {
-		System.out.println("tu sammm");
 		List<ZahtevDTO> zahteviList = service.findRequestsByUser(username);
+		return new ResponseEntity<List<ZahtevDTO>>(zahteviList, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/allRequests", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZahtevDTO>> allRequests() throws XMLDBException {
+		List<ZahtevDTO> zahteviList = service.findAllRequests();
+		return new ResponseEntity<List<ZahtevDTO>>(zahteviList, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/newRequests", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZahtevDTO>> newRequests() throws XMLDBException {
+		List<ZahtevDTO> zahteviList = service.findNewRequests();
 		return new ResponseEntity<List<ZahtevDTO>>(zahteviList, HttpStatus.OK);
 	}
 	

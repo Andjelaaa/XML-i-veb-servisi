@@ -41,9 +41,9 @@ public class ObavestenjeController {
 	
 	@PostMapping(value = "/create",  produces = MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<Object> makeObavestenje(@RequestBody ObavestenjeDTO dto) throws Exception{
-		if(!validate(dto)) {
-			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
-		}
+//		if(!validate(dto)) {
+//			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
+//		}
 		Obavestenje ob = new Obavestenje(dto);
 		 try {
 			 service.makeObavestenje(ob);

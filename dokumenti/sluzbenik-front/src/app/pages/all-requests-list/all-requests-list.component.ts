@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { RequestDTO } from 'src/app/model/RequestDTO';
 import { RequestService } from 'src/app/services/request-service/request.service';
 
 @Component({
-  selector: 'app-request-list',
-  templateUrl: './request-list.component.html',
-  styleUrls: ['./request-list.component.css']
+  selector: 'app-all-requests-list',
+  templateUrl: './all-requests-list.component.html',
+  styleUrls: ['./all-requests-list.component.css']
 })
-export class RequestListComponent implements OnInit {
+export class AllRequestsListComponent implements OnInit {
 
   public requestList: RequestDTO[] = []; 
   public username: string = '';
@@ -24,19 +23,9 @@ export class RequestListComponent implements OnInit {
     return 'http://localhost:8081/api/zahtev/'+name+'/pdf';
   }
 
-  getUsername(){
-    const token = localStorage.getItem('user') || '';
-    const jwt: JwtHelperService = new JwtHelperService();       
-    const info = jwt.decodeToken(token);
-    this.username = info.sub;
-    console.log(info);
-
-  }
-
   getUserRequests(){
-    this.getUsername();
     const convert = require('xml-js');
-    this.requestService.getUserRequests(this.username).subscribe(
+    this.requestService.getAllRequests().subscribe(
       result => {
         const listObject: any = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         if(listObject.List.item.adresa){
@@ -45,6 +34,7 @@ export class RequestListComponent implements OnInit {
           this.list = listObject.List.item;
           this.requestList = this.list as RequestDTO[];
         }
+        
       },
       error => {
           console.log(error);
@@ -52,4 +42,5 @@ export class RequestListComponent implements OnInit {
     );
 
   }
+
 }

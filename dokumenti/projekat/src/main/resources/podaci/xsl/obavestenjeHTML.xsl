@@ -21,6 +21,10 @@
             	<br></br>
             	<br></br>
             	<div style="text-align:left;">
+            		<xsl:variable name="zahtevURI" select="d:obavestenje/d:zahtev_uri"/>
+            		<p><a href="http://localhost:4200/zahtev/{$zahtevURI}">
+							Referencirani zahtev
+						</a></p>
             		<u><xsl:value-of select="d:obavestenje/d:organ_vlasti/d:naziv_organa_vlasti"/></u>
                     <u><xsl:value-of select="d:obavestenje/d:organ_vlasti/d:sediste_organa"/></u>
                     <p>(naziv i sediste organa)</p>
