@@ -8,6 +8,7 @@ import { RegisterPageComponent } from '../pages/register-page/register-page.comp
 import { RequestPageComponent } from '../pages/request-page/request-page.component';
 import { ObavestenjePrikazComponent } from '../pages/information-review/information-review.component';
 import { ZahtevPrikazComponent } from '../pages/request-review/request-review.component';
+import { RequestListComponent } from '../pages/request-list/request-list.component';
 
 export const routes: Routes = [
     { path: '',
@@ -50,6 +51,12 @@ export const routes: Routes = [
     {
         path: 'zahtev/:id',
         component: ZahtevPrikazComponent,
+       // canActivate: [RoleGuard],
+      //  data: {expectedRoles: 'GRADJANIN'}
+    },
+    {
+        path: 'zahtevpdf',
+        component: RequestListComponent,
        // canActivate: [RoleGuard],
       //  data: {expectedRoles: 'GRADJANIN'}
     }

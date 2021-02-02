@@ -23,7 +23,7 @@ import com.xml.projekat.service.ObavestenjeService;
 
 
 @RestController
-@RequestMapping(value = "api/obavestenje", produces = MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
+@RequestMapping(value = "api/obavestenje")
 public class ObavestenjeController {
 	
 	private ObavestenjeService service;
@@ -33,13 +33,13 @@ public class ObavestenjeController {
 		this.service = service;
 	}
 
-	@PostMapping()
+	@PostMapping( produces = MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<ObavestenjeDTO> parseObavestenje(@RequestBody RetrieveDTO dto) throws Exception{
 		Obavestenje response = service.parseObavestenje(dto);
 		return new ResponseEntity<ObavestenjeDTO>(new ObavestenjeDTO(response), HttpStatus.OK);
 	}
 	
-	@PostMapping(value = "/create")
+	@PostMapping(value = "/create",  produces = MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<Object> makeObavestenje(@RequestBody ObavestenjeDTO dto) throws Exception{
 		if(!validate(dto)) {
 			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
@@ -54,7 +54,7 @@ public class ObavestenjeController {
 		return new ResponseEntity<>(new ObavestenjeDTO(ob),HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value = "/{name}/pdf", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{name}/pdf", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public ResponseEntity<Object> getPdf(@PathVariable("name") String name) throws Exception {
 		
 		Resource resource = service.getPdf(name);

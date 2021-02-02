@@ -22,7 +22,7 @@ import com.xml.poverenik.service.ResenjeService;
 
 
 @RestController
-@RequestMapping(value = "api/resenje", produces =MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
+@RequestMapping(value = "api/resenje")
 public class ResenjeController {
 	private ResenjeService service;
 
@@ -31,7 +31,7 @@ public class ResenjeController {
 		this.service = service;
 	}
 
-	@PostMapping()
+	@PostMapping( produces =MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<ResenjeDTO> parseResenje(@RequestBody RetrieveDTO dto) throws Exception{
 		Resenje response = service.parseResenje(dto);
 		return new ResponseEntity<ResenjeDTO>(new ResenjeDTO(response), HttpStatus.OK);
@@ -43,7 +43,7 @@ public class ResenjeController {
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 	
-	@PostMapping("/create")
+	@PostMapping(value ="/create", produces =MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<Object> createResenje(@RequestBody ResenjeDTO dto) throws Exception{
 		if(!validate(dto)) {
 			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
@@ -59,7 +59,7 @@ public class ResenjeController {
 		return new ResponseEntity<>(new ResenjeDTO(entity),HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value = "/{name}/pdf", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{name}/pdf", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public ResponseEntity<Object> getPdf(@PathVariable("name") String name) throws Exception {
 		
 		Resource resource = service.getPdf(name);
