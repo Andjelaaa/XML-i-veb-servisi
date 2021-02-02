@@ -139,7 +139,7 @@ public class DOMWriter {
 		Element datum = document.createElement("d:datum");
 		datum.setAttribute("property","pred:datum");
 		datum.setAttribute("datatype","xs:string");
-		datum.appendChild(document.createTextNode(formatter.format(resenje.getZaglavlje().getDatum())));
+		datum.appendChild(document.createTextNode(resenje.getZaglavlje().getDatum()));
 
 		zaglavlje.appendChild(brojResenja);
 		zaglavlje.appendChild(document.createTextNode("Datum"));

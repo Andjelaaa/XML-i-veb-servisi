@@ -104,9 +104,10 @@ public class DOMParser {
 
 		String brojResenja = document.getElementsByTagName("broj_resenja").item(0).getTextContent();
 		String datumString = document.getElementsByTagName("datum").item(0).getTextContent();
-
-		Date datum = formatter.parse(datumString.replaceAll("\\s", ""));
-		TZaglavlje zaglavlje = new TZaglavlje(brojResenja, datum);
+//
+//		System.out.println(datumString);
+//		String datum = formatter.format(datumString.replaceAll("\\s", ""));
+		TZaglavlje zaglavlje = new TZaglavlje(brojResenja, datumString);
 
 		String nazivResenja = document.getElementsByTagName("naziv_resenja").item(0).getChildNodes().item(0)
 				.getTextContent();
