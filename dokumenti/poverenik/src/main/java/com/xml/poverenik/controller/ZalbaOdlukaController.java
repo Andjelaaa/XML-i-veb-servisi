@@ -21,7 +21,7 @@ import com.xml.poverenik.model.ZalbaOdluke;
 import com.xml.poverenik.service.ZalbaOdlukaService;
 
 @RestController
-@RequestMapping(value = "api/zalbaodluke", produces = MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
+@RequestMapping(value = "api/zalbaodluke")
 public class ZalbaOdlukaController {
 	private ZalbaOdlukaService service;
 
@@ -30,7 +30,7 @@ public class ZalbaOdlukaController {
 		this.service = service;
 	}
 
-	@PostMapping()
+	@PostMapping( produces =MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<ZalbaOdlukaDTO> parseZalbaOdluke(@RequestBody RetrieveDTO dto) throws Exception{
 		ZalbaOdluke response = service.parseZalbaOdluke(dto);
 		return new ResponseEntity<ZalbaOdlukaDTO>(new ZalbaOdlukaDTO(response), HttpStatus.OK);
@@ -42,7 +42,7 @@ public class ZalbaOdlukaController {
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 	
-	@PostMapping("/create")
+	@PostMapping(value = "/create" ,produces =MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<Object> createZalbaOdluke(@RequestBody ZalbaOdlukaDTO dto) throws Exception{
 //		if(!validate(dto))
 //			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
@@ -59,7 +59,7 @@ public class ZalbaOdlukaController {
 	
 	}
 	
-	@GetMapping(value = "/{name}/pdf", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{name}/pdf", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public ResponseEntity<Object> getPdf(@PathVariable("name") String name) throws Exception {
 		
 		Resource resource = service.getPdf(name);

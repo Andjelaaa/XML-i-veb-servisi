@@ -24,7 +24,7 @@ import com.xml.projekat.service.ZahtevService;
 
 
 @RestController
-@RequestMapping(value = "api/zahtev", produces = MediaType.APPLICATION_XML_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
+@RequestMapping(value = "api/zahtev")
 public class ZahtevController {
 	private ZahtevService service;
 
@@ -33,13 +33,13 @@ public class ZahtevController {
 		this.service = service;
 	}
 
-	@PostMapping()
+	@PostMapping(produces = MediaType.APPLICATION_XML_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<ZahtevDTO> parseZahtev(@RequestBody RetrieveDTO dto) throws Exception{
 		Zahtev response = service.parseZahtev(dto);
 		return new ResponseEntity<ZahtevDTO>(new ZahtevDTO(response), HttpStatus.OK);
 	}
 	
-	@PostMapping("/create")
+	@PostMapping(value ="/create", produces = MediaType.APPLICATION_XML_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<Object> createZahtev(@RequestBody ZahtevDTO dto) throws Exception{
 		if(!validate(dto)) {
 			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);     
@@ -55,7 +55,7 @@ public class ZahtevController {
 		return new ResponseEntity<>(new ZahtevDTO(z),HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value = "/{name}/pdf", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{name}/pdf", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public ResponseEntity<Object> getPdf(@PathVariable("name") String name) throws Exception {
 		Resource resource = service.getPdf(name);
 		

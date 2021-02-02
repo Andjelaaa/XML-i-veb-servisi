@@ -15,6 +15,7 @@ import { InformationPageComponent } from './pages/information-page/information-p
 import { ObavestenjePrikazComponent } from './pages/information-review/information-review.component';
 import { ZahtevPrikazComponent } from './pages/request-review/request-review.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
+import { RequestListComponent } from './pages/request-list/request-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SafeHtmlPipe } from './safe-html.pipe';
     InformationPageComponent,
     ObavestenjePrikazComponent,
     ZahtevPrikazComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    RequestListComponent
   ],
   imports: [
     BrowserModule,
