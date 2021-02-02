@@ -159,7 +159,7 @@ public class Zahtev {
 		return "Zahtev [podnosilac=" + podnosilac + ", adresa=" + adresa + ", drugiPodaciZaKontakt="
 				+ drugiPodaciZaKontakt + ", nazivOrganaVlasti=" + nazivOrganaVlasti + ", sedisteOrgana=" + sedisteOrgana
 				+ ", naslov=" + naslov + ", paragrafi=" + paragrafi + ", trazeneInformacije=" + trazeneInformacije
-				+ ", datum=" + datum + ", mesto=" + mesto + ", fusnote=" + fusnote + "]";
+				+ ", datum=" + datum + ", mesto=" + mesto + ", fusnote=" + fusnote + "URI="+URI+"]";
 	}
 	
 

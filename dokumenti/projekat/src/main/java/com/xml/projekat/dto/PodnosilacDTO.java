@@ -3,7 +3,7 @@ package com.xml.projekat.dto;
 import com.xml.projekat.model.Podnosilac;
 
 public class PodnosilacDTO {
-	private String URI;
+	
 	private String ime;
 	private String prezime;
 	private String nazivFirme;
@@ -38,20 +38,12 @@ public class PodnosilacDTO {
 		this.ime = podnosilac.getIme();
 		this.prezime =  podnosilac.getPrezime();
 		this.nazivFirme = podnosilac.getNazivFirme();
+		this.korisnickoIme = podnosilac.getKorisnickoIme();
 	}
 
 	@Override
 	public String toString() {
 		return "Podnosilac [ime=" + ime + ", prezime=" + prezime + ", nazivFirme=" + nazivFirme + "]";
-	}
-	
-
-	public String getURI() {
-		return URI;
-	}
-
-	public void setURI(String uRI) {
-		URI = uRI;
 	}
 
 	public String getKorisnickoIme() {

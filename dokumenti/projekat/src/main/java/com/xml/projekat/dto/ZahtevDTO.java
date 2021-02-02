@@ -8,6 +8,7 @@ import com.xml.projekat.model.Zahtev;
 
 public class ZahtevDTO {
 	private String text;
+	private String URI;
 	private PodnosilacDTO podnosilac;
 	private AdresaDTO adresa;
 	private String drugiPodaciZaKontakt;
@@ -50,6 +51,7 @@ public class ZahtevDTO {
 	}
 
 	public ZahtevDTO(Zahtev z) {
+		this.URI = z.getURI();
 		this.podnosilac = new PodnosilacDTO(z.getPodnosilac());
 		this.adresa = new AdresaDTO(z.getAdresa());
 		this.drugiPodaciZaKontakt = z.getDrugiPodaciZaKontakt();
@@ -171,6 +173,14 @@ public class ZahtevDTO {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getURI() {
+		return URI;
+	}
+
+	public void setURI(String uRI) {
+		URI = uRI;
 	}
 	
 	

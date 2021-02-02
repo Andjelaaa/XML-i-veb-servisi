@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
-import { ZahtevService } from 'src/app/services/zahtev-service/zahtev.service';
+import { RequestService } from 'src/app/services/request-service/request.service';
 
 @Component({
   selector: 'app-zahtev-prikaz',
@@ -10,7 +10,7 @@ import { ZahtevService } from 'src/app/services/zahtev-service/zahtev.service';
 export class ZahtevPrikazComponent implements OnInit {
   @Input() id: any;
   public html = '';
-  constructor(private zahtevService: ZahtevService,
+  constructor(private requestService: RequestService,
               private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
@@ -19,7 +19,7 @@ export class ZahtevPrikazComponent implements OnInit {
   }
 
   getZahtev(): void{
-    this.zahtevService.toHtml(this.id).subscribe(
+    this.requestService.toHtml(this.id).subscribe(
       (response => {
         if (!response) {
           alert('File not exist or is empty');

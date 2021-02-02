@@ -1,5 +1,10 @@
 package com.xml.projekat.service;
 
+import java.io.IOException;
+import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -7,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.xml.sax.SAXException;
+import org.xmldb.api.base.XMLDBException;
 
 import com.xml.projekat.dom.DOMParser;
 import com.xml.projekat.dom.DOMWriter;
@@ -73,6 +80,11 @@ public class UserService {
 		String documentContent = domWriter.generateUser(t);
         userRepository.save(documentContent, t.getUsername());
 		
+	}
+
+	public List<String> findAll() throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException, ParserConfigurationException, SAXException, IOException {
+		// TODO Auto-generated method stub
+		return userRepository.findAllUsernames();
 	}
 
 }

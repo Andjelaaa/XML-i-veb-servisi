@@ -1,13 +1,14 @@
 package com.xml.projekat.controller;
 
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,6 +70,15 @@ public class ZahtevController {
 	public ResponseEntity<String> getHTML(@PathVariable("name") String name) throws XMLDBException {
 		String result = service.convertXMLtoHTML(name);
 		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/userRequests/{username}", produces = MediaType.APPLICATION_XML_VALUE)
+//	@PreAuthorize(hasRole="GRADJANIN")
+	//@CrossOrigin(origins = "http://localhost:8081")
+	public ResponseEntity<List<ZahtevDTO>> userRequests(@PathVariable("username") String username) throws XMLDBException {
+		System.out.println("tu sammm");
+		List<ZahtevDTO> zahteviList = service.findRequestsByUser(username);
+		return new ResponseEntity<List<ZahtevDTO>>(zahteviList, HttpStatus.OK);
 	}
 	
 

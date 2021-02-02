@@ -1,4 +1,26 @@
 
 <div>
-    <button class="paper_btns" mat-stroked-button color="primary"><a href="{{getHref('1')}}">Open as pdf</a></button>
+    <h2>Vaši zahtevi</h2>
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Organ vlasti</th>
+            <th>Trazene informacije</th>
+            <th>Preuzmi PDF</th>
+            <th>Prikaz zahteva</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let zahtev of list">
+            <td>{{zahtev.datum._text}}</td>
+            <td>{{zahtev.nazivOrganaVlasti._text}} {{zahtev.sedisteOrgana._text}}</td>
+            <td>{{zahtev.trazeneInformacije._text}}</td>
+            <td><button mat-button color="primary"><a href="{{getHref(zahtev.uri._text)}}">Preuzmi PDF</a></button></td>
+            <td><button mat-button color="primary" ><a href="/zahtev/{{zahtev.uri._text}}">Prikaz zahteva</a></button></td>
+        </tr>
+    </tbody>
+
+    </table>
+    
 </div>

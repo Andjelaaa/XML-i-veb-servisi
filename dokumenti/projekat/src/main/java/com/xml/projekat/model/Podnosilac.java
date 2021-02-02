@@ -37,7 +37,7 @@ public class Podnosilac {
 
 	@Override
 	public String toString() {
-		return "Podnosilac [ime=" + ime + ", prezime=" + prezime + ", nazivFirme=" + nazivFirme + "]";
+		return "Podnosilac [ime=" + ime + ", prezime=" + prezime + ", nazivFirme=" + nazivFirme + "korisnicko ime"+korisnickoIme+"]";
 	}
 
 	

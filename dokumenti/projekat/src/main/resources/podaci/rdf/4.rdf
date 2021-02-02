@@ -3,7 +3,7 @@
     <pred:URI xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4</pred:URI>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:korisnicko_ime xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
+    <pred:korisnicko_ime xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jova</pred:korisnicko_ime>
   </rdf:Description>
   <rdf:Description rdf:about="">
     <pred:naziv_organa_vlasti xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SOPV</pred:naziv_organa_vlasti>

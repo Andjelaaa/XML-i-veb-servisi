@@ -3,6 +3,7 @@ package com.xml.projekat.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.w3c.dom.Document;
+import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
@@ -53,6 +54,17 @@ public class ZahtevRepository {
 	
 	public Integer getSize() throws XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return existManager.getCollectionSize(collectionId);
+	}
+	
+	public ResourceSet findZahtevi(String xPathExpression) {
+		ResourceSet result = null;
+		try {
+			result = existManager.retrieve(collectionId, xPathExpression);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

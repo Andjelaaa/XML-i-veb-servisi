@@ -89,21 +89,21 @@ public class DOMParser {
 
 	public Zahtev parseZahtev(Document document) throws IOException {
 
-		String uri = document.getElementsByTagName("URI").item(0).getTextContent();
-		String drugiPodaciZaKontakt = document.getElementsByTagName("drugi_podaci_za_kontakt").item(0).getTextContent();
-		String nazivOrganaVlasti = document.getElementsByTagName("naziv_organa_vlasti").item(0).getTextContent();
-		String sedisteOrgana = document.getElementsByTagName("sediste_organa").item(0).getTextContent();
-		String naslov = document.getElementsByTagName("naslov").item(0).getTextContent();
-		String trazeneInformacije = document.getElementsByTagName("trazene_informacije").item(0).getTextContent();
-		String datum = document.getElementsByTagName("datum").item(0).getTextContent();
-		String mesto = document.getElementsByTagName("mesto").item(0).getTextContent();
-		NodeList fusnote = document.getElementsByTagName("fusnota");
+		String uri = document.getElementsByTagName("d:URI").item(0).getTextContent();
+		String drugiPodaciZaKontakt = document.getElementsByTagName("d:drugi_podaci_za_kontakt").item(0).getTextContent();
+		String nazivOrganaVlasti = document.getElementsByTagName("d:naziv_organa_vlasti").item(0).getTextContent();
+		String sedisteOrgana = document.getElementsByTagName("d:sediste_organa").item(0).getTextContent();
+		String naslov = document.getElementsByTagName("d:naslov").item(0).getTextContent();
+		String trazeneInformacije = document.getElementsByTagName("d:trazene_informacije").item(0).getTextContent();
+		String datum = document.getElementsByTagName("d:datum").item(0).getTextContent();
+		String mesto = document.getElementsByTagName("d:mesto").item(0).getTextContent();
+		NodeList fusnote = document.getElementsByTagName("d:fusnota");
 		ArrayList<String> fusnoteLista = new ArrayList<String>();
 		for (int i = 0; i < fusnote.getLength(); i++) {
 			fusnoteLista.add(fusnote.item(i).getTextContent());
 		}
 
-		NodeList paragrafi = document.getElementsByTagName("p");
+		NodeList paragrafi = document.getElementsByTagName("d:p");
 		ArrayList<PZahtev> paragrafiLista = new ArrayList<PZahtev>();
 		for (int i = 0; i < paragrafi.getLength(); i++) {
 			String paragrafTekst = ((Element) paragrafi.item(i)).getFirstChild().getTextContent();
@@ -115,7 +115,7 @@ public class DOMParser {
 				NodeList izbor = izbori.item(1).getChildNodes();
 				for (int j = 0; j < izbor.getLength(); j++) {
 					if (izbor.item(j) instanceof Element) {
-						String broj = izbor.item(j).getAttributes().getNamedItem("broj").getTextContent();
+						String broj = izbor.item(j).getAttributes().getNamedItem("d:broj").getTextContent();
 						String tekst = izbor.item(j).getFirstChild().getTextContent();
 						HashMap<String, String> podizboriMapa = new HashMap<String, String>();
 						String drugiNacin = null;
@@ -125,14 +125,14 @@ public class DOMParser {
 
 						if (podizbori != null) {
 							Element podizboriEl = (Element) podizbori;
-							NodeList podizbori2 = podizboriEl.getElementsByTagName("podizbor");
+							NodeList podizbori2 = podizboriEl.getElementsByTagName("d:podizbor");
 							for (int k = 0; k < podizbori2.getLength(); k++) {
-								String podizborBroj = podizbori2.item(k).getAttributes().getNamedItem("broj").getTextContent();
+								String podizborBroj = podizbori2.item(k).getAttributes().getNamedItem("d:broj").getTextContent();
 								String podizborString = podizbori2.item(k).getTextContent();
 								podizboriMapa.put(podizborBroj, podizborString);
 							}
 
-							drugiNacin = podizboriEl.getElementsByTagName("drugi_nacin").item(0).getTextContent();
+							drugiNacin = podizboriEl.getElementsByTagName("d:drugi_nacin").item(0).getTextContent();
 
 						}
 
@@ -146,15 +146,15 @@ public class DOMParser {
 			paragrafiLista.add(paragraf);
 		}
 
-		String ulica = document.getElementsByTagName("ulica").item(0).getTextContent();
-		String broj = document.getElementsByTagName("broj").item(0).getTextContent();
-		String grad = document.getElementsByTagName("grad").item(0).getTextContent();
+		String ulica = document.getElementsByTagName("d:ulica").item(0).getTextContent();
+		String broj = document.getElementsByTagName("d:broj").item(0).getTextContent();
+		String grad = document.getElementsByTagName("d:grad").item(0).getTextContent();
 		Adresa adresa = new Adresa(ulica, broj, grad);
 
-		String ime = document.getElementsByTagName("ime").item(0).getTextContent();
-		String prezime = document.getElementsByTagName("prezime").item(0).getTextContent();
-		String nazivFirme = document.getElementsByTagName("naziv_firme").item(0).getTextContent();
-		String korisnickoIme = document.getElementsByTagName("korisnicko_ime").item(0).getTextContent();
+		String ime = document.getElementsByTagName("d:ime").item(0).getTextContent();
+		String prezime = document.getElementsByTagName("d:prezime").item(0).getTextContent();
+		String nazivFirme = document.getElementsByTagName("d:naziv_firme").item(0).getTextContent();
+		String korisnickoIme = document.getElementsByTagName("d:korisnicko_ime").item(0).getTextContent();
 		Podnosilac podnosilac = new Podnosilac(ime, prezime, nazivFirme, korisnickoIme);
 
 		Zahtev z = new Zahtev(podnosilac, adresa, drugiPodaciZaKontakt, nazivOrganaVlasti, sedisteOrgana, naslov,

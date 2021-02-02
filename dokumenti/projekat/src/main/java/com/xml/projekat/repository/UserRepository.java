@@ -71,7 +71,6 @@ public class UserRepository {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(foundUser.getUsername());
 		return foundUser;
 	}
 
