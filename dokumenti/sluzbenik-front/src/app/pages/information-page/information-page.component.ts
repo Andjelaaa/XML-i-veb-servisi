@@ -21,6 +21,7 @@ export class InformationPageComponent implements OnInit, AfterViewInit{
       // mozda podesavanje parametara od kog je usera
   }
   ngAfterViewInit(): void {
+    //podatke o podnosiocu dobija iz zahteva
     const element = document.getElementById('obavestenje');
     const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
     <obavestenje>
@@ -48,7 +49,8 @@ export class InformationPageComponent implements OnInit, AfterViewInit{
     тражену информацију и о изради копије
     </naslov>
     <nazivOrganaVlasti>NOV</nazivOrganaVlasti>
-    <pobavestenjeDTO>
+    <sedisteOrgana>Novi Sad</sedisteOrgana>
+    <paragrafi>
     <element>
     <brojKancelarije>12</brojKancelarije>
     <brojZgrade>31</brojZgrade>
@@ -62,14 +64,13 @@ export class InformationPageComponent implements OnInit, AfterViewInit{
     <trazenaInformacija>ZELIM OBAVESTENJE</trazenaInformacija>
     <ulica>Jovan Jovanovic Zmaj</ulica>
     </element>
-    </pobavestenjeDTO>
+    </paragrafi>
     <podnosilac>
     <ime>Jova</ime>
     <nazivFirme>Firma doo</nazivFirme>
     <prezime>Jovic</prezime>
     <korisnickoIme>Jocy</korisnickoIme>
     </podnosilac>
-    <sedisteOrgana>Novi Sad</sedisteOrgana>
     <text null="true" />
     </obavestenje>`;
     Xonomy.setMode('laic');

@@ -19,63 +19,27 @@ export class XonomyInformationService {
     ) {}
 
     public informationSpecification = {
-          elements: {
-            obavestenje: {
-                zahtevURI: {},
-                adresa: {
-                    ulica : {
-                        attributes: {
-                          property: {
-                            isInvisible: true
-                          }
-                        },
-                        hasText: true,
-                        asker: Xonomy.askString
-                      },
-                       broj: {
-                        attributes: {
-                          property: {
-                            isInvisible: true,
-                          }
-                        },
-                        hasText: true,
-                        asker: Xonomy.askString
-                      },
-                      grad: {
-                        attributes: {
-                          property: {
-                            isInvisible: true,
-                          }
-                        },
-                        hasText: true,
-                        asker: Xonomy.askString
-                      },
-                    },
-                brojPredmeta: {},
-                datum: {},
-                nazivOrganaVlasti: {},
-                sedisteOrgana: {},
-                podnosilac: {
-                        title: 'Podnosilac zahteva',
-                      },
-                      korisnickoIme: {
-                        title: 'Unesi korisnicko ime',
-                        hasText: true,
-                        asker: Xonomy.askString
-                      },
-                      ime : {
-
-                      },
-                       prezime: {
-                        attributes: {
-                          property: {
-                            isInvisible: true
-                          }
-                        },
-                        hasText: true,
-                        asker: Xonomy.askString
-                      },
-                    }
-                },
+      elements: {
+        zahtevURI: {
+          isReadOnly : true
+        },
+        adresa: {},
+        ulica : {},
+        broj: {},
+        grad: {},
+        brojPredmeta: {},
+        datum: {},
+        nazivOrganaVlasti: {},
+        sedisteOrgana: {},
+        podnosilac: {
+          title: 'Podnosilac zahteva',
+        },
+        korisnickoIme: {
+          title: 'Unesi korisnicko ime',
+        },
+        ime : {},
+        prezime: {}
+  
+      }
     };
 }

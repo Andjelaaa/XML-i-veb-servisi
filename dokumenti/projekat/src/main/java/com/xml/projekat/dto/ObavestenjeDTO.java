@@ -24,7 +24,7 @@ public class ObavestenjeDTO {
 	private String brojPredmeta;
 
 	private String mestoPecata;
-	private ArrayList<PObavestenjeDTO> pobavestenjeDTO;
+	private ArrayList<PObavestenjeDTO> paragrafi;
 
 	
 	public ObavestenjeDTO() {
@@ -54,7 +54,7 @@ public class ObavestenjeDTO {
 		this.naslov = naslov;
 		this.brojPredmeta = brojPredmeta;
 		this.mestoPecata = mestoPecata;
-		this.pobavestenjeDTO = PObavestenjeDTO.konverter(pobavestenje);
+		this.paragrafi = PObavestenjeDTO.konverter(pobavestenje);
 		
 	}
 	
@@ -70,7 +70,7 @@ public class ObavestenjeDTO {
 		this.naslov = naslov;
 		this.brojPredmeta = brojPredmeta;
 		this.mestoPecata = mestoPecata;
-		this.pobavestenjeDTO = PObavestenjeDTO.konverter(pobavestenje);
+		this.paragrafi = PObavestenjeDTO.konverter(pobavestenje);
 		this.text = text;		
 	}
 	
@@ -164,12 +164,14 @@ public class ObavestenjeDTO {
 	}
 
 
-	public ArrayList<PObavestenjeDTO> getPobavestenjeDTO() {
-		return pobavestenjeDTO;
+
+
+	public ArrayList<PObavestenjeDTO> getParagrafi() {
+		return paragrafi;
 	}
 
-	public void setPobavestenjeDTO(ArrayList<PObavestenjeDTO> pobavestenjeDTO) {
-		this.pobavestenjeDTO = pobavestenjeDTO;
+	public void setParagrafi(ArrayList<PObavestenjeDTO> paragrafi) {
+		this.paragrafi = paragrafi;
 	}
 
 	public String getText() {
@@ -184,7 +186,7 @@ public class ObavestenjeDTO {
 		return "ObavestenjeDTO [podnosilac=" + podnosilac + ", adresa=" + adresa + ", nazivOrganaVlasti="
 				+ nazivOrganaVlasti + ", sedisteOrgana=" + sedisteOrgana + ", dostavljeno=" + dostavljeno + ", datum="
 				+ datum + ", naslov=" + naslov + ", brojPredmeta=" + brojPredmeta + ", mestoPecata=" + mestoPecata
-				+ "\n, klasa sa atributima =" + pobavestenjeDTO +  "]";
+				+ "\n, klasa sa atributima =" + paragrafi +  "]";
 	}
 
 

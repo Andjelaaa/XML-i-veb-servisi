@@ -114,7 +114,7 @@ public class ObavestenjeController {
 				|| dto.getAdresa().getBroj() == null || dto.getAdresa().getBroj().trim().equals("") ||
 						dto.getAdresa().getGrad() == null || dto.getAdresa().getGrad().trim().equals(""))
 			return false;
-		if(dto.getPobavestenjeDTO() == null || dto.getPobavestenjeDTO().size() == 0)
+		if(dto.getParagrafi() == null || dto.getParagrafi().size() == 0)
 			return false;
 		return true;
 	}

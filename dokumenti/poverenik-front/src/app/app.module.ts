@@ -11,6 +11,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './interceptors/intercept.service';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ToastrModule } from 'ngx-toastr';
+import { AppealSilencePageComponent } from './pages/appeal-silence-page/appeal-silence-page.component';
+import { AppealDecisionPageComponent } from './pages/appeal-decision-page/appeal-decision-page.component';
+import { DecisionPageComponent } from './pages/decision-page/decision-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { ToastrModule } from 'ngx-toastr';
     LoginPageComponent,
     RegisterPageComponent,
     HomePageComponent,
-    NavbarGradjaninComponent
+    NavbarGradjaninComponent,
+    AppealSilencePageComponent,
+    AppealDecisionPageComponent,
+    DecisionPageComponent
   ],
   imports: [
     BrowserModule,

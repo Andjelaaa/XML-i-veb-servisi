@@ -55,7 +55,7 @@ public class Obavestenje {
 		this.brojPredmeta = dto.getBrojPredmeta();
 		this.paragrafi = new ArrayList<PObavestenje>();
 		
-		for(PObavestenjeDTO po: dto.getPobavestenjeDTO()) {
+		for(PObavestenjeDTO po: dto.getParagrafi()) {
 			PObavestenje p = new PObavestenje(po);
 			this.paragrafi.add(p);
 		}		

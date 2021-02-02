@@ -133,7 +133,6 @@ export class XonomyRequestService {
           ]
         },
         tekst: {
-          isReadOnly: true,
           oneliner: true,
           asker: Xonomy.askPicklist,
           askerParameter: ["obaveštenje da li poseduje traženu informaciju", "uvid u dokument koji sadrži traženu informaciju", "kopiju dokumenta koji sadrži traženu informaciju", "dostavljanje kopije dokumenta koji sadrži traženu informaciju"]
