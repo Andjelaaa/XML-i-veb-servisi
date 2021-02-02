@@ -65,6 +65,7 @@ export class RequestPageComponent implements OnInit, AfterViewInit{
        <ime>Marko</ime>
        <nazivFirme>FIRMA doo</nazivFirme>
        <prezime>Markovic</prezime>
+       <korisnickoIme>jova</korisnickoIme>
     </podnosilac>
     <sedisteOrgana>Novi Sad</sedisteOrgana>
     <trazeneInformacije>Zahtev za dokument </trazeneInformacije>

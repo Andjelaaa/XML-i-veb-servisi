@@ -1,14 +1,16 @@
 package com.xml.projekat.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.xml.sax.SAXException;
 import org.xmldb.api.base.XMLDBException;
 
 import com.xml.projekat.dto.RetrieveDTO;
+import com.xml.projekat.dto.SearchDTO;
 import com.xml.projekat.dto.ZahtevDTO;
 import com.xml.projekat.model.Zahtev;
 import com.xml.projekat.service.ZahtevService;
@@ -88,6 +92,18 @@ public class ZahtevController {
 	public ResponseEntity<List<ZahtevDTO>> newRequests() throws XMLDBException {
 		List<ZahtevDTO> zahteviList = service.findNewRequests();
 		return new ResponseEntity<List<ZahtevDTO>>(zahteviList, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/searchRequests/{search}", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZahtevDTO>> searchRequests(@PathVariable("search") String search) throws XMLDBException, SAXException, IOException, ParserConfigurationException {
+		List<ZahtevDTO> zahteviList = service.findRequestsByContent(search);
+		return new ResponseEntity<List<ZahtevDTO>>(zahteviList, HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/searchByMetadata", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZahtevDTO>> searchByMetadata(@RequestBody SearchDTO dto) throws IOException {
+		List<ZahtevDTO> result = service.searhByMetadata(dto);
+		return new ResponseEntity<List<ZahtevDTO>>(result, HttpStatus.OK);
 	}
 	
 

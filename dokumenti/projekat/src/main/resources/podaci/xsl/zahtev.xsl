@@ -35,81 +35,39 @@
 
 
 						<fo:list-block margin-left="20px">
-						<fo:list-item>
-						 <fo:list-item-label>
-						   <fo:block>-</fo:block>
-						 </fo:list-item-label>
-						 <fo:list-item-body>
-						   <fo:block>  obaveštenje da li poseduje traženu informaciju;</fo:block>
-						 </fo:list-item-body>
-						</fo:list-item>
-						<fo:list-item>
-						 <fo:list-item-label>
-						   <fo:block>-</fo:block>
-						 </fo:list-item-label>
-						 <fo:list-item-body>
-						   <fo:block>  uvid u dokument koji sadrži traženu informaciju;</fo:block>
-						 </fo:list-item-body>
-						</fo:list-item>
+							<xsl:for-each select="d:zahtev/d:tekst_zahteva/d:p">
+								<xsl:choose>
+									<xsl:when test="d:izbori">
+										<xsl:for-each select="d:izbori/d:izbor">
+											<fo:list-item>
+											 <fo:list-item-label>
+											   <fo:block>-<xsl:text>  </xsl:text></fo:block>
+											 </fo:list-item-label>
+											 <fo:list-item-body>
+											   <fo:block><xsl:value-of select="text()"></xsl:value-of></fo:block>
+											 </fo:list-item-body>
+											</fo:list-item>
+											<xsl:choose>
+											<xsl:when test="d:podizbori">
+												<fo:list-item>
+											 <fo:list-item-label>
+											   <fo:block><xsl:text>  </xsl:text>-<xsl:text>  </xsl:text></fo:block>
+											 </fo:list-item-label>
+											 <fo:list-item-body>
+											   <fo:block><xsl:value-of select="d:podizbori/d:podizbor"></xsl:value-of></fo:block>
+											 </fo:list-item-body>
+											</fo:list-item>
+											</xsl:when>
+											</xsl:choose>
+										</xsl:for-each>
+									</xsl:when>
+			
+								</xsl:choose>
+							</xsl:for-each>
 						
-						<fo:list-item>
-						 <fo:list-item-label>
-						   <fo:block>-</fo:block>
-						 </fo:list-item-label>
-						 <fo:list-item-body>
-						   <fo:block>  kopiju dokumenta koji sadrži traženu informaciju;</fo:block>
-						 </fo:list-item-body>
-						</fo:list-item>
 						
-						<fo:list-item>
-						 <fo:list-item-label>
-						   <fo:block>-</fo:block>
-						 </fo:list-item-label>
-						 <fo:list-item-body>
-						   <fo:block>  dostavljanje kopije dokumenta koji sadrži traženu informaciju:**</fo:block>
-						   
-						   
-								<fo:list-block margin-left="50px">
-								<fo:list-item>
-								 <fo:list-item-label>
-								   <fo:block>-</fo:block>
-								 </fo:list-item-label>
-								 <fo:list-item-body>
-								   <fo:block> poštom</fo:block>
-								 </fo:list-item-body>
-								</fo:list-item>
-								<fo:list-item>
-								 <fo:list-item-label>
-								   <fo:block>-</fo:block>
-								 </fo:list-item-label>
-								 <fo:list-item-body>
-								   <fo:block>elektronskom poštom</fo:block>
-								 </fo:list-item-body>
-								</fo:list-item>
-								
-								<fo:list-item>
-								 <fo:list-item-label>
-								   <fo:block>-</fo:block>
-								 </fo:list-item-label>
-								<fo:list-item-body>
-								   <fo:block>faksom</fo:block>
-								 </fo:list-item-body>
-								</fo:list-item>
-								
-								<fo:list-item>
-								 <fo:list-item-label>
-								   <fo:block>-</fo:block>
-								 </fo:list-item-label>
-								<fo:list-item-body>
-								   <fo:block>na drugi nacin:*** <fo:inline text-decoration="underline">
-						<xsl:text > 				</xsl:text>
-						</fo:inline></fo:block>
-								 </fo:list-item-body>
-								</fo:list-item>
-								
-								</fo:list-block>
-						 </fo:list-item-body>
-						</fo:list-item>
+						
+						
 						</fo:list-block>
 
 						Ovaj zahtev se odnosi na sledece informacije:

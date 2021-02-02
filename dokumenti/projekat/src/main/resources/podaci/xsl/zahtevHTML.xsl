@@ -34,17 +34,24 @@
                 </p>
                 
                 <ul margin-left="20px">
-						<li> obavestenje da li poseduje trazenu informaciju;</li>
-						<li>  uvid u dokument koji sadrzi trazenu informaciju;</li>
-						<li>  kopiju dokumenta koji sadrzi trazenu informaciju;</li>
-						<li>  dostavljanje kopije dokumenta koji sadrzi trazenu informaciju:**</li>
-						   
-						   <ul>
-						   		<li>postom</li>
-								<li>elektronskom postom</li>
-								<li>faksom</li>
-								<li>na drugi nacin:***________________________</li>						   
-						   </ul>
+	                <xsl:for-each select="d:zahtev/d:tekst_zahteva/d:p">
+					<xsl:choose>
+						<xsl:when test="d:izbori">
+							<xsl:for-each select="d:izbori/d:izbor">
+								<li><xsl:value-of select="text()"></xsl:value-of></li>
+								<xsl:choose>
+								<xsl:when test="d:podizbori">
+									<ul>
+									<li><xsl:value-of select="d:podizbori/d:podizbor"></xsl:value-of></li>
+									</ul>
+								</xsl:when>
+								</xsl:choose>
+							</xsl:for-each>
+						</xsl:when>
+
+					</xsl:choose>
+				</xsl:for-each>
+
 				</ul>
 				<span>Ovaj zahtev se odnosi na sledece informacije: </span>
 				 <u><xsl:value-of select="d:zahtev/d:tekst_zahteva/d:trazene_informacije"/></u>

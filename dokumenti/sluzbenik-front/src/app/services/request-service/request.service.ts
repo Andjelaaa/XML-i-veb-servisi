@@ -25,6 +25,16 @@ getUserRequests(username: string): Observable<any> {
 
 }
 
+getSearchRequests(search: string): Observable<any> {
+  return this.http.get(`${environment.baseUrl}/api/zahtev/searchRequests/${search}`,
+     {headers: this.headers, responseType: 'text'});
+
+}
+getMetadataSearchRequests(search: any): Observable<any> {
+  return this.http.post(`${environment.baseUrl}/api/zahtev/searchByMetadata`, search,
+     {headers: this.headers, responseType: 'text'});
+}
+
 toHtml(id: String){
   const headersJson = new HttpHeaders({
     'Content-Type': 'application/json'});

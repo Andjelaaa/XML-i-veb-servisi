@@ -465,7 +465,7 @@ public class DOMWriter {
 		tekstZahteva.appendChild(naslov);
 
 		for (int i = 0; i < z.getParagrafi().size(); i++) {
-			Element paragraf = document.createElement("p");
+			Element paragraf = document.createElement("d:p");
 			if (z.getParagrafi().get(i).getIzbori().size() == 0) {
 				paragraf.appendChild(document.createTextNode(z.getParagrafi().get(i).getText()));
 			} else {
@@ -474,7 +474,7 @@ public class DOMWriter {
 				for (int j = 0; j < z.getParagrafi().get(i).getIzbori().size(); j++) {
 					Element izbor = document.createElement("d:izbor");
 					izbor.appendChild(document.createTextNode(z.getParagrafi().get(i).getIzbori().get(j).getTekst()));
-					izbor.setAttribute("broj", Integer.toString(j + 1));
+					izbor.setAttribute("d:broj", Integer.toString(j + 1));
 					if (z.getParagrafi().get(i).getIzbori().get(j).getPodizbori() != null) {
 						Element podizbori = document.createElement("d:podizbori");
 						izbor.appendChild(podizbori);

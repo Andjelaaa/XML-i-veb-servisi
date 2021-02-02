@@ -132,7 +132,6 @@ public class DOMParser {
 								podizboriMapa.put(podizborBroj, podizborString);
 							}
 
-							drugiNacin = podizboriEl.getElementsByTagName("d:drugi_nacin").item(0).getTextContent();
 
 						}
 
@@ -160,7 +159,7 @@ public class DOMParser {
 		Zahtev z = new Zahtev(podnosilac, adresa, drugiPodaciZaKontakt, nazivOrganaVlasti, sedisteOrgana, naslov,
 				paragrafiLista, trazeneInformacije, datum, mesto, fusnoteLista);
 		z.setURI(uri);
-		System.out.println(z);
+		//System.out.println(z);
 		FusekiReader.executeQuery("/zahtevi");
 		return z;
 	}
