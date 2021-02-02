@@ -38,7 +38,6 @@ import com.xml.projekat.rdf.FusekiReader;
 import com.xml.projekat.repository.ObavestenjeRepository;
 import com.xml.projekat.repository.ZahtevRepository;
 
-import net.sf.saxon.expr.instruct.ForEach;
 
 @Service
 public class ZahtevService {
