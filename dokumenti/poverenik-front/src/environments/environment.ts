@@ -7,7 +7,10 @@ export const environment = {
     baseUrl: 'http://localhost:8082',
     login: 'api/user/login',
     signOut:  'api/user/sign-out',
+    decision:  'api/resenje/create',
     register:  'api/user/register',
+    appealSilence:  'api/zalba_cutanje/create',
+    appealDecision:  'api/zalba_odluke/create',
 };
 
 /*

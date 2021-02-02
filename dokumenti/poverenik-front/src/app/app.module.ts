@@ -14,6 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppealSilencePageComponent } from './pages/appeal-silence-page/appeal-silence-page.component';
 import { AppealDecisionPageComponent } from './pages/appeal-decision-page/appeal-decision-page.component';
 import { DecisionPageComponent } from './pages/decision-page/decision-page.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { DecisionPageComponent } from './pages/decision-page/decision-page.compo
     ToastrModule.forRoot(),
     MaterialModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true}, DatePipe],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })

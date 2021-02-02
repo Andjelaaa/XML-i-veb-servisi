@@ -21,7 +21,7 @@ import com.xml.poverenik.model.ZalbaOdluke;
 import com.xml.poverenik.service.ZalbaOdlukaService;
 
 @RestController
-@RequestMapping(value = "api/zalbaodluke")
+@RequestMapping(value = "api/zalba_odluke")
 public class ZalbaOdlukaController {
 	private ZalbaOdlukaService service;
 
