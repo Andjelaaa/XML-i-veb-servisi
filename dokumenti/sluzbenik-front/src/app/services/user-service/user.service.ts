@@ -29,4 +29,9 @@ export class UserService {
         return this.http.post(`${environment.baseUrl}/${environment.register}`,
          registerData, {headers: this.headers, responseType: 'text'});
     }
+    soap(): Observable<any>{
+        return this.http.post(`${environment.baseUrl}/app/soap/hello`,
+         {headers: this.headers, responseType: 'text'});
+    }
+
 }

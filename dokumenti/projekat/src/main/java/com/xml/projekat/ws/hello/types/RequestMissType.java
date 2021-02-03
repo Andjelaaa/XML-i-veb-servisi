@@ -1,4 +1,4 @@
-package com.xml.projekat.soap.ws.hello.types;
+package com.xml.projekat.ws.hello.types;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -16,8 +16,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &amp;lt;complexContent&amp;gt;
  *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
  *       &amp;lt;sequence&amp;gt;
- *         &amp;lt;element name="FirstName" type="{http://soap.spring.com/ws/hello/types}NameType"/&amp;gt;
- *         &amp;lt;element name="LastName" type="{http://soap.spring.com/ws/hello/types}NameType"/&amp;gt;
+ *         &amp;lt;element name="FirstName" type="{http://projekat.xml.com/ws/hello/types}NameType"/&amp;gt;
+ *         &amp;lt;element name="LastName" type="{http://projekat.xml.com/ws/hello/types}NameType"/&amp;gt;
  *       &amp;lt;/sequence&amp;gt;
  *     &amp;lt;/restriction&amp;gt;
  *   &amp;lt;/complexContent&amp;gt;
