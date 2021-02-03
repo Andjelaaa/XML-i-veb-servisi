@@ -1,8 +1,11 @@
 package com.xml.poverenik.controller;
 
-import java.util.Date;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -15,11 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.xml.sax.SAXException;
 import org.xmldb.api.base.XMLDBException;
 
 import com.xml.poverenik.dto.ResenjeDTO;
 import com.xml.poverenik.dto.RetrieveDTO;
-import com.xml.poverenik.dto.ZalbaCutanjeDTO;
+import com.xml.poverenik.dto.SearchResenjeDTO;
 import com.xml.poverenik.model.Resenje;
 import com.xml.poverenik.service.ResenjeService;
 
@@ -80,6 +84,18 @@ public class ResenjeController {
 	public ResponseEntity<List<ResenjeDTO>> getAll() throws XMLDBException {
 		List<ResenjeDTO> resenjaList = service.findAllDecisions();
 		return new ResponseEntity<List<ResenjeDTO>>(resenjaList, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/searchRequests/{search}", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ResenjeDTO>> searchRequests(@PathVariable("search") String search) throws XMLDBException, SAXException, IOException, ParserConfigurationException, ParseException {
+		List<ResenjeDTO> zalbeList = service.findDecisionsByContent(search);
+		return new ResponseEntity<List<ResenjeDTO>>(zalbeList, HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/searchByMetadata", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ResenjeDTO>> searchByMetadata(@RequestBody SearchResenjeDTO dto) throws IOException {
+		List<ResenjeDTO> result = service.searhByMetadata(dto);
+		return new ResponseEntity<List<ResenjeDTO>>(result, HttpStatus.OK);
 	}
 
 	private boolean validate(ResenjeDTO dto) {

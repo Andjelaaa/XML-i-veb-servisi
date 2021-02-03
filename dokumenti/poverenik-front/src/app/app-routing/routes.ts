@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { LoginGuard } from '../guards/login/login.service';
 import { RoleGuard } from '../guards/role/role.service';
+import { AllAppealDecisionListComponent } from '../pages/all-appeal-decision-list/all-appeal-decision-list.component';
+import { AllAppealSilenceListComponent } from '../pages/all-appeal-silence-list/all-appeal-silence-list.component';
 import { AllDecisionListComponent } from '../pages/all-decision-list/all-decision-list.component';
 import { AppealDecisionListComponent } from '../pages/appeal-decision-list/appeal-decision-list.component';
 import { AppealDecisionPageComponent } from '../pages/appeal-decision-page/appeal-decision-page.component';
@@ -13,6 +15,8 @@ import { DecisionPageComponent } from '../pages/decision-page/decision-page.comp
 import { DecisionReviewComponent } from '../pages/decision-review/decision-review.component';
 import { HomePageComponent } from '../pages/home-page/home-page.component';
 import { LoginPageComponent } from '../pages/login-page/login-page.component';
+import { NewAppealDecisionListComponent } from '../pages/new-appeal-decision-list/new-appeal-decision-list.component';
+import { NewAppealSilenceListComponent } from '../pages/new-appeal-silence-list/new-appeal-silence-list.component';
 import { RegisterPageComponent } from '../pages/register-page/register-page.component';
 
 export const routes: Routes = [
@@ -94,5 +98,30 @@ export const routes: Routes = [
     component: AllDecisionListComponent,
   //  canActivate: [RoleGuard],
   //  data: {expectedRoles: 'GRADJANIN'}
+  },
+  {
+    path: 'all_appeal_decision',
+    component: AllAppealDecisionListComponent,
+  //  canActivate: [RoleGuard],
+  //  data: {expectedRoles: 'GRADJANIN'}
+  },
+  {
+    path: 'all_appeal_silence',
+    component: AllAppealSilenceListComponent,
+  //  canActivate: [RoleGuard],
+  //  data: {expectedRoles: 'GRADJANIN'}
+  },
+  {
+    path: 'new_appeal_decision',
+    component: NewAppealDecisionListComponent,
+  //  canActivate: [RoleGuard],
+  //  data: {expectedRoles: 'GRADJANIN'}
+  },
+  {
+    path: 'new_appeal_silence',
+    component: NewAppealSilenceListComponent,
+  //  canActivate: [RoleGuard],
+  //  data: {expectedRoles: 'GRADJANIN'}
   }
+
 ];

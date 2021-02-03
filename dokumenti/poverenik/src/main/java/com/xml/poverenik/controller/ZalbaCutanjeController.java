@@ -1,7 +1,10 @@
 package com.xml.poverenik.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -14,9 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.xml.sax.SAXException;
 import org.xmldb.api.base.XMLDBException;
 
 import com.xml.poverenik.dto.RetrieveDTO;
+import com.xml.poverenik.dto.SearchDTO;
 import com.xml.poverenik.dto.ZalbaCutanjeDTO;
 import com.xml.poverenik.dto.ZalbaOdlukaDTO;
 import com.xml.poverenik.model.ZalbaCutanje;
@@ -77,6 +82,25 @@ public class ZalbaCutanjeController {
 		List<ZalbaCutanjeDTO> zalbeList = service.findAllAppeal();
 		return new ResponseEntity<List<ZalbaCutanjeDTO>>(zalbeList, HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/new", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZalbaCutanjeDTO>> getNew() throws XMLDBException {
+		List<ZalbaCutanjeDTO> zalbeList = service.findNewAppeal();
+		return new ResponseEntity<List<ZalbaCutanjeDTO>>(zalbeList, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/searchRequests/{search}", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZalbaCutanjeDTO>> searchRequests(@PathVariable("search") String search) throws XMLDBException, SAXException, IOException, ParserConfigurationException {
+		List<ZalbaCutanjeDTO> zalbeList = service.findAppealsByContent(search);
+		return new ResponseEntity<List<ZalbaCutanjeDTO>>(zalbeList, HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/searchByMetadata", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZalbaCutanjeDTO>> searchByMetadata(@RequestBody SearchDTO dto) throws IOException {
+		List<ZalbaCutanjeDTO> result = service.searhByMetadata(dto);
+		return new ResponseEntity<List<ZalbaCutanjeDTO>>(result, HttpStatus.OK);
+	}
+	
 	private boolean validate(ZalbaCutanjeDTO dto) {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd");

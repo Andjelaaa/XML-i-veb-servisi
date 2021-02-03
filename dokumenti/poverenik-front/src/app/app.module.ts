@@ -23,6 +23,10 @@ import { AppealDecisionListComponent } from './pages/appeal-decision-list/appeal
 import { AppealSilenceListComponent } from './pages/appeal-silence-list/appeal-silence-list.component';
 import { DecisionListComponent } from './pages/decision-list/decision-list.component';
 import { AllDecisionListComponent } from './pages/all-decision-list/all-decision-list.component';
+import { NewAppealSilenceListComponent } from './pages/new-appeal-silence-list/new-appeal-silence-list.component';
+import { NewAppealDecisionListComponent } from './pages/new-appeal-decision-list/new-appeal-decision-list.component';
+import { AllAppealDecisionListComponent } from './pages/all-appeal-decision-list/all-appeal-decision-list.component';
+import { AllAppealSilenceListComponent } from './pages/all-appeal-silence-list/all-appeal-silence-list.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { AllDecisionListComponent } from './pages/all-decision-list/all-decision
     AppealDecisionListComponent,
     AppealSilenceListComponent,
     DecisionListComponent,
-    AllDecisionListComponent
+    AllDecisionListComponent,
+    AllAppealDecisionListComponent,
+    AllAppealSilenceListComponent,
+    NewAppealSilenceListComponent,
+    NewAppealDecisionListComponent
   ],
   imports: [
     BrowserModule,

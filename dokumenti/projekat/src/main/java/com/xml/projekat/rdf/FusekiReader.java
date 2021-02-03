@@ -82,7 +82,6 @@ public class FusekiReader {
 		
 		String sparqlQueryTemplate = readFile(QUERY_FILEPATH, StandardCharsets.UTF_8);
 		System.out.println("Query: " + sparqlQueryTemplate);
-		System.out.println(params.get("URI")+"LALALALALA");
 		String sparqlQuery = StringSubstitutor.replace(sparqlQueryTemplate, params, "{{", "}}");
 		System.out.println("Query: " + sparqlQuery);
 		

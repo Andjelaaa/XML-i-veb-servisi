@@ -6,8 +6,10 @@
             <th>Datum</th>
             <th>Organ vlasti</th>
             <th>Poverenik</th>
+            <th>Podnosilac zalbe</th>
             <th>Preuzmi PDF</th>
             <th>Prikaz zalbe</th>
+            <th>Napisi resenje</th>
         </tr>
     </thead>
     <tbody>
@@ -15,8 +17,10 @@
             <td>{{zalba.datumZalbe._text}}</td>
             <td>{{zalba.paragrafi.paragrafi[0].nazivOrgana._text}}</td>
             <td>{{zalba.nazivPoverenika._text}}</td>
+            <td>{{zalba.podnosilac.ime._text}} {{zalba.podnosilac.prezime._text}}</td>
             <td><button mat-button color="primary"><a href="{{getHref(zalba.uri._text)}}">Preuzmi PDF</a></button></td>
             <td><button mat-button color="primary" ><a href="/appeal_silence_review/{{zalba.uri._text}}">Prikaz zalbe</a></button></td>
+            <td><button mat-button color="primary" ><a href="/make_decision/c{{zalba.uri._text}}">Napisi resenje</a></button></td>
         </tr>
     </tbody>
 

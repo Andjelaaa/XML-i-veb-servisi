@@ -1,43 +1,63 @@
-<div>
-  <div>
-    <button>
-        Pretraga
-    </button>
-  </div>
-  <div>
-    <button>
-        Napredna pretraga
-     </button>
-</div>
-<div>
-    <button  [routerLink]="['/make_decision']">
-        Novo resenje 
+<div class="main">
+  <div class="second">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <button *ngIf ="type==='POVERENIK'" [routerLink]="['/new_appeal_decision']">
+        Pregled pristiglih žalbi na odluku
       </button>
-</div>
-<div>
-    <button  [routerLink]="['/make_appeal_silence']">
-        Nova zalba cutanja 
+      <br>
+      <br>
+    <button *ngIf ="type==='POVERENIK'" [routerLink]="['/new_appeal_silence']">
+        Pregled pristiglih žalbi na ćutanje
       </button>
-</div>
-<div>
-    <button  [routerLink]="['/make_appeal_decision']">
-        Nova zalba odluke 
+      <br>
+      <br>
+      <button *ngIf ="type==='POVERENIK'" [routerLink]="['/all_appeal_decision']">
+        Istorija žalbi na odluku
       </button>
-</div>
-<div>
-    <button>
-        Pregled svih primljenih/poslatih dokumenata(info)
+      <br>
+      <br>
+      <button *ngIf ="type==='POVERENIK'" [routerLink]="['/all_appeal_silence']">
+        Istorija žalbi na ćutanje
       </button>
-</div>
-<div>
-    <button>
-        Pregled pristiglih zahteva
+      <br>
+      <br>
+      <button *ngIf ="type==='POVERENIK'" [routerLink]="['/all_decision']">
+        Istorija rešenja
       </button>
-</div>
-<div>
-    <button>
-        Pregled svih primljenih/poslatih dokumenata(info)
+      <br>
+      <br>
+      <button *ngIf ="type==='GRADJANIN'" [routerLink]="['/make_appeal_silence']">
+          Nova žalba cutanja 
       </button>
-</div>
+      <br>
+      <br>
+      <button *ngIf ="type==='GRADJANIN'" [routerLink]="['/make_appeal_decision']">
+          Nova žalba odluke 
+      </button>
+      <br>
+      <br>
+      <button *ngIf ="type==='GRADJANIN'" [routerLink]="['/user_appeal_decision']">
+        Istorija žalbi na odluku 
+      </button>
+      <br>
+      <br>
+      <button *ngIf ="type==='GRADJANIN'" [routerLink]="['/user_appeal_silence']">
+        Istorija žalbi na ćutanje
+      </button>
+      <br>
+      <br>
+      <button *ngIf ="type==='GRADJANIN'" [routerLink]="['/user_decision']">
+        Istorija rešenja 
+      </button>
   
+      
+  
+    
+  </div>
+  
+
 </div>

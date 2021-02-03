@@ -1,5 +1,21 @@
 <div>
     <h2>Resenja</h2>
+    <input matInput placeholder="Unesite kljucnu rec ili frazu za pretragu" [(ngModel)]="searchInput"/>
+
+    <button mat-raised-button (click)="search()">Pretrazi</button>
+    <button mat-button (click)="getAllDecision()">
+        <span class="material-icons black-colored-icon">
+            refresh
+            </span>
+    </button>
+    <br>
+    <input matInput placeholder="URI" [(ngModel)]="metadataSearch.URI"/>
+    <input matInput placeholder="Datum DD.MM.YYYY." [(ngModel)]="metadataSearch.datum"/>
+    <input matInput placeholder="Korisnicko ime" [(ngModel)]="metadataSearch.korisnicko_ime"/>
+    <input matInput placeholder="URI zalbe na odluku na koju se resenje odnosi" [(ngModel)]="metadataSearch.zalba_odluke_uri"/>
+    <input matInput placeholder="URI zalbe cutanja na koju se resenje odnosi" [(ngModel)]="metadataSearch.zalba_cutanje_uri"/>
+    <input matInput placeholder="Broj resenja" [(ngModel)]="metadataSearch.brojResenja"/>
+    <button mat-raised-button (click)="searchMetadata()">Pretrazi po metapodacima</button>
     <table class="styled-table">
         <thead>
         <tr>

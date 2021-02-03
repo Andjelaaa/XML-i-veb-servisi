@@ -36,4 +36,19 @@ export class AppealSilenceService {
         return this.http.get(`${environment.baseUrl}/${environment.apiAppealSilence}all`,
         {headers: this.headers, responseType: 'text'}); 
     }
+
+    getNew() :Observable<any>{
+        return this.http.get(`${environment.baseUrl}/${environment.apiAppealSilence}new`,
+        {headers: this.headers, responseType: 'text'}); 
+    }
+    
+    getSearchRequests(search: string): Observable<any> {
+        return this.http.get(`${environment.baseUrl}/${environment.apiAppealSilence}searchRequests/${search}`,
+           {headers: this.headers, responseType: 'text'});
+      
+    }
+    getMetadataSearchRequests(search: any): Observable<any> {
+    return this.http.post(`${environment.baseUrl}/${environment.apiAppealSilence}searchByMetadata`, search,
+        {headers: this.headers, responseType: 'text'});
+    }
 }

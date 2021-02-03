@@ -35,4 +35,19 @@ export class AppealDecisionService {
         return this.http.get(`${environment.baseUrl}/${environment.apiAppealDecision}all`,
         {headers: this.headers, responseType: 'text'}); 
     }
+
+    getNew() :Observable<any>{
+        return this.http.get(`${environment.baseUrl}/${environment.apiAppealDecision}new`,
+        {headers: this.headers, responseType: 'text'}); 
+    }
+
+    getSearchRequests(search: string): Observable<any> {
+        return this.http.get(`${environment.baseUrl}/${environment.apiAppealDecision}searchRequests/${search}`,
+           {headers: this.headers, responseType: 'text'});
+      
+    }
+    getMetadataSearchRequests(search: any): Observable<any> {
+    return this.http.post(`${environment.baseUrl}/${environment.apiAppealDecision}searchByMetadata`, search,
+        {headers: this.headers, responseType: 'text'});
+    }
 }

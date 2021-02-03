@@ -1,7 +1,10 @@
 package com.xml.poverenik.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -14,9 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.xml.sax.SAXException;
 import org.xmldb.api.base.XMLDBException;
 
 import com.xml.poverenik.dto.RetrieveDTO;
+import com.xml.poverenik.dto.SearchDTO;
 import com.xml.poverenik.dto.ZalbaOdlukaDTO;
 import com.xml.poverenik.model.ZalbaOdluke;
 import com.xml.poverenik.service.ZalbaOdlukaService;
@@ -79,6 +84,24 @@ public class ZalbaOdlukaController {
 	public ResponseEntity<List<ZalbaOdlukaDTO>> getAll() throws XMLDBException {
 		List<ZalbaOdlukaDTO> zalbeList = service.findAllAppeal();
 		return new ResponseEntity<List<ZalbaOdlukaDTO>>(zalbeList, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/new", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZalbaOdlukaDTO>> getNew() throws XMLDBException {
+		List<ZalbaOdlukaDTO> zalbeList = service.findNewAppeal();
+		return new ResponseEntity<List<ZalbaOdlukaDTO>>(zalbeList, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/searchRequests/{search}", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZalbaOdlukaDTO>> searchRequests(@PathVariable("search") String search) throws XMLDBException, SAXException, IOException, ParserConfigurationException {
+		List<ZalbaOdlukaDTO> zalbeList = service.findAppealsByContent(search);
+		return new ResponseEntity<List<ZalbaOdlukaDTO>>(zalbeList, HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/searchByMetadata", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZalbaOdlukaDTO>> searchByMetadata(@RequestBody SearchDTO dto) throws IOException {
+		List<ZalbaOdlukaDTO> result = service.searhByMetadata(dto);
+		return new ResponseEntity<List<ZalbaOdlukaDTO>>(result, HttpStatus.OK);
 	}
 	
 	private boolean validate(ZalbaOdlukaDTO dto) {

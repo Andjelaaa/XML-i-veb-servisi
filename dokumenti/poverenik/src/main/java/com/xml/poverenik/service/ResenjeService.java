@@ -1,17 +1,24 @@
 package com.xml.poverenik.service;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
@@ -21,11 +28,11 @@ import com.xml.poverenik.dom.DOMParser;
 import com.xml.poverenik.dom.DOMWriter;
 import com.xml.poverenik.dto.ResenjeDTO;
 import com.xml.poverenik.dto.RetrieveDTO;
+import com.xml.poverenik.dto.SearchResenjeDTO;
 import com.xml.poverenik.dto.ZalbaCutanjeDTO;
 import com.xml.poverenik.model.Resenje;
-import com.xml.poverenik.model.ZalbaCutanje;
+import com.xml.poverenik.rdf.FusekiReader;
 import com.xml.poverenik.repository.ResenjeRepository;
-import com.xml.poverenik.dom.XSLTransformer;
 
 @Service
 public class ResenjeService {
@@ -117,5 +124,84 @@ public class ResenjeService {
 		
 		ArrayList<ResenjeDTO> resenjeList = extractDataFromRequests(result);	
 		return resenjeList;
+	}
+	
+	
+	public List<ResenjeDTO> findDecisionsByContent(String search) throws SAXException, IOException, ParserConfigurationException, ParseException {
+		String xPathExpression = "/";
+		ResourceSet result = resenjeRepository.findResenja(xPathExpression);	
+		ResourceIterator i;
+		ArrayList<String> resenjaList = new ArrayList<String>();
+		try {
+			i = result.getIterator();
+			while (i.hasMoreResources()) {
+				XMLResource resource = (XMLResource) i.nextResource();
+				resenjaList.add(resource.getContent().toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		ArrayList<ResenjeDTO> filtriranaListaZahteva = new ArrayList<ResenjeDTO>();
+		for (String rDTO : resenjaList) {
+			if(rDTO.toLowerCase().contains(search.toLowerCase())) {
+				Document document = domParser.buildDocumentFromText(rDTO);
+				Resenje resenje = domParser.parseResenje(document);				
+				filtriranaListaZahteva.add(new ResenjeDTO(resenje));
+			}
+				
+		}
+		return filtriranaListaZahteva;
+	}
+	
+	public ArrayList<ResenjeDTO> searhByMetadata(SearchResenjeDTO dto) throws IOException {
+		Map<String, String> params = new HashMap<String, String>();
+		if(dto.getURI() == null) {
+			params.put("URI", "");
+		}else {
+			params.put("URI", dto.getURI());
+		}
+		if(dto.getDatum() == null) {
+			params.put("datum", "");
+		}else {
+			params.put("datum", dto.getDatum());
+		}
+		if(dto.getKorisnicko_ime() == null) {
+			params.put("korisnicko_ime", "");
+		}else {
+			params.put("korisnicko_ime", dto.getKorisnicko_ime());
+		}
+		if(dto.getZalba_cutanje_uri() == null) {
+			params.put("zalba_cutanje_uri", "");
+		}else {
+			params.put("zalba_cutanje_uri", dto.getZalba_cutanje_uri());
+		}
+		if(dto.getZalba_odluke_uri() == null) {
+			params.put("zalba_odluke_uri", "");
+		}else {
+			params.put("zalba_odluke_uri", dto.getZalba_odluke_uri());
+		}
+		if(dto.getBrojResenja() == null) {
+			params.put("brojResenja", "");
+		}else {
+			params.put("brojResenja", dto.getBrojResenja());
+		}
+
+		ArrayList<String> URIs = FusekiReader.executeQuery(params, "/resenja", "src/main/resources/podaci/rdf/queryResenje.rq");
+		ArrayList<ResenjeDTO> zahteviList = new ArrayList<ResenjeDTO>();
+		ArrayList<ResenjeDTO> filtriranaList = new ArrayList<ResenjeDTO>();
+		if (URIs.size() != 0) {
+			String xPathExpression = "/";
+			ResourceSet result = resenjeRepository.findResenja(xPathExpression);
+			zahteviList = extractDataFromRequests(result);
+			
+			for (ResenjeDTO rDTO : zahteviList) {
+				if(URIs.contains(rDTO.getURI())){
+					filtriranaList.add(rDTO);
+				}
+			}			
+		}
+		return filtriranaList;
 	}
 }

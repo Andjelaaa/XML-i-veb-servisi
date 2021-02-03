@@ -35,4 +35,13 @@ export class DecisionService {
         return this.http.get(`${environment.baseUrl}/${environment.apiDecision}all`,
         {headers: this.headers, responseType: 'text'}); 
     }
+    getSearchRequests(search: string): Observable<any> {
+        return this.http.get(`${environment.baseUrl}/${environment.apiDecision}searchRequests/${search}`,
+           {headers: this.headers, responseType: 'text'});
+      
+    }
+    getMetadataSearchRequests(search: any): Observable<any> {
+    return this.http.post(`${environment.baseUrl}/${environment.apiDecision}searchByMetadata`, search,
+        {headers: this.headers, responseType: 'text'});
+    }
 }

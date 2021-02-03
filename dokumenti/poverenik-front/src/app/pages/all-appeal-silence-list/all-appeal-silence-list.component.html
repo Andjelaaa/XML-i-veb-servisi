@@ -1,0 +1,42 @@
+<div>
+    <h2>Zalbe Cutanje</h2>
+    <input matInput placeholder="Unesite kljucnu rec ili frazu za pretragu" [(ngModel)]="searchInput"/>
+
+    <button mat-raised-button (click)="search()">Pretrazi</button>
+    <button mat-button (click)="getAllAppeals()">
+        <span class="material-icons black-colored-icon">
+            refresh
+            </span>
+    </button>
+    <br>
+    <input matInput placeholder="URI" [(ngModel)]="metadataSearch.URI"/>
+    <input matInput placeholder="Datum DD.MM.YYYY." [(ngModel)]="metadataSearch.datum"/>
+    <input matInput placeholder="Korisnicko ime" [(ngModel)]="metadataSearch.korisnicko_ime"/>
+    <input matInput placeholder="Naziv poverenika" [(ngModel)]="metadataSearch.naziv_poverenika"/>
+    <input matInput placeholder="URI zahteva na koji se zalba odnosi" [(ngModel)]="metadataSearch.zahtev_uri"/>
+    <button mat-raised-button (click)="searchMetadata()">Pretrazi po metapodacima</button>
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Organ vlasti</th>
+            <th>Poverenik</th>
+            <th>Podnosilac zalbe</th>
+            <th>Preuzmi PDF</th>
+            <th>Prikaz zalbe</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let zalba of list">
+            <td>{{zalba.datumZalbe._text}}</td>
+            <td>{{zalba.paragrafi.paragrafi[0].nazivOrgana._text}}</td>
+            <td>{{zalba.nazivPoverenika._text}}</td>
+            <td>{{zalba.podnosilac.ime._text}} {{zalba.podnosilac.prezime._text}}</td>
+            <td><button mat-button color="primary"><a href="{{getHref(zalba.uri._text)}}">Preuzmi PDF</a></button></td>
+            <td><button mat-button color="primary" ><a href="/appeal_silence_review/{{zalba.uri._text}}">Prikaz zalbe</a></button></td>
+        </tr>
+    </tbody>
+
+    </table>
+    
+</div>
