@@ -1,4 +1,4 @@
-package com.xml.projekat.soap.ws.hello.types;
+package com.xml.projekat.ws.hello.types;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -23,8 +23,8 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _RequestMiss_QNAME = new QName("http://xml.com/ws/hello/types", "RequestMiss");
-    private final static QName _ResponseMiss_QNAME = new QName("http://xml.com/ws/hello/types", "ResponseMiss");
+    private final static QName _RequestMiss_QNAME = new QName("http://projekat.xml.com/ws/hello/types", "RequestMiss");
+    private final static QName _ResponseMiss_QNAME = new QName("http://projekat.xml.com/ws/hello/types", "ResponseMiss");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.xml.projekat.soap.ws.hello.types
@@ -49,7 +49,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link RequestMissType }{@code >}
      */
-    @XmlElementDecl(namespace = "http://xml.com/ws/hello/types", name = "RequestMiss")
+    @XmlElementDecl(namespace = "http://projekat.xml.com/ws/hello/types", name = "RequestMiss")
     public JAXBElement<RequestMissType> createRequestMiss(RequestMissType value) {
         return new JAXBElement<RequestMissType>(_RequestMiss_QNAME, RequestMissType.class, null, value);
     }
@@ -62,7 +62,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      */
-    @XmlElementDecl(namespace = "http://xml.com/ws/hello/types", name = "ResponseMiss")
+    @XmlElementDecl(namespace = "http://projekat.xml.com/ws/hello/types", name = "ResponseMiss")
     public JAXBElement<String> createResponseMiss(String value) {
         return new JAXBElement<String>(_ResponseMiss_QNAME, String.class, null, value);
     }
