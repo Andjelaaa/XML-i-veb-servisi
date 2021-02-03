@@ -32,6 +32,12 @@ export class XonomyDecisionService {
         brojResenja:{},
         datum:{
             isReadOnly: true
+        },
+        zalbaOdlukeURI:{
+            isReadOnly: true
+        },
+        zalbaCutanjeURI:{
+            isReadOnly: true
         }
     }
   };

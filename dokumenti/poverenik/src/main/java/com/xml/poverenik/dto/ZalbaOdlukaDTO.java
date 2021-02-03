@@ -7,6 +7,11 @@ import com.xml.poverenik.model.ZalbaOdluke;
 
 
 public class ZalbaOdlukaDTO {
+	
+
+	private String URI;
+	private String zahtevURI;
+	
 	private String text;
 	private PodnosilacDTO nazivPodnosioca;
 	private AdresaDTO adresaPodnosioca;
@@ -24,6 +29,28 @@ public class ZalbaOdlukaDTO {
 	
 	public ZalbaOdlukaDTO() {}
 	
+	public ZalbaOdlukaDTO( String uRI, String zahtevURI, String text,
+			PodnosilacDTO nazivPodnosioca, AdresaDTO adresaPodnosioca, String drugiPodaciZaKontakt,
+			String nazivPoverenika, AdresaDTO sedistePoverenika, String naslov, String nazivOrganaVlasti,
+			ArrayList<PZalbaOdlukeDTO> paragrafi, String mesto, String datum, ArrayList<String> tackeNapomene) {
+		super();
+	
+		URI = uRI;
+		this.zahtevURI = zahtevURI;
+		this.text = text;
+		this.nazivPodnosioca = nazivPodnosioca;
+		this.adresaPodnosioca = adresaPodnosioca;
+		this.drugiPodaciZaKontakt = drugiPodaciZaKontakt;
+		this.nazivPoverenika = nazivPoverenika;
+		this.sedistePoverenika = sedistePoverenika;
+		this.naslov = naslov;
+		this.nazivOrganaVlasti = nazivOrganaVlasti;
+		this.paragrafi = paragrafi;
+		this.mesto = mesto;
+		this.datum = datum;
+		this.tackeNapomene = tackeNapomene;
+	}
+
 	public ZalbaOdlukaDTO(String text, PodnosilacDTO nazivPodnosioca, AdresaDTO adresaPodnosioca, String drugiPodaciZaKontakt,
 			String nazivPoverenika, AdresaDTO sedistePoverenika, String naslov, String nazivOrganaVlasti,
 			ArrayList<PZalbaOdlukeDTO> paragrafi, String mesto, String datum, ArrayList<String> tackeNapomene) {
@@ -45,6 +72,7 @@ public class ZalbaOdlukaDTO {
 		this.text = response;
 	}
 	public ZalbaOdlukaDTO(ZalbaOdluke zo) {
+		this.URI = zo.getURI();
 		this.nazivPodnosioca = new PodnosilacDTO(zo.getNazivPodnosioca());
 		this.adresaPodnosioca = new AdresaDTO(zo.getAdresaPodnosioca());
 		this.drugiPodaciZaKontakt = zo.getDrugiPodaciZaKontakt();
@@ -139,6 +167,21 @@ public class ZalbaOdlukaDTO {
 	}
 	public void setTackeNapomene(ArrayList<String> tackeNapomene) {
 		this.tackeNapomene = tackeNapomene;
+	}
+	public String getURI() {
+		return URI;
+	}
+
+	public void setURI(String uRI) {
+		URI = uRI;
+	}
+
+	public String getZahtevURI() {
+		return zahtevURI;
+	}
+
+	public void setZahtevURI(String zahtevURI) {
+		this.zahtevURI = zahtevURI;
 	}
 
 

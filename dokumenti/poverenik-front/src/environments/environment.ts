@@ -11,6 +11,9 @@ export const environment = {
     register:  'api/user/register',
     appealSilence:  'api/zalba_cutanje/create',
     appealDecision:  'api/zalba_odluke/create',
+    apiDecision: 'api/resenje/',
+    apiAppealDecision: 'api/zalba_odluke/',
+    apiAppealSilence: 'api/zalba_cutanje/'
 };
 
 /*

@@ -7,6 +7,9 @@ import com.xml.poverenik.model.ZalbaCutanje;
 
 
 public class ZalbaCutanjeDTO {
+	
+	private String URI;
+	private String zahtevURI;
 	private String text;
 	private PodnosilacDTO podnosilac;
 	private AdresaDTO adresa;
@@ -24,6 +27,25 @@ public class ZalbaCutanjeDTO {
 	
 	public ZalbaCutanjeDTO() {
 		super();
+	}
+
+	public ZalbaCutanjeDTO( String uRI, String zahtevURI, String text, PodnosilacDTO podnosilac,
+			AdresaDTO adresa, String drugiPodaciZaKontakt, String nazivPoverenika, AdresaDTO sedistePoverenika,
+			String naslov, ArrayList<PZalbaCutanjeDTO> paragrafi, String datumZalbe, String mestoZalbe) {
+		super();
+
+		URI = uRI;
+		this.zahtevURI = zahtevURI;
+		this.text = text;
+		this.podnosilac = podnosilac;
+		this.adresa = adresa;
+		this.drugiPodaciZaKontakt = drugiPodaciZaKontakt;
+		this.nazivPoverenika = nazivPoverenika;
+		this.sedistePoverenika = sedistePoverenika;
+		this.naslov = naslov;
+		this.paragrafi = paragrafi;
+		this.datumZalbe = datumZalbe;
+		this.mestoZalbe = mestoZalbe;
 	}
 
 	public ZalbaCutanjeDTO(String text, PodnosilacDTO podnosilac, AdresaDTO adresa, String drugiPodaciZaKontakt, String nazivPoverenika,
@@ -47,6 +69,8 @@ public class ZalbaCutanjeDTO {
 	}
 
 	public ZalbaCutanjeDTO(ZalbaCutanje zc) {
+		this.URI = zc.getURI();
+		this.zahtevURI = zc.getZahtevURI();
 		this.podnosilac = new PodnosilacDTO(zc.getPodnosilac());
 		this.adresa = new AdresaDTO(zc.getAdresa());
 		this.drugiPodaciZaKontakt = zc.getDrugiPodaciZaKontakt();
@@ -145,11 +169,32 @@ public class ZalbaCutanjeDTO {
 		this.adresa = adresa;
 	}
 
+	
+
+	public String getURI() {
+		return URI;
+	}
+
+	public void setURI(String uRI) {
+		URI = uRI;
+	}
+
+	public String getZahtevURI() {
+		return zahtevURI;
+	}
+
+	public void setZahtevURI(String zahtevURI) {
+		this.zahtevURI = zahtevURI;
+	}
+
 	@Override
 	public String toString() {
-		return "Zalba cutanje [podnosilac=" + podnosilac + ", adresa=" + adresa + ", drugiPodaciZaKontakt="
-				+ drugiPodaciZaKontakt + ", nazivPoverenika=" + nazivPoverenika + ", sedistePoverenika=" + sedistePoverenika + ", naslov= " + naslov +", paragrafi=" + paragrafi +
-				", datumZalbe=" + datumZalbe + ", mestoZalbe=" + mestoZalbe + "]";
+		return "ZalbaCutanjeDTO [URI=" + URI + ", zahtevURI=" + zahtevURI + ", text=" + text + ", podnosilac="
+				+ podnosilac + ", adresa=" + adresa + ", drugiPodaciZaKontakt=" + drugiPodaciZaKontakt
+				+ ", nazivPoverenika=" + nazivPoverenika + ", sedistePoverenika=" + sedistePoverenika + ", naslov="
+				+ naslov + ", paragrafi=" + paragrafi + ", datumZalbe=" + datumZalbe + ", mestoZalbe=" + mestoZalbe
+				+ "]";
 	}
+
 	
 }

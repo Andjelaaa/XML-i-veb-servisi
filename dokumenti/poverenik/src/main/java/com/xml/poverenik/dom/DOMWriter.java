@@ -123,6 +123,27 @@ public class DOMWriter {
 		dokumentResenje.setAttribute("xmlns:xs","http://www.w3.org/2001/XMLSchema#");
 		dokumentResenje.setAttribute("xmlns:d","http://www.ftn.uns.ac.rs/xpath/examples");
 		
+		Element uri = document.createElement("d:URI");
+		uri.setAttribute("property","pred:URI");
+		uri.setAttribute("datatype","xs:string");
+		uri.appendChild(document.createTextNode(""+(resenjeRepository.getSize()+1)));
+		
+		dokumentResenje.appendChild(uri);
+		
+		Element zalbaCutanjeUri = document.createElement("d:zalba_cutanje_uri");
+		zalbaCutanjeUri.setAttribute("property","pred:zalba_cutanje_uri");
+		zalbaCutanjeUri.setAttribute("datatype","xs:string");
+		zalbaCutanjeUri.appendChild(document.createTextNode(resenje.getURIZalbaCutanje()));
+		
+		dokumentResenje.appendChild(zalbaCutanjeUri);
+		
+		Element zalbaOdlukaUri = document.createElement("d:zalba_odluke_uri");
+		zalbaOdlukaUri.setAttribute("property","pred:zalba_odluke_uri");
+		zalbaOdlukaUri.setAttribute("datatype","xs:string");
+		zalbaOdlukaUri.appendChild(document.createTextNode(resenje.getURIZalbaOdluke()));
+		
+		dokumentResenje.appendChild(zalbaOdlukaUri);
+		
 		Element nazivResenja = document.createElement("d:naziv_resenja");
 		nazivResenja.appendChild(document.createTextNode(resenje.getNazivOdluka().getNazivResenja()));
 		Element odluka = document.createElement("d:odluka");
@@ -176,6 +197,12 @@ public class DOMWriter {
 		dokumentResenje.appendChild(tekstResenja);
 		dokumentResenje.appendChild(tekstObrazlozenja);
 		dokumentResenje.appendChild(potpisPoverenika);
+		
+		Element korisnickoIme = document.createElement("d:korisnicko_ime");
+		korisnickoIme.setAttribute("property","pred:korisnicko_ime");
+		korisnickoIme.setAttribute("datatype","xs:string");
+		korisnickoIme.appendChild(document.createTextNode(resenje.getKorisnickoIme()));
+		dokumentResenje.appendChild(korisnickoIme);
 
 
 		StringWriter sw = new StringWriter();
@@ -207,6 +234,20 @@ public class DOMWriter {
 		zalbaOdluke.setAttribute("xmlns:d","http://www.ftn.uns.ac.rs/xpath/examples");
 		
 		document.appendChild(zalbaOdluke);
+		
+		Element uri = document.createElement("d:URI");
+		uri.setAttribute("property","pred:URI");
+		uri.setAttribute("datatype","xs:string");
+		uri.appendChild(document.createTextNode(""+(zalbaOdlukeRepository.getSize()+1)));
+		
+		zalbaOdluke.appendChild(uri);
+		
+		Element zahtevUri = document.createElement("d:zahtev_uri");
+		zahtevUri.setAttribute("property","pred:zahtev_uri");
+		zahtevUri.setAttribute("datatype","xs:string");
+		zahtevUri.appendChild(document.createTextNode(zo.getZahtevURI()));
+		
+		zalbaOdluke.appendChild(zahtevUri);
 
 		Element podnosilacZalbe = document.createElement("d:podnosilac_zalbe");
 		Element nazivPodnosioca = document.createElement("d:naziv_podnosioca");
@@ -401,6 +442,20 @@ public class DOMWriter {
 		zalbaCutanje.setAttribute("xmlns:d","http://www.ftn.uns.ac.rs/xpath/examples");
 		
 		document.appendChild(zalbaCutanje);
+		
+		Element uri = document.createElement("d:URI");
+		uri.setAttribute("property","pred:URI");
+		uri.setAttribute("datatype","xs:string");
+		uri.appendChild(document.createTextNode(""+(zalbaCutanjeRepository.getSize()+1)));
+		
+		zalbaCutanje.appendChild(uri);
+		
+		Element zahtevUri = document.createElement("d:zahtev_uri");
+		zahtevUri.setAttribute("property","pred:zahtev_uri");
+		zahtevUri.setAttribute("datatype","xs:string");
+		zahtevUri.appendChild(document.createTextNode(zc.getZahtevURI()));
+		
+		zalbaCutanje.appendChild(zahtevUri);
 
 		Element podnosilacZalbe = document.createElement("d:podnosilac_zalbe");
 		Element nazivPodnosioca = document.createElement("d:naziv_podnosioca");

@@ -6,6 +6,10 @@ import com.xml.poverenik.dto.PZalbaOdlukeDTO;
 import com.xml.poverenik.dto.ZalbaOdlukaDTO;
 
 public class ZalbaOdluke {
+	
+	private String URI;
+	private String zahtevURI;
+	
 	private Podnosilac nazivPodnosioca;
 	private Adresa adresaPodnosioca;
 	private String drugiPodaciZaKontakt;
@@ -20,6 +24,25 @@ public class ZalbaOdluke {
 	private String datum;
 	private ArrayList<String> tackeNapomene;
 	
+	public ZalbaOdluke(String uRI, String zahtevURI, Podnosilac nazivPodnosioca,
+			Adresa adresaPodnosioca, String drugiPodaciZaKontakt, String nazivPoverenika, Adresa sedistePoverenika,
+			String naslov, String nazivOrganaVlasti, ArrayList<PZalbaOdluke> paragrafi, String mesto, String datum,
+			ArrayList<String> tackeNapomene) {
+		super();
+		URI = uRI;
+		this.zahtevURI = zahtevURI;
+		this.nazivPodnosioca = nazivPodnosioca;
+		this.adresaPodnosioca = adresaPodnosioca;
+		this.drugiPodaciZaKontakt = drugiPodaciZaKontakt;
+		this.nazivPoverenika = nazivPoverenika;
+		this.sedistePoverenika = sedistePoverenika;
+		this.naslov = naslov;
+		this.nazivOrganaVlasti = nazivOrganaVlasti;
+		this.paragrafi = paragrafi;
+		this.mesto = mesto;
+		this.datum = datum;
+		this.tackeNapomene = tackeNapomene;
+	}
 	public ZalbaOdluke(Podnosilac nazivPodnosioca, Adresa adresaPodnosioca, String drugiPodaciZaKontakt,
 			String nazivPoverenika, Adresa sedistePoverenika, String naslov, String nazivOrganaVlasti,
 			ArrayList<PZalbaOdluke> paragrafi, String mesto, String datum, ArrayList<String> tackeNapomene) {
@@ -37,6 +60,7 @@ public class ZalbaOdluke {
 		this.tackeNapomene = tackeNapomene;
 	}
 	public ZalbaOdluke(ZalbaOdlukaDTO dto) {
+		this.zahtevURI = dto.getZahtevURI();
 		this.nazivPodnosioca = new Podnosilac(dto.getNazivPodnosioca());
 		this.adresaPodnosioca = new Adresa(dto.getAdresaPodnosioca());
 		this.drugiPodaciZaKontakt = dto.getDrugiPodaciZaKontakt();
@@ -125,6 +149,19 @@ public class ZalbaOdluke {
 	}
 	public void setTackeNapomene(ArrayList<String> tackeNapomene) {
 		this.tackeNapomene = tackeNapomene;
+	}
+	
+	public String getURI() {
+		return URI;
+	}
+	public void setURI(String uRI) {
+		URI = uRI;
+	}
+	public String getZahtevURI() {
+		return zahtevURI;
+	}
+	public void setZahtevURI(String zahtevURI) {
+		this.zahtevURI = zahtevURI;
 	}
 	
 

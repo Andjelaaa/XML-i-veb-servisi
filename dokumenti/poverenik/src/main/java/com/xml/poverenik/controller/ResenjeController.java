@@ -1,6 +1,7 @@
 package com.xml.poverenik.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.springframework.core.io.Resource;
@@ -18,6 +19,7 @@ import org.xmldb.api.base.XMLDBException;
 
 import com.xml.poverenik.dto.ResenjeDTO;
 import com.xml.poverenik.dto.RetrieveDTO;
+import com.xml.poverenik.dto.ZalbaCutanjeDTO;
 import com.xml.poverenik.model.Resenje;
 import com.xml.poverenik.service.ResenjeService;
 
@@ -68,6 +70,16 @@ public class ResenjeController {
 		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
 				.body(resource);
+	}
+	@GetMapping(value = "/userAppeal/{username}", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ResenjeDTO>> userRequests(@PathVariable("username") String username) throws XMLDBException {
+		List<ResenjeDTO> resenjaList = service.findDecisionByUser(username);
+		return new ResponseEntity<List<ResenjeDTO>>(resenjaList, HttpStatus.OK);
+	}
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ResenjeDTO>> getAll() throws XMLDBException {
+		List<ResenjeDTO> resenjaList = service.findAllDecisions();
+		return new ResponseEntity<List<ResenjeDTO>>(resenjaList, HttpStatus.OK);
 	}
 
 	private boolean validate(ResenjeDTO dto) {

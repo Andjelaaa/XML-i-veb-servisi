@@ -1,0 +1,25 @@
+<div>
+    <h2>Zalbe Odluke</h2>
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Organ vlasti</th>
+            <th>Poverenik</th>
+            <th>Preuzmi PDF</th>
+            <th>Prikaz zalbe</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let zalba of list">
+            <td>{{zalba.datumZalbe._text}}</td>
+            <td>{{zalba.paragrafi.paragrafi[0].nazivOrgana._text}}</td>
+            <td>{{zalba.nazivPoverenika._text}}</td>
+            <td><button mat-button color="primary"><a href="{{getHref(zalba.uri._text)}}">Preuzmi PDF</a></button></td>
+            <td><button mat-button color="primary" ><a href="/appeal_silence_review/{{zalba.uri._text}}">Prikaz zalbe</a></button></td>
+        </tr>
+    </tbody>
+
+    </table>
+    
+</div>

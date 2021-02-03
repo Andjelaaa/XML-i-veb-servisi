@@ -15,6 +15,14 @@ import { AppealSilencePageComponent } from './pages/appeal-silence-page/appeal-s
 import { AppealDecisionPageComponent } from './pages/appeal-decision-page/appeal-decision-page.component';
 import { DecisionPageComponent } from './pages/decision-page/decision-page.component';
 import { DatePipe } from '@angular/common';
+import { SafeHtmlPipe } from './safe-html.pipe';
+import { AppealDecisionReviewComponent } from './pages/appeal-decision-review/appeal-decision-review.component';
+import { AppealSilenceReviewComponent } from './pages/appeal-silence-review/appeal-silence-review.component';
+import { DecisionReviewComponent } from './pages/decision-review/decision-review.component';
+import { AppealDecisionListComponent } from './pages/appeal-decision-list/appeal-decision-list.component';
+import { AppealSilenceListComponent } from './pages/appeal-silence-list/appeal-silence-list.component';
+import { DecisionListComponent } from './pages/decision-list/decision-list.component';
+import { AllDecisionListComponent } from './pages/all-decision-list/all-decision-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +33,15 @@ import { DatePipe } from '@angular/common';
     NavbarGradjaninComponent,
     AppealSilencePageComponent,
     AppealDecisionPageComponent,
-    DecisionPageComponent
+    DecisionPageComponent,
+    AppealDecisionReviewComponent,
+    AppealSilenceReviewComponent,
+    DecisionReviewComponent,
+    SafeHtmlPipe,
+    AppealDecisionListComponent,
+    AppealSilenceListComponent,
+    DecisionListComponent,
+    AllDecisionListComponent
   ],
   imports: [
     BrowserModule,

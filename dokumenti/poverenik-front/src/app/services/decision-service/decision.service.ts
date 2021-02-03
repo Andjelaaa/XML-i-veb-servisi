@@ -21,4 +21,18 @@ export class DecisionService {
         return this.http.post(`${environment.baseUrl}/${environment.decision}`, request,
          {headers: this.headers, responseType: 'text'});
       }
+    toHtml(id: String){
+        const headersJson = new HttpHeaders({
+          'Content-Type': 'application/json'});
+       return this.http.get(`${environment.baseUrl}/${environment.apiDecision}` + id ,{headers: headersJson, responseType: 'text'});
+    }
+    getUserDecision(username: string): Observable<any>{
+        return this.http.get(`${environment.baseUrl}/${environment.apiDecision}userAppeal/${username}`,
+        {headers: this.headers, responseType: 'text'}); 
+    }
+
+    getAll() :Observable<any>{
+        return this.http.get(`${environment.baseUrl}/${environment.apiDecision}all`,
+        {headers: this.headers, responseType: 'text'}); 
+    }
 }

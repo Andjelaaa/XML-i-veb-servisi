@@ -1,6 +1,7 @@
 package com.xml.poverenik.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -67,6 +68,17 @@ public class ZalbaOdlukaController {
 		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
 				.body(resource);
+	}
+	
+	@GetMapping(value = "/userAppeal/{username}", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZalbaOdlukaDTO>> userRequests(@PathVariable("username") String username) throws XMLDBException {
+		List<ZalbaOdlukaDTO> zalbeList = service.findAppealsByUser(username);
+		return new ResponseEntity<List<ZalbaOdlukaDTO>>(zalbeList, HttpStatus.OK);
+	}
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZalbaOdlukaDTO>> getAll() throws XMLDBException {
+		List<ZalbaOdlukaDTO> zalbeList = service.findAllAppeal();
+		return new ResponseEntity<List<ZalbaOdlukaDTO>>(zalbeList, HttpStatus.OK);
 	}
 	
 	private boolean validate(ZalbaOdlukaDTO dto) {

@@ -98,36 +98,43 @@ public class DOMParser {
 	}
 
 	public Resenje parseResenje(Document document) throws ParseException, IOException {
+		
+		String uri = document.getElementsByTagName("d:URI").item(0).getTextContent();
+		String uriZalbaCutanje = document.getElementsByTagName("d:zalba_cutanje_uri").item(0).getTextContent();
+		String uriZalbaOdluke = document.getElementsByTagName("d:zalba_odluke_uri").item(0).getTextContent();
+
+		String korisnickoIme = document.getElementsByTagName("d:korisnicko_ime").item(0).getTextContent();
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("MM.dd.yyyy.");
 
-		String opisPostupka = document.getElementsByTagName("opis_postupka").item(0).getTextContent();
+		String opisPostupka = document.getElementsByTagName("d:opis_postupka").item(0).getTextContent();
 
-		String brojResenja = document.getElementsByTagName("broj_resenja").item(0).getTextContent();
-		String datumString = document.getElementsByTagName("datum").item(0).getTextContent();
+		String brojResenja = document.getElementsByTagName("d:broj_resenja").item(0).getTextContent();
+		String datumString = document.getElementsByTagName("d:datum").item(0).getTextContent();
 //
 //		System.out.println(datumString);
 //		String datum = formatter.format(datumString.replaceAll("\\s", ""));
 		TZaglavlje zaglavlje = new TZaglavlje(brojResenja, datumString);
 
-		String nazivResenja = document.getElementsByTagName("naziv_resenja").item(0).getChildNodes().item(0)
+		String nazivResenja = document.getElementsByTagName("d:naziv_resenja").item(0).getChildNodes().item(0)
 				.getTextContent();
-		String odluka = document.getElementsByTagName("odluka").item(0).getTextContent();
+		String odluka = document.getElementsByTagName("d:odluka").item(0).getTextContent();
 		NazivOdluka nazivOdluka = new NazivOdluka(nazivResenja, odluka);
 
-		String potpisPoverenika = document.getElementsByTagName("potpis_poverenika").item(0).getTextContent();
+		String potpisPoverenika = document.getElementsByTagName("d:potpis_poverenika").item(0).getTextContent();
 
-		String txtResenja = document.getElementsByTagName("tekst_resenja").item(0).getChildNodes().item(0)
+		String txtResenja = document.getElementsByTagName("d:tekst_resenja").item(0).getChildNodes().item(0)
 				.getTextContent();
-		String txtObrazlozenja = document.getElementsByTagName("tekst_obrazlozenja").item(0).getChildNodes().item(0)
+		String txtObrazlozenja = document.getElementsByTagName("d:tekst_obrazlozenja").item(0).getChildNodes().item(0)
 				.getTextContent();
 
 		ArrayList<String> paragrafiResenja = new ArrayList<String>();
 		ArrayList<String> paragrafiObrazlozenja = new ArrayList<String>();
 
-		NodeList paragrafi = document.getElementsByTagName("p");
+		NodeList paragrafi = document.getElementsByTagName("d:p");
 
 		for (int i = 0; i < paragrafi.getLength(); i++) {
-			if (paragrafi.item(i).getParentNode().equals(document.getElementsByTagName("tekst_resenja").item(0))) {
+			if (paragrafi.item(i).getParentNode().equals(document.getElementsByTagName("d:tekst_resenja").item(0))) {
 				paragrafiResenja.add(paragrafi.item(i).getTextContent());
 			} else {
 				paragrafiObrazlozenja.add(paragrafi.item(i).getTextContent());
@@ -138,37 +145,43 @@ public class DOMParser {
 		TTekst tekstObrazlozenja = new TTekst(txtObrazlozenja, paragrafiObrazlozenja);
 
 		Resenje r = new Resenje(nazivOdluka, zaglavlje, opisPostupka, tekstResenja, tekstObrazlozenja,
-				potpisPoverenika);
+				potpisPoverenika,korisnickoIme, uri, uriZalbaCutanje, uriZalbaOdluke);
 		System.out.println(r);
 		FusekiReader.executeQuery("/resenja");
 		return r;
 	}
 
 	public ZalbaOdluke parseZalbaOdluke(Document document) throws IOException {
-		String ime = document.getElementsByTagName("ime").item(0).getTextContent();
-		String prezime = document.getElementsByTagName("prezime").item(0).getTextContent();
-		String nazivFirme = document.getElementsByTagName("naziv_firme").item(0).getTextContent();
-		Podnosilac podnosilac = new Podnosilac(ime, prezime, nazivFirme);
+		
+		String uri = document.getElementsByTagName("d:URI").item(0).getTextContent();
+		String uriZahteva = document.getElementsByTagName("d:zahtev_uri").item(0).getTextContent();
+		
+		
+		String ime = document.getElementsByTagName("d:ime").item(0).getTextContent();
+		String prezime = document.getElementsByTagName("d:prezime").item(0).getTextContent();
+		String nazivFirme = document.getElementsByTagName("d:naziv_firme").item(0).getTextContent();
+		String korisnickoIme = document.getElementsByTagName("d:korisnicko_ime").item(0).getTextContent();
+		Podnosilac podnosilac = new Podnosilac(ime, prezime, nazivFirme, korisnickoIme);
 
-		String drugiPodaciZaKontakt = document.getElementsByTagName("drugi_podaci_za_kontakt").item(0).getTextContent();
-		String nazivPoverenika = document.getElementsByTagName("naziv_poverenika").item(0).getTextContent();
+		String drugiPodaciZaKontakt = document.getElementsByTagName("d:drugi_podaci_za_kontakt").item(0).getTextContent();
+		String nazivPoverenika = document.getElementsByTagName("d:naziv_poverenika").item(0).getTextContent();
 
-		Element adresaElement = (Element) document.getElementsByTagName("adresa").item(0);
-		String ulica = adresaElement.getElementsByTagName("ulica").item(0).getTextContent();
-		String broj = adresaElement.getElementsByTagName("broj").item(0).getTextContent();
-		String grad = adresaElement.getElementsByTagName("grad").item(0).getTextContent();
+		Element adresaElement = (Element) document.getElementsByTagName("d:adresa").item(0);
+		String ulica = adresaElement.getElementsByTagName("d:ulica").item(0).getTextContent();
+		String broj = adresaElement.getElementsByTagName("d:broj").item(0).getTextContent();
+		String grad = adresaElement.getElementsByTagName("d:grad").item(0).getTextContent();
 		Adresa adresa = new Adresa(ulica, broj, grad);
 
-		Element sedisteElement = (Element) document.getElementsByTagName("sediste_poverenika").item(0);
-		String ulicaSediste = sedisteElement.getElementsByTagName("ulica").item(0).getTextContent();
-		String brojSediste = sedisteElement.getElementsByTagName("broj").item(0).getTextContent();
-		String gradSediste = sedisteElement.getElementsByTagName("grad").item(0).getTextContent();
+		Element sedisteElement = (Element) document.getElementsByTagName("d:sediste_poverenika").item(0);
+		String ulicaSediste = sedisteElement.getElementsByTagName("d:ulica").item(0).getTextContent();
+		String brojSediste = sedisteElement.getElementsByTagName("d:broj").item(0).getTextContent();
+		String gradSediste = sedisteElement.getElementsByTagName("d:grad").item(0).getTextContent();
 		Adresa adresaSediste = new Adresa(ulicaSediste, brojSediste, gradSediste);
 
-		String naslov = document.getElementsByTagName("naslov").item(0).getTextContent();
+		String naslov = document.getElementsByTagName("d:naslov").item(0).getTextContent();
 		//String nazivOrganaVlasti = document.getElementsByTagName("naziv_organa").item(0).getTextContent();
 		String nazivOrganaVlasti = "asdf";
-		NodeList paragrafi = document.getElementsByTagName("p");
+		NodeList paragrafi = document.getElementsByTagName("d:p");
 		ArrayList<PZalbaOdluke> paragrafiLista = new ArrayList<PZalbaOdluke>();
 		for (int i = 0; i < paragrafi.getLength(); i++) {
 			String paragrafTekst = paragrafi.item(i).getTextContent().trim();
@@ -176,14 +189,14 @@ public class DOMParser {
 			String razlog = null;
 			String brojZalbe = null;
 			String godinaOdbijanja = null;
-			if (((Element) paragrafi.item(i)).getElementsByTagName("datum").item(0) != null)
-				datum = ((Element) paragrafi.item(i)).getElementsByTagName("datum").item(0).getTextContent();
-			if (((Element) paragrafi.item(i)).getElementsByTagName("razlog").item(0) != null)
+			if (((Element) paragrafi.item(i)).getElementsByTagName("d:datum").item(0) != null)
+				datum = ((Element) paragrafi.item(i)).getElementsByTagName("d:datum").item(0).getTextContent();
+			if (((Element) paragrafi.item(i)).getElementsByTagName("d:razlog").item(0) != null)
 				razlog = ((Element) paragrafi.item(i)).getElementsByTagName("razlog").item(0).getTextContent();
-			if (((Element) paragrafi.item(i)).getElementsByTagName("broj_zalbe").item(0) != null)
-				brojZalbe = ((Element) paragrafi.item(i)).getElementsByTagName("broj_zalbe").item(0).getTextContent();
-			if (((Element) paragrafi.item(i)).getElementsByTagName("godina_odbijanja").item(0) != null)
-				godinaOdbijanja = ((Element) paragrafi.item(i)).getElementsByTagName("godina_odbijanja").item(0)
+			if (((Element) paragrafi.item(i)).getElementsByTagName("d:broj_zalbe").item(0) != null)
+				brojZalbe = ((Element) paragrafi.item(i)).getElementsByTagName("d:broj_zalbe").item(0).getTextContent();
+			if (((Element) paragrafi.item(i)).getElementsByTagName("d:godina_odbijanja").item(0) != null)
+				godinaOdbijanja = ((Element) paragrafi.item(i)).getElementsByTagName("d:godina_odbijanja").item(0)
 						.getTextContent();
 
 			PZalbaOdluke pzo = new PZalbaOdluke(paragrafTekst, datum, razlog, brojZalbe, godinaOdbijanja);
@@ -191,18 +204,18 @@ public class DOMParser {
 
 		}
 
-		Element podaciDatumMesto = (Element) document.getElementsByTagName("podaci_o_trenutku").item(0);
+		Element podaciDatumMesto = (Element) document.getElementsByTagName("d:podaci_o_trenutku").item(0);
 
-		String datum = podaciDatumMesto.getElementsByTagName("datum").item(0).getTextContent();
-		String mesto = podaciDatumMesto.getElementsByTagName("mesto").item(0).getTextContent();
+		String datum = podaciDatumMesto.getElementsByTagName("d:datum").item(0).getTextContent();
+		String mesto = podaciDatumMesto.getElementsByTagName("d:mesto").item(0).getTextContent();
 
-		NodeList tacke = document.getElementsByTagName("tacka");
+		NodeList tacke = document.getElementsByTagName("d:tacka");
 		ArrayList<String> tackeLista = new ArrayList<String>();
 		for (int j = 0; j < tacke.getLength(); j++) {
 			tackeLista.add(tacke.item(j).getTextContent());
 		}
 
-		ZalbaOdluke zalba = new ZalbaOdluke(podnosilac, adresa, drugiPodaciZaKontakt, nazivPoverenika, adresaSediste,
+		ZalbaOdluke zalba = new ZalbaOdluke(uri, uriZahteva, podnosilac, adresa, drugiPodaciZaKontakt, nazivPoverenika, adresaSediste,
 				naslov, nazivOrganaVlasti, paragrafiLista, mesto, datum, tackeLista);
 		System.out.println(zalba);
 		FusekiReader.executeQuery("/zalbeOdluke");
@@ -210,41 +223,47 @@ public class DOMParser {
 	}
 
 	public ZalbaCutanje parseZalbaCutanje(Document document) throws IOException {
-		String ime = document.getElementsByTagName("ime").item(0).getTextContent();
-		String prezime = document.getElementsByTagName("prezime").item(0).getTextContent();
-		String nazivFirme = document.getElementsByTagName("naziv_firme").item(0).getTextContent();
-		Podnosilac podnosilac = new Podnosilac(ime, prezime, nazivFirme);
+		
+		String uri = document.getElementsByTagName("d:URI").item(0).getTextContent();
+		String uriZahteva = document.getElementsByTagName("d:zahtev_uri").item(0).getTextContent();
+		
+		
+		String ime = document.getElementsByTagName("d:ime").item(0).getTextContent();
+		String prezime = document.getElementsByTagName("d:prezime").item(0).getTextContent();
+		String nazivFirme = document.getElementsByTagName("d:naziv_firme").item(0).getTextContent();
+		String korisnickoIme = document.getElementsByTagName("d:korisnicko_ime").item(0).getTextContent();
+		Podnosilac podnosilac = new Podnosilac(ime, prezime, nazivFirme, korisnickoIme);
 
-		String drugiPodaciZaKontakt = document.getElementsByTagName("drugi_podaci_za_kontakt").item(0).getTextContent();
-		String nazivPoverenika = document.getElementsByTagName("naziv_poverenika").item(0).getTextContent();
+		String drugiPodaciZaKontakt = document.getElementsByTagName("d:drugi_podaci_za_kontakt").item(0).getTextContent();
+		String nazivPoverenika = document.getElementsByTagName("d:naziv_poverenika").item(0).getTextContent();
 
-		Element adresaElement = (Element) document.getElementsByTagName("adresa").item(0);
-		String ulica = adresaElement.getElementsByTagName("ulica").item(0).getTextContent();
-		String broj = adresaElement.getElementsByTagName("broj").item(0).getTextContent();
-		String grad = adresaElement.getElementsByTagName("grad").item(0).getTextContent();
+		Element adresaElement = (Element) document.getElementsByTagName("d:adresa").item(0);
+		String ulica = adresaElement.getElementsByTagName("d:ulica").item(0).getTextContent();
+		String broj = adresaElement.getElementsByTagName("d:broj").item(0).getTextContent();
+		String grad = adresaElement.getElementsByTagName("d:grad").item(0).getTextContent();
 		Adresa adresa = new Adresa(ulica, broj, grad);
 
-		Element sedisteElement = (Element) document.getElementsByTagName("sediste_poverenika").item(0);
-		String ulicaSediste = sedisteElement.getElementsByTagName("ulica").item(0).getTextContent();
-		String brojSediste = sedisteElement.getElementsByTagName("broj").item(0).getTextContent();
-		String gradSediste = sedisteElement.getElementsByTagName("grad").item(0).getTextContent();
+		Element sedisteElement = (Element) document.getElementsByTagName("d:sediste_poverenika").item(0);
+		String ulicaSediste = sedisteElement.getElementsByTagName("d:ulica").item(0).getTextContent();
+		String brojSediste = sedisteElement.getElementsByTagName("d:broj").item(0).getTextContent();
+		String gradSediste = sedisteElement.getElementsByTagName("d:grad").item(0).getTextContent();
 		Adresa adresaSediste = new Adresa(ulicaSediste, brojSediste, gradSediste);
 
-		String naslov = document.getElementsByTagName("naslov").item(0).getTextContent();
+		String naslov = document.getElementsByTagName("d:naslov").item(0).getTextContent();
 
-		NodeList paragrafi = document.getElementsByTagName("p");
+		NodeList paragrafi = document.getElementsByTagName("d:p");
 		ArrayList<PZalbaCutanje> paragrafiLista = new ArrayList<PZalbaCutanje>();
 		for (int i = 0; i < paragrafi.getLength(); i++) {
 			String paragrafTekst = paragrafi.item(i).getTextContent().trim();
-			if (((Element) paragrafi.item(i)).getElementsByTagName("datum").item(0) != null) {
-				String datum = ((Element) paragrafi.item(i)).getElementsByTagName("datum").item(0).getTextContent();
+			if (((Element) paragrafi.item(i)).getElementsByTagName("d:datum").item(0) != null) {
+				String datum = ((Element) paragrafi.item(i)).getElementsByTagName("d:datum").item(0).getTextContent();
 				String podaciOZahtevuIInformacijama = ((Element) paragrafi.item(i))
-						.getElementsByTagName("podaci_o_zahtevu_i_informacijama").item(0).getTextContent();
+						.getElementsByTagName("d:podaci_o_zahtevu_i_informacijama").item(0).getTextContent();
 				PZalbaCutanje paragraf = new PZalbaCutanje(paragrafTekst, datum, podaciOZahtevuIInformacijama);
 				paragrafiLista.add(paragraf);
 
-			} else if (((Element) paragrafi.item(i)).getElementsByTagName("naziv_organa").item(0) != null) {
-				String nazivOrgana = ((Element) paragrafi.item(i)).getElementsByTagName("naziv_organa").item(0)
+			} else if (((Element) paragrafi.item(i)).getElementsByTagName("d:naziv_organa").item(0) != null) {
+				String nazivOrgana = ((Element) paragrafi.item(i)).getElementsByTagName("d:naziv_organa").item(0)
 						.getTextContent();
 				PZalbaCutanje paragraf = new PZalbaCutanje(paragrafTekst, nazivOrgana);
 				paragrafiLista.add(paragraf);
@@ -255,13 +274,13 @@ public class DOMParser {
 
 		}
 
-		Element podaciDatumMesto = (Element) document.getElementsByTagName("podaci_o_vremenu_i_mestu_podnosenja_zalbe")
+		Element podaciDatumMesto = (Element) document.getElementsByTagName("d:podaci_o_vremenu_i_mestu_podnosenja_zalbe")
 				.item(0);
 
-		String datum = podaciDatumMesto.getElementsByTagName("datum").item(0).getTextContent();
-		String mesto = podaciDatumMesto.getElementsByTagName("mesto").item(0).getTextContent();
+		String datum = podaciDatumMesto.getElementsByTagName("d:datum").item(0).getTextContent();
+		String mesto = podaciDatumMesto.getElementsByTagName("d:mesto").item(0).getTextContent();
 
-		ZalbaCutanje zalba = new ZalbaCutanje(podnosilac, adresa, drugiPodaciZaKontakt, nazivPoverenika, adresaSediste,
+		ZalbaCutanje zalba = new ZalbaCutanje(uri, uriZahteva, podnosilac, adresa, drugiPodaciZaKontakt, nazivPoverenika, adresaSediste,
 				naslov, paragrafiLista, datum, mesto);
 		System.out.println(zalba);
 		FusekiReader.executeQuery("/zalbeCutanje");

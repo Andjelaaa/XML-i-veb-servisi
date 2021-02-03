@@ -14,6 +14,9 @@ declare const Xonomy: any;
 })
 export class DecisionPageComponent implements OnInit {
     time: any;
+    private id: string = "";
+    private idOdluka: string = '';
+    private idCutanje: string = '';
     constructor(
         private xonomyService: XonomyDecisionService,
         private service: DecisionService,
@@ -21,6 +24,12 @@ export class DecisionPageComponent implements OnInit {
         private route: ActivatedRoute,
         private datePipe: DatePipe) { }
       ngOnInit(): void {
+        this.id = this.route.snapshot.paramMap.get('id') as string;
+        if(this.id.startsWith('o')){
+            this.idOdluka = this.id.substring(1);
+        }else{
+          this.idCutanje = this.id.substring(1);
+        }
       }
       ngAfterViewInit(): void {
         //podatke o podnosiocu dobija iz zalbe
@@ -28,6 +37,9 @@ export class DecisionPageComponent implements OnInit {
         const element = document.getElementById('resenje');
         const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
         <root>
+        <zalbaCutanjeURI>${this.idCutanje}</zalbaCutanjeURI>
+        <zalbaOdlukeURI>${this.idOdluka}</zalbaOdlukeURI>
+        <korisnickoIme>Unesite korisnicko ime</korisnickoIme>
         <naziv>Rešenje</naziv>
         <odluka>kada je zalba osnovana – nalaze se:</odluka>
         <opisPostupka>
@@ -145,6 +157,7 @@ export class DecisionPageComponent implements OnInit {
       }
       submit(): void {
         const text = Xonomy.harvest();
+        console.log(text);
         this.service.sendDecision(text).subscribe(
           response => {
             this.router.navigateByUrl('/home');

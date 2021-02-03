@@ -1,0 +1,26 @@
+<div>
+    <h2>Resenja</h2>
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Broj resenja</th>
+            <th>Tip zalbe</th>
+            <th>Preuzmi PDF</th>
+            <th>Prikaz resenja</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let resenje of list">
+            <td>{{resenje.zaglavlje.datum._text}}</td>
+            <td>{{resenje.zaglavlje.brojResenja._text}}</td>
+            <td *ngIf = "resenje.zalbaCutanjeURI._text">Zalba cutanje</td>
+            <td *ngIf = "resenje.zalbaOdlukeURI._text">Zalba odluke</td>
+            <td><button mat-button color="primary"><a href="{{getHref(resenje.uri._text)}}">Preuzmi PDF</a></button></td>
+            <td><button mat-button color="primary" ><a href="/decision_review/{{resenje.uri._text}}">Prikaz resenja</a></button></td>
+        </tr>
+    </tbody>
+
+    </table>
+    
+</div>

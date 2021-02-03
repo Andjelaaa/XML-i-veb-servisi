@@ -4,19 +4,26 @@ import java.io.ByteArrayOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+import org.xmldb.api.base.ResourceIterator;
+import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.modules.XMLResource;
 
 import com.xml.poverenik.dom.DOMParser;
 import com.xml.poverenik.dom.DOMWriter;
+import com.xml.poverenik.dto.ResenjeDTO;
 import com.xml.poverenik.dto.RetrieveDTO;
+import com.xml.poverenik.dto.ZalbaCutanjeDTO;
 import com.xml.poverenik.model.Resenje;
+import com.xml.poverenik.model.ZalbaCutanje;
 import com.xml.poverenik.repository.ResenjeRepository;
 import com.xml.poverenik.dom.XSLTransformer;
 
@@ -67,5 +74,48 @@ public class ResenjeService {
 	public String convertXMLtoHTML(String id) throws XMLDBException {
 		String xml = resenjeRepository.findResenje(id);
 		return xslTransformer.convertXMLtoHTML(xslPathHTML, xml);
+	}
+	
+	private ArrayList<ResenjeDTO> extractDataFromRequests(ResourceSet resourceSet) {
+		ArrayList<ResenjeDTO> resenjeList = new ArrayList<ResenjeDTO>();
+		ResourceIterator i;
+		try {
+			i = resourceSet.getIterator();
+			while (i.hasMoreResources()) {
+				XMLResource resource = (XMLResource) i.nextResource();
+				
+				Document document = domParser.buildDocumentFromText(resource.getContent().toString());
+				Resenje resenje = domParser.parseResenje(document);
+				
+				resenjeList.add(new ResenjeDTO(resenje));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resenjeList;
+	}
+	
+
+	public List<ResenjeDTO> findDecisionByUser(String username) {
+		String xPathExpression = "/";
+		ResourceSet result = resenjeRepository.findResenja(xPathExpression);		
+		
+		ArrayList<ResenjeDTO> resenjaList = extractDataFromRequests(result);
+		ArrayList<ResenjeDTO> filtriranaListaZalbi = new ArrayList<ResenjeDTO>();
+		for (ResenjeDTO resenjeDTO : resenjaList) {
+			if(resenjeDTO.getKorisnickoIme().equals(username)) {
+				filtriranaListaZalbi.add(resenjeDTO);
+			}
+				
+		}
+		return filtriranaListaZalbi;
+	}
+
+	public List<ResenjeDTO> findAllDecisions() {
+		String xPathExpression = "/";
+		ResourceSet result = resenjeRepository.findResenja(xPathExpression);		
+		
+		ArrayList<ResenjeDTO> resenjeList = extractDataFromRequests(result);	
+		return resenjeList;
 	}
 }

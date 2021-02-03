@@ -6,6 +6,9 @@ import com.xml.poverenik.dto.PZalbaCutanjeDTO;
 import com.xml.poverenik.dto.ZalbaCutanjeDTO;
 
 public class ZalbaCutanje {
+
+	private String URI;
+	private String zahtevURI;
 	private Podnosilac podnosilac;
 	private Adresa adresa;
 	private String drugiPodaciZaKontakt;
@@ -24,6 +27,23 @@ public class ZalbaCutanje {
 		super();
 	}
 
+	public ZalbaCutanje(String uRI, String zahtevURI, Podnosilac podnosilac, Adresa adresa,
+			String drugiPodaciZaKontakt, String nazivPoverenika, Adresa sedistePoverenika, String naslov,
+			ArrayList<PZalbaCutanje> paragrafi, String datumZalbe, String mestoZalbe) {
+		super();
+		URI = uRI;
+		this.zahtevURI = zahtevURI;
+		this.podnosilac = podnosilac;
+		this.adresa = adresa;
+		this.drugiPodaciZaKontakt = drugiPodaciZaKontakt;
+		this.nazivPoverenika = nazivPoverenika;
+		this.sedistePoverenika = sedistePoverenika;
+		this.naslov = naslov;
+		this.paragrafi = paragrafi;
+		this.datumZalbe = datumZalbe;
+		this.mestoZalbe = mestoZalbe;
+	}
+
 	public ZalbaCutanje(Podnosilac podnosilac, Adresa adresa, String drugiPodaciZaKontakt, String nazivPoverenika,
 			Adresa sedistePoverenika, String naslov, ArrayList<PZalbaCutanje> paragrafi, String datumZalbe, String mestoZalbe) {
 		super();
@@ -40,6 +60,7 @@ public class ZalbaCutanje {
 
 	
 	public ZalbaCutanje(ZalbaCutanjeDTO dto) {
+		this.zahtevURI = dto.getZahtevURI();
 		this.podnosilac = new Podnosilac(dto.getPodnosilac());
 		this.adresa = new Adresa(dto.getAdresa());
 		this.drugiPodaciZaKontakt = dto.getDrugiPodaciZaKontakt();
@@ -130,6 +151,23 @@ public class ZalbaCutanje {
 		this.mestoZalbe = mestoZalbe;
 	}
 	
+
+	public String getURI() {
+		return URI;
+	}
+
+	public void setURI(String uRI) {
+		URI = uRI;
+	}
+
+	public String getZahtevURI() {
+		return zahtevURI;
+	}
+
+	public void setZahtevURI(String zahtevURI) {
+		this.zahtevURI = zahtevURI;
+	}
+
 	@Override
 	public String toString() {
 		return "Zalba cutanje [podnosilac=" + podnosilac + ", adresa=" + adresa + ", drugiPodaciZaKontakt="

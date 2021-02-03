@@ -21,4 +21,18 @@ export class AppealDecisionService {
         return this.http.post(`${environment.baseUrl}/${environment.appealDecision}`, request,
          {headers: this.headers, responseType: 'text'});
       }
+      toHtml(id: String){
+        const headersJson = new HttpHeaders({
+          'Content-Type': 'application/json'});
+       return this.http.get(`${environment.baseUrl}/${environment.apiAppealDecision}` + id ,{headers: headersJson, responseType: 'text'});
+    }
+    getUserAppealDecision(username: string): Observable<any>{
+        return this.http.get(`${environment.baseUrl}/${environment.apiAppealDecision}userAppeal/${username}`,
+        {headers: this.headers, responseType: 'text'}); 
+    }
+
+    getAll() :Observable<any>{
+        return this.http.get(`${environment.baseUrl}/${environment.apiAppealDecision}all`,
+        {headers: this.headers, responseType: 'text'}); 
+    }
 }

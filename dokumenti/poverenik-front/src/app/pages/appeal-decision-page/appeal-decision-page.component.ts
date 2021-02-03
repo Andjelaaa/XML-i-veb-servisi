@@ -28,6 +28,7 @@ export class AppealDecisionPageComponent implements OnInit {
         const element = document.getElementById('zalba');
         const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
         <root>
+        <zahtevURI>Unesite URI zahteva</zahtevURI>
            <adresaPodnosioca>
               <broj>21</broj>
               <grad>Novi Sad</grad>

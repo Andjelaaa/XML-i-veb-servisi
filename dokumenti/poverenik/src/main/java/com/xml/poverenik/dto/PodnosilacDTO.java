@@ -37,6 +37,7 @@ public class PodnosilacDTO {
 		this.ime = podnosilac.getIme();
 		this.prezime =  podnosilac.getPrezime();
 		this.nazivFirme = podnosilac.getNazivFirme();
+		this.korisnickoIme = podnosilac.getKorisnickoIme();
 	}
 
 	@Override

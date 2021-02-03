@@ -1,6 +1,7 @@
 package com.xml.poverenik.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +18,7 @@ import org.xmldb.api.base.XMLDBException;
 
 import com.xml.poverenik.dto.RetrieveDTO;
 import com.xml.poverenik.dto.ZalbaCutanjeDTO;
+import com.xml.poverenik.dto.ZalbaOdlukaDTO;
 import com.xml.poverenik.model.ZalbaCutanje;
 import com.xml.poverenik.service.ZalbaCutanjeService;
 
@@ -40,7 +42,6 @@ public class ZalbaCutanjeController {
 	public ResponseEntity<Object> makeZalbaCutanje(@RequestBody ZalbaCutanjeDTO dto) throws Exception{
 //		if(!validate(dto))
 //			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
-	     
 		ZalbaCutanje zc = new ZalbaCutanje(dto);
 		try {
 			 service.makeZalbaCutanje(zc);
@@ -66,7 +67,16 @@ public class ZalbaCutanjeController {
 		System.out.println(result);
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
-	
+	@GetMapping(value = "/userAppeal/{username}", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZalbaCutanjeDTO>> userRequests(@PathVariable("username") String username) throws XMLDBException {
+		List<ZalbaCutanjeDTO> zalbeList = service.findAppealsByUser(username);
+		return new ResponseEntity<List<ZalbaCutanjeDTO>>(zalbeList, HttpStatus.OK);
+	}
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<ZalbaCutanjeDTO>> getAll() throws XMLDBException {
+		List<ZalbaCutanjeDTO> zalbeList = service.findAllAppeal();
+		return new ResponseEntity<List<ZalbaCutanjeDTO>>(zalbeList, HttpStatus.OK);
+	}
 	private boolean validate(ZalbaCutanjeDTO dto) {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd");

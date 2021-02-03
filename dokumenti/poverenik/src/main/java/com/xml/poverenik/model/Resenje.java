@@ -10,10 +10,34 @@ public class Resenje {
 	private TTekst tekstResenja;
 	private TTekst tekstObrazlozenja;
 	private String potpisPoverenika;
+	private String korisnickoIme;
+	private String URI;
+	private String URIZalbaCutanje;
+	private String URIZalbaOdluke;
+	
+	
 	
 	public Resenje() {
 		super();
 	}
+	
+
+	public Resenje(NazivOdluka nazivOdluka, TZaglavlje zaglavlje, String opisPostupka, TTekst tekstResenja,
+			TTekst tekstObrazlozenja, String potpisPoverenika, String korisnickoIme, String uRI, String uRIZalbaCutanje,
+			String uRIZalbaOdluke) {
+		super();
+		this.nazivOdluka = nazivOdluka;
+		this.zaglavlje = zaglavlje;
+		this.opisPostupka = opisPostupka;
+		this.tekstResenja = tekstResenja;
+		this.tekstObrazlozenja = tekstObrazlozenja;
+		this.potpisPoverenika = potpisPoverenika;
+		this.korisnickoIme = korisnickoIme;
+		URI = uRI;
+		URIZalbaCutanje = uRIZalbaCutanje;
+		URIZalbaOdluke = uRIZalbaOdluke;
+	}
+
 
 	public Resenje(NazivOdluka nazivOdluka, TZaglavlje zaglavlje, String opisPostupka, TTekst tekstResenja,
 			TTekst tekstObrazlozenja, String potpisPoverenika) {
@@ -33,6 +57,10 @@ public class Resenje {
 		this.tekstResenja = new TTekst(dto.getTekstResenja());
 		this.tekstObrazlozenja = new TTekst(dto.getTekstObrazlozenja());
 		this.potpisPoverenika = dto.getPotpisPoverenika();
+		this.korisnickoIme = dto.getKorisnickoIme();
+		this.URI = dto.getURI();
+		this.URIZalbaCutanje = dto.getZalbaCutanjeURI();
+		this.URIZalbaOdluke = dto.getZalbaOdlukeURI();
 	}
 
 	public NazivOdluka getNazivOdluka() {
@@ -81,6 +109,38 @@ public class Resenje {
 
 	public void setPotpisPoverenika(String potpisPoverenika) {
 		this.potpisPoverenika = potpisPoverenika;
+	}
+
+	public String getKorisnickoIme() {
+		return korisnickoIme;
+	}
+
+	public void setKorisnickoIme(String korisnickoIme) {
+		this.korisnickoIme = korisnickoIme;
+	}
+
+	public String getURI() {
+		return URI;
+	}
+
+	public void setURI(String uRI) {
+		URI = uRI;
+	}
+
+	public String getURIZalbaCutanje() {
+		return URIZalbaCutanje;
+	}
+
+	public void setURIZalbaCutanje(String uRIZalbaCutanje) {
+		URIZalbaCutanje = uRIZalbaCutanje;
+	}
+
+	public String getURIZalbaOdluke() {
+		return URIZalbaOdluke;
+	}
+
+	public void setURIZalbaOdluke(String uRIZalbaOdluke) {
+		URIZalbaOdluke = uRIZalbaOdluke;
 	}
 
 	@Override

@@ -21,4 +21,19 @@ export class AppealSilenceService {
         return this.http.post(`${environment.baseUrl}/${environment.appealSilence}`, request,
          {headers: this.headers, responseType: 'text'});
       }
+      toHtml(id: String){
+        const headersJson = new HttpHeaders({
+          'Content-Type': 'application/json'});
+       return this.http.get(`${environment.baseUrl}/${environment.apiAppealSilence}` + id ,{headers: headersJson, responseType: 'text'});
+    }
+
+    getUserAppealSilence(username: string): Observable<any>{
+        return this.http.get(`${environment.baseUrl}/${environment.apiAppealSilence}userAppeal/${username}`,
+        {headers: this.headers, responseType: 'text'}); 
+    }
+
+    getAll() :Observable<any>{
+        return this.http.get(`${environment.baseUrl}/${environment.apiAppealSilence}all`,
+        {headers: this.headers, responseType: 'text'}); 
+    }
 }

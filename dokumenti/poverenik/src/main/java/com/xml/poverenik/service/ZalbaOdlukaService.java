@@ -4,18 +4,26 @@ import java.io.ByteArrayOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+import org.xmldb.api.base.ResourceIterator;
+import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.modules.XMLResource;
 
 import com.xml.poverenik.dom.DOMParser;
 import com.xml.poverenik.dom.DOMWriter;
 import com.xml.poverenik.dom.XSLTransformer;
 import com.xml.poverenik.dto.RetrieveDTO;
+import com.xml.poverenik.dto.ZalbaCutanjeDTO;
+import com.xml.poverenik.dto.ZalbaOdlukaDTO;
+import com.xml.poverenik.model.ZalbaCutanje;
 import com.xml.poverenik.model.ZalbaOdluke;
 import com.xml.poverenik.repository.ZalbaOdlukeRepository;
 
@@ -68,4 +76,47 @@ public class ZalbaOdlukaService {
 		String xml = zalbaOdlukeRepository.findZalbaOdluke(id);
 		return xslTransformer.convertXMLtoHTML(xslPathHTML, xml);
 	}
+
+	public List<ZalbaOdlukaDTO> findAppealsByUser(String username) {
+		String xPathExpression = "/";
+		ResourceSet result = zalbaOdlukeRepository.findZalbe(xPathExpression);		
+		
+		ArrayList<ZalbaOdlukaDTO> zalbeList = extractDataFromRequests(result);
+		ArrayList<ZalbaOdlukaDTO> filtriranaListaZalbi = new ArrayList<ZalbaOdlukaDTO>();
+		for (ZalbaOdlukaDTO zalbaDTO : zalbeList) {
+			if(zalbaDTO.getNazivPodnosioca().getKorisnickoIme().equals(username)) {
+				filtriranaListaZalbi.add(zalbaDTO);
+			}
+				
+		}
+		return filtriranaListaZalbi;	
+	}
+	private ArrayList<ZalbaOdlukaDTO> extractDataFromRequests(ResourceSet resourceSet) {
+		ArrayList<ZalbaOdlukaDTO> zalbeList = new ArrayList<ZalbaOdlukaDTO>();
+		ResourceIterator i;
+		try {
+			i = resourceSet.getIterator();
+			while (i.hasMoreResources()) {
+				XMLResource resource = (XMLResource) i.nextResource();
+				
+				Document document = domParser.buildDocumentFromText(resource.getContent().toString());
+				ZalbaOdluke zalba = domParser.parseZalbaOdluke(document);
+				
+				zalbeList.add(new ZalbaOdlukaDTO(zalba));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return zalbeList;
+	}
+
+	public List<ZalbaOdlukaDTO> findAllAppeal() {
+		
+		String xPathExpression = "/";
+		ResourceSet result = zalbaOdlukeRepository.findZalbe(xPathExpression);		
+		
+		ArrayList<ZalbaOdlukaDTO> zalbeList = extractDataFromRequests(result);	
+		return zalbeList;
+	}
+
 }
