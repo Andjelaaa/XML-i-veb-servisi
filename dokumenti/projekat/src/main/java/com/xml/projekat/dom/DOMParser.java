@@ -40,7 +40,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.xml.projekat.model.*;
-import com.xml.projekat.rdf.FusekiReader;;
+import com.xml.projekat.rdf.FusekiReader;
 
 @Component
 public class DOMParser {
@@ -304,6 +304,17 @@ public class DOMParser {
 		FusekiReader.executeQuery("/obavestenja");
 		return obavestenje;
 	}
+	
+	public Izvestaj parseIzvestaj(Document document) {
+		String godina = document.getElementsByTagName("d:godina").item(0).getTextContent();
+		String brPodnetihZahteva = document.getElementsByTagName("d:br_podnetih_zahteva").item(0).getTextContent();
+		String brOdbijenihZahteva = document.getElementsByTagName("d:br_odbijenih_zahteva").item(0).getTextContent();
+		String brZalbi = document.getElementsByTagName("d:br_zalbi").item(0).getTextContent();
+		Izvestaj izvestaj = new Izvestaj(godina, brPodnetihZahteva, brOdbijenihZahteva, brZalbi);
+		
+		return izvestaj;
+	}
+
 
 	/**
 	 * A recursive helper method for iterating over the elements of a DOM tree.
@@ -388,4 +399,5 @@ public class DOMParser {
 		}
 	}
 
+	
 }
