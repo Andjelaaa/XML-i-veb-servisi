@@ -67,4 +67,8 @@ public class IzvestajController {
 		String result = service.convertXMLtoHTML(name);
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
+	
+	
+	
+	
 }

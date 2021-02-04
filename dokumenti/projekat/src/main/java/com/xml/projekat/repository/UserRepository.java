@@ -133,7 +133,6 @@ public class UserRepository {
 		TUser foundUser = null;
 		try {
 			ResourceSet result = existManager.retrieve(collectionId, xPathExpression);
-			
 			if (result == null) {
 				return null;
 			}
@@ -156,7 +155,6 @@ public class UserRepository {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(foundUser.getUsername());
 		return foundUser;
 	}
 	

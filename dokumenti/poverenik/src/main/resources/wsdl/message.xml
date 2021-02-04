@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:message xmlns:d="http://message" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xs:schemaLocation="http://message message.xsd ">
+<d:godina>2021</d:godina>
+<d:br_podnetih_zahteva>2</d:br_podnetih_zahteva>
+<d:br_odbijenih_zahteva>1</d:br_odbijenih_zahteva>
+<d:br_zalbi>20</d:br_zalbi>
+</d:message>

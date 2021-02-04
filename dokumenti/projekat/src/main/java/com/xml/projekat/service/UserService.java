@@ -66,9 +66,9 @@ public class UserService {
 
 	public void create(TUser user) throws Exception {
 		
-		//TUser tUser = userRepository.findOne(user.getUsername());
-		//if (tUser != null)
-		//	throw new Exception("User with given username already exist");
+		TUser tUser = userRepository.findOne(user.getUsername());
+		if (tUser != null)
+			throw new Exception("User with given username already exist");
 		TUser t = new TUser();
 		t.setFirstName(user.getFirstName());
 		t.setLastName(user.getLastName());

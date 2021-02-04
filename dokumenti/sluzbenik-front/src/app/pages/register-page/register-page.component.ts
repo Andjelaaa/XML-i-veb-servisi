@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user-service/user.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
@@ -15,7 +15,9 @@ export class RegisterPageComponent implements OnInit {
   constructor(
       private fb: FormBuilder,
       private userService: UserService,
-      private router: Router
+      private router: Router,
+      private toastr: ToastrService
+
   ) {
       this.createForm();
   }
@@ -34,11 +36,12 @@ export class RegisterPageComponent implements OnInit {
   }
   submit(): void {
     if (this.formRegister.invalid){
-        // toaster
+        this.toastr.error('Sva polja su obavezna.');
         return;
+        
     }
     if (this.formRegister.value.password !== this.formRegister.value.passwordRepeat){
-        // toaster
+        this.toastr.error('Šifre nisu iste.');
         return;
     }
     const user: any = {};
@@ -61,7 +64,7 @@ export class RegisterPageComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       error => {
-          console.log('toaster da e moze da ga kreira');
+        this.toastr.error('Zauzeto korisničko ime.');
       }
     );
   }

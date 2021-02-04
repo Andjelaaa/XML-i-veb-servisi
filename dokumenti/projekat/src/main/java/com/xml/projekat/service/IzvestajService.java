@@ -6,10 +6,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.soap.MessageFactory;
+import javax.xml.soap.SOAPBody;
+import javax.xml.soap.SOAPConnection;
+import javax.xml.soap.SOAPConnectionFactory;
+import javax.xml.soap.SOAPElement;
+import javax.xml.soap.SOAPEnvelope;
+import javax.xml.soap.SOAPMessage;
+import javax.xml.soap.SOAPPart;
 import javax.xml.transform.TransformerException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +31,7 @@ import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
+import com.xml.projekat.data.types.Message;
 import com.xml.projekat.dom.DOMParser;
 import com.xml.projekat.dom.DOMWriter;
 import com.xml.projekat.dom.XSLTransformer;
@@ -61,7 +71,7 @@ public class IzvestajService {
 		return izvestaj;
 	}
 
-	public Izvestaj makeIzvestaj() throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException, TransformerException, IOException {
+	public Izvestaj makeIzvestaj() throws Exception {
 		
 		Izvestaj izvestaj = new Izvestaj();
 		List<ZahtevDTO> zahteviList = zahtevService.findAllRequests();
@@ -93,6 +103,7 @@ public class IzvestajService {
 			e.printStackTrace();
 		}
 		
+		posaljiIzvestajPovereniku(izvestaj);
 		
 		
 		return izvestaj;
@@ -139,4 +150,52 @@ public class IzvestajService {
 		}
 		return izvestajiList;
 	}
+	
+	public void posaljiIzvestajPovereniku(Izvestaj izvestaj) throws Exception{
+		
+		String soapEndpointUrl = "http://localhost:8082/ws/izvestaj";
+        
+        SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+        SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+
+        
+        MessageFactory messageFactory = MessageFactory.newInstance();
+        SOAPMessage soapMessage = messageFactory.createMessage();
+        
+        SOAPPart soapPart = soapMessage.getSOAPPart();
+
+        String myNamespace = "d";
+        String myNamespaceURI = "http://message";
+
+        // SOAP Envelope
+        SOAPEnvelope envelope = soapPart.getEnvelope();
+        envelope.addNamespaceDeclaration(myNamespace, myNamespaceURI);
+
+        SOAPBody soapBody = envelope.getBody();
+        envelope.addNamespaceDeclaration(myNamespace, myNamespaceURI);
+
+        SOAPElement izvestajSend = soapBody.addChildElement("message", myNamespace);
+        
+        SOAPElement godina = izvestajSend.addChildElement("godina", myNamespace);
+        godina.addTextNode(izvestaj.getGodina());
+        SOAPElement brPodnetihZahteva = izvestajSend.addChildElement("br_podnetih_zahteva", myNamespace);
+        brPodnetihZahteva.addTextNode(izvestaj.getBrPodnetihZahteva());
+        
+        SOAPElement brOdbijenihZahteva = izvestajSend.addChildElement("br_odbijenih_zahteva", myNamespace);
+        brOdbijenihZahteva.addTextNode(izvestaj.getBrOdbijenihZahteva());
+        
+        SOAPElement brZalbi = izvestajSend.addChildElement("br_zalbi", myNamespace);
+        brZalbi.addTextNode(izvestaj.getBrZalbi());
+       
+        soapMessage.saveChanges();
+
+        System.out.println("Request SOAP Message:");
+        soapMessage.writeTo(System.out);
+        System.out.println("\n");
+        SOAPMessage soapResponse = soapConnection.call(soapMessage, soapEndpointUrl);
+
+        // Print the SOAP Response
+        System.out.println("Response SOAP Message:");
+        soapResponse.writeTo(System.out);
+}	
 }

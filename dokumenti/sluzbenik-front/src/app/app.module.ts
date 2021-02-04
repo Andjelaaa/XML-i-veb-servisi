@@ -20,6 +20,7 @@ import { NewRequestsListComponent } from './pages/new-requests-list/new-requests
 import { AllRequestsListComponent } from './pages/all-requests-list/all-requests-list.component';
 import { InformationListComponent } from './pages/information-list/information-list.component';
 import { AllInformationListComponent } from './pages/all-information-list/all-information-list.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AllInformationListComponent } from './pages/all-information-list/all-in
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
+    ToastrModule.forRoot()
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true}],
   bootstrap: [AppComponent],

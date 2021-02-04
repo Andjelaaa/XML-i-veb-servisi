@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://message" xmlns:d="http://message">
+   <xs:element name="message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="godina"/>
+        <xs:element type="xs:string" name="br_podnetih_zahteva"/>
+        <xs:element type="xs:string" name="br_odbijenih_zahteva"/>
+        <xs:element type="xs:string" name="br_zalbi"/>
+      </xs:sequence>
+    </xs:complexType>
+    </xs:element>  
+</xs:schema>

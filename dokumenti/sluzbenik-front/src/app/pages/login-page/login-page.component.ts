@@ -2,6 +2,7 @@ import { XmlParser } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/services/user-service/user.service';
 @Component({
   selector: 'app-login-page',
@@ -14,7 +15,8 @@ export class LoginPageComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private userService: UserService,
-        private router: Router
+        private router: Router,
+        private toastr: ToastrService
     ) {
         this.createForm();
     }
@@ -46,7 +48,7 @@ export class LoginPageComponent implements OnInit {
             this.router.navigate(['/home']);
           },
           error => {
-              console.log(error);
+            this.toastr.error('Pogrešno korisničko ime ili šifra.');
           }
         );
       }

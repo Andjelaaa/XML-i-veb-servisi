@@ -37,6 +37,7 @@ import com.xml.poverenik.rdf.MetadataExtractor;
 import com.xml.poverenik.repository.ResenjeRepository;
 import com.xml.poverenik.repository.ZalbaCutanjeRepository;
 import com.xml.poverenik.repository.ZalbaOdlukeRepository;
+import com.xml.poverenik.ws.izvestaj.Message;
 
 /**
  * 
@@ -219,7 +220,37 @@ public class DOMWriter {
 		
 
 	}
-
+	public String generateDOMIzvestaj(Message i) {
+		createDocument();
+		ProcessingInstruction newPI = document.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"src/main/resources/podaci/xsl/izvestaj.xsl\"");
+		document.insertBefore(newPI, document.getDocumentElement());
+		Element izvestaj = document.createElement("d:message");
+	
+		izvestaj.setAttribute("xmlns:xs","http://www.w3.org/2001/XMLSchema#");
+		izvestaj.setAttribute("xmlns:d","http://www.ftn.uns.ac.rs/xpath/examples");
+		
+		
+		document.appendChild(izvestaj);
+	
+		Element godina = document.createElement("d:godina");
+		godina.appendChild(document.createTextNode(i.getGodina()));
+		izvestaj.appendChild(godina);
+		Element brPodnetihZahteva = document.createElement("d:br_podnetih_zahteva");
+		brPodnetihZahteva.appendChild(document.createTextNode(i.getBrPodnetihZahteva()));
+		izvestaj.appendChild(brPodnetihZahteva);
+		
+		Element brOdbijenihZahteva = document.createElement("d:br_odbijenih_zahteva");
+		brOdbijenihZahteva.appendChild(document.createTextNode(i.getBrOdbijenihZahteva()));
+		izvestaj.appendChild(brOdbijenihZahteva);
+		
+		Element brZalbi = document.createElement("d:br_zalbi");
+		brZalbi.appendChild(document.createTextNode(i.getBrZalbi()));
+		izvestaj.appendChild(brZalbi);
+		
+		StringWriter sw = new StringWriter();
+		transform(sw);
+		return sw.toString();
+	}
 	public String generateZalbaOdluke(ZalbaOdluke zo) throws TransformerException, IOException, XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		createDocument();
 

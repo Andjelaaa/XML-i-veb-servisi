@@ -36,7 +36,6 @@ export class RegisterPageComponent implements OnInit {
   }
   submit(): void {
     if (this.formRegister.invalid){
-        console.log('ssssssssssssss');
         this.toastr.error('Sva polja su obavezna.');
         return;
     }

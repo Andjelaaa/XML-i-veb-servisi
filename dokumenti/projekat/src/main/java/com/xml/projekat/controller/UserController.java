@@ -34,11 +34,17 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<UserTokenStateDTO> login(@RequestBody LoginDTO dto)
 			throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException {
-		UserTokenStateDTO jwt = userService.login(dto);
-		if (jwt != null) {
-			return new ResponseEntity<UserTokenStateDTO>(jwt, HttpStatus.OK);
+		UserTokenStateDTO jwt = null;
+		try {
+			jwt = userService.login(dto);
+			if (jwt != null) {
+				return new ResponseEntity<UserTokenStateDTO>(jwt, HttpStatus.OK);
+			}
 		}
-		return new ResponseEntity<UserTokenStateDTO>(jwt, HttpStatus.BAD_REQUEST);
+		catch(Exception e) {
+			return new ResponseEntity<UserTokenStateDTO>(jwt, HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<UserTokenStateDTO>(jwt, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)

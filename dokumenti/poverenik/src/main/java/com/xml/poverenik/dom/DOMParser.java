@@ -10,8 +10,6 @@ import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -40,7 +38,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.xml.poverenik.model.Adresa;
-import com.xml.poverenik.model.Izbor;
 import com.xml.poverenik.model.NazivOdluka;
 import com.xml.poverenik.model.PZalbaCutanje;
 import com.xml.poverenik.model.PZalbaOdluke;
@@ -50,7 +47,8 @@ import com.xml.poverenik.model.TTekst;
 import com.xml.poverenik.model.TZaglavlje;
 import com.xml.poverenik.model.ZalbaCutanje;
 import com.xml.poverenik.model.ZalbaOdluke;
-import com.xml.poverenik.rdf.FusekiReader;;
+import com.xml.poverenik.rdf.FusekiReader;
+import com.xml.poverenik.ws.izvestaj.Message;
 
 @Component
 public class DOMParser {
@@ -96,7 +94,15 @@ public class DOMParser {
 		return sw.toString();
 
 	}
-
+	public Message parseIzvestaj(Document document) {
+		String godina = document.getElementsByTagName("d:godina").item(0).getTextContent();
+		String brPodnetihZahteva = document.getElementsByTagName("d:br_podnetih_zahteva").item(0).getTextContent();
+		String brOdbijenihZahteva = document.getElementsByTagName("d:br_odbijenih_zahteva").item(0).getTextContent();
+		String brZalbi = document.getElementsByTagName("d:br_zalbi").item(0).getTextContent();
+		Message izvestaj = new Message(godina, brPodnetihZahteva, brOdbijenihZahteva, brZalbi);
+		
+		return izvestaj;
+	}
 	public Resenje parseResenje(Document document) throws ParseException, IOException {
 		
 		String uri = document.getElementsByTagName("d:URI").item(0).getTextContent();
