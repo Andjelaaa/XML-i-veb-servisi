@@ -71,11 +71,18 @@ public class ResenjeService {
 	public Resource getPdf(String id) throws Exception {
 		String document = resenjeRepository.findResenje(id);
 		ByteArrayOutputStream outputStream = xslTransformer.generatePDf(document, xslFOPath);
-
+		
 		Path file = Paths.get(id + ".pdf");
 		Files.write(file, outputStream.toByteArray());
 
 		return new UrlResource(file.toUri());
+	}
+	
+	public byte[] getPdfAsByteArray(String id) throws Exception {
+		String document = resenjeRepository.findResenje(id);
+		ByteArrayOutputStream outputStream = xslTransformer.generatePDf(document, xslFOPath);
+		
+		return outputStream.toByteArray();
 	}
 	
 	public String convertXMLtoHTML(String id) throws XMLDBException {

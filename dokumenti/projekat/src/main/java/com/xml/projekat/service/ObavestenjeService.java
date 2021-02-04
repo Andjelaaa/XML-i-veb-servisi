@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.xml.transform.TransformerException;
 
+import org.quartz.plugins.history.LoggingTriggerHistoryPlugin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -20,14 +21,15 @@ import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
+import com.xml.projekat.data.types.Message;
 import com.xml.projekat.dom.DOMParser;
 import com.xml.projekat.dom.DOMWriter;
 import com.xml.projekat.dom.XSLTransformer;
 import com.xml.projekat.dto.ObavestenjeDTO;
 import com.xml.projekat.dto.RetrieveDTO;
-import com.xml.projekat.dto.ZahtevDTO;
 import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.repository.ObavestenjeRepository;
+import com.xml.projekat.repository.UserRepository;
 
 @Service
 public class ObavestenjeService {
@@ -40,8 +42,15 @@ public class ObavestenjeService {
 	@Autowired
 	private ObavestenjeRepository obavestenjeRepository;
 	
+	@Autowired 
+	private EmailService emailService;
+//	@Autowired User
 	@Autowired
 	private XSLTransformer xslTransformer;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
 	
 	public ObavestenjeService(DOMParser domParser,DOMWriter domWriter) {
 		this.domParser = domParser;
@@ -55,10 +64,22 @@ public class ObavestenjeService {
 		return obavestenje;
 	}
 
-	public void makeObavestenje(Obavestenje obavestenje) throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException, TransformerException, IOException {
+	public void makeObavestenje(Obavestenje obavestenje) throws Exception {
 		String documentContent = domWriter.generateDOMObavestenje(obavestenje);
 		String naziv = (obavestenjeRepository.getSize()+1) + ".xml";
 		obavestenjeRepository.save(documentContent, naziv);
+		Message message = new Message();
+		String username = obavestenje.getPodnosilac().getKorisnickoIme();
+		String email = userRepository.findOneByUsername(username).getEmail();
+		String naslov = "Obavestenje za poslati zahtev za informacijama od javnog znacaja";
+		String sadrzaj = "Za pregled obavestenja udjite na link: "+ "http://localhost:4200/obavestenje/" + obavestenjeRepository.getSize();
+		byte[] prilog = getPdfAsByteArray(obavestenjeRepository.getSize()+"");
+		message.setPrimalac(email);
+		message.setNaslov(naslov);
+		message.setSadrzaj(sadrzaj);
+		message.setPrilog(prilog);
+		message.setTipPriloga("pdf");
+		emailService.posaljiMejl(message);
 	}
 	
 	public Resource getPdf(String id) throws Exception {
@@ -70,6 +91,14 @@ public class ObavestenjeService {
 
 		return new UrlResource(file.toUri());
 	}
+	
+	public byte[] getPdfAsByteArray(String id) throws Exception {
+		String document = obavestenjeRepository.findObavestenje(id);
+		ByteArrayOutputStream outputStream = xslTransformer.generatePDf(document, xslFOPath);
+		
+		return outputStream.toByteArray();
+	}
+	
 	public String convertXMLtoHTML(String id) throws XMLDBException {
 		String xml = obavestenjeRepository.findObavestenje(id);
 		return xslTransformer.convertXMLtoHTML(xslPathHTML, xml);

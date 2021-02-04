@@ -15,6 +15,6 @@
 		<url-pattern>/ws/*</url-pattern>
 	</servlet-mapping>
 	<session-config>
-		<session-timeout>160</session-timeout>
+		<session-timeout>1600</session-timeout>
 	</session-config>
 </web-app>

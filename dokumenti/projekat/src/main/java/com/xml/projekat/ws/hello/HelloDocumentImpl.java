@@ -26,13 +26,10 @@ import com.xml.projekat.ws.hello.types.ObjectFactory;
                       wsdlLocation = "classpath:wsdl/HelloDocument.wsdl",
                       endpointInterface = "com.xml.projekat.ws.hello.HelloDocument")
                       
-public class HelloDocumentPortImpl implements HelloDocument {
+public class HelloDocumentImpl implements HelloDocument {
 
-    private static final Logger LOG = Logger.getLogger(HelloDocumentPortImpl.class.getName());
+    private static final Logger LOG = Logger.getLogger(HelloDocumentImpl.class.getName());
 
-    /* (non-Javadoc)
-     * @see com.xml.projekat.ws.hello.HelloDocument#sayHelloMiss(com.xml.projekat.ws.hello.types.RequestMissType requestMiss)*
-     */
     public java.lang.String sayHelloMiss(com.xml.projekat.ws.hello.types.RequestMissType requestMiss) { 
     	LOG.info("Executing operation sayHelloMiss");
 		System.out.println(requestMiss);

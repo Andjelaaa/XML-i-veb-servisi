@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ps:message xmlns:ps="http://message" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://message message.xsd ">
+  <ps:primalac>ps:primalac</ps:primalac>
+  <ps:naslov>ps:naslov</ps:naslov>
+  <ps:sadrzaj>ps:sadrzaj</ps:sadrzaj>
+  <ps:prilog>MA==</ps:prilog>
+</ps:message>

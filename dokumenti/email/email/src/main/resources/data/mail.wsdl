@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="EmailService"
+    targetNamespace="http://mail"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:elem="http://message"
+    xmlns:tns="http://mail">
+    
+    <wsdl:types>
+        <xs:schema>
+            <xs:import namespace="http://message" 
+                schemaLocation= "./message.xsd"/>  
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="posaljiPorukuRequest">
+        <wsdl:part name="message" element="elem:message" />
+    </wsdl:message>
+    <wsdl:message name="posaljiPorukuResponse" />
+    
+    <wsdl:portType name="EmailServicePortType">
+        <wsdl:operation name="posaljiPoruku">
+            <wsdl:input message="tns:posaljiPorukuRequest" />
+            <wsdl:output message="tns:posaljiPorukuResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <wsdl:binding name="EmailServiceSoapBinding" type="tns:EmailServicePortType">
+        <soap:binding style="rpc"  transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="posaljiPoruku">
+            <soap:operation soapAction="http://email/ws/posaljiPoruku" />
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <wsdl:service name="EmailService">
+        <wsdl:port name="EmailServiceSoapBinding" binding="tns:EmailServiceSoapBinding">
+            <soap:address location="http://localhost:8083/emailPort" />
+        </wsdl:port>
+    </wsdl:service>
+    
+</wsdl:definitions>

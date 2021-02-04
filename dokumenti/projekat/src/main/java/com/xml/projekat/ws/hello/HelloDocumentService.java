@@ -1,10 +1,13 @@
 package com.xml.projekat.ws.hello;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import javax.xml.namespace.QName;
 import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
 import javax.xml.ws.WebServiceFeature;
+
+
 import javax.xml.ws.Service;
 
 /**
@@ -23,13 +26,15 @@ public class HelloDocumentService extends Service {
     public final static QName SERVICE = new QName("http://projekat.xml.com/ws/hello", "HelloDocumentService");
     public final static QName HelloDocumentPort = new QName("http://projekat.xml.com/ws/hello", "HelloDocumentPort");
     static {
-        URL url = HelloDocumentService.class.getClassLoader().getResource("wsdl/HelloDocument.wsdl");
-        if (url == null) {
+        URL url = null;
+        try {
+            url = new URL("file:/C:/Users/Milica/Desktop/XML-i-veb-servisi/dokumenti/projekat/src/main/resources/wsdl/HelloDocument.wsdl");
+        } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(HelloDocumentService.class.getName())
-                .log(java.util.logging.Level.INFO, 
-                     "Can not initialize the default wsdl from {0}", "classpath:wsdl/HelloDocument.wsdl");
-        }       
-        WSDL_LOCATION = url;   
+                .log(java.util.logging.Level.INFO,
+                     "Can not initialize the default wsdl from {0}", "file:/C:/Users/Predator/Desktop/XML/SOAP%20JAX-WS%20(Example%203)/src/main/resources/wsdl/HelloDocument.wsdl");
+        }
+        WSDL_LOCATION = url;
     }
 
     public HelloDocumentService(URL wsdlLocation) {
