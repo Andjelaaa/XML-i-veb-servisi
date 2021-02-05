@@ -1,7 +1,9 @@
 package com.xml.poverenik.service;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,13 +13,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.soap.MessageFactory;
+import javax.xml.soap.SOAPBody;
+import javax.xml.soap.SOAPConnection;
+import javax.xml.soap.SOAPConnectionFactory;
+import javax.xml.soap.SOAPConstants;
+import javax.xml.soap.SOAPElement;
+import javax.xml.soap.SOAPEnvelope;
+import javax.xml.soap.SOAPMessage;
+import javax.xml.soap.SOAPPart;
+import javax.xml.transform.dom.DOMSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.ProcessingInstruction;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
@@ -30,6 +50,7 @@ import com.xml.poverenik.dom.DOMWriter;
 import com.xml.poverenik.dto.ResenjeDTO;
 import com.xml.poverenik.dto.RetrieveDTO;
 import com.xml.poverenik.dto.SearchResenjeDTO;
+
 import com.xml.poverenik.model.Resenje;
 import com.xml.poverenik.rdf.FusekiReader;
 import com.xml.poverenik.repository.ResenjeRepository;
@@ -73,6 +94,7 @@ public class ResenjeService {
 		String documentContent = domWriter.generateResenje(r);
 		String naziv = (resenjeRepository.getSize()+1) + ".xml";
 		resenjeRepository.save(documentContent, naziv);
+		posaljiResenjeSluzbeniku(r, resenjeRepository.getSize());
 		Message message = new Message();
 		String username = r.getKorisnickoIme();
 		String email = userRepository.findOneByUsername(username).getEmail();
@@ -85,6 +107,7 @@ public class ResenjeService {
 		message.setPrilog(prilog);
 		message.setTipPriloga("pdf");
 		emailService.posaljiMejl(message);
+		
 	}
 
 	public Resource getPdf(String id) throws Exception {
@@ -230,4 +253,89 @@ public class ResenjeService {
 		}
 		return filtriranaList;
 	}
+	
+	public void posaljiResenjeSluzbeniku(Resenje resenje, Integer urii) throws Exception{
+		
+		
+		String soapEndpointUrl = "http://localhost:8081/ws/resenjee";
+        SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+        SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+       
+        MessageFactory messageFactory = MessageFactory.newInstance();
+  
+        SOAPMessage soapMessage = messageFactory.createMessage();
+        soapMessage.getMimeHeaders().addHeader("SOAPAction", "\"\"");
+        SOAPPart soapPart = soapMessage.getSOAPPart();
+        // SOAP Envelope
+        String myNamespace = "d";
+        String myNamespaceURI = "http://dokument_resenje";
+        SOAPEnvelope envelope = soapPart.getEnvelope();
+        envelope.addNamespaceDeclaration(myNamespace, myNamespaceURI);
+
+        SOAPBody soapBody = envelope.getBody();
+        envelope.addNamespaceDeclaration(myNamespace, myNamespaceURI);
+
+        SOAPElement resenjeSend = soapBody.addChildElement("dokument_resenje", myNamespace);
+        
+        SOAPElement uri = resenjeSend.addChildElement("URI", myNamespace);
+        uri.addTextNode(urii+"");
+        SOAPElement zalbaCutanja = resenjeSend.addChildElement("zalba_cutanje_uri", myNamespace);
+        SOAPElement zalbaOdluke = resenjeSend.addChildElement("zalba_odluke_uri", myNamespace);
+        if(resenje.getURIZalbaCutanje() !=null) {
+        	zalbaCutanja.addTextNode(resenje.getURIZalbaCutanje());
+        }
+        else
+        	zalbaOdluke.addTextNode(resenje.getURIZalbaOdluke());
+        	        
+        SOAPElement nazivResenja = resenjeSend.addChildElement("naziv_resenja", myNamespace);
+        nazivResenja.addTextNode(resenje.getNazivOdluka().getNazivResenja());
+        
+        SOAPElement odluka = nazivResenja.addChildElement("odluka", myNamespace);
+        odluka.addTextNode(resenje.getNazivOdluka().getNazivResenja());
+        
+        SOAPElement zaglavlje = resenjeSend.addChildElement("zaglavlje", myNamespace);
+              
+        SOAPElement brojResenja = zaglavlje.addChildElement("broj_resenja", myNamespace);
+        brojResenja.addTextNode(resenje.getZaglavlje().getBrojResenja());
+        
+        SOAPElement datum = zaglavlje.addChildElement("datum", myNamespace);
+        datum.addTextNode(resenje.getZaglavlje().getDatum());
+       
+        SOAPElement opisPostupka = resenjeSend.addChildElement("opis_postupka", myNamespace);
+        opisPostupka.addTextNode(resenje.getOpisPostupka());
+        
+        SOAPElement tekstResenja = resenjeSend.addChildElement("tekst_resenja", myNamespace);
+        tekstResenja.addTextNode(resenje.getTekstResenja().getTekst());
+        
+        for (int i = 0; i < resenje.getTekstResenja().getParagrafi().size(); i++) {
+        	SOAPElement paragraf = tekstResenja.addChildElement("p", myNamespace);
+        	paragraf.addTextNode(resenje.getTekstResenja().getParagrafi().get(i));
+		}
+        
+        SOAPElement tekstObrazlozenja = resenjeSend.addChildElement("tekst_obrazlozenja", myNamespace);
+        tekstObrazlozenja.addTextNode(resenje.getTekstObrazlozenja().getTekst());
+        
+        for (int i = 0; i < resenje.getTekstObrazlozenja().getParagrafi().size(); i++) {
+        	SOAPElement paragraf = tekstObrazlozenja.addChildElement("p", myNamespace);
+        	paragraf.addTextNode(resenje.getTekstObrazlozenja().getParagrafi().get(i));
+		}
+		
+        SOAPElement potpis = resenjeSend.addChildElement("potpis_poverenika", myNamespace);
+        potpis.addTextNode(resenje.getPotpisPoverenika());
+        
+        SOAPElement korisnicko = resenjeSend.addChildElement("korisnicko_ime", myNamespace);
+        korisnicko.addTextNode(resenje.getKorisnickoIme());
+          
+        soapMessage.saveChanges();
+
+        System.out.println("Request SOAP Message:");
+        soapMessage.writeTo(System.out);
+        System.out.println("\n");
+        SOAPMessage soapResponse = soapConnection.call(soapMessage, soapEndpointUrl);
+
+        // Print the SOAP Response
+        System.out.println("Response SOAP Message:");
+        soapResponse.writeTo(System.out);
+	}
+
 }

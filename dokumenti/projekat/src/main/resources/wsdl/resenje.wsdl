@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<wsdl:definitions name="DecisionService"
+    targetNamespace="http://resenje"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:elem="http://dokument_resenje"
+    xmlns:tns="http://resenje">
+    
+    <wsdl:types>
+        <xs:schema>
+            <xs:import namespace="http://dokument_resenje" 
+                schemaLocation= "./dokument_resenje.xsd"/>  
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="sendDecisionRequest">
+        <wsdl:part name="dokument_resenje" element="elem:dokument_resenje" />
+    </wsdl:message>
+    <wsdl:message name="sendDecisionResponse" />
+    
+    <wsdl:portType name="DecisionServicePortType">
+        <wsdl:operation name="sendDecision">
+            <wsdl:input message="tns:sendDecisionRequest" />
+            <wsdl:output message="tns:sendDecisionResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <wsdl:binding name="DecisionServiceSoapBinding" type="tns:DecisionServicePortType">
+        <soap:binding style="rpc"  transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="sendDecision">
+            <soap:operation soapAction="http://resenjee/ws/sendDecision" />
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <wsdl:service name="DecisionService">
+        <wsdl:port name="DecisionServiceSoapBinding" binding="tns:DecisionServiceSoapBinding">
+            <soap:address location="http://localhost:8081/decisionPort" />
+        </wsdl:port>
+    </wsdl:service>
+    
+</wsdl:definitions>

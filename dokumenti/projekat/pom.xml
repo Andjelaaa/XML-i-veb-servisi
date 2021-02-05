@@ -108,16 +108,16 @@
 	<profiles>
 			<profile>
 				<id>noGenerate</id>
-					<activation> <!-- Ovo treba promeniti za generisanje -->
+				<activation> <!-- Ovo treba promeniti za generisanje -->
 					<activeByDefault>true</activeByDefault>
-				</activation>
+				</activation>	
 				<properties>
 					<xjc.generate>none</xjc.generate> 
 				</properties>
 			</profile>
 			<profile>
 				<id>generate</id>
-			
+				
 				<properties>
 					<xjc.generate>generate-sources</xjc.generate>
 				</properties>
@@ -141,12 +141,12 @@
 							<sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>${basedir}/src/main/resources/wsdl/izvestaj.wsdl</wsdl>
+									<wsdl>${basedir}/src/main/resources/wsdl/resenje.wsdl</wsdl>
 									<extraargs>
 										<extraarg>-impl</extraarg> 
 										<extraarg>-verbose</extraarg>
 									</extraargs>
-									<wsdlLocation>classpath:wsdl/izvestaj.wsdl</wsdlLocation>
+									<wsdlLocation>classpath:wsdl/resenje.wsdl</wsdlLocation>
 									
 								</wsdlOption>
 							</wsdlOptions>

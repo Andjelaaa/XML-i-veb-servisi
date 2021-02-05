@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -58,6 +59,7 @@ public class DOMWriter {
 	private static TransformerFactory transformerFactory;
 
 	private Document document;
+	
 	
 	@Autowired
 	private MetadataExtractor metadataExtractor;
@@ -204,8 +206,6 @@ public class DOMWriter {
 		korisnickoIme.setAttribute("datatype","xs:string");
 		korisnickoIme.appendChild(document.createTextNode(resenje.getKorisnickoIme()));
 		dokumentResenje.appendChild(korisnickoIme);
-
-
 		StringWriter sw = new StringWriter();
 		transform(sw);
 		
@@ -669,7 +669,5 @@ public class DOMWriter {
 		StringWriter sw = new StringWriter();
 		transform(sw);
 		return sw.toString();
-	}
-
-
+		}
 }

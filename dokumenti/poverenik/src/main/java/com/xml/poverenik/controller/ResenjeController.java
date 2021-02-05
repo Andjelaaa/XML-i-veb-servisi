@@ -60,6 +60,7 @@ public class ResenjeController {
 		 try {
 			 service.createResenje(entity);
 	     }catch(Exception e) {
+	    	 e.printStackTrace();
 	         return new ResponseEntity<>(new ResenjeDTO(entity),HttpStatus.BAD_REQUEST);
 	     }
 			

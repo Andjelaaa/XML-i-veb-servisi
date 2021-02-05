@@ -3,12 +3,20 @@ package com.xml.projekat.dom;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -24,17 +32,21 @@ import org.w3c.dom.Element;
 import org.w3c.dom.ProcessingInstruction;
 import org.xmldb.api.base.XMLDBException;
 
-import com.itextpdf.styledxmlparser.jsoup.nodes.XmlDeclaration;
 import com.xml.projekat.model.Izbor;
 import com.xml.projekat.model.Izvestaj;
 import com.xml.projekat.model.Obavestenje;
 import com.xml.projekat.model.PObavestenje;
+import com.xml.projekat.model.Resenje;
 import com.xml.projekat.model.TUser;
 import com.xml.projekat.model.Zahtev;
 import com.xml.projekat.rdf.FusekiWriter;
 import com.xml.projekat.rdf.MetadataExtractor;
 import com.xml.projekat.repository.ObavestenjeRepository;
+import com.xml.projekat.repository.ResenjeRepository;
 import com.xml.projekat.repository.ZahtevRepository;
+import com.xml.projekat.ws.resenje.DokumentResenje;
+import com.xml.projekat.ws.resenje.DokumentResenje.Zaglavlje.BrojResenja;
+
 
 /**
  * 
@@ -59,6 +71,9 @@ public class DOMWriter {
 	@Autowired
 	private MetadataExtractor metadataExtractor;
 
+	@Autowired
+	private ResenjeRepository resenjeRepository;
+	
 	@Autowired
 	private ObavestenjeRepository obavestenjeRepository;
 	
@@ -383,7 +398,121 @@ public class DOMWriter {
 		transform(sw);
 		return sw.toString();
 	}
+	public String generateResenje(DokumentResenje resenje) throws TransformerException, IOException, XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException, JAXBException {
+		createDocument();
+	
+		ProcessingInstruction newPI = document.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"src/main/resources/podaci/xsl/resenje.xsl\"");
+		document.insertBefore(newPI, document.getDocumentElement());
+		
+		Element dokumentResenje = document.createElement("d:dokument_resenje");
+		document.appendChild(dokumentResenje);
 
+
+		dokumentResenje.setAttribute("xmlns", "http://www.w3.org/ns/rdfa#");
+		dokumentResenje.setAttribute("xmlns:pred","http://www.ftn.uns.ac.rs/rdf/examples/predicate/");		
+		dokumentResenje.setAttribute("xmlns:xs","http://www.w3.org/2001/XMLSchema#");
+		dokumentResenje.setAttribute("xmlns:d","http://www.ftn.uns.ac.rs/xpath/examples");
+		
+		Element uri = document.createElement("d:URI");
+		uri.setAttribute("property","pred:URI");
+		uri.setAttribute("datatype","xs:string");
+		uri.appendChild(document.createTextNode(resenje.getURI().getValue()));
+		
+		dokumentResenje.appendChild(uri);
+		
+		Element zalbaCutanjeUri = document.createElement("d:zalba_cutanje_uri");
+		zalbaCutanjeUri.setAttribute("property","pred:zalba_cutanje_uri");
+		zalbaCutanjeUri.setAttribute("datatype","xs:string");
+		zalbaCutanjeUri.appendChild(document.createTextNode(resenje.getZalbaCutanjeUri().getValue()));
+		
+		dokumentResenje.appendChild(zalbaCutanjeUri);
+		
+		Element zalbaOdlukaUri = document.createElement("d:zalba_odluke_uri");
+		zalbaOdlukaUri.setAttribute("property","pred:zalba_odluke_uri");
+		zalbaOdlukaUri.setAttribute("datatype","xs:string");
+		zalbaOdlukaUri.appendChild(document.createTextNode(resenje.getZalbaOdlukeUri().getValue()));
+		
+		dokumentResenje.appendChild(zalbaOdlukaUri);
+		
+	
+		Element nazivResenja = document.createElement("d:naziv_resenja");
+		nazivResenja.appendChild(document.createTextNode(resenje.getNazivResenja().getContent().get(0).toString()));
+		Element odluka = document.createElement("d:odluka");
+
+	    //get elem from JAXBELEMENT
+		odluka.appendChild(document.createTextNode((String) ((JAXBElement)resenje.getNazivResenja().getContent().get(1)).getValue()));
+
+		nazivResenja.appendChild(odluka);
+
+		Element zaglavlje = document.createElement("d:zaglavlje");
+		zaglavlje.appendChild(document.createTextNode("BR"));
+		Element brojResenja = document.createElement("d:broj_resenja");
+		brojResenja.setAttribute("property","pred:brojResenja");
+		brojResenja.setAttribute("datatype","xs:string");
+	
+		
+		brojResenja.appendChild(document.createTextNode(((DokumentResenje.Zaglavlje.BrojResenja) ((JAXBElement)resenje.getZaglavlje().getContent().get(0)).getValue()).getValue()));
+		
+		Element datum = document.createElement("d:datum");
+		datum.setAttribute("property","pred:datum");
+		datum.setAttribute("datatype","xs:string");
+		
+		datum.appendChild(document.createTextNode(((DokumentResenje.Zaglavlje.Datum) ((JAXBElement)resenje.getZaglavlje().getContent().get(1)).getValue()).getValue()));
+
+		zaglavlje.appendChild(brojResenja);
+		zaglavlje.appendChild(document.createTextNode("Datum"));
+		zaglavlje.appendChild(datum);
+
+		Element opisPostupka = document.createElement("d:opis_postupka");
+		opisPostupka.appendChild(document.createTextNode(resenje.getOpisPostupka()));
+		Element potpisPoverenika = document.createElement("d:potpis_poverenika");
+		potpisPoverenika.appendChild(document.createTextNode(resenje.getPotpisPoverenika()));
+
+		Element tekstResenja = document.createElement("d:tekst_resenja");
+		tekstResenja.appendChild(document.createTextNode(resenje.getTekstResenja().getContent().get(0).toString()));
+
+		Element tekstObrazlozenja = document.createElement("d:tekst_obrazlozenja");
+		tekstObrazlozenja.appendChild(document.createTextNode(resenje.getTekstObrazlozenja().getContent().get(0).toString()));
+
+		for (int i = 1; i < resenje.getTekstResenja().getContent().size(); i+=2) {
+			Element paragraf = document.createElement("d:p");
+			paragraf.appendChild(document.createTextNode((String) ((JAXBElement)resenje.getNazivResenja().getContent().get(1)).getValue()));
+			tekstResenja.appendChild(paragraf);
+		}
+		for (int i = 1; i < resenje.getTekstObrazlozenja().getContent().size(); i+=2) {
+			Element paragraf = document.createElement("d:p");
+			paragraf.appendChild(document.createTextNode((String) ((JAXBElement)resenje.getTekstObrazlozenja().getContent().get(1)).getValue()));
+			tekstObrazlozenja.appendChild(paragraf);
+		}
+
+		dokumentResenje.appendChild(nazivResenja);
+		dokumentResenje.appendChild(zaglavlje);
+		dokumentResenje.appendChild(opisPostupka);
+		dokumentResenje.appendChild(tekstResenja);
+		dokumentResenje.appendChild(tekstObrazlozenja);
+		dokumentResenje.appendChild(potpisPoverenika);
+		
+		Element korisnickoIme = document.createElement("d:korisnicko_ime");
+		korisnickoIme.setAttribute("property","pred:korisnicko_ime");
+		korisnickoIme.setAttribute("datatype","xs:string");
+		korisnickoIme.appendChild(document.createTextNode(resenje.getKorisnickoIme().getValue()));
+		dokumentResenje.appendChild(korisnickoIme);
+
+
+		StringWriter sw = new StringWriter();
+		transform(sw);
+		
+		String naziv = (resenjeRepository.getSize()+1) + ".rdf";
+		String rdfFilePath = "src/main/resources/podaci/rdf/"+naziv;
+		// extract metadata
+		
+		metadataExtractor.extractMetadata(sw.toString(), new FileOutputStream(new File(rdfFilePath)));
+		FusekiWriter.saveRDF(rdfFilePath, "/resenja");
+		
+		return sw.toString();
+		
+
+	}
 
 	public String generateZahtev(Zahtev z) throws TransformerException, IOException, XMLDBException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		createDocument();

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.xml.projekat.ws.resenje.DecisionServiceSoapBindingImpl;
+
 
 
 
@@ -17,5 +19,13 @@ public class EndpointConfig {
 	@Autowired
 	private Bus bus;
 	
+	@Autowired
+	DecisionServiceSoapBindingImpl service;
+	@Bean
+	public Endpoint resenjeEndpoint() {
+		EndpointImpl endpoint = new EndpointImpl(bus, service);
+		endpoint.publish("/resenjee");
+		return endpoint;
+	}
 	
 }

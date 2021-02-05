@@ -1,14 +1,21 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
   <rdf:Description rdf:about="">
-    <pred:URI xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1</pred:URI>
+    <pred:URI xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DSdsa</pred:URI>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:korisnicko_ime xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jova</pred:korisnicko_ime>
+    <pred:zalba_cutanje_uri xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> dasasd</pred:zalba_cutanje_uri>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:naziv_organa_vlasti xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SOPV</pred:naziv_organa_vlasti>
+    <pred:zalba_odluke_uri xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> dasasd</pred:zalba_odluke_uri>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21.11.2020.</pred:datum>
+    <pred:brojResenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+                </pred:brojResenja>
+  </rdf:Description>
+  <rdf:Description rdf:about="">
+    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">javax.xml.bind.JAXBElement@cbbc6e6</pred:datum>
+  </rdf:Description>
+  <rdf:Description rdf:about="">
+    <pred:korisnicko_ime xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jocy</pred:korisnicko_ime>
   </rdf:Description>
 </rdf:RDF>
