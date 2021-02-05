@@ -19,6 +19,10 @@
 		</head>
 		<body>
 		<br></br>
+		<xsl:variable name="zahtevURI" select="d:zalba_cutanje/d:zahtev_uri"/>
+            		<p><a href="http://localhost:4200/zahtev/{$zahtevURI}">
+							Referencirani zahtev
+						</a></p>
         <br></br>
         <div style="text-align:center;">
         	<h3>ZALBA KADA ORGAN VLASTI <u>NIJE POSTUPIO/nije postupio u celosti/PO ZAHTEVU</u><br></br>

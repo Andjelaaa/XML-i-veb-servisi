@@ -7,7 +7,7 @@
 	<xsl:template match="/">
 		<html>
             <head>
-                <title>ZALBA ODLUKE</title>
+                <title>RESENJE</title>
                 <style type="text/css">
                     body {
 				        height: 842px;
@@ -19,6 +19,24 @@
                 </style>
             </head>
             <body>
+            <xsl:choose>
+					<xsl:when test="d:dokument_resenje/d:zalba_odluke_uri">
+						<xsl:variable name="zalbaURI" select="d:dokument_resenje/d:zalba_odluke_uri"/>
+            	
+            		<p><a href="http://localhost:4201/appeal_decision_review/{$zalbaURI}">
+							Referencirana zalba
+						</a></p>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:variable name="zalba2URI" select="d:dokument_resenje/d:zalba_cutanje_uri"/>
+            	
+            		<p><a href="http://localhost:4201/appeal_silence_review/{$zalba2URI}">
+							Referencirana zalba
+						</a></p>
+					</xsl:otherwise>
+				</xsl:choose>
+            
+        
             	<br></br>
             	<table style="width=100%">
             		<tr>
