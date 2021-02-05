@@ -24,15 +24,16 @@ import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
+import com.xml.poverenik.data.types.Message;
 import com.xml.poverenik.dom.DOMParser;
 import com.xml.poverenik.dom.DOMWriter;
 import com.xml.poverenik.dto.ResenjeDTO;
 import com.xml.poverenik.dto.RetrieveDTO;
 import com.xml.poverenik.dto.SearchResenjeDTO;
-import com.xml.poverenik.dto.ZalbaCutanjeDTO;
 import com.xml.poverenik.model.Resenje;
 import com.xml.poverenik.rdf.FusekiReader;
 import com.xml.poverenik.repository.ResenjeRepository;
+import com.xml.poverenik.repository.UserRepository;
 
 @Service
 public class ResenjeService {
@@ -45,7 +46,13 @@ public class ResenjeService {
 	
 	@Autowired
 	private ResenjeRepository resenjeRepository;
+
+	@Autowired
+	private UserRepository userRepository;
 	
+	@Autowired
+	private EmailService emailService;
+
 	@Autowired
 	private com.xml.poverenik.dom.XSLTransformer xslTransformer;
 	
@@ -66,6 +73,18 @@ public class ResenjeService {
 		String documentContent = domWriter.generateResenje(r);
 		String naziv = (resenjeRepository.getSize()+1) + ".xml";
 		resenjeRepository.save(documentContent, naziv);
+		Message message = new Message();
+		String username = r.getKorisnickoIme();
+		String email = userRepository.findOneByUsername(username).getEmail();
+		String naslov = "Odluka o postupku po zalbi";
+		String sadrzaj = "Za pregled resenja udjite na link: "+ "http://localhost:4201/decision_review/" + resenjeRepository.getSize();
+		byte[] prilog = getPdfAsByteArray(resenjeRepository.getSize()+"");
+		message.setPrimalac(email);
+		message.setNaslov(naslov);
+		message.setSadrzaj(sadrzaj);
+		message.setPrilog(prilog);
+		message.setTipPriloga("pdf");
+		emailService.posaljiMejl(message);
 	}
 
 	public Resource getPdf(String id) throws Exception {

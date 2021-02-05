@@ -47,6 +47,7 @@ public class ZalbaCutanjeController {
 	public ResponseEntity<Object> makeZalbaCutanje(@RequestBody ZalbaCutanjeDTO dto) throws Exception{
 //		if(!validate(dto))
 //			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
+		System.out.print(dto.toString());
 		ZalbaCutanje zc = new ZalbaCutanje(dto);
 		try {
 			 service.makeZalbaCutanje(zc);
@@ -75,6 +76,9 @@ public class ZalbaCutanjeController {
 	@GetMapping(value = "/userAppeal/{username}", produces = MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<List<ZalbaCutanjeDTO>> userRequests(@PathVariable("username") String username) throws XMLDBException {
 		List<ZalbaCutanjeDTO> zalbeList = service.findAppealsByUser(username);
+//		for (ZalbaCutanjeDTO zalba: zalbeList) {
+//			
+//		}
 		return new ResponseEntity<List<ZalbaCutanjeDTO>>(zalbeList, HttpStatus.OK);
 	}
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_XML_VALUE)

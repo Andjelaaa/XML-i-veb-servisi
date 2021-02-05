@@ -64,6 +64,7 @@ public class ZalbaCutanjeDTO {
 	}
 
 	
+	
 	public ZalbaCutanjeDTO(String response) {
 		this.text = response;
 	}

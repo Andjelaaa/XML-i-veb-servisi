@@ -41,6 +41,7 @@ public class Zahtev {
 	}
 	
 	public Zahtev(ZahtevDTO dto) {
+		this.URI = dto.getURI();
 		this.podnosilac = new Podnosilac(dto.getPodnosilac());
 		this.adresa = new Adresa(dto.getAdresa());
 		this.drugiPodaciZaKontakt = dto.getDrugiPodaciZaKontakt();

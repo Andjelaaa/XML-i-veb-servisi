@@ -13,13 +13,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let zahtev of list">
+        <tr *ngFor="let zahtev of list; index as i">
             <td>{{zahtev.datum._text}}</td>
             <td>{{zahtev.podnosilac.ime._text}} {{zahtev.podnosilac.prezime._text}}</td>
             <td>{{zahtev.trazeneInformacije._text}}</td>
             <td><button mat-button color="primary"><a href="{{getHref(zahtev.uri._text)}}">Preuzmi PDF</a></button></td>
             <td><button mat-button color="primary" ><a href="/zahtev/{{zahtev.uri._text}}">Prikaz zahteva</a></button></td>
             <td><button mat-button color="primary" ><a href="/make_info/{{zahtev.uri._text}}">Odgovori na zahtev</a></button></td>
+            <td><button mat-button color="primary" (click) = "denyRequest(zahtev,i)"> Odbij zahtev </button></td>
         </tr>
     </tbody>
 

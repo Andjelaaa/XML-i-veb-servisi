@@ -44,4 +44,21 @@ export class NewRequestsListComponent implements OnInit {
 
   }
 
+  denyRequest(zahtev: any, i: any) {
+    const convert = require('xml-js');
+    const zahtevRoot = {zahtevDTO: zahtev};
+    const zahtevXML = convert.js2xml(zahtevRoot, {compact: true, ignoreComment: true, spaces: 4});
+    console.log(zahtevXML);
+    this.requestService.denyRequest(zahtevXML).subscribe(
+      result => {
+        this.list.splice(i,1);
+        console.log("Zahtev uspesno odbijen");
+      },
+      error => {
+          console.log(error);
+      }
+    );
+
+  }
+
 }

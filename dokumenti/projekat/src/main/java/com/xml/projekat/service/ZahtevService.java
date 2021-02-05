@@ -24,6 +24,7 @@ import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
+import com.xml.projekat.data.types.Message;
 import com.xml.projekat.dom.DOMParser;
 import com.xml.projekat.dom.DOMWriter;
 import com.xml.projekat.dom.XSLTransformer;
@@ -32,10 +33,10 @@ import com.xml.projekat.dto.RetrieveDTO;
 import com.xml.projekat.dto.SearchDTO;
 import com.xml.projekat.dto.ZahtevDTO;
 import com.xml.projekat.model.Obavestenje;
-import com.xml.projekat.model.TUser;
 import com.xml.projekat.model.Zahtev;
 import com.xml.projekat.rdf.FusekiReader;
 import com.xml.projekat.repository.ObavestenjeRepository;
+import com.xml.projekat.repository.UserRepository;
 import com.xml.projekat.repository.ZahtevRepository;
 
 
@@ -47,6 +48,12 @@ public class ZahtevService {
 	private static String xslFOPath = "src/main/resources/podaci/xsl/zahtev.xsl";
 	private static String xslPathHTML = "src/main/resources/podaci/xsl/zahtevHTML.xsl";
 
+	@Autowired 
+	EmailService emailService;
+	
+	@Autowired
+	UserRepository userRepository;
+	
 	@Autowired
 	private ZahtevRepository zahtevRepository;
 	
@@ -85,6 +92,13 @@ public class ZahtevService {
 		Files.write(file, outputStream.toByteArray());
 
 		return new UrlResource(file.toUri());
+	}
+	
+	public byte[] getPdfAsByteArray(String id) throws Exception {
+		String document = zahtevRepository.findZahtev(id);
+		ByteArrayOutputStream outputStream = xslTransformer.generatePDf(document, xslFOPath);
+		
+		return outputStream.toByteArray();
 	}
 	
 	public String convertXMLtoHTML(String id) throws XMLDBException {
@@ -248,6 +262,21 @@ public class ZahtevService {
 			}			
 		}
 		return filtriranaList;
+	}
+
+	public void denyZahtev(Zahtev z) throws Exception {
+		Message message = new Message();
+		String username = z.getPodnosilac().getKorisnickoIme();
+		String email = userRepository.findOneByUsername(username).getEmail();
+		String naslov = "Odluka o zahtevu";
+		String sadrzaj = "Postovani "+z.getPodnosilac().getIme()+" "+z.getPodnosilac().getPrezime()+", Vas zahtev: "+ "http://localhost:4200/zahtev/" + z.getURI()+" je odbijen.";
+		byte[] prilog = getPdfAsByteArray(z.getURI());
+		message.setPrimalac(email);
+		message.setNaslov(naslov);
+		message.setSadrzaj(sadrzaj);
+		message.setPrilog(prilog);
+		message.setTipPriloga("pdf");
+		emailService.posaljiMejl(message);
 	}
 
 }

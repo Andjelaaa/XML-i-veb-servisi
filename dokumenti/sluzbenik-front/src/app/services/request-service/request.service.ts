@@ -52,4 +52,10 @@ getAllRequests(): Observable<any> {
      {headers: this.headers, responseType: 'text'});
 
 }
+
+denyRequest(zahtev: any) : Observable<any> {
+  return this.http.post(`${environment.baseUrl}/api/zahtev/deny`,zahtev,
+     {headers: this.headers, responseType: 'text'});
+}
+
 }
