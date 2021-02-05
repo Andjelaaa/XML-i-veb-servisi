@@ -1,0 +1,10 @@
+SELECT * FROM <http://localhost:8080/fuseki/obavestenja/data/obavestenja> WHERE {
+ ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/URI> ?URI .
+  ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/datum> ?zahtev_uri .
+  ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/korisnicko_ime> ?korisnicko_ime .
+  ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/naziv_organa_vlasti> ?naziv_organa_vlasti .
+  ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/naziv_organa_vlasti> ?brojPredmeta .
+  ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/naziv_organa_vlasti> ?datum .
+  FILTER( CONTAINS(UCASE(str(?URI)), UCASE("{{URI}}"))
+  ) .
+}

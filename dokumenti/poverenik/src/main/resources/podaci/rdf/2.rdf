@@ -9,7 +9,9 @@
     <pred:korisnicko_ime xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jova</pred:korisnicko_ime>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:naziv_poverenika xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dragojlo</pred:naziv_poverenika>
+    <pred:naziv_poverenika xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+                        Povereniky za informacije od javnog značaja i zaštitu podataka o ličnosti
+                </pred:naziv_poverenika>
   </rdf:Description>
   <rdf:Description rdf:about="">
     <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">05.02.2021.</pred:datum>

@@ -117,13 +117,13 @@ export const routes: Routes = [
     path: 'new_appeal_decision',
     component: NewAppealDecisionListComponent,
     canActivate: [RoleGuard],
-    data: {expectedRoles: 'GRADJANIN'}
+    data: {expectedRoles: 'POVERENIK'}
   },
   {
     path: 'new_appeal_silence',
     component: NewAppealSilenceListComponent,
     canActivate: [RoleGuard],
-    data: {expectedRoles: 'GRADJANIN'}
+    data: {expectedRoles: 'POVERENIK'}
   },
   {
     path: 'reports',

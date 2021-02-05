@@ -252,4 +252,24 @@ public class ZalbaOdlukaService {
 		return filtriranaList;
 	}
 
+	public Resource findRdf(String uri) throws IOException {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("URI", uri);
+		
+		FusekiReader.findRDF(params, "/zalbeOdluke", "src/main/resources/podaci/rdf/queryOneADecision.rq");
+		Path file = Paths.get("src/main/resources/podaci/rdf/metadataRDF.xml");
+
+		return new UrlResource(file.toUri());
+	}
+
+	public Resource findJsonMetadata(String uri) throws IOException {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("URI", uri);
+		
+		FusekiReader.findJsonMetadata(params, "/zalbeOdluke", "src/main/resources/podaci/rdf/queryOneADecision.rq");
+		Path file = Paths.get("src/main/resources/podaci/rdf/metadataJSON.json");
+
+		return new UrlResource(file.toUri());
+	}
+
 }

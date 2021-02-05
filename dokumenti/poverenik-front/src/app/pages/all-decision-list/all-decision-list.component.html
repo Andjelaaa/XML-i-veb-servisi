@@ -24,6 +24,8 @@
             <th>Tip zalbe</th>
             <th>Preuzmi PDF</th>
             <th>Prikaz resenja</th>
+            <th>Preuzmi metapodatke u rdf formatu</th>
+            <th>Preuzmi metapodatke u json formatu</th>
         </tr>
     </thead>
     <tbody>
@@ -34,6 +36,8 @@
             <td *ngIf = "resenje.zalbaOdlukeURI._text">Zalba odluke</td>
             <td><button mat-button color="primary"><a href="{{getHref(resenje.uri._text)}}">Preuzmi PDF</a></button></td>
             <td><button mat-button color="primary" ><a href="/decision_review/{{resenje.uri._text}}">Prikaz resenja</a></button></td>
+            <td><button mat-button color="primary"><a href="http://localhost:8082/api/resenje/rdf/{{resenje.uri._text}}">Preuzmi RDF</a></button></td>
+            <td><button mat-button color="primary"><a href="http://localhost:8082/api/resenje/json/{{resenje.uri._text}}">Preuzmi JSON</a></button></td>
         </tr>
     </tbody>
 

@@ -9,6 +9,8 @@
             <th>Podnosilac zalbe</th>
             <th>Preuzmi PDF</th>
             <th>Prikaz zalbe</th>
+            <th>Preuzmi metapodatke u rdf formatu</th>
+            <th>Preuzmi metapodatke u json formatu</th>
             <th>Napisi resenje</th>
         </tr>
     </thead>
@@ -20,6 +22,8 @@
             <td>{{zalba.podnosilac.ime._text}} {{zalba.podnosilac.prezime._text}}</td>
             <td><button mat-button color="primary"><a href="{{getHref(zalba.uri._text)}}">Preuzmi PDF</a></button></td>
             <td><button mat-button color="primary" ><a href="/appeal_silence_review/{{zalba.uri._text}}">Prikaz zalbe</a></button></td>
+            <td><button mat-button color="primary"><a href="http://localhost:8082/api/zalba_cutanje/rdf/{{zalba.uri._text}}">Preuzmi RDF</a></button></td>
+            <td><button mat-button color="primary"><a href="http://localhost:8082/api/zalba_cutanje/json/{{zalba.uri._text}}">Preuzmi JSON</a></button></td>
             <td><button mat-button color="primary" ><a href="/make_decision/c{{zalba.uri._text}}">Napisi resenje</a></button></td>
         </tr>
     </tbody>

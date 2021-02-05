@@ -1,0 +1,9 @@
+SELECT * FROM <http://localhost:8080/fuseki2/zalbeOdluke/data/zalbeOdluke> WHERE {
+ ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/URI> ?URI .
+  ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/datum> ?datum .
+  ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/korisnicko_ime> ?korisnicko_ime .
+  ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/naziv_poverenika> ?naziv_poverenika .
+  ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/zahtev_uri> ?zahtev_uri .
+  FILTER( CONTAINS(UCASE(str(?URI)), UCASE("{{URI}}"))
+  ) .
+}

@@ -9,6 +9,8 @@
             <th>Trazena informacija</th>
             <th>Preuzmi PDF</th>
             <th>Prikaz obavestenja</th>
+            <th>Preuzmi metapodatke u rdf formatu</th>
+            <th>Preuzmi metapodatke u json formatu</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +20,8 @@
             <td>{{obavestenje.paragrafi.paragrafi[0].trazenaInformacija._text}}</td>
             <td><button mat-button color="primary"><a href="{{getHref(obavestenje.uri._text)}}">Preuzmi PDF</a></button></td>
             <td><button mat-button color="primary" ><a href="/obavestenje/{{obavestenje.uri._text}}">Prikaz obavestenja</a></button></td>
+            <td><button mat-button color="primary"><a href="http://localhost:8081/api/obavestenje/rdf/{{obavestenje.uri._text}}">Preuzmi RDF</a></button></td>
+            <td><button mat-button color="primary"><a href="http://localhost:8081/api/obavestenje/json/{{obavestenje.uri._text}}">Preuzmi JSON</a></button></td>
         </tr>
     </tbody>
 

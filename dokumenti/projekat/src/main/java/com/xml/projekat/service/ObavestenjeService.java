@@ -6,7 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.transform.TransformerException;
 
@@ -28,6 +30,7 @@ import com.xml.projekat.dom.XSLTransformer;
 import com.xml.projekat.dto.ObavestenjeDTO;
 import com.xml.projekat.dto.RetrieveDTO;
 import com.xml.projekat.model.Obavestenje;
+import com.xml.projekat.rdf.FusekiReader;
 import com.xml.projekat.repository.ObavestenjeRepository;
 import com.xml.projekat.repository.UserRepository;
 
@@ -143,6 +146,26 @@ public class ObavestenjeService {
 			e.printStackTrace();
 		}
 		return obavestenjeList;
+	}
+
+	public Resource findRdf(String uri) throws IOException {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("URI", uri);
+		
+		FusekiReader.findRDF(params, "/obavestenja", "src/main/resources/podaci/rdf/queryOneInfo.rq");
+		Path file = Paths.get("src/main/resources/podaci/rdf/metadataRDF.xml");
+
+		return new UrlResource(file.toUri());
+	}
+
+	public Resource findJsonMetadata(String uri) throws IOException {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("URI", uri);
+		
+		FusekiReader.findJsonMetadata(params, "/obavestenja", "src/main/resources/podaci/rdf/queryOneInfo.rq");
+		Path file = Paths.get("src/main/resources/podaci/rdf/metadataJSON.json");
+
+		return new UrlResource(file.toUri());
 	}
 	
 }
