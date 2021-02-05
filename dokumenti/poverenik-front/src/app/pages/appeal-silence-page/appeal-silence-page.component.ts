@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppealSilenceService } from 'src/app/services/appeal-silence-service/appeal-silence.service';
 import { XonomyAppealSilenceService } from 'src/app/services/xonomy-service/xonomy-appeal-silence.service';
+import { ToastrService } from 'ngx-toastr';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 declare const Xonomy: any;
 
@@ -19,45 +21,46 @@ export class AppealSilencePageComponent implements OnInit {
         private service: AppealSilenceService,
         private router: Router,
         private route: ActivatedRoute,
+        private toastr: ToastrService,
         private datePipe: DatePipe) { }
       ngOnInit(): void {
       }
       ngAfterViewInit(): void {
-        //podatke o podnosiocu dobija iz zalbe
+        const token = localStorage.getItem('user') || '';
+        const jwt: JwtHelperService = new JwtHelperService();       
+        const info = jwt.decodeToken(token);
+        const username = info.sub;
         this.time = this.datePipe.transform(new Date(), 'dd.MM.yyyy.');
         const element = document.getElementById('zalba');
         const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
         <root>
-        <zahtevURI>Unesite URI zahteva</zahtevURI>
+        <zahtevURI></zahtevURI>
            <adresa>
-              <broj>32</broj>
-              <grad>Novi Sad</grad>
-              <ulica>Jugoslovenska</ulica>
+              <broj></broj>
+              <grad></grad>
+              <ulica></ulica>
            </adresa>
-           <datumZalbe>'21.21.2020.'</datumZalbe>
-           <drugiPodaciZaKontakt>064872743</drugiPodaciZaKontakt>
+           <datumZalbe>${this.time}</datumZalbe>
+           <drugiPodaciZaKontakt></drugiPodaciZaKontakt>
            <mestoZalbe />
            <naslov>
                  ŽALBA KADA ORGAN VLASTI NIJE POSTUPIO/ nije postupio u celosti/ PO ZAHTEVU  TRAŽIOCA U ZAKONSKOM 
                  ROKU  (ĆUTANjE UPRAVE)
             </naslov>
-           <nazivPoverenika>
-                        Povereniky za informacije od javnog značaja i zaštitu podataka o ličnosti
-                </nazivPoverenika>
+           <nazivPoverenika></nazivPoverenika>
            <paragrafi>
               <element>
-                 <nazivOrgana>Sluzbenik</nazivOrgana>
+                 <nazivOrgana></nazivOrgana>
                  <text>U skladu sa članom 22. Zakona o slobodnom pristupu informacija od javnog značaja podnosim:
-                    Žalbu
-                    protiv</text>
+                    Žalbu protiv</text>
               </element>
               <element>
                  <text>zbog toga što organ vlasti:
                         nije postupio/ nije postupio u celosti/ u zakonskom roku</text>
               </element>
               <element>
-                 <datum>10.03.2021.</datum>
-                 <podaciOZahtevuIInformacijama>podaci o zahevu</podaciOZahtevuIInformacijama>
+                 <datum></datum>
+                 <podaciOZahtevuIInformacijama></podaciOZahtevuIInformacijama>
                  <text>po mom zahtevu za slobodan pristup informacijama od javnog značaja
                         koji sam podneo tom organu dana
                         
@@ -78,15 +81,15 @@ export class AppealSilencePageComponent implements OnInit {
               </element>
            </paragrafi>
            <podnosilac>
-              <ime>Slavisa</ime>
+              <ime></ime>
               <nazivFirme />
-              <prezime>Slavic</prezime>
-              <korisnickoIme>slakiiisa</korisnickoIme>
+              <prezime></prezime>
+              <korisnickoIme>${username}</korisnickoIme>
            </podnosilac>
            <sedistePoverenika>
-              <broj>15</broj>
-              <grad>Beograd</grad>
-              <ulica>Bulevar kralja Aleksandra</ulica>
+              <broj></broj>
+              <grad></grad>
+              <ulica></ulica>
            </sedistePoverenika>
            <text null="true" />
         </root>`;
@@ -95,6 +98,10 @@ export class AppealSilencePageComponent implements OnInit {
       }
       submit(): void {
         const text = Xonomy.harvest();
+        if(Xonomy.warnings.length !== 0) {
+         this.toastr.error('Morate popuniti sva obavezna polja!')
+         return
+       }
         this.service.sendAppealSilence(text).subscribe(
           response => {
             this.router.navigateByUrl('/home');
@@ -104,5 +111,4 @@ export class AppealSilencePageComponent implements OnInit {
           }
         );
       }
-
 }

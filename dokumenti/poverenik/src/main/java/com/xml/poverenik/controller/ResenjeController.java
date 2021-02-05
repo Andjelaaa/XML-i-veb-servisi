@@ -52,14 +52,16 @@ public class ResenjeController {
 	
 	@PostMapping(value ="/create", produces =MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<Object> createResenje(@RequestBody ResenjeDTO dto) throws Exception{
-		if(!validate(dto)) {
-			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
-		     
-		}
+		System.out.print(dto.toString());
+//		if(!validate(dto)) {
+//			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
+//		     
+//		}
 		Resenje entity = new Resenje(dto);
 		 try {
 			 service.createResenje(entity);
 	     }catch(Exception e) {
+	    	 e.printStackTrace();
 	         return new ResponseEntity<>(new ResenjeDTO(entity),HttpStatus.BAD_REQUEST);
 	     }
 			
