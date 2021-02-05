@@ -18,6 +18,8 @@ import { LoginPageComponent } from '../pages/login-page/login-page.component';
 import { NewAppealDecisionListComponent } from '../pages/new-appeal-decision-list/new-appeal-decision-list.component';
 import { NewAppealSilenceListComponent } from '../pages/new-appeal-silence-list/new-appeal-silence-list.component';
 import { RegisterPageComponent } from '../pages/register-page/register-page.component';
+import { ReportListComponent } from '../pages/report-list/report-list.component';
+import { ReportReviewComponent } from '../pages/report-review/report-review.component';
 
 export const routes: Routes = [
     { path: '',
@@ -120,6 +122,18 @@ export const routes: Routes = [
   {
     path: 'new_appeal_silence',
     component: NewAppealSilenceListComponent,
+  //  canActivate: [RoleGuard],
+  //  data: {expectedRoles: 'GRADJANIN'}
+  },
+  {
+    path: 'reports',
+    component: ReportListComponent,
+  //  canActivate: [RoleGuard],
+  //  data: {expectedRoles: 'GRADJANIN'}
+  },
+  {
+    path: 'report_review',
+    component: ReportReviewComponent,
   //  canActivate: [RoleGuard],
   //  data: {expectedRoles: 'GRADJANIN'}
   }
