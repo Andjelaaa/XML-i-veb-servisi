@@ -27,6 +27,8 @@ import { NewAppealSilenceListComponent } from './pages/new-appeal-silence-list/n
 import { NewAppealDecisionListComponent } from './pages/new-appeal-decision-list/new-appeal-decision-list.component';
 import { AllAppealDecisionListComponent } from './pages/all-appeal-decision-list/all-appeal-decision-list.component';
 import { AllAppealSilenceListComponent } from './pages/all-appeal-silence-list/all-appeal-silence-list.component';
+import { ReportListComponent } from './pages/report-list/report-list.component';
+import { ReportReviewComponent } from './pages/report-review/report-review.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { AllAppealSilenceListComponent } from './pages/all-appeal-silence-list/a
     AllAppealDecisionListComponent,
     AllAppealSilenceListComponent,
     NewAppealSilenceListComponent,
-    NewAppealDecisionListComponent
+    NewAppealDecisionListComponent,
+    ReportListComponent,
+    ReportReviewComponent
   ],
   imports: [
     BrowserModule,

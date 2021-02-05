@@ -1,4 +1,59 @@
-<div>
+<div class="main">
+  <div class="second">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <button *ngIf ="type==='SLUZBENIK'" [routerLink]="['/new_requests']">
+        Pregled pristiglih zahteva
+      </button>
+      <br>
+      <br>
+    <button *ngIf ="type==='SLUZBENIK'" [routerLink]="['/requests']">
+        Istorija zahteva za informacijama od javnog značaja
+      </button>
+      <br>
+      <br>
+      <button *ngIf ="type==='SLUZBENIK'" [routerLink]="['/informations']">
+        Istorija poslatih obaveštenja 
+      </button>
+      <br>
+      <br>
+      <button *ngIf ="type==='SLUZBENIK'" [routerLink]="['/']">
+        Izveštaji
+      </button>
+      <br>
+      <br>
+      <button *ngIf ="type==='SLUZBENIK'" (click)="createReport()">
+        Podnesi izveštaj za tekuću godinu
+      </button>
+      <br>
+      <br>
+      <button *ngIf ="type==='GRADJANIN'" [routerLink]="['/make_request']">
+          Novi zahtev
+      </button>
+      <br>
+      <br>
+      <button *ngIf ="type==='GRADJANIN'" [routerLink]="['/user_requests']">
+          Poslati zahtevi
+      </button>
+      <br>
+      <br>
+      <button *ngIf ="type==='GRADJANIN'" [routerLink]="['/user_informations']">
+        Istorija primljenih obaveštenja
+      </button>
+  </div>
+  
+
+</div>
+
+
+
+
+
+
+<!-- <div>
   <div>
     <button>
         Pretraga
@@ -40,4 +95,4 @@
         soap
       </button>
 </div>
-</div>
+</div> -->

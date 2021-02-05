@@ -73,6 +73,7 @@ public class IzvestajService {
 
 	public Izvestaj makeIzvestaj() throws Exception {
 		
+		
 		Izvestaj izvestaj = new Izvestaj();
 		List<ZahtevDTO> zahteviList = zahtevService.findAllRequests();
 		int brojac = 0;
@@ -96,7 +97,7 @@ public class IzvestajService {
 		
 		try {
 			String documentContent = domWriter.generateDOMIzvestaj(izvestaj);
-			String naziv = (izvestajRepository.getSize()+1) + ".xml";
+			String naziv = godina + ".xml";
 			izvestajRepository.save(documentContent, naziv);
 		}catch(Exception e)
 		{

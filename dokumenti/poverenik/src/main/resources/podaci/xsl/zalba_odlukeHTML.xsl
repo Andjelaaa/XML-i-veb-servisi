@@ -18,6 +18,10 @@
             </head>
             <body>
             	<br></br>
+            	<xsl:variable name="zahtevURI" select="d:zalba_odluke/d:zahtev_uri"/>
+            		<p><a href="http://localhost:4200/zahtev/{$zahtevURI}">
+							Referencirani zahtev
+						</a></p>
             	<br></br>
             	<div style="text-align:center;">
 	            	<h3>ZALBA  PROTIV  ODLUKE ORGANA  VLASTI KOJOM JE 
