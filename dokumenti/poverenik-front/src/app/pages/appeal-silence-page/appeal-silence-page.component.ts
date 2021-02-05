@@ -52,7 +52,7 @@ export class AppealSilencePageComponent implements OnInit {
               <element>
                  <nazivOrgana></nazivOrgana>
                  <text>U skladu sa članom 22. Zakona o slobodnom pristupu informacija od javnog značaja podnosim:
-                    Žalbu protiv</text>
+                    Žalbu protiv </text>
               </element>
               <element>
                  <text>zbog toga što organ vlasti:

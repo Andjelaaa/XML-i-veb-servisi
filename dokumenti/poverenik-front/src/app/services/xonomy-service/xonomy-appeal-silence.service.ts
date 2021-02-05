@@ -252,7 +252,9 @@ export class XonomyAppealSilenceService {
             asker: Xonomy.askString
 
         },
-        
+        text: {
+          isReadOnly: true
+        }        
     }
   };
 

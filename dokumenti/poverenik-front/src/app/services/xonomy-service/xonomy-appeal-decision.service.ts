@@ -239,6 +239,10 @@ export class XonomyAppealDecisionService {
         naslov:{
             isReadOnly: true
         },
+        tekst: {
+            isReadOnly: true,
+        },
+
     }
   };
 
