@@ -24,6 +24,8 @@
             <th>Trazene informacije</th>
             <th>Preuzmi PDF</th>
             <th>Prikaz zahteva</th>
+            <th>Preuzmi metapodatke u rdf formatu</th>
+            <th>Preuzmi metapodatke u json formatu</th>
         </tr>
     </thead>
     <tbody>
@@ -33,6 +35,8 @@
             <td>{{zahtev.trazeneInformacije._text}}</td>
             <td><button mat-button color="primary"><a href="{{getHref(zahtev.uri._text)}}">Preuzmi PDF</a></button></td>
             <td><button mat-button color="primary" ><a href="/zahtev/{{zahtev.uri._text}}">Prikaz zahteva</a></button></td>
+            <td><button mat-button color="primary"><a href="http://localhost:8081/api/zahtev/rdf/{{zahtev.uri._text}}">Preuzmi RDF</a></button></td>
+            <td><button mat-button color="primary"><a href="http://localhost:8081/api/zahtev/json/{{zahtev.uri._text}}">Preuzmi JSON</a></button></td>
         </tr>
     </tbody>
 

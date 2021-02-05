@@ -22,6 +22,7 @@ export class XonomyRequestService {
     public requestSpecification = {
       validate: function (jsElement: any) {
         let elementSpec = this.elements[jsElement.name];
+        
         if (elementSpec.validate) elementSpec.validate(jsElement);
         for (let i = 0; i < jsElement.attributes.length; i++) {
           let jsAttribute = jsElement.attributes[i];
