@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InformationService } from 'src/app/services/information-service/information.service';
 import { XonomyInformationService } from 'src/app/services/xonomy-service/xonomy-information.service';
+import { ToastrService } from 'ngx-toastr';
 
 declare const Xonomy: any;
 
@@ -16,6 +17,7 @@ export class InformationPageComponent implements OnInit, AfterViewInit{
     private xonomyService: XonomyInformationService,
     private informationService: InformationService,
     private router: Router,
+    private toastr: ToastrService,
     private route: ActivatedRoute) { }
   ngOnInit(): void {
       // mozda podesavanje parametara od kog je usera
@@ -28,49 +30,37 @@ export class InformationPageComponent implements OnInit, AfterViewInit{
     <obavestenje>
     <zahtevURI>${zahtev_uri}</zahtevURI>
     <adresa>
-    <broj>123</broj>
-    <grad>Novi Sad</grad>
-    <ulica>Sterije Popovica</ulica>
+    <broj></broj>
+    <grad></grad>
+    <ulica></ulica>
     </adresa>
-    <brojPredmeta>12</brojPredmeta>
-    <datum>21.11.2019.</datum>
-    <dostavljeno>
-    <element>
-    Достављено:
-    Именованом
-    Архиви
-    </element>
-    </dostavljeno>
-    <mestoPecata>
-    (М.П.)
-    </mestoPecata>
-    <naslov>
-    ОБАВЕШТЕЊЕ
-    о стављању на увид документа који садржи
-    тражену информацију и о изради копије
-    </naslov>
-    <nazivOrganaVlasti>NOV</nazivOrganaVlasti>
-    <sedisteOrgana>Novi Sad</sedisteOrgana>
+    <brojPredmeta></brojPredmeta>
+    <datum></datum>
+    <dostavljeno></dostavljeno>
+    <mestoPecata></mestoPecata>
+    <naslov></naslov>
+    <nazivOrganaVlasti></nazivOrganaVlasti>
+    <sedisteOrgana></sedisteOrgana>
     <paragrafi>
     <element>
-    <brojKancelarije>12</brojKancelarije>
-    <brojZgrade>31</brojZgrade>
-    <dan>21.</dan>
-    <doSati>15:00</doSati>
-    <godina>1999.</godina>
-    <mesto>Novi Sad</mesto>
-    <novcanaNaknada>213.99</novcanaNaknada>
-    <odSati>14:00</odSati>
-    <sati>14:23</sati>
-    <trazenaInformacija>ZELIM OBAVESTENJE</trazenaInformacija>
-    <ulica>Jovan Jovanovic Zmaj</ulica>
+    <brojKancelarije></brojKancelarije>
+    <brojZgrade></brojZgrade>
+    <dan></dan>
+    <doSati></doSati>
+    <godina></godina>
+    <mesto></mesto>
+    <novcanaNaknada></novcanaNaknada>
+    <odSati></odSati>
+    <sati></sati>
+    <trazenaInformacija></trazenaInformacija>
+    <ulica></ulica>
     </element>
     </paragrafi>
     <podnosilac>
-    <ime>Jova</ime>
-    <nazivFirme>Firma doo</nazivFirme>
-    <prezime>Jovic</prezime>
-    <korisnickoIme>jova</korisnickoIme>
+    <ime></ime>
+    <nazivFirme></nazivFirme>
+    <prezime></prezime>
+    <korisnickoIme></korisnickoIme>
     </podnosilac>
     <text null="true" />
     </obavestenje>`;
@@ -79,6 +69,10 @@ export class InformationPageComponent implements OnInit, AfterViewInit{
   }
   submit(): void {
     const text = Xonomy.harvest();
+    if(Xonomy.warnings.length !== 0) {
+      this.toastr.error('Molimo popunite sva obavezna polja!')
+      return
+    }
     this.informationService.sendInformation(text).subscribe(
       response => {
         this.router.navigateByUrl('/home');

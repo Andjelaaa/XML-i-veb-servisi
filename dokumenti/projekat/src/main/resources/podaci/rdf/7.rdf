@@ -3,12 +3,18 @@
     <pred:URI xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">7</pred:URI>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:korisnicko_ime xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
+    <pred:zahtev_uri xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1</pred:zahtev_uri>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:naziv_organa_vlasti xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SOPV</pred:naziv_organa_vlasti>
+    <pred:korisnicko_ime xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jova</pred:korisnicko_ime>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21.11.2020.</pred:datum>
+    <pred:naziv_organa_vlasti xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Uprava grada Kragujevca</pred:naziv_organa_vlasti>
+  </rdf:Description>
+  <rdf:Description rdf:about="">
+    <pred:brojPredmeta xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">12365</pred:brojPredmeta>
+  </rdf:Description>
+  <rdf:Description rdf:about="">
+    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">12.02.2016.</pred:datum>
   </rdf:Description>
 </rdf:RDF>
