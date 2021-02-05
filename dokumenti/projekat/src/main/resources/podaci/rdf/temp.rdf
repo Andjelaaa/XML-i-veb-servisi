@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="subject"/>
+    <variable name="URI"/>
+    <variable name="datum"/>
+    <variable name="korisnicko_ime"/>
+    <variable name="naziv_organa_vlasti"/>
+  </head>
+  <results>
+    <result>
+      <binding name="subject">
+        <uri>file:///C:/Users/teodo/Desktop/XML-i-veb-servisi/dokumenti/projekat/src/main/resources/podaci/rdf/9.rdf</uri>
+      </binding>
+      <binding name="URI">
+        <literal>9</literal>
+      </binding>
+      <binding name="datum">
+        <literal>15.11.2021.</literal>
+      </binding>
+      <binding name="korisnicko_ime">
+        <literal>jova</literal>
+      </binding>
+      <binding name="naziv_organa_vlasti">
+        <literal>djfkjsdg</literal>
+      </binding>
+    </result>
+  </results>
+</sparql>

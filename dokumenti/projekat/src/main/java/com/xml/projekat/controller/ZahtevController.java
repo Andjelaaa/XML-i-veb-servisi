@@ -121,6 +121,24 @@ public class ZahtevController {
 		List<ZahtevDTO> result = service.searhByMetadata(dto);
 		return new ResponseEntity<List<ZahtevDTO>>(result, HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/rdf/{uri}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<Object> rdf(@PathVariable String uri) throws IOException {
+		Resource resource = service.findRdf(uri);
+		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
+	}
+	
+	@GetMapping(value = "/json/{uri}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<Object> metadataJson(@PathVariable String uri) throws IOException {
+		Resource resource = service.findJsonMetadata(uri);
+		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
+	}
+	
+	
 
 	private boolean validate(ZahtevDTO dto) {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
