@@ -13,6 +13,7 @@
             <th>Preuzmi metapodatke u rdf formatu</th>
             <th>Preuzmi metapodatke u json formatu</th>
             <th>Napisi resenje</th>
+            <th>Obavesti organ vlasti o zalbi</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
             <td><button mat-button color="primary"><a href="http://localhost:8082/api/zalba_odluke/rdf/{{zalba.uri._text}}">Preuzmi RDF</a></button></td>
             <td><button mat-button color="primary"><a href="http://localhost:8082/api/zalba_odluke/json/{{zalba.uri._text}}">Preuzmi JSON</a></button></td>
             <td><button mat-button color="primary" ><a href="/make_decision/o{{zalba.uri._text}}">Napisi resenje</a></button></td>
+            <td><button mat-button color="primary" (click)="sendMail(zalba.uri._text)">Posalji mail</button></td>
         </tr>
     </tbody>
 

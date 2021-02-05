@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AppealDecisionService } from 'src/app/services/appeal-decision-service/appeal-decision.service';
 
 @Component({
@@ -10,7 +11,8 @@ export class NewAppealDecisionListComponent implements OnInit {
   public username: string = '';
   public list: Array<any> = new Array;
 
-  constructor(private appealDecisionService: AppealDecisionService) { }
+  constructor(private appealDecisionService: AppealDecisionService,
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getAllAppeals();
@@ -39,6 +41,18 @@ export class NewAppealDecisionListComponent implements OnInit {
       }
     );
 
+  }
+  sendMail(zalbaId: any)
+  {
+    this.appealDecisionService.sendMail(zalbaId).subscribe(
+      result => {
+        this.toastrService.success("Mail poslat");
+        console.log("Mail poslat");
+      },
+      error =>{
+        this.toastrService.error("Mail nije poslat");
+        console.log("Mail nije poslat");
+      })
   }
 
 

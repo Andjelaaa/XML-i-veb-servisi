@@ -23,6 +23,7 @@ import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
+import com.xml.poverenik.data.types.Message;
 import com.xml.poverenik.dom.DOMParser;
 import com.xml.poverenik.dom.DOMWriter;
 import com.xml.poverenik.dom.XSLTransformer;
@@ -54,6 +55,9 @@ public class ZalbaOdlukaService {
 	@Autowired
 	private ResenjeRepository resenjeRepository;
 	
+	@Autowired
+	private EmailService emailService;
+	
 	public ZalbaOdlukaService(DOMParser domParser, DOMWriter domWriter) {
 		this.domParser = domParser;
 		this.domWriter = domWriter;
@@ -81,6 +85,28 @@ public class ZalbaOdlukaService {
 		Files.write(file, outputStream.toByteArray());
 
 		return new UrlResource(file.toUri());
+	}
+	
+	public void sendMail(String uri) throws Exception {
+		
+		Message message = new Message();
+		String email = "organvlasti@gmail.com";
+		String naslov = "Zalba na zahtev";
+		String sadrzaj = "Pristigla je zalba na zahtev. Za pregled zalbe udjite na link: "+ "http://localhost:4201/appeal_decision_review/" + uri;
+		byte[] prilog = getPdfAsByteArray(uri);
+		message.setPrimalac(email);
+		message.setNaslov(naslov);
+		message.setSadrzaj(sadrzaj);
+		message.setPrilog(prilog);
+		message.setTipPriloga("pdf");
+		emailService.posaljiMejl(message);
+	}
+
+	public byte[] getPdfAsByteArray(String id) throws Exception {
+		String document = zalbaOdlukeRepository.findZalbaOdluke(id);
+		ByteArrayOutputStream outputStream = xslTransformer.generatePDf(document, xslFOPath);
+		
+		return outputStream.toByteArray();
 	}
 	
 	public String convertXMLtoHTML(String id) throws XMLDBException {

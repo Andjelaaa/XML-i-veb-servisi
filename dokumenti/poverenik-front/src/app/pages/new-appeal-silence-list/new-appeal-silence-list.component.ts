@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AppealSilenceService } from 'src/app/services/appeal-silence-service/appeal-silence.service';
 
 @Component({
@@ -10,7 +11,8 @@ export class NewAppealSilenceListComponent implements OnInit {
   public username: string = '';
   public list: Array<any> = new Array;
 
-  constructor(private appealSilenceService: AppealSilenceService) { }
+  constructor(private appealSilenceService: AppealSilenceService,
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getNewAppeals();
@@ -39,6 +41,19 @@ export class NewAppealSilenceListComponent implements OnInit {
       }
     );
 
+  }
+
+  sendMail(zalbaId: any)
+  {
+    this.appealSilenceService.sendMail(zalbaId).subscribe(
+      result => {
+        this.toastrService.success("Mail poslat");
+        console.log("Mail poslat");
+      },
+      error =>{
+        this.toastrService.error("Mail nije poslat");
+        console.log("Mail nije poslat");
+      })
   }
 
 }

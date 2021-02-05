@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.xml.sax.SAXException;
 import org.xmldb.api.base.XMLDBException;
 
+import com.xml.poverenik.dto.ResenjeDTO;
 import com.xml.poverenik.dto.RetrieveDTO;
 import com.xml.poverenik.dto.SearchDTO;
 import com.xml.poverenik.dto.ZalbaCutanjeDTO;
@@ -119,6 +120,19 @@ public class ZalbaCutanjeController {
 		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
 				.body(resource);
+	}
+	
+	@GetMapping(value = "/sendMail/{uri}")
+	public ResponseEntity<Object> sendMail(@PathVariable String uri) throws IOException {
+		
+		try {
+			 service.sendMail(uri);
+	     }catch(Exception e) {
+	    	 e.printStackTrace();
+	         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	     }
+		
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	private boolean validate(ZalbaCutanjeDTO dto) {

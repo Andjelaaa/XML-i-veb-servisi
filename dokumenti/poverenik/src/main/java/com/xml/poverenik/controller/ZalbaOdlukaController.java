@@ -120,6 +120,19 @@ public class ZalbaOdlukaController {
 				.body(resource);
 	}
 	
+	@GetMapping(value = "/sendMail/{uri}")
+	public ResponseEntity<Object> sendMail(@PathVariable String uri) throws IOException {
+		
+		try {
+			 service.sendMail(uri);
+	     }catch(Exception e) {
+	    	 e.printStackTrace();
+	         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	     }
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 	private boolean validate(ZalbaOdlukaDTO dto) {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd");

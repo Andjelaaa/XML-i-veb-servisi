@@ -50,4 +50,8 @@ export class AppealDecisionService {
     return this.http.post(`${environment.baseUrl}/${environment.apiAppealDecision}searchByMetadata`, search,
         {headers: this.headers, responseType: 'text'});
     }
+
+    sendMail(id: string) {
+        return this.http.get(`${environment.baseUrl}/${environment.apiAppealDecision}sendMail/` + id ,{responseType: 'text'});
+   }
 }
