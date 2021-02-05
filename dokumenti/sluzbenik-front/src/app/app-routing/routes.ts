@@ -51,14 +51,14 @@ export const routes: Routes = [
     {
         path: 'obavestenje/:id',
         component: ObavestenjePrikazComponent,
-       // canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'SLUZBENIK|GRADJANIN'}
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'SLUZBENIK|GRADJANIN'}
     },
     {
         path: 'zahtev/:id',
         component: ZahtevPrikazComponent,
-       // canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'SLUZBENIK|GRADJANIN'}
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'SLUZBENIK|GRADJANIN'}
     },
     {
         path: 'user_requests',
@@ -81,14 +81,14 @@ export const routes: Routes = [
     {
         path: 'informations',
         component: AllInformationListComponent,
-       // canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'SLUZBENIK'}
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'SLUZBENIK'}
     },
     {
         path: 'user_informations',
         component: InformationListComponent,
-       // canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'GRADJANIN'}
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'GRADJANIN'}
     },
     {
         path: 'reports',
