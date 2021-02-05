@@ -162,7 +162,7 @@ export class XonomyRequestService {
             {
               caption: 'Obrisite izbor',
               action: Xonomy.deleteElement
-            },
+            },    
             {
               caption: 'Postom',
               action: Xonomy.newElementChild,
