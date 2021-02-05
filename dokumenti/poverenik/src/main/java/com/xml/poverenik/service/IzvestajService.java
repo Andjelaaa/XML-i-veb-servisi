@@ -24,8 +24,11 @@ import org.xmldb.api.modules.XMLResource;
 import com.xml.poverenik.dom.DOMParser;
 import com.xml.poverenik.dom.DOMWriter;
 import com.xml.poverenik.dom.XSLTransformer;
+import com.xml.poverenik.dto.IzvestajDTO;
 import com.xml.poverenik.dto.RetrieveDTO;
 import com.xml.poverenik.repository.IzvestajRepository;
+import com.xml.poverenik.repository.ZalbaCutanjeRepository;
+import com.xml.poverenik.repository.ZalbaOdlukeRepository;
 import com.xml.poverenik.ws.izvestaj.Message;
 
 @Service
@@ -38,6 +41,12 @@ public class IzvestajService {
 	
 	@Autowired
 	private IzvestajRepository izvestajRepository;
+	
+	@Autowired
+	private ZalbaCutanjeRepository zalbaCutanjeRepository;
+	
+	@Autowired
+	private ZalbaOdlukeRepository zalbaOdlukeRepository;
 		
 	@Autowired
 	private XSLTransformer xslTransformer;
@@ -57,8 +66,10 @@ public class IzvestajService {
 	public Message makeIzvestaj(Message m) throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException, TransformerException, IOException {
 		
 		try {
+			int brZalbi = zalbaCutanjeRepository.getSize() +  zalbaOdlukeRepository.getSize();
+			m.setBrZalbi(brZalbi+"");
 			String documentContent = domWriter.generateDOMIzvestaj(m);
-			String naziv = (izvestajRepository.getSize()+1) + ".xml";
+			String naziv = m.getGodina() + ".xml";
 			izvestajRepository.save(documentContent, naziv);
 		}catch(Exception e)
 		{
@@ -82,31 +93,31 @@ public class IzvestajService {
 		return xslTransformer.convertXMLtoHTML(xslPathHTML, xml);
 	}
 	
-//	public List<IzvestajDTO> findAllReports(){
-//		String xPathExpression = "/";
-//		ResourceSet result = izvestajRepository.findIzvestaje(xPathExpression);	
-//		ArrayList<IzvestajDTO> obavestenjaList = extractDataFromInformations(result);
-//		return obavestenjaList;
-//		
-//	}
-//	
-//
-//	private ArrayList<IzvestajDTO> extractDataFromInformations(ResourceSet resourceSet) {
-//		ArrayList<IzvestajDTO> izvestajiList = new ArrayList<IzvestajDTO>();
-//		ResourceIterator i;
-//		try {
-//			i = resourceSet.getIterator();
-//			while (i.hasMoreResources()) {
-//				XMLResource resource = (XMLResource) i.nextResource();
-//				
-//				Document document = domParser.buildDocumentFromText(resource.getContent().toString());
-//				Izvestaj o = domParser.parseIzvestaj(document);
-//				
-//				izvestajiList.add(new IzvestajDTO(o));
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return izvestajiList;
-//	}
+	public List<IzvestajDTO> findAllReports(){
+		String xPathExpression = "/";
+		ResourceSet result = izvestajRepository.findIzvestaje(xPathExpression);	
+		ArrayList<IzvestajDTO> obavestenjaList = extractDataFromInformations(result);
+		return obavestenjaList;
+		
+	}
+	
+
+	private ArrayList<IzvestajDTO> extractDataFromInformations(ResourceSet resourceSet) {
+		ArrayList<IzvestajDTO> izvestajiList = new ArrayList<IzvestajDTO>();
+		ResourceIterator i;
+		try {
+			i = resourceSet.getIterator();
+			while (i.hasMoreResources()) {
+				XMLResource resource = (XMLResource) i.nextResource();
+				
+				Document document = domParser.buildDocumentFromText(resource.getContent().toString());
+				Message o = domParser.parseIzvestaj(document);
+				
+				izvestajiList.add(new IzvestajDTO(o));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return izvestajiList;
+	}
 }
