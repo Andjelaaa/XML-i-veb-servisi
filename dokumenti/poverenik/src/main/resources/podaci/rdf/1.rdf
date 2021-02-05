@@ -9,12 +9,12 @@
     <pred:zalba_odluke_uri xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:brojResenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">071-01-1114/2020-03</pred:brojResenja>
+    <pred:brojResenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">58</pred:brojResenja>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">04.02.2021.</pred:datum>
+    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">05.02.2021.</pred:datum>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:korisnicko_ime xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jova</pred:korisnicko_ime>
+    <pred:korisnicko_ime xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jocy</pred:korisnicko_ime>
   </rdf:Description>
 </rdf:RDF>

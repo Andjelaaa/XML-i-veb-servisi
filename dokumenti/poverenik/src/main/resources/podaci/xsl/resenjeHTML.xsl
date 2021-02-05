@@ -20,7 +20,7 @@
             </head>
             <body>
             <xsl:choose>
-					<xsl:when test="d:dokument_resenje/d:zalba_odluke_uri">
+					<xsl:when test="d:dokument_resenje/d:zalba_odluke_uri != ''">
 						<xsl:variable name="zalbaURI" select="d:dokument_resenje/d:zalba_odluke_uri"/>
             	
             		<p><a href="http://localhost:4201/appeal_decision_review/{$zalbaURI}">

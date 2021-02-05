@@ -185,9 +185,12 @@ public class ResenjeDTO {
 
 	@Override
 	public String toString() {
-		return "ResenjeDTO [korisnickoIme=" + korisnickoIme + ", URI=" + URI + ", URIZalbaCutanje=" + zalbaCutanjeURI
-				+ ", URIZalbaOdluke=" + zalbaOdlukeURI + "]";
+		return "ResenjeDTO [text=" + text + ", naziv=" + naziv + ", odluka=" + odluka + ", zaglavlje=" + zaglavlje
+				+ ", opisPostupka=" + opisPostupka + ", tekstResenja=" + tekstResenja + ", tekstObrazlozenja="
+				+ tekstObrazlozenja + ", potpisPoverenika=" + potpisPoverenika + ", korisnickoIme=" + korisnickoIme
+				+ ", URI=" + URI + ", zalbaCutanjeURI=" + zalbaCutanjeURI + ", zalbaOdlukeURI=" + zalbaOdlukeURI + "]";
 	}
-	
+
+
 	
 }
