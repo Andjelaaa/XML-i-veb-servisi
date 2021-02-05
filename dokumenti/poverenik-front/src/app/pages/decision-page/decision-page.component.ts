@@ -34,7 +34,6 @@ export class DecisionPageComponent implements OnInit {
         }
       }
       ngAfterViewInit(): void {
-        //podatke o podnosiocu dobija iz zalbe
         this.time = this.datePipe.transform(new Date(), 'dd.MM.yyyy.');
         const element = document.getElementById('resenje');
         const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
@@ -74,7 +73,7 @@ export class DecisionPageComponent implements OnInit {
       submit(): void {
         const text = Xonomy.harvest();
         if(Xonomy.warnings.length !== 0) {
-          this.toastr.error('Молимо Вас да исправно попуните форму!')
+          this.toastr.error('Morate popuniti sva obavezna polja!')
           return
         }
         this.service.sendDecision(text).subscribe(

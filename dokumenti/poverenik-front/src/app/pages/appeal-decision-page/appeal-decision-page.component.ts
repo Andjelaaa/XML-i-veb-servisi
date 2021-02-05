@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { ToastrService } from 'ngx-toastr';
 import { AppealDecisionService } from 'src/app/services/appeal-decision-service/appeal-decision.service';
 import { XonomyAppealDecisionService } from 'src/app/services/xonomy-service/xonomy-appeal-decision.service';
 
@@ -19,43 +21,45 @@ export class AppealDecisionPageComponent implements OnInit {
         private service: AppealDecisionService,
         private router: Router,
         private route: ActivatedRoute,
+        private toastr: ToastrService,
         private datePipe: DatePipe) { }
       ngOnInit(): void {
       }
       ngAfterViewInit(): void {
-        //podatke o podnosiocu dobija iz zalbe
+         const token = localStorage.getItem('user') || '';
+         const jwt: JwtHelperService = new JwtHelperService();       
+         const info = jwt.decodeToken(token);
+         const username = info.sub;
         this.time = this.datePipe.transform(new Date(), 'dd.MM.yyyy.');
         const element = document.getElementById('zalba');
         const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
         <root>
-        <zahtevURI>Unesite URI zahteva</zahtevURI>
+        <zahtevURI></zahtevURI>
            <adresaPodnosioca>
-              <broj>21</broj>
-              <grad>Novi Sad</grad>
-              <ulica>Ulica</ulica>
+              <broj></broj>
+              <grad></grad>
+              <ulica></ulica>
            </adresaPodnosioca>
-           <datum>21.11.2002.</datum>
-           <drugiPodaciZaKontakt>299192</drugiPodaciZaKontakt>
+           <datum>${this.time}</datum>
+           <drugiPodaciZaKontakt></drugiPodaciZaKontakt>
            <mesto />
            <naslov>
                    ŽALBA PROTIV ODLUKE ORGANA VLASTI KOJOM JE ODBIJEN ILI ODBAČEN ZATEV ZA PRISTUP INFORMACIJI
             </naslov>
-           <nazivOrganaVlasti>Sluzbenik</nazivOrganaVlasti>
+           <nazivOrganaVlasti></nazivOrganaVlasti>
            <nazivPodnosioca>
-              <ime>Jovan</ime>
-              <nazivFirme>JJ</nazivFirme>
-              <prezime>Jovic</prezime>
-              <korisnickoIme>jovica</korisnickoIme>
+              <ime></ime>
+              <nazivFirme></nazivFirme>
+              <prezime></prezime>
+              <korisnickoIme>${username}</korisnickoIme>
            </nazivPodnosioca>
            <nazivPoverenika>
                         Povereniky za informacije od javnog značaja i zaštitu podataka o ličnosti
                 </nazivPoverenika>
            <paragrafi>
               <element>
-                 <brojZalbe>12</brojZalbe>
-                 <datum>21.11.2002.</datum>
-                 <godinaOdbijanja>2010.</godinaOdbijanja>
-                 <razlog>NE POSTOJI RAZLOG</razlog>
+                 <brojZalbe></brojZalbe>
+                 <godinaOdbijanja></godinaOdbijanja>
                  <tekst>Broj
                         
                         od
@@ -63,9 +67,7 @@ export class AppealDecisionPageComponent implements OnInit {
                         godine.</tekst>
               </element>
               <element>
-                 <brojZalbe null="true" />
                  <datum />
-                 <godinaOdbijanja null="true" />
                  <razlog />
                  <tekst>Navedenom odlukom organa vlasti(rešenjem, zaključkom, obaveštenjem u pisanoj
                         formi sa elementima odluke) , suprotno zakonu, odbijen-odbačen je moj zahtev koji
@@ -78,28 +80,18 @@ export class AppealDecisionPageComponent implements OnInit {
                         jer nije zasnovana na Zakonu o slobodnom pristupu informacijama od javnog značaja.</tekst>
               </element>
               <element>
-                 <brojZalbe null="true" />
-                 <datum null="true" />
-                 <godinaOdbijanja null="true" />
-                 <razlog null="true" />
                  <tekst>Na osnovu iznetih razloga, predlažem da Poverenik uvaži moju žalbu, poništi odluka prvostepenog organa i omogući
                         mi pristup traženoj/im informaciji/ma.</tekst>
               </element>
               <element>
-                 <brojZalbe null="true" />
-                 <datum null="true" />
-                 <godinaOdbijanja null="true" />
-                 <razlog null="true" />
                  <tekst>Žalbu podnosim blagovremeno, u zakonskom roku utvrđenom u članu 22.st. 1. Zakona o slobodnom
                         pristupu informacijama od javnog značaja.</tekst>
               </element>
            </paragrafi>
            <sedistePoverenika>
-              <broj>15</broj>
-              <grad>
-                        Beograd 
-                    </grad>
-              <ulica>Bulevar kralja Aleksandra</ulica>
+              <broj></broj>
+              <grad></grad>
+              <ulica></ulica>
            </sedistePoverenika>
            <tackeNapomene>
               <element>
@@ -120,6 +112,10 @@ export class AppealDecisionPageComponent implements OnInit {
       }
       submit(): void {
         const text = Xonomy.harvest();
+        if(Xonomy.warnings.length !== 0) {
+         this.toastr.error('Morate popuniti sva obavezna polja!')
+         return
+       }
         this.service.sendAppealDecision(text).subscribe(
           response => {
             this.router.navigateByUrl('/home');
