@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,16 +34,15 @@ public class IzvestajController {
 		List<IzvestajDTO> resenjaList = service.findAllReports();
 		return new ResponseEntity<List<IzvestajDTO>>(resenjaList, HttpStatus.OK);
 	}
-	
-
-	/*
 	@GetMapping(value = "/{name}", produces = MediaType.TEXT_HTML_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@CrossOrigin(origins = "http://localhost:8082")
 	public ResponseEntity<String> getHTML(@PathVariable("name") String name) throws XMLDBException {
 		String result = service.convertXMLtoHTML(name);
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/{name}/pdf", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@CrossOrigin(origins = "http://localhost:8082")
 	public ResponseEntity<Object> getPdf(@PathVariable("name") String name) throws Exception {
 		
 		Resource resource = service.getPdf(name);
@@ -51,6 +51,10 @@ public class IzvestajController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
 				.body(resource);
 	}
+
+	/*
+	
+	
 	
 	*/
 

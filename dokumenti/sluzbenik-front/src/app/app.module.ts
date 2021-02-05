@@ -21,6 +21,8 @@ import { AllRequestsListComponent } from './pages/all-requests-list/all-requests
 import { InformationListComponent } from './pages/information-list/information-list.component';
 import { AllInformationListComponent } from './pages/all-information-list/all-information-list.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ReportListComponent } from './pages/report-list/report-list.component';
+import { ReportReviewComponent } from './pages/report-review/report-review.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { ToastrModule } from 'ngx-toastr';
     NewRequestsListComponent,
     AllRequestsListComponent,
     InformationListComponent,
-    AllInformationListComponent
+    AllInformationListComponent,
+    ReportListComponent,
+    ReportReviewComponent
   ],
   imports: [
     BrowserModule,

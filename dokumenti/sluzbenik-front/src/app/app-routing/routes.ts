@@ -13,6 +13,8 @@ import { NewRequestsListComponent } from '../pages/new-requests-list/new-request
 import { AllRequestsListComponent } from '../pages/all-requests-list/all-requests-list.component';
 import { AllInformationListComponent } from '../pages/all-information-list/all-information-list.component';
 import { InformationListComponent } from '../pages/information-list/information-list.component';
+import { ReportListComponent } from '../pages/report-list/report-list.component';
+import { ReportReviewComponent } from '../pages/report-review/report-review.component';
 
 export const routes: Routes = [
     { path: '',
@@ -50,13 +52,13 @@ export const routes: Routes = [
         path: 'obavestenje/:id',
         component: ObavestenjePrikazComponent,
        // canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'GRADJANIN'}
+      //  data: {expectedRoles: 'SLUZBENIK|GRADJANIN'}
     },
     {
         path: 'zahtev/:id',
         component: ZahtevPrikazComponent,
        // canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'GRADJANIN'}
+      //  data: {expectedRoles: 'SLUZBENIK|GRADJANIN'}
     },
     {
         path: 'user_requests',
@@ -80,12 +82,24 @@ export const routes: Routes = [
         path: 'informations',
         component: AllInformationListComponent,
        // canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'GRADJANIN'}
+      //  data: {expectedRoles: 'SLUZBENIK'}
     },
     {
         path: 'user_informations',
         component: InformationListComponent,
        // canActivate: [RoleGuard],
       //  data: {expectedRoles: 'GRADJANIN'}
-    }
+    },
+    {
+        path: 'reports',
+        component: ReportListComponent,
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'SLUZBENIK'}
+      },
+      {
+        path: 'report_review/:id',
+        component: ReportReviewComponent,
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'SLUZBENIK'}
+      }
 ];

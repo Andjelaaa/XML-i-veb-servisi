@@ -62,80 +62,80 @@ export const routes: Routes = [
     {
         path: 'decision_review/:id',
         component: DecisionReviewComponent,
-      //  canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'GRADJANIN'}
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'POVERENIK|GRADJANIN'}
     },
     {
         path: 'appeal_decision_review/:id',
         component: AppealDecisionReviewComponent,
-      //  canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'GRADJANIN'}
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'POVERENIK|GRADJANIN'}
     },
     {
         path: 'appeal_silence_review/:id',
         component: AppealSilenceReviewComponent,
-      //  canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'GRADJANIN'}
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'POVERENIK|GRADJANIN'}
     },
     {
         path: 'user_appeal_decision',
         component: AppealDecisionListComponent,
-      //  canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'GRADJANIN'}
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'GRADJANIN'}
     },
     {
         path: 'user_appeal_silence',
         component: AppealSilenceListComponent,
-      //  canActivate: [RoleGuard],
-      //  data: {expectedRoles: 'GRADJANIN'}
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'GRADJANIN'}
     },
     {
       path: 'user_decision',
       component: DecisionListComponent,
-    //  canActivate: [RoleGuard],
-    //  data: {expectedRoles: 'GRADJANIN'}
+      canActivate: [RoleGuard],
+      data: {expectedRoles: 'GRADJANIN'}
   },
   {
     path: 'all_decision',
     component: AllDecisionListComponent,
-  //  canActivate: [RoleGuard],
-  //  data: {expectedRoles: 'GRADJANIN'}
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'POVERENIK'}
   },
   {
     path: 'all_appeal_decision',
     component: AllAppealDecisionListComponent,
-  //  canActivate: [RoleGuard],
-  //  data: {expectedRoles: 'GRADJANIN'}
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'POVERENIK'}
   },
   {
     path: 'all_appeal_silence',
     component: AllAppealSilenceListComponent,
-  //  canActivate: [RoleGuard],
-  //  data: {expectedRoles: 'GRADJANIN'}
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'POVERENIK'}
   },
   {
     path: 'new_appeal_decision',
     component: NewAppealDecisionListComponent,
-  //  canActivate: [RoleGuard],
-  //  data: {expectedRoles: 'GRADJANIN'}
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'GRADJANIN'}
   },
   {
     path: 'new_appeal_silence',
     component: NewAppealSilenceListComponent,
-  //  canActivate: [RoleGuard],
-  //  data: {expectedRoles: 'GRADJANIN'}
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'GRADJANIN'}
   },
   {
     path: 'reports',
     component: ReportListComponent,
-  //  canActivate: [RoleGuard],
-  //  data: {expectedRoles: 'GRADJANIN'}
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'POVERENIK'}
   },
   {
-    path: 'report_review',
+    path: 'report_review/:id',
     component: ReportReviewComponent,
-  //  canActivate: [RoleGuard],
-  //  data: {expectedRoles: 'GRADJANIN'}
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'POVERENIK'}
   }
 
 ];

@@ -13,7 +13,7 @@ export class ReportService {
     'Content-Type' : 'application/xml'});
 
 createReport(): Observable < any > {
-    return this.http.get(`${environment.baseUrl}/izvestaj/create`,
+    return this.http.get(`${environment.baseUrl}/api/izvestaj/create`,
      {headers: this.headers, responseType: 'text'});
   }
 
@@ -21,8 +21,11 @@ toHtml(id: String){
   const headersJson = new HttpHeaders({
     'Content-Type': 'application/json'});
 
-  return this.http.get(`${environment.baseUrl}/izvestaj/` + id ,{headers: headersJson, responseType: 'text'});
+  return this.http.get(`${environment.baseUrl}/api/izvestaj/` + id ,{headers: headersJson, responseType: 'text'});
 }
-
+getAll() :Observable<any>{
+  return this.http.get(`${environment.baseUrl}/api/izvestaj/all`,
+  {headers: this.headers, responseType: 'text'}); 
+}
 
 }

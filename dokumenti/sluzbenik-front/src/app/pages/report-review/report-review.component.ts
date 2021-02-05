@@ -9,7 +9,7 @@ import { ReportService } from 'src/app/services/report-service/report.service';
 })
 export class ReportReviewComponent implements OnInit {
 
-  @Input() id: any;
+    @Input() id: any;
   public html = '';
   constructor(private reportService: ReportService,
               private route: ActivatedRoute) { }
@@ -33,5 +33,6 @@ export class ReportReviewComponent implements OnInit {
       })
     );
     }
+  
 
 }
