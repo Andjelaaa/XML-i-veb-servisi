@@ -74,6 +74,11 @@ public class ZalbaCutanjeService {
 		//return domParser.getDocumentAsString(document);
 		return zalbaCutanje;
 	}
+	public ZalbaCutanje getOneById(String id) throws IOException {
+		Document document = zalbaCutanjeRepository.find(id);
+		ZalbaCutanje zalbaCutanje= domParser.parseZalbaCutanje(document);
+		return zalbaCutanje;
+	}
 	
 	public void makeZalbaCutanje(ZalbaCutanje zc) throws ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException, TransformerException, IOException {
 		String documentContent = domWriter.generateZalbaCutanje(zc);

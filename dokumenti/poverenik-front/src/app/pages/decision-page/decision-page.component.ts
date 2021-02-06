@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DecisionService } from 'src/app/services/decision-service/decision.service';
 import { XonomyDecisionService } from 'src/app/services/xonomy-service/xonomy-decision.service';
 import { ToastrService } from 'ngx-toastr';
+import { AppealSilenceService } from 'src/app/services/appeal-silence-service/appeal-silence.service';
+import { AppealDecisionService } from 'src/app/services/appeal-decision-service/appeal-decision.service';
 
 
 declare const Xonomy: any;
@@ -18,7 +20,10 @@ export class DecisionPageComponent implements OnInit {
     private id: string = "";
     private idOdluka: string = '';
     private idCutanje: string = '';
+    private username: string = '';
     constructor(
+        private appealSilenceService : AppealSilenceService,
+        private appealDecisionService: AppealDecisionService,
         private xonomyService: XonomyDecisionService,
         private service: DecisionService,
         private router: Router,
@@ -29,22 +34,42 @@ export class DecisionPageComponent implements OnInit {
         this.id = this.route.snapshot.paramMap.get('id') as string;
         if(this.id.startsWith('o')){
             this.idOdluka = this.id.substring(1);
+            this.appealDecisionService.getUsername(this.idOdluka).subscribe(
+              res => {
+                this.username = res;
+                this.ngAfterViewInitt();
+              },
+              error => {
+                console.log(error);
+              }
+            )
         }else{
           this.idCutanje = this.id.substring(1);
+          this.appealSilenceService.getUsername(this.idCutanje).subscribe(
+            res => {
+              this.username = res;
+              this.ngAfterViewInitt();
+            },
+            error => {
+              console.log(error);
+            }
+          )
         }
+        
       }
-      ngAfterViewInit(): void {
+      ngAfterViewInitt(): void {
+        console.log(this.username+"snksb");
         this.time = this.datePipe.transform(new Date(), 'dd.MM.yyyy.');
         const element = document.getElementById('resenje');
         const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
         <root>
         <zalbaCutanjeURI>${this.idCutanje}</zalbaCutanjeURI>
         <zalbaOdlukeURI>${this.idOdluka}</zalbaOdlukeURI>
-        <korisnickoIme>Unesite korisnicko ime</korisnickoIme>
+        <korisnickoIme>${this.username}</korisnickoIme>
         <naziv>Rešenje</naziv>
         <odluka></odluka>
         <opisPostupka></opisPostupka>
-        <potpisPoverenika></potpisPoverenika>
+        <potpisPoverenika>Poverenik za informacije od javnog znacaja</potpisPoverenika>
         <tekstObrazlozenja>
         <tekst>
         Obrazloženje

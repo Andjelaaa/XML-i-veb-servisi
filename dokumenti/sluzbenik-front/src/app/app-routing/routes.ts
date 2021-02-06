@@ -15,6 +15,8 @@ import { AllInformationListComponent } from '../pages/all-information-list/all-i
 import { InformationListComponent } from '../pages/information-list/information-list.component';
 import { ReportListComponent } from '../pages/report-list/report-list.component';
 import { ReportReviewComponent } from '../pages/report-review/report-review.component';
+import { AllDecisionListComponent } from '../pages/all-decision-list/all-decision-list.component';
+import { DecisionReviewComponent } from '../pages/decision-review/decision-review.component';
 
 export const routes: Routes = [
     { path: '',
@@ -101,5 +103,18 @@ export const routes: Routes = [
         component: ReportReviewComponent,
         canActivate: [RoleGuard],
         data: {expectedRoles: 'SLUZBENIK'}
+      },
+      {
+        path: 'decisions',
+        component: AllDecisionListComponent,
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'SLUZBENIK'}
+      },
+      {
+        path: 'decision_review/:id',
+        component: DecisionReviewComponent,
+        canActivate: [RoleGuard],
+        data: {expectedRoles: 'SLUZBENIK'}
       }
+
 ];

@@ -38,7 +38,19 @@ export class XonomyDecisionService {
         naziv: {
             isReadOnly: true
         },
-        odluka:{},
+        odluka:{
+          title: "Unesite tekst odluke",
+            validate: function (jsElement: any) {
+                if (jsElement.getText() == '') {
+                  Xonomy.warnings.push({
+                    htmlID: jsElement.htmlID,
+                    text: 'Odluka je obavezno polje!',
+                  });
+                }
+              },
+              hasText: true,
+              asker: Xonomy.askString
+        },
         opisPostupka: {
             title: "Unesite opis postupka",
             validate: function (jsElement: any) {
@@ -68,7 +80,9 @@ export class XonomyDecisionService {
               }
             },
         },
-
+        korisnickoIme: {
+          isReadOnly: true
+        },
         paragrafi: {
             hasText: false,
             validate: function (jsElement: any) {
@@ -119,6 +133,9 @@ export class XonomyDecisionService {
         },
         zalbaCutanjeURI:{
             isReadOnly: true
+        },
+        potpisPoverenika: {
+          isReadOnly: true          
         }
     }
   };

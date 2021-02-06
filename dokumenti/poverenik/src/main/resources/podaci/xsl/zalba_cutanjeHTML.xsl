@@ -62,8 +62,8 @@
 			<table style="width:100%">
 			<tr>
 			<td style="vertical-align:bottom">
-			 U  <xsl:value-of select="d:zalba_cutanje/d:podaci_o_vremenu_i_mestu_podnosenja_zalbe/d:mesto" /><xsl:text>, dana</xsl:text>
-			 <xsl:value-of select="d:zalba_cutanje/d:podaci_o_vremenu_i_mestu_podnosenja_zalbe/d:datum" /><xsl:text> godine</xsl:text>
+			 U  <xsl:value-of select="d:zalba_cutanje/d:tekst_zalbe/d:podaci_o_vremenu_i_mestu_podnosenja_zalbe/d:mesto" /><xsl:text>, dana</xsl:text>
+			 <xsl:value-of select="d:zalba_cutanje/d:tekst_zalbe/d:podaci_o_vremenu_i_mestu_podnosenja_zalbe/d:datum" /><xsl:text> godine</xsl:text>
 			</td>
 			<td style="text-align:right;">
 				<xsl:value-of select="d:zalba_cutanje/d:podnosilac_zalbe/d:naziv_podnosioca/d:ime" />

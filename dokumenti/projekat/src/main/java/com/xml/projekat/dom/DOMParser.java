@@ -8,9 +8,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -39,6 +37,10 @@ import org.w3c.dom.Text;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.xml.projekat.model.NazivOdluka;
+import com.xml.projekat.model.Resenje;
+import com.xml.projekat.model.TTekst;
+import com.xml.projekat.model.TZaglavlje;
 import com.xml.projekat.model.*;
 import com.xml.projekat.rdf.FusekiReader;
 
@@ -87,10 +89,63 @@ public class DOMParser {
 
 	}
 
+	public Resenje parseResenje(Document document) throws ParseException, IOException {
+
+		String uri = document.getElementsByTagName("d:URI").item(0).getTextContent();
+		String uriZalbaCutanje = document.getElementsByTagName("d:zalba_cutanje_uri").item(0).getTextContent();
+		String uriZalbaOdluke = document.getElementsByTagName("d:zalba_odluke_uri").item(0).getTextContent();
+
+		String korisnickoIme = document.getElementsByTagName("d:korisnicko_ime").item(0).getTextContent();
+
+
+		String opisPostupka = document.getElementsByTagName("d:opis_postupka").item(0).getTextContent();
+
+		String brojResenja = document.getElementsByTagName("d:broj_resenja").item(0).getTextContent();
+		String datumString = document.getElementsByTagName("d:datum").item(0).getTextContent();
+//
+//		System.out.println(datumString);
+//		String datum = formatter.format(datumString.replaceAll("\\s", ""));
+		TZaglavlje zaglavlje = new TZaglavlje(brojResenja, datumString);
+
+		String nazivResenja = document.getElementsByTagName("d:naziv_resenja").item(0).getChildNodes().item(0)
+				.getTextContent();
+		String odluka = document.getElementsByTagName("d:odluka").item(0).getTextContent();
+		NazivOdluka nazivOdluka = new NazivOdluka(nazivResenja, odluka);
+
+		String potpisPoverenika = document.getElementsByTagName("d:potpis_poverenika").item(0).getTextContent();
+
+		String txtResenja = document.getElementsByTagName("d:tekst_resenja").item(0).getChildNodes().item(0)
+				.getTextContent();
+		String txtObrazlozenja = document.getElementsByTagName("d:tekst_obrazlozenja").item(0).getChildNodes().item(0)
+				.getTextContent();
+
+		ArrayList<String> paragrafiResenja = new ArrayList<String>();
+		ArrayList<String> paragrafiObrazlozenja = new ArrayList<String>();
+
+		NodeList paragrafi = document.getElementsByTagName("d:p");
+
+		for (int i = 0; i < paragrafi.getLength(); i++) {
+			if (paragrafi.item(i).getParentNode().equals(document.getElementsByTagName("d:tekst_resenja").item(0))) {
+				paragrafiResenja.add(paragrafi.item(i).getTextContent());
+			} else {
+				paragrafiObrazlozenja.add(paragrafi.item(i).getTextContent());
+			}
+		}
+
+		TTekst tekstResenja = new TTekst(txtResenja, paragrafiResenja);
+		TTekst tekstObrazlozenja = new TTekst(txtObrazlozenja, paragrafiObrazlozenja);
+
+		Resenje r = new Resenje(nazivOdluka, zaglavlje, opisPostupka, tekstResenja, tekstObrazlozenja, potpisPoverenika,
+				korisnickoIme, uri, uriZalbaCutanje, uriZalbaOdluke);
+		System.out.println(r);
+		return r;
+	}
+
 	public Zahtev parseZahtev(Document document) throws IOException {
 
 		String uri = document.getElementsByTagName("d:URI").item(0).getTextContent();
-		String drugiPodaciZaKontakt = document.getElementsByTagName("d:drugi_podaci_za_kontakt").item(0).getTextContent();
+		String drugiPodaciZaKontakt = document.getElementsByTagName("d:drugi_podaci_za_kontakt").item(0)
+				.getTextContent();
 		String nazivOrganaVlasti = document.getElementsByTagName("d:naziv_organa_vlasti").item(0).getTextContent();
 		String sedisteOrgana = document.getElementsByTagName("d:sediste_organa").item(0).getTextContent();
 		String naslov = document.getElementsByTagName("d:naslov").item(0).getTextContent();
@@ -127,11 +182,11 @@ public class DOMParser {
 							Element podizboriEl = (Element) podizbori;
 							NodeList podizbori2 = podizboriEl.getElementsByTagName("d:podizbor");
 							for (int k = 0; k < podizbori2.getLength(); k++) {
-								String podizborBroj = podizbori2.item(k).getAttributes().getNamedItem("d:broj").getTextContent();
+								String podizborBroj = podizbori2.item(k).getAttributes().getNamedItem("d:broj")
+										.getTextContent();
 								String podizborString = podizbori2.item(k).getTextContent();
 								podizboriMapa.put(podizborBroj, podizborString);
 							}
-
 
 						}
 
@@ -159,7 +214,7 @@ public class DOMParser {
 		Zahtev z = new Zahtev(podnosilac, adresa, drugiPodaciZaKontakt, nazivOrganaVlasti, sedisteOrgana, naslov,
 				paragrafiLista, trazeneInformacije, datum, mesto, fusnoteLista);
 		z.setURI(uri);
-		//System.out.println(z);
+		// System.out.println(z);
 		FusekiReader.executeQuery("/zahtevi");
 		return z;
 	}
@@ -262,8 +317,8 @@ public class DOMParser {
 			String text = paragrafiXML.item(i).getTextContent().trim();
 			if (((Element) paragrafiXML.item(i)).getElementsByTagName("d:novcana_naknada").item(0) != null
 					&& paragrafiXML.item(i) instanceof Element) {
-				String novcanaNaknada = ((Element) paragrafiXML.item(i)).getElementsByTagName("d:novcana_naknada").item(0)
-						.getTextContent();
+				String novcanaNaknada = ((Element) paragrafiXML.item(i)).getElementsByTagName("d:novcana_naknada")
+						.item(0).getTextContent();
 
 				PObavestenje pObavestenje = new PObavestenje(text, novcanaNaknada);
 				paragrafi.add(pObavestenje);
@@ -272,13 +327,14 @@ public class DOMParser {
 
 				String godina = ((Element) paragrafiXML.item(i)).getElementsByTagName("d:godina").item(0)
 						.getTextContent();
-				String trazenaInformacija = ((Element) paragrafiXML.item(i)).getElementsByTagName("d:trazena_informacija")
-						.item(0).getTextContent();
+				String trazenaInformacija = ((Element) paragrafiXML.item(i))
+						.getElementsByTagName("d:trazena_informacija").item(0).getTextContent();
 				String dan = ((Element) paragrafiXML.item(i)).getElementsByTagName("d:dan").item(0).getTextContent();
 				String sati = ((Element) paragrafiXML.item(i)).getElementsByTagName("d:sati").item(0).getTextContent();
 				String odSati = ((Element) paragrafiXML.item(i)).getElementsByTagName("d:od").item(0).getTextContent();
 				String doSati = ((Element) paragrafiXML.item(i)).getElementsByTagName("d:do").item(0).getTextContent();
-				String mesto = ((Element) paragrafiXML.item(i)).getElementsByTagName("d:mesto").item(0).getTextContent();
+				String mesto = ((Element) paragrafiXML.item(i)).getElementsByTagName("d:mesto").item(0)
+						.getTextContent();
 				String ulicaOb = ((Element) paragrafiXML.item(i)).getElementsByTagName("d:ulica").item(0)
 						.getTextContent();
 				String brojZgrade = ((Element) paragrafiXML.item(i)).getElementsByTagName("d:broj_zgrade").item(0)
@@ -288,7 +344,7 @@ public class DOMParser {
 
 				PObavestenje pObavestenje = new PObavestenje(text, godina, trazenaInformacija, dan, sati, odSati,
 						doSati, mesto, ulicaOb, brojZgrade, brojKancelarije);
-				
+
 				System.out.println(pObavestenje);
 				paragrafi.add(pObavestenje);
 
@@ -300,27 +356,25 @@ public class DOMParser {
 		obavestenje.setURI(uri);
 		obavestenje.setZahtevURI(uriZahteva);
 		System.out.println(obavestenje);
-		
+
 		FusekiReader.executeQuery("/obavestenja");
 		return obavestenje;
 	}
-	
+
 	public Izvestaj parseIzvestaj(Document document) {
 		String godina = document.getElementsByTagName("d:godina").item(0).getTextContent();
 		String brPodnetihZahteva = document.getElementsByTagName("d:br_podnetih_zahteva").item(0).getTextContent();
 		String brOdbijenihZahteva = document.getElementsByTagName("d:br_odbijenih_zahteva").item(0).getTextContent();
 		String brZalbi = document.getElementsByTagName("d:br_zalbi").item(0).getTextContent();
 		Izvestaj izvestaj = new Izvestaj(godina, brPodnetihZahteva, brOdbijenihZahteva, brZalbi);
-		
+
 		return izvestaj;
 	}
-
 
 	/**
 	 * A recursive helper method for iterating over the elements of a DOM tree.
 	 * 
-	 * @param node
-	 *            current node
+	 * @param node current node
 	 */
 	private void printNode(Node node) {
 
@@ -399,5 +453,4 @@ public class DOMParser {
 		}
 	}
 
-	
 }

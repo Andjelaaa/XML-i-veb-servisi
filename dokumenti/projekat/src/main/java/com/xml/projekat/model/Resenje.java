@@ -1,14 +1,14 @@
 package com.xml.projekat.model;
 
-
+import com.xml.projekat.dto.ResenjeDTO;
 
 public class Resenje {
 	
 	private NazivOdluka nazivOdluka;
 	private TZaglavlje zaglavlje;
 	private String opisPostupka;
-	private TResenja tekstResenja;
-	private TObrazlozenja tekstObrazlozenja;
+	private TTekst tekstResenja;
+	private TTekst tekstObrazlozenja;
 	private String potpisPoverenika;
 	private String korisnickoIme;
 	private String URI;
@@ -22,8 +22,8 @@ public class Resenje {
 	}
 	
 
-	public Resenje(NazivOdluka nazivOdluka, TZaglavlje zaglavlje, String opisPostupka, TResenja tekstResenja,
-			TObrazlozenja tekstObrazlozenja, String potpisPoverenika, String korisnickoIme, String uRI, String uRIZalbaCutanje,
+	public Resenje(NazivOdluka nazivOdluka, TZaglavlje zaglavlje, String opisPostupka, TTekst tekstResenja,
+			TTekst tekstObrazlozenja, String potpisPoverenika, String korisnickoIme, String uRI, String uRIZalbaCutanje,
 			String uRIZalbaOdluke) {
 		super();
 		this.nazivOdluka = nazivOdluka;
@@ -38,6 +38,30 @@ public class Resenje {
 		URIZalbaOdluke = uRIZalbaOdluke;
 	}
 
+
+	public Resenje(NazivOdluka nazivOdluka, TZaglavlje zaglavlje, String opisPostupka, TTekst tekstResenja,
+			TTekst tekstObrazlozenja, String potpisPoverenika) {
+		super();
+		this.nazivOdluka = nazivOdluka;
+		this.zaglavlje = zaglavlje;
+		this.opisPostupka = opisPostupka;
+		this.tekstResenja = tekstResenja;
+		this.tekstObrazlozenja = tekstObrazlozenja;
+		this.potpisPoverenika = potpisPoverenika;
+	}
+
+	public Resenje(ResenjeDTO dto) {
+		this.nazivOdluka = new NazivOdluka(dto.getNaziv(), dto.getOdluka());
+		this.zaglavlje = new TZaglavlje(dto.getZaglavlje());
+		this.opisPostupka = dto.getOpisPostupka();
+		this.tekstResenja = new TTekst(dto.getTekstResenja());
+		this.tekstObrazlozenja = new TTekst(dto.getTekstObrazlozenja());
+		this.potpisPoverenika = dto.getPotpisPoverenika();
+		this.korisnickoIme = dto.getKorisnickoIme();
+		this.URI = dto.getURI();
+		this.URIZalbaCutanje = dto.getZalbaCutanjeURI();
+		this.URIZalbaOdluke = dto.getZalbaOdlukeURI();
+	}
 
 	public NazivOdluka getNazivOdluka() {
 		return nazivOdluka;
@@ -63,19 +87,19 @@ public class Resenje {
 		this.opisPostupka = opisPostupka;
 	}
 
-	public TResenja getTekstResenja() {
+	public TTekst getTekstResenja() {
 		return tekstResenja;
 	}
 
-	public void setTekstResenja(TResenja tekstResenja) {
+	public void setTekstResenja(TTekst tekstResenja) {
 		this.tekstResenja = tekstResenja;
 	}
 
-	public TObrazlozenja getTekstObrazlozenja() {
+	public TTekst getTekstObrazlozenja() {
 		return tekstObrazlozenja;
 	}
 
-	public void setTekstObrazlozenja(TObrazlozenja tekstObrazlozenja) {
+	public void setTekstObrazlozenja(TTekst tekstObrazlozenja) {
 		this.tekstObrazlozenja = tekstObrazlozenja;
 	}
 

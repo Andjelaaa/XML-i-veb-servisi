@@ -32,6 +32,7 @@ import com.xml.poverenik.dto.RetrieveDTO;
 import com.xml.poverenik.dto.SearchDTO;
 import com.xml.poverenik.dto.ZalbaOdlukaDTO;
 import com.xml.poverenik.model.Resenje;
+import com.xml.poverenik.model.ZalbaCutanje;
 import com.xml.poverenik.model.ZalbaOdluke;
 import com.xml.poverenik.rdf.FusekiReader;
 import com.xml.poverenik.repository.ResenjeRepository;
@@ -63,6 +64,12 @@ public class ZalbaOdlukaService {
 		this.domWriter = domWriter;
 	}
 
+	public ZalbaOdluke getOneById(String id) throws IOException {
+		Document document = zalbaOdlukeRepository.find(id);
+		ZalbaOdluke zalbaOdluke = domParser.parseZalbaOdluke(document);
+		return zalbaOdluke;
+	}
+	
 	public ZalbaOdluke parseZalbaOdluke(RetrieveDTO dto) throws Exception {
 		Document document = zalbaOdlukeRepository.find(dto.getXpath());
 		//Document document = domParser.buildDocumentFromFile("./../zalba_odluke.xml");

@@ -23,6 +23,7 @@ import org.xmldb.api.base.XMLDBException;
 import com.xml.poverenik.dto.RetrieveDTO;
 import com.xml.poverenik.dto.SearchDTO;
 import com.xml.poverenik.dto.ZalbaOdlukaDTO;
+import com.xml.poverenik.model.ZalbaCutanje;
 import com.xml.poverenik.model.ZalbaOdluke;
 import com.xml.poverenik.service.ZalbaOdlukaService;
 
@@ -40,6 +41,12 @@ public class ZalbaOdlukaController {
 	public ResponseEntity<ZalbaOdlukaDTO> parseZalbaOdluke(@RequestBody RetrieveDTO dto) throws Exception{
 		ZalbaOdluke response = service.parseZalbaOdluke(dto);
 		return new ResponseEntity<ZalbaOdlukaDTO>(new ZalbaOdlukaDTO(response), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/username/{id}", produces = MediaType.TEXT_HTML_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> getUsername(@PathVariable("id") String id) throws Exception {
+		ZalbaOdluke zo = service.getOneById(id);
+		return new ResponseEntity<String>(zo.getNazivPodnosioca().getKorisnickoIme(), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/{name}", produces = MediaType.TEXT_HTML_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

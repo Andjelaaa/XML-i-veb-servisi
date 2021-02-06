@@ -17,6 +17,13 @@ export class AppealSilenceService {
         private http: HttpClient
     ) {}
 
+    getUsername(id: any) : Observable < any > {
+        const headersJson = new HttpHeaders({
+            'Content-Type': 'application/json'});
+        return this.http.get(`${environment.baseUrl}/${environment.apiAppealSilence}username/`+id,
+         {headers: headersJson, responseType: 'text'});
+    }
+
     sendAppealSilence(request: any): Observable < any > {
         return this.http.post(`${environment.baseUrl}/${environment.appealSilence}`, request,
          {headers: this.headers, responseType: 'text'});

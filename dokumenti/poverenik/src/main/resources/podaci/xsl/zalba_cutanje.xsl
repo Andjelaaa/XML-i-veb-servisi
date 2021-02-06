@@ -110,7 +110,7 @@
 						<fo:inline>
 							<xsl:text>U </xsl:text>
 							<xsl:value-of
-								select="d:zalba_cutanje/d:podaci_o_vremenu_i_mestu_podnosenja_zalbe/d:mesto" />
+								select="d:zalba_cutanje/d:tekst_zalbe/d:podaci_o_vremenu_i_mestu_podnosenja_zalbe/d:mesto" />
 						</fo:inline>
 					</fo:block>
 					<fo:block font-family="sans-serif" font-size="12px"
@@ -118,7 +118,7 @@
 						<fo:inline>
 							<xsl:text>dana </xsl:text>
 							<xsl:value-of
-								select="d:zalba_cutanje/d:podaci_o_vremenu_i_mestu_podnosenja_zalbe/d:datum" />
+								select="d:zalba_cutanje/d:tekst_zalbe/d:podaci_o_vremenu_i_mestu_podnosenja_zalbe/d:datum" />
 							<xsl:text>godine</xsl:text>
 						</fo:inline>
 					</fo:block>

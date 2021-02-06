@@ -1,18 +1,17 @@
 package com.xml.projekat.dto;
 
-import java.util.Date;
 
 import com.xml.projekat.model.TZaglavlje;
 
 public class TZaglavljeDTO {
 	private String brojResenja;
-	private Date datum;
+	private String datum;
 	
 	public TZaglavljeDTO() {
 		super();
 	}
 	
-	public TZaglavljeDTO(String brojResenja, Date datum) {
+	public TZaglavljeDTO(String brojResenja, String datum) {
 		super();
 		this.brojResenja = brojResenja;
 		this.datum = datum;
@@ -31,11 +30,11 @@ public class TZaglavljeDTO {
 		this.brojResenja = brojResenja;
 	}
 
-	public Date getDatum() {
+	public String getDatum() {
 		return datum;
 	}
 
-	public void setDatum(Date datum) {
+	public void setDatum(String datum) {
 		this.datum = datum;
 	}
 

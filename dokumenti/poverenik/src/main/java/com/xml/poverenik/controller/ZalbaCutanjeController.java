@@ -68,6 +68,12 @@ public class ZalbaCutanjeController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
 				.body(resource);
 	}
+	@GetMapping(value = "/username/{id}", produces = MediaType.TEXT_HTML_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> getUsername(@PathVariable("id") String id) throws Exception {
+		ZalbaCutanje zc = service.getOneById(id);
+		return new ResponseEntity<String>(zc.getPodnosilac().getKorisnickoIme(), HttpStatus.OK);
+	}
+	
 	@GetMapping(value = "/{name}", produces = MediaType.TEXT_HTML_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getHTML(@PathVariable("name") String name) throws XMLDBException {
 		String result = service.convertXMLtoHTML(name);

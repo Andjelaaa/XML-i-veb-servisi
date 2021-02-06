@@ -16,6 +16,12 @@ export class AppealDecisionService {
     constructor(
         private http: HttpClient
     ) {}
+    getUsername(id: any) : Observable < any > {
+        const headersJson = new HttpHeaders({
+            'Content-Type': 'application/json'});
+        return this.http.get(`${environment.baseUrl}/${environment.apiAppealDecision}username/`+id,
+         {headers: headersJson, responseType: 'text'});
+      }
 
     sendAppealDecision(request: any): Observable < any > {
         return this.http.post(`${environment.baseUrl}/${environment.appealDecision}`, request,

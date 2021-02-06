@@ -30,6 +30,11 @@
       </button>
       <br>
       <br>
+      <button *ngIf ="type==='SLUZBENIK'" [routerLink]="['/decisions']">
+        Pogledaj pristigla resenja
+      </button>
+      <br>
+      <br>
       <button *ngIf ="type==='GRADJANIN'" [routerLink]="['/make_request']">
           Novi zahtev
       </button>
