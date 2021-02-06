@@ -3,13 +3,13 @@
     <pred:URI xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1</pred:URI>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:zalba_cutanje_uri xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1</pred:zalba_cutanje_uri>
+    <pred:zalba_cutanje_uri xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:zalba_odluke_uri xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
+    <pred:zalba_odluke_uri xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2</pred:zalba_odluke_uri>
   </rdf:Description>
   <rdf:Description rdf:about="">
-    <pred:brojResenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">071-01-1114/2020-03</pred:brojResenja>
+    <pred:brojResenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">123</pred:brojResenja>
   </rdf:Description>
   <rdf:Description rdf:about="">
     <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">05.02.2021.</pred:datum>

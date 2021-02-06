@@ -26,16 +26,20 @@
             <th>Podnosilac zalbe</th>
             <th>Preuzmi PDF</th>
             <th>Prikaz zalbe</th>
+            <th>Preuzmi metapodatke u rdf formatu</th>
+            <th>Preuzmi metapodatke u json formatu</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let zalba of list">
             <td>{{zalba.datum._text}}</td>
             <td>{{zalba.nazivOrganaVlasti._text}}</td>
-            <td>{{zalba.nazivPoverenika._text}}</td>
+            <td>{{zalba.nazivPoverenika._text}}</td> 
             <td>{{zalba.nazivPodnosioca.ime._text}} {{zalba.nazivPodnosioca.prezime._text}}</td>
             <td><button mat-button color="primary"><a href="{{getHref(zalba.uri._text)}}">Preuzmi PDF</a></button></td>
             <td><button mat-button color="primary" ><a href="/appeal_decision_review/{{zalba.uri._text}}">Prikaz zalbe</a></button></td>
+            <td><button mat-button color="primary"><a href="http://localhost:8082/api/zalba_odluke/rdf/{{zalba.uri._text}}">Preuzmi RDF</a></button></td>
+            <td><button mat-button color="primary"><a href="http://localhost:8082/api/zalba_odluke/json/{{zalba.uri._text}}">Preuzmi JSON</a></button></td>
         </tr>
     </tbody>
 

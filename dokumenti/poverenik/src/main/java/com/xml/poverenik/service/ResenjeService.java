@@ -253,8 +253,28 @@ public class ResenjeService {
 		}
 		return filtriranaList;
 	}
-	
-	public void posaljiResenjeSluzbeniku(Resenje resenje, Integer urii) throws Exception{
+
+	public Resource findRdf(String uri) throws IOException {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("URI", uri);
+		
+		FusekiReader.findRDF(params, "/resenja", "src/main/resources/podaci/rdf/queryOneDecision.rq");
+		Path file = Paths.get("src/main/resources/podaci/rdf/metadataRDF.xml");
+
+		return new UrlResource(file.toUri());
+	}
+
+	public Resource findJsonMetadata(String uri) throws IOException {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("URI", uri);
+		
+		FusekiReader.findJsonMetadata(params, "/resenja", "src/main/resources/podaci/rdf/queryOneDecision.rq");
+		Path file = Paths.get("src/main/resources/podaci/rdf/metadataJSON.json");
+
+		return new UrlResource(file.toUri());
+	}
+
+public void posaljiResenjeSluzbeniku(Resenje resenje, Integer urii) throws Exception{
 		
 		
 		String soapEndpointUrl = "http://localhost:8081/ws/resenjee";
@@ -336,6 +356,4 @@ public class ResenjeService {
         // Print the SOAP Response
         System.out.println("Response SOAP Message:");
         soapResponse.writeTo(System.out);
-	}
-
-}
+	}}

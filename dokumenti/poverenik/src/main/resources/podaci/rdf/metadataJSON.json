@@ -1,0 +1,17 @@
+{
+  "head": {
+    "vars": [ "subject" , "URI" , "datum" , "korisnicko_ime" , "naziv_poverenika" , "zahtev_uri" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "subject": { "type": "uri" , "value": "file:///C:/Users/Tamara/Desktop/XML-i-veb-servisi/dokumenti/poverenik/src/main/resources/podaci/rdf/4.rdf" } ,
+        "URI": { "type": "literal" , "value": "4" } ,
+        "datum": { "type": "literal" , "value": "05.02.2021." } ,
+        "korisnicko_ime": { "type": "literal" , "value": "jova" } ,
+        "naziv_poverenika": { "type": "literal" , "value": "dasd" } ,
+        "zahtev_uri": { "type": "literal" , "value": "1" }
+      }
+    ]
+  }
+}

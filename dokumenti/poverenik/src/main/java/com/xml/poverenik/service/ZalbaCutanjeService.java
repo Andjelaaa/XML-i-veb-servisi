@@ -24,6 +24,7 @@ import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
+import com.xml.poverenik.data.types.Message;
 import com.xml.poverenik.dom.DOMParser;
 import com.xml.poverenik.dom.DOMWriter;
 import com.xml.poverenik.dto.ResenjeDTO;
@@ -53,6 +54,8 @@ public class ZalbaCutanjeService {
 	private ZalbaCutanjeRepository zalbaCutanjeRepository;
 	@Autowired
 	private ResenjeRepository resenjeRepository;
+	@Autowired
+	private EmailService emailService;
 	
 	
 	@Autowired
@@ -87,6 +90,29 @@ public class ZalbaCutanjeService {
 
 		return new UrlResource(file.toUri());
 	}
+	
+	public void sendMail(String uri) throws Exception {
+		
+		Message message = new Message();
+		String email = "organvlasti@gmail.com";
+		String naslov = "Zalba na zahtev";
+		String sadrzaj = "Pristigla je zalba na zahtev. Za pregled zalbe udjite na link: "+ "http://localhost:4201/appeal_silence_review/" + uri;
+		byte[] prilog = getPdfAsByteArray(uri);
+		message.setPrimalac(email);
+		message.setNaslov(naslov);
+		message.setSadrzaj(sadrzaj);
+		message.setPrilog(prilog);
+		message.setTipPriloga("pdf");
+		emailService.posaljiMejl(message);
+	}
+	
+	public byte[] getPdfAsByteArray(String id) throws Exception {
+		String document = zalbaCutanjeRepository.findZalbaCutanje(id);
+		ByteArrayOutputStream outputStream = xslTransformer.generatePDf(document, xslFOPath);
+		
+		return outputStream.toByteArray();
+	}
+	
 	public String convertXMLtoHTML(String id) throws XMLDBException {
 		String xml = zalbaCutanjeRepository.findZalbaCutanje(id);
 		return xslTransformer.convertXMLtoHTML(xslPathHTML, xml);
@@ -254,5 +280,25 @@ public class ZalbaCutanjeService {
 			}			
 		}
 		return filtriranaList;
+	}
+
+	public Resource findRdf(String uri) throws IOException {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("URI", uri);
+		
+		FusekiReader.findRDF(params, "/zalbeCutanje", "src/main/resources/podaci/rdf/queryOneASilence.rq");
+		Path file = Paths.get("src/main/resources/podaci/rdf/metadataRDF.xml");
+
+		return new UrlResource(file.toUri());
+	}
+
+	public Resource findJsonMetadata(String uri) throws IOException {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("URI", uri);
+		
+		FusekiReader.findJsonMetadata(params, "/zalbeCutanje", "src/main/resources/podaci/rdf/queryOneASilence.rq");
+		Path file = Paths.get("src/main/resources/podaci/rdf/metadataJSON.json");
+
+		return new UrlResource(file.toUri());
 	}
 }

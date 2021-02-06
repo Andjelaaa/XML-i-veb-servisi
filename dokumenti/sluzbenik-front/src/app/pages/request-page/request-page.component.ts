@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RequestDTO } from 'src/app/model/RequestDTO';
 import { RequestService } from 'src/app/services/request-service/request.service';
 import { XonomyRequestService } from 'src/app/services/xonomy-service/xonomy-request.service';
+import { ToastrService } from 'ngx-toastr';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 declare const Xonomy: any;
 
@@ -17,32 +19,35 @@ export class RequestPageComponent implements OnInit, AfterViewInit{
     private xonomyService: XonomyRequestService,
     private requestService: RequestService,
     private router: Router,
+    private toastr: ToastrService,
     private route: ActivatedRoute) { }
+    
   ngOnInit(): void {
       // mozda podesavanje parametara od kog je usera
   }
   ngAfterViewInit(): void {
+    const token = localStorage.getItem('user') || '';
+    const jwt: JwtHelperService = new JwtHelperService();       
+    const info = jwt.decodeToken(token);
+    const username = info.sub;
     const element = document.getElementById('zahtev');
     const xmlString = `<?xml version="1.0" encoding="UTF-8" ?>
     <root>
     <adresa>
-       <broj>12</broj>
-       <grad>Novi Sad</grad>
-       <ulica>Bul. Kralja Petra</ulica>
+       <broj></broj>
+       <grad></grad>
+       <ulica></ulica>
     </adresa>
-    <datum>21.11.2020.</datum>
-    <drugiPodaciZaKontakt>069784532</drugiPodaciZaKontakt>
+    <datum></datum>
+    <drugiPodaciZaKontakt></drugiPodaciZaKontakt>
     <fusnote>
        <element>* U kućici označiti koja zakonska prava na pristup informacijama želite da ostvarite.</element>
        <element>** U kućici označiti način dostavljanja kopije dokumenata.</element>
        <element>*** Kada zahtevate drugi način dostavljanja obavezno upisati koji način dostavljanja zahtevate.</element>
     </fusnote>
-    <mesto>Novi Sad</mesto>
-    <naslov>
-             ZAHTEV
-             za pristup informaciji od javnog značaja
-         </naslov>
-    <nazivOrganaVlasti>SOPV</nazivOrganaVlasti>
+    <mesto></mesto>
+    <naslov></naslov>
+    <nazivOrganaVlasti></nazivOrganaVlasti>
     <paragrafi>
        <element>
           <text>
@@ -62,20 +67,23 @@ export class RequestPageComponent implements OnInit, AfterViewInit{
        </element>
     </paragrafi>
     <podnosilac>
-       <ime>Marko</ime>
-       <nazivFirme>FIRMA doo</nazivFirme>
-       <prezime>Markovic</prezime>
-       <korisnickoIme>jova</korisnickoIme>
+       <ime></ime>
+       <nazivFirme></nazivFirme>
+       <prezime></prezime>
+       <korisnickoIme>${username}</korisnickoIme>
     </podnosilac>
-    <sedisteOrgana>Novi Sad</sedisteOrgana>
-    <trazeneInformacije>Zahtev za dokument </trazeneInformacije>
+    <sedisteOrgana></sedisteOrgana>
+    <trazeneInformacije></trazeneInformacije>
  </root>`;
     Xonomy.setMode('laic');
     Xonomy.render(xmlString, element, this.xonomyService.requestSpecification);
   }
   submit(): void {
     const text = Xonomy.harvest();
-    console.log(text);
+    if(Xonomy.warnings.length !== 0) {
+      this.toastr.error('Molimo popunite sva obavezna polja!')
+      return
+    };
     this.requestService.sendRequest(text).subscribe(
       response => {
         this.router.navigateByUrl('/home');

@@ -1,0 +1,8 @@
+SELECT * FROM <http://localhost:8080/fuseki/zahtevi/data/zahtevi> WHERE {
+ ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/URI> ?URI .
+  ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/datum> ?datum .
+  ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/korisnicko_ime> ?korisnicko_ime .
+  ?subject <http://www.ftn.uns.ac.rs/rdf/examples/predicate/naziv_organa_vlasti> ?naziv_organa_vlasti .
+  FILTER( CONTAINS(UCASE(str(?URI)), UCASE("{{URI}}"))
+  ) .
+}

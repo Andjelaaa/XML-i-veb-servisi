@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="subject"/>
+    <variable name="URI"/>
+    <variable name="datum"/>
+    <variable name="korisnicko_ime"/>
+    <variable name="naziv_poverenika"/>
+    <variable name="zahtev_uri"/>
+  </head>
+  <results>
+    <result>
+      <binding name="subject">
+        <uri>file:///C:/Users/Tamara/Desktop/XML-i-veb-servisi/dokumenti/poverenik/src/main/resources/podaci/rdf/4.rdf</uri>
+      </binding>
+      <binding name="URI">
+        <literal>4</literal>
+      </binding>
+      <binding name="datum">
+        <literal>05.02.2021.</literal>
+      </binding>
+      <binding name="korisnicko_ime">
+        <literal>jova</literal>
+      </binding>
+      <binding name="naziv_poverenika">
+        <literal>dasd</literal>
+      </binding>
+      <binding name="zahtev_uri">
+        <literal>1</literal>
+      </binding>
+    </result>
+  </results>
+</sparql>

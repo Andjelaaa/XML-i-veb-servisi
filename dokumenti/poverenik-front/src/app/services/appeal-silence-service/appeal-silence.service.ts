@@ -51,4 +51,7 @@ export class AppealSilenceService {
     return this.http.post(`${environment.baseUrl}/${environment.apiAppealSilence}searchByMetadata`, search,
         {headers: this.headers, responseType: 'text'});
     }
+    sendMail(id: string) {
+         return this.http.get(`${environment.baseUrl}/${environment.apiAppealSilence}sendMail/` + id ,{responseType: 'text'});
+    }
 }

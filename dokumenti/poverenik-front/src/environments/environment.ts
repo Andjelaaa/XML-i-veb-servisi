@@ -13,7 +13,8 @@ export const environment = {
     appealDecision:  'api/zalba_odluke/create',
     apiDecision: 'api/resenje/',
     apiAppealDecision: 'api/zalba_odluke/',
-    apiAppealSilence: 'api/zalba_cutanje/'
+    apiAppealSilence: 'api/zalba_cutanje/',
+    apiReport: 'api/izvestaj/'
 };
 
 /*

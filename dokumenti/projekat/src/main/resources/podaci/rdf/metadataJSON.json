@@ -1,0 +1,10 @@
+{
+  "head": {
+    "vars": [ "subject" , "URI" , "datum" , "korisnicko_ime" , "naziv_organa_vlasti" ]
+  } ,
+  "results": {
+    "bindings": [
+      
+    ]
+  }
+}

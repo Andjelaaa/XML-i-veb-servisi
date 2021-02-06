@@ -1,5 +1,7 @@
 package com.xml.poverenik.rdf;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -22,6 +24,8 @@ import com.xml.poverenik.rdf.AuthenticationUtilities.ConnectionProperties;
 
 public class FusekiReader {
 	private static final String QUERY_FILEPATH = "src/main/resources/podaci/rdf/query.rq";
+	private static final String RDF_TEMP_FILE = "src/main/resources/podaci/rdf/metadataRDF.xml";
+	private static final String JSON_TEMP_FILE = "src/main/resources/podaci/rdf/metadataJSON.json";
 
 	private FusekiReader() {}
 
@@ -124,5 +128,43 @@ public static ArrayList<String> executeQuery( Map<String, String> params, String
 	public static String readFile(String path, Charset encoding) throws IOException {
 		byte[] encoded = Files.readAllBytes(Paths.get(path));
 		return new String(encoded, encoding);
+	}
+
+public static void findRDF( Map<String, String> params, String metadataGraphUri, String queryPath) throws IOException {
+		
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties(metadataGraphUri);
+		
+		String sparqlQueryTemplate = readFile(queryPath, StandardCharsets.UTF_8);
+		System.out.println("Query: " + sparqlQueryTemplate);
+		String sparqlQuery = StringSubstitutor.replace(sparqlQueryTemplate, params, "{{", "}}");
+		System.out.println("Query: " + sparqlQuery);
+		
+		// Create a QueryExecution that will access a SPARQL service over HTTP
+		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+		// Query the SPARQL endpoint, iterate over the result set...
+		ResultSet results = query.execSelect();
+		
+	    ResultSetFormatter.outputAsXML(new FileOutputStream(new File(RDF_TEMP_FILE)), results);
+		query.close() ;
+		System.out.println("[INFO] SPARQL Query End.");
+	}
+	
+	public static void findJsonMetadata( Map<String, String> params, String metadataGraphUri, String queryPath) throws IOException {
+		
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties(metadataGraphUri);
+		
+		String sparqlQueryTemplate = readFile(queryPath, StandardCharsets.UTF_8);
+		System.out.println("Query: " + sparqlQueryTemplate);
+		String sparqlQuery = StringSubstitutor.replace(sparqlQueryTemplate, params, "{{", "}}");
+		System.out.println("Query: " + sparqlQuery);
+		
+		// Create a QueryExecution that will access a SPARQL service over HTTP
+		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+		// Query the SPARQL endpoint, iterate over the result set...
+		ResultSet results = query.execSelect();
+		
+	    ResultSetFormatter.outputAsJSON(new FileOutputStream(new File(JSON_TEMP_FILE)), results);
+		query.close() ;
+		System.out.println("[INFO] SPARQL Query End.");
 	}
 }

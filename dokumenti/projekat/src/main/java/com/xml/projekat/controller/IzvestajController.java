@@ -1,5 +1,7 @@
 package com.xml.projekat.controller;
 
+import java.util.List;
+
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -68,7 +70,11 @@ public class IzvestajController {
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 	
-	
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<List<IzvestajDTO>> getAll() throws XMLDBException {
+		List<IzvestajDTO> resenjaList = service.findAllReports();
+		return new ResponseEntity<List<IzvestajDTO>>(resenjaList, HttpStatus.OK);
+	}
 	
 	
 }

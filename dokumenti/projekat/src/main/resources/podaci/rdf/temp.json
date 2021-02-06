@@ -1,0 +1,16 @@
+{
+  "head": {
+    "vars": [ "subject" , "URI" , "datum" , "korisnicko_ime" , "naziv_organa_vlasti" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "subject": { "type": "uri" , "value": "file:///C:/Users/teodo/Desktop/XML-i-veb-servisi/dokumenti/projekat/src/main/resources/podaci/rdf/9.rdf" } ,
+        "URI": { "type": "literal" , "value": "9" } ,
+        "datum": { "type": "literal" , "value": "15.11.2021." } ,
+        "korisnicko_ime": { "type": "literal" , "value": "jova" } ,
+        "naziv_organa_vlasti": { "type": "literal" , "value": "djfkjsdg" }
+      }
+    ]
+  }
+}

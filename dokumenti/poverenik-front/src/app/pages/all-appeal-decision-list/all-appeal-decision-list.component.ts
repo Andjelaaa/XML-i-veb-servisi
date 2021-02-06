@@ -14,7 +14,7 @@ export class AllAppealDecisionListComponent implements OnInit {
 
 
   constructor(private appealDecisionService: AppealDecisionService) { }
-
+ 
   ngOnInit(): void {
     this.getAllAppeals();
 
@@ -24,6 +24,7 @@ export class AllAppealDecisionListComponent implements OnInit {
   }
 
   getAllAppeals(){
+    this.list = [];
     const convert = require('xml-js');
     this.appealDecisionService.getAll().subscribe(
       result => {

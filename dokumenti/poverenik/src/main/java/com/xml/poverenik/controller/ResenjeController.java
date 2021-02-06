@@ -52,10 +52,11 @@ public class ResenjeController {
 	
 	@PostMapping(value ="/create", produces =MediaType.APPLICATION_XML_VALUE, consumes =  MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<Object> createResenje(@RequestBody ResenjeDTO dto) throws Exception{
-		if(!validate(dto)) {
-			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
-		     
-		}
+		System.out.print(dto.toString());
+//		if(!validate(dto)) {
+//			return new ResponseEntity<>("Invalid format!",HttpStatus.BAD_REQUEST);
+//		     
+//		}
 		Resenje entity = new Resenje(dto);
 		 try {
 			 service.createResenje(entity);
@@ -97,6 +98,22 @@ public class ResenjeController {
 	public ResponseEntity<List<ResenjeDTO>> searchByMetadata(@RequestBody SearchResenjeDTO dto) throws IOException {
 		List<ResenjeDTO> result = service.searhByMetadata(dto);
 		return new ResponseEntity<List<ResenjeDTO>>(result, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/rdf/{uri}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<Object> rdf(@PathVariable String uri) throws IOException {
+		Resource resource = service.findRdf(uri);
+		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
+	}
+	
+	@GetMapping(value = "/json/{uri}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<Object> metadataJson(@PathVariable String uri) throws IOException {
+		Resource resource = service.findJsonMetadata(uri);
+		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
 	}
 
 	private boolean validate(ResenjeDTO dto) {

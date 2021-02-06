@@ -198,7 +198,7 @@ public class DOMParser {
 			if (((Element) paragrafi.item(i)).getElementsByTagName("d:datum").item(0) != null)
 				datum = ((Element) paragrafi.item(i)).getElementsByTagName("d:datum").item(0).getTextContent();
 			if (((Element) paragrafi.item(i)).getElementsByTagName("d:razlog").item(0) != null)
-				razlog = ((Element) paragrafi.item(i)).getElementsByTagName("razlog").item(0).getTextContent();
+				razlog = ((Element) paragrafi.item(i)).getElementsByTagName("d:razlog").item(0).getTextContent();
 			if (((Element) paragrafi.item(i)).getElementsByTagName("d:broj_zalbe").item(0) != null)
 				brojZalbe = ((Element) paragrafi.item(i)).getElementsByTagName("d:broj_zalbe").item(0).getTextContent();
 			if (((Element) paragrafi.item(i)).getElementsByTagName("d:godina_odbijanja").item(0) != null)

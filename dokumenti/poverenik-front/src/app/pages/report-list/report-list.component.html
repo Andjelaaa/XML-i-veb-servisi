@@ -1,0 +1,28 @@
+
+<div>
+    <h2>Izvestaji</h2>
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Godina</th>
+            <th>Broj podnetih zahteva</th>
+            <th>Broj odbijenih zahteva</th>
+            <th>Broj zalbi</th>
+            <th>Preuzmi PDF</th>
+            <th>Prikaz izvestaja</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let izvestaj of list">
+            <td>{{izvestaj.godina._text}}</td>
+            <td>{{izvestaj.brPodnetihZahteva._text}}</td>
+            <td>{{izvestaj.brOdbijenihZahteva._text}}</td>
+            <td>{{izvestaj.brZalbi._text}}</td>
+            <td><button mat-button color="primary"><a href="{{getHref(izvestaj.godina._text)}}">Preuzmi PDF</a></button></td>
+            <td><button mat-button color="primary" ><a href="/report_review/{{izvestaj.godina._text}}">Prikaz izvestaja</a></button></td>
+        </tr>
+    </tbody>
+
+    </table>
+    
+</div>

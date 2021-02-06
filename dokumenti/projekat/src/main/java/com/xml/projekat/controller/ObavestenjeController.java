@@ -1,5 +1,6 @@
 package com.xml.projekat.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -83,6 +84,22 @@ public class ObavestenjeController {
 	public ResponseEntity<List<ObavestenjeDTO>> allInformations() throws XMLDBException {
 		List<ObavestenjeDTO> obavestenjeList = service.findAllInformations();
 		return new ResponseEntity<List<ObavestenjeDTO>>(obavestenjeList, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/rdf/{uri}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<Object> rdf(@PathVariable String uri) throws IOException {
+		Resource resource = service.findRdf(uri);
+		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
+	}
+	
+	@GetMapping(value = "/json/{uri}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<Object> metadataJson(@PathVariable String uri) throws IOException {
+		Resource resource = service.findJsonMetadata(uri);
+		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
 	}
 	
 	private boolean validate(ObavestenjeDTO dto) {

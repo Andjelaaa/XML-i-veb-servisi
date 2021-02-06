@@ -20,57 +20,132 @@ export class XonomyRequestService {
 
 
     public requestSpecification = {
+      validate: function (jsElement: any) {
+        let elementSpec = this.elements[jsElement.name];
+        
+        if (elementSpec.validate) elementSpec.validate(jsElement);
+        for (let i = 0; i < jsElement.attributes.length; i++) {
+          let jsAttribute = jsElement.attributes[i];
+          let attributeSpec = elementSpec.attributes[jsAttribute.name];
+          if (attributeSpec.validate) attributeSpec.validate(jsAttribute);
+        }
+        for (let i = 0; i < jsElement.children.length; i++) {
+          let jsChild = jsElement.children[i];
+          if (jsChild.type == 'element') {
+            //if element
+            this.validate(jsChild); //recursion
+          }
+        }
+      },
       elements: {
         podnosilac: {
           title: 'Podnosilac zahteva',
         },
-        korisnickoIme: {
-          title: 'Unesi korisnicko ime',
+        ime : {
+          title: 'Unesite ime',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Ime je obavezno polje!',
+              });
+            }
+          },
           hasText: true,
           asker: Xonomy.askString
         },
-        ime : {},
         prezime: {
-          attributes: {
-          property: {
-          isInvisible: true
-          }
+          title: 'Unesite prezime',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Prezime je obavezno polje!',
+              });
+            }
+          },
+          hasText: true,
+          asker: Xonomy.askString
         },
-        hasText: true,
-        asker: Xonomy.askString
-        },
-
         adresa: {},
         ulica : {
-          attributes: {
-            property: {
-              isInvisible: true
+          title: 'Unesite naziv ulice',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Ulica je obavezno polje!',
+              });
             }
           },
           hasText: true,
           asker: Xonomy.askString
         },
         broj: {
-          attributes: {
-            property: {
-              isInvisible: true,
-            }
-          },
-          hasText: true,
-          asker: Xonomy.askString
-          },
-        grad: {
-          attributes: {
-            property: {
-              isInvisible: true,
+          title: 'Unesite ulicni broj',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Broj je obavezno polje!',
+              });
             }
           },
           hasText: true,
           asker: Xonomy.askString
         },
-        drugiPodaciZaKontakt: {},
-        nazivOrganaVlasti: {},
-        sedisteOrgana: {},
+        grad: {
+          title: 'Unesite grad',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Grad je obavezno polje!',
+              });
+            }
+          },
+          hasText: true,
+          asker: Xonomy.askString
+        },
+        drugiPodaciZaKontakt: {
+          title: 'Unesite druge podatke za kontakt',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Drugi podaci za kontakt su obavezno polje!',
+              });
+            }
+          },
+          hasText: true,
+          asker: Xonomy.askString
+        },
+        nazivOrganaVlasti: {
+          title: 'Unesite naziv organa vlasti',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Naziv organa vlasti je obavezno polje!',
+              });
+            }
+          },
+          hasText: true,
+          asker: Xonomy.askString
+        },
+        sedisteOrgana: {
+          title: 'Unesite sediste organa vlasti',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Sediste organa vlasti je obavezno polje!',
+              });
+            }
+          },
+          hasText: true,
+          asker: Xonomy.askString
+        },
         a: {
           isReadOnly: true,
         },
@@ -88,7 +163,7 @@ export class XonomyRequestService {
             {
               caption: 'Obrisite izbor',
               action: Xonomy.deleteElement
-            },
+            },    
             {
               caption: 'Postom',
               action: Xonomy.newElementChild,
@@ -121,30 +196,80 @@ export class XonomyRequestService {
           },
           {
             hideIf: function (jsElement : any) {
-              console.log(jsElement.children[0].children[0].value);
               return jsElement.children[0].children[0].value !== "dostavljanje kopije dokumenta koji sadrži traženu informaciju";
             },
             caption: 'Dodajte podizbor',
             action: Xonomy.newElementChild,
             actionParameter: '<podizbori></podizbori>',
           },
-          
-
           ]
         },
         tekst: {
+          validate: function (jsElement: any) {
+            if (jsElement.children[0].value === 'Izaberite opciju') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Morate odabrati tekst'
+              });
+            }
+          },
           oneliner: true,
           asker: Xonomy.askPicklist,
           askerParameter: ["obaveštenje da li poseduje traženu informaciju", "uvid u dokument koji sadrži traženu informaciju", "kopiju dokumenta koji sadrži traženu informaciju", "dostavljanje kopije dokumenta koji sadrži traženu informaciju"]
         },
-        trazeneInformacije: {},
-        datum: {},
-        mesto: {},
+        trazeneInformacije: {
+          title: 'Unesite trazene informacije',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Trazene informacije su obavezno polje!',
+              });
+            }
+          },
+          hasText: true,
+          asker: Xonomy.askString
+        },
+        datum: {
+          title: 'Unesite datum',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Datum je obavezno polje!',
+              });
+            }
+          },
+          hasText: true,
+          asker: Xonomy.askString
+        },
+        mesto: {
+          title: 'Unesite mesto',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Mesto je obavezno polje!',
+              });
+            }
+          },
+          hasText: true,
+          asker: Xonomy.askString
+        },
         fusnote: {
           isInvisible: true,
         },
         izbori: {
-          title: 'Kliknite da biste dodali zahtev',
+          hasText: false,
+          
+          validate: function (jsElement: any) {       
+            if (jsElement.children[0].type === "text") {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+              });
+            }
+          },
+          title: 'Kliknite da biste dodali izbor',
           menu: [
           {
             caption: 'Dodajte izbor',
@@ -154,9 +279,35 @@ export class XonomyRequestService {
         ]
         },
         naslov: {
+          title: 'Unesite naslov zaheva',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Naslov je obavezno polje!',
+              });
+            }
+          },
+          hasText: true,
+          asker: Xonomy.askString,
+        },
+        korisnickoIme: {
           isReadOnly: true,
+        },
+        nazivFirme: {
+          title: 'Unesite naziv firme',
+          validate: function (jsElement: any) {
+            if (jsElement.getText() == '') {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: 'Naziv firme je obavezno polje!',
+              });
+            }
+          },
+          hasText: true,
+          asker: Xonomy.askString
         }
-    }
+      }
   };
-
+    
 }

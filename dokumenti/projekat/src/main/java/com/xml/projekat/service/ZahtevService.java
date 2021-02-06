@@ -94,6 +94,27 @@ public class ZahtevService {
 		return new UrlResource(file.toUri());
 	}
 	
+	public Resource findRdf(String uri) throws IOException {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("URI", uri);
+		
+		FusekiReader.findRDF(params, "/zahtevi", "src/main/resources/podaci/rdf/queryOneRequest.rq");
+		Path file = Paths.get("src/main/resources/podaci/rdf/metadataRDF.xml");
+
+		return new UrlResource(file.toUri());
+	}
+	
+	public Resource findJsonMetadata(String uri) throws IOException {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("URI", uri);
+		
+		FusekiReader.findJsonMetadata(params, "/zahtevi", "src/main/resources/podaci/rdf/queryOneRequest.rq");
+		Path file = Paths.get("src/main/resources/podaci/rdf/metadataJSON.json");
+
+		return new UrlResource(file.toUri());
+	}
+
+	
 	public byte[] getPdfAsByteArray(String id) throws Exception {
 		String document = zahtevRepository.findZahtev(id);
 		ByteArrayOutputStream outputStream = xslTransformer.generatePDf(document, xslFOPath);
