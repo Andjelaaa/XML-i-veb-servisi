@@ -54,7 +54,7 @@ export class AppealDecisionPageComponent implements OnInit {
               <korisnickoIme>${username}</korisnickoIme>
            </nazivPodnosioca>
            <nazivPoverenika>
-                        Povereniky za informacije od javnog značaja i zaštitu podataka o ličnosti
+                        Povereniku za informacije od javnog značaja i zaštitu podataka o ličnosti
                 </nazivPoverenika>
            <paragrafi>
               <element>
