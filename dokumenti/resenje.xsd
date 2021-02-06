@@ -1,29 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-    <xs:include schemaLocation="general_types.xsd"/>
-    <xs:element name="dokument_resenje">
-        <xs:complexType>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+ elementFormDefault="qualified" 
+targetNamespace="http://dokument_resenje" xmlns:d="http://dokument_resenje">
+  <xs:element name="dokument_resenje">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="URI">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:QName" name="datatype"/>
+                <xs:attribute type="xs:QName" name="property"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="zalba_cutanje_uri">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:QName" name="datatype"/>
+                <xs:attribute type="xs:QName" name="property"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="zalba_odluke_uri">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:QName" name="datatype"/>
+                <xs:attribute type="xs:QName" name="property"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="naziv_resenja">
+          <xs:complexType mixed="true">
             <xs:sequence>
-                <xs:element name="naziv_resenja">
-                    <xs:complexType mixed="true">
-                        <xs:sequence>
-                            <xs:element name="odluka" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="zaglavlje" type="TZaglavlje"/>
-                <xs:element maxOccurs="unbounded" name="opis_postupka" type="xs:string"/>
-                <xs:element name="tekst_resenja" type="TTekst"/>
-                <xs:element name="tekst_obrazlozenja" type="TTekst"/>
-                <xs:element name="potpis_poverenika">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:maxLength value="40"/>
-                            <xs:minLength value="1"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
+              <xs:element type="xs:string" name="odluka"/>
             </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="zaglavlje">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:element name="broj_resenja">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:QName" name="datatype"/>
+                      <xs:attribute type="xs:QName" name="property"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="datum">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:QName" name="datatype"/>
+                      <xs:attribute type="xs:QName" name="property"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element type="xs:string" name="opis_postupka"/>
+        <xs:element name="tekst_resenja">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:element type="xs:string" name="p" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="tekst_obrazlozenja">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:element type="xs:string" name="p" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element type="xs:string" name="potpis_poverenika"/>
+        <xs:element name="korisnicko_ime">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:QName" name="datatype"/>
+                <xs:attribute type="xs:QName" name="property"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

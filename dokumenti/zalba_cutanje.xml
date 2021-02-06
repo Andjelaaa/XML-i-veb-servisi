@@ -1,73 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<zalba_cutanje xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="zalba_cutanje.xsd">
-    <podnosilac_zalbe>
-        <naziv_podnosioca>
-            <ime></ime>
-            <prezime></prezime>
-            <naziv_firme></naziv_firme>
-        </naziv_podnosioca>
-        <adresa>
-            <grad></grad>
-            <ulica></ulica>
-            <broj></broj>
-        </adresa>
-        <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
-    </podnosilac_zalbe>
-    <poverenik>
-        <naziv_poverenika>
-                Повереникy за информације од јавног значаја и заштиту података о личности
-        </naziv_poverenika>
-        <sediste_poverenika>
-            Aдреса за пошту: 
-            <grad>Београд</grad>
-            , 
-            <ulica>Булевар краља Александра</ulica>
-            бр.
-            <broj>15</broj>
-        </sediste_poverenika>
-    </poverenik>
-    <naslov>
-         ЖАЛБА КАДА ОРГАН ВЛАСТИ НИЈЕ ПОСТУПИО/ није поступио у целости/ ПО ЗАХТЕВУ  ТРАЖИОЦА У ЗАКОНСКОМ 
-         РОКУ  (ЋУТАЊЕ УПРАВЕ)
-    </naslov>
-    <tekst_zalbe>
-        <p>
-        У складу са чланом 22. Закона о слободном приступу информација од јавног значаја подносим:
-            Жалбу
-            против
-            <naziv_organa></naziv_organa>
-        </p>
-        
-        <p>
-                због тога што орган власти:
-                није поступио/ није поступио у целости/ у законском року
-         </p>
-         <p>
-                по мом захтеву за слободан приступ информацијама од јавног значаја
-                који сам поднео том органу дана
-                <datum></datum>
-                године, а којим сам тражио/ла да ми се у складу са Законом о слободном 
+<?xml-stylesheet type="text/xsl" href="src/main/resources/podaci/xsl/zalba_cutanje.xsl"?>
+<d:zalba_cutanje xmlns="http://www.w3.org/ns/rdfa#" xmlns:d="http://www.ftn.uns.ac.rs/xpath/examples" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#">
+   <d:URI datatype="xs:string" property="pred:URI">4</d:URI>
+   <d:zahtev_uri datatype="xs:string" property="pred:zahtev_uri">1</d:zahtev_uri>
+   <d:podnosilac_zalbe>
+      <d:naziv_podnosioca>
+         <d:ime>Slavisa</d:ime>
+         <d:prezime>Slavic</d:prezime>
+         <d:naziv_firme/>
+         <d:korisnicko_ime datatype="xs:string" property="pred:korisnicko_ime">jova</d:korisnicko_ime>
+      </d:naziv_podnosioca>
+      <d:adresa>
+         <d:ulica>Jugoslovenska</d:ulica>
+         <d:broj>32</d:broj>
+         <d:grad>Novi Sad</d:grad>
+      </d:adresa>
+      <d:drugi_podaci_za_kontakt>064872743</d:drugi_podaci_za_kontakt>
+   </d:podnosilac_zalbe>
+   <d:poverenik>
+      <d:naziv_poverenika datatype="xs:string" property="pred:naziv_poverenika">Povereniky za informacije od javnog značaja i zaštitu podataka o ličnosti</d:naziv_poverenika>
+      <d:sediste_poverenika>Aдреса за пошту:<d:ulica>Bulevar kralja Aleksandra</d:ulica>бр.<d:broj>15</d:broj>
+         <d:grad>Beograd</d:grad>
+      </d:sediste_poverenika>
+   </d:poverenik>
+   <d:naslov>ŽALBA KADA ORGAN VLASTI NIJE POSTUPIO/ nije postupio u celosti/ PO ZAHTEVU  TRAŽIOCA U ZAKONSKOM 
+                 ROKU  (ĆUTANjE UPRAVE)</d:naslov>
+   <d:tekst_zalbe>
+      <d:p>U skladu sa članom 22. Zakona o slobodnom pristupu informacija od javnog značaja podnosim:
+                    Žalbu
+                    protiv<d:naziv_organa>Sluzbenik</d:naziv_organa>
+      </d:p>
+      <d:p>zbog toga što organ vlasti:
+                        nije postupio/ nije postupio u celosti/ u zakonskom roku</d:p>
+      <d:p>po mom zahtevu za slobodan pristup informacijama od javnog značaja
+                        koji sam podneo tom organu dana
+                        
+                        godine, a kojim sam tražio/la da mi se u skladu sa Zakonom o slobodnom 
+                        pristupu informacijama od javnog značaja omogući uvid- kopija dokumenta 
+                        koji sadrži informacije o/u vezi sa:<d:datum>10.03.2021.</d:datum>године, а којим сам тражио/ла да ми се у складу са Законом о слободном 
                 приступу информацијама од јавног значаја омогући увид- копија документа 
-                који садржи информације о/у вези са:
-                <podaci_o_zahtevu_i_informacijama></podaci_o_zahtevu_i_informacijama>              
-         </p>
-         <p>
-                На основу изнетог, предлажем да Повереник уважи моју жалбу и омогући ми
-                приступ траженој/им информацији/ма.
-         </p>
-         <p>
-                Као доказ, уз жалбу због непоступању по захтеву у целости, треба приложити и добијени одговор
-                органа власти.
-         </p>
-         <p>
-                Напомена: Код жалбе  због непоступању по захтеву у целости, треба приложити и добијени одговор органа власти. 
-         </p>
-         <podaci_o_vremenu_i_mestu_podnosenja_zalbe>
-                У
-                <mesto></mesto>
-                ,дана
-                <datum></datum>
-                године
-          </podaci_o_vremenu_i_mestu_podnosenja_zalbe>
-    </tekst_zalbe>
-</zalba_cutanje>
+                који садржи информације о/у вези са:<d:podaci_o_zahtevu_i_informacijama>podaci o zahevu</d:podaci_o_zahtevu_i_informacijama>
+      </d:p>
+      <d:p>Na osnovu iznetog, predlažem da Poverenik uvaži moju žalbu i omogući mi
+                        pristup traženoj/im informaciji/ma.</d:p>
+      <d:p>Kao dokaz, uz žalbu zbog nepostupanju po zahtevu u celosti, treba priložiti i dobijeni odgovor
+                        organa vlasti.</d:p>
+      <d:p>Napomena: Kod žalbe  zbog nepostupanju po zahtevu u celosti, treba priložiti i dobijeni odgovor organa vlasti.</d:p>
+      <d:podaci_o_vremenu_i_mestu_podnosenja_zalbe>У<d:mesto/>,дана<d:datum datatype="xs:string" property="pred:datum">'21.21.2020.'</d:datum> године</d:podaci_o_vremenu_i_mestu_podnosenja_zalbe>
+   </d:tekst_zalbe>
+</d:zalba_cutanje>

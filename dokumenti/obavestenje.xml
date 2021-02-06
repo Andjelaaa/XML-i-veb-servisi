@@ -1,79 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<obavestenje
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:noNamespaceSchemaLocation="obavestenje.xsd">
-    <podnosilac_zahteva>
-        <naziv_podnosioca>
-            <ime></ime>
-            <prezime></prezime>
-            <naziv_firme></naziv_firme>
-        </naziv_podnosioca>
-        <adresa>
-            <ulica></ulica>
-            <broj></broj>
-            <grad></grad>
-        </adresa>
-    </podnosilac_zahteva>
-    <organ_vlasti>
-        <naziv_organa_vlasti></naziv_organa_vlasti>
-        <sediste_organa></sediste_organa>
-    </organ_vlasti>
-    <dostavljeno>
-        Достављено:
-        <lista>
-            <element broj="1">Именованом</element>
-            <element broj="2">Архиви</element>
-        </lista>
-    </dostavljeno>
-    <tekst_obavestenja>
-        <broj_predmeta></broj_predmeta>
-        <datum></datum>
-        <naslov>
-                ОБАВЕШТЕЊЕ
-                о стављању на увид документа који садржи 
-                тражену информацију и о изради копије
-        </naslov>
-        <p>
-            На основу члана 16. ст. 1. Закона о слободном приступу информацијама од јавног
-            значаја, поступајући по вашем захтеву за слободан приступ информацијама од
-            <godina></godina>
-            год.,којим сте тражили увид у документ/е са информацијама о / у вези са:
-            <trazena_informacija></trazena_informacija>
-            обавештавамо вас да дана 
-            <dan></dan>
-             , у 
-            <sati></sati>
-            часова, односно у времену од 
-            <od></od>
-            до
-            <do></do>
-             часова, у просторијама органа у 
-            <mesto></mesto>
-             ул.
-            <ulica></ulica>
-             бр.
-            <broj_zgrade></broj_zgrade>
-            , канцеларија бр.
-            <broj_kancelarije></broj_kancelarije>
-            можете извршити увид у документ/е у коме је садржана тражена информација. 
-        </p>
-        <p>
-            Том приликом, на ваш захтев, може вам се издати и копија документа са траженом 
-            информацијом.
-        </p>
-        <p>
-            Трошкови су утврђени Уредбом Владе Републике Србије („Сл. гласник РС“, бр. 8/06), и
-            то: копија стране А4 формата износи 3 динара, А3 формата 6 динара, CD 35 динара, 
-            дискете 20 динара, DVD 40 динара, аудио-касета – 150 динара, видео-касета 300 динара,
-            претварање једне стране документа из физичког у електронски облик – 30 динара.
-        </p>
-        <p>
-            Износ укупних трошкова израде копије документа по вашем захтеву износи 
-            <novcana_naknada></novcana_naknada>
-            динара и уплаћује се на жиро-рачун Буџета Републике Србије бр. 840-742328-843-30, с позивом на број 97 – ознака шифре општине/града где се налази орган власти (из Правилника о условима и начину вођења рачуна – „Сл. гласник РС“, 20/07... 40/10). 
-        </p>
-    </tekst_obavestenja>
-    <mesto_pecata>
-        (М.П.)
-    </mesto_pecata>
-</obavestenje>
+<?xml-stylesheet type="text/xsl" href="src/main/resources/podaci/xsl/obavestenje.xsl"?>
+<d:obavestenje xmlns="http://www.w3.org/ns/rdfa#" xmlns:d="http://www.ftn.uns.ac.rs/xpath/examples" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#">
+   <d:URI xmlns="" datatype="xs:string" property="pred:URI">3</d:URI>
+   <d:zahtev_uri xmlns="" datatype="xs:string" property="pred:zahtev_uri">3</d:zahtev_uri>
+   <d:podnosilac_zahteva xmlns="">
+      <d:naziv_podnosioca>
+         <d:ime>Jova</d:ime>
+         <d:prezime>Jovic</d:prezime>
+         <d:naziv_firme>Firma doo</d:naziv_firme>
+         <d:korisnicko_ime datatype="xs:string" property="pred:korisnicko_ime">Jocy</d:korisnicko_ime>
+      </d:naziv_podnosioca>
+      <d:adresa>
+         <d:ulica>Sterije Popovica</d:ulica>
+         <d:broj>123</d:broj>
+         <d:grad>Novi Sad</d:grad>
+      </d:adresa>
+   </d:podnosilac_zahteva>
+   <d:organ_vlasti xmlns="">
+      <d:naziv_organa_vlasti datatype="xs:string" property="pred:naziv_organa_vlasti">NOV</d:naziv_organa_vlasti>
+      <d:sediste_organa>Novi Sad</d:sediste_organa>
+   </d:organ_vlasti>
+   <d:dostavljeno xmlns="">Достављено:<d:lista>
+         <d:element broj="1">Именованом</d:element>
+         <d:element broj="2">Архиви</d:element>
+      </d:lista>
+   </d:dostavljeno>
+   <d:tekst_obavestenja xmlns="">
+      <d:broj_predmeta datatype="xs:string" property="pred:brojPredmeta">12</d:broj_predmeta>
+      <d:datum datatype="xs:string" property="pred:datum">21.11.2019.</d:datum>
+      <d:naslov> ОБАВЕШТЕЊЕ                о стављању на увид документа који садржи                тражену информацију и о изради копије</d:naslov>
+      <d:p>На основу члана 16. ст. 1. Закона о слободном приступу информацијама од јавног            значаја, поступајући по вашем захтеву за слободан приступ информацијама од
+<d:godina>1999.</d:godina>год.,којим сте тражили увид у документ/е са информацијама о / у вези са:<d:trazena_informacija>ZELIM OBAVESTENJE</d:trazena_informacija>обавештавамо вас да дана <d:dan>21.</d:dan>, у<d:sati>14:23</d:sati> часова, односно у времену од<d:od>14:00</d:od>до<d:do>15:00</d:do>часова, у просторијама органа у<d:mesto>Novi Sad</d:mesto>ул.<d:ulica>Jovan Jovanovic Zmaj</d:ulica>бр.<d:broj_zgrade>31</d:broj_zgrade>, канцеларија бр.<d:broj_kancelarije>12</d:broj_kancelarije>можете извршити увид у документ/е у коме је садржана тражена информација.</d:p>
+      <d:p>Том приликом, на ваш захтев, може вам се издати и копија документа са траженом            информацијом.</d:p>
+      <d:p>Трошкови су утврђени Уредбом Владе Републике Србије („Сл. гласник РС“, бр. 8/06), и             то: копија стране А4 формата износи 3 динара, А3 формата 6 динара, CD 35 динара,             дискете 20 динара, DVD 40 динара, аудио-касета – 150 динара, видео-касета 300 динара,            претварање једне стране документа из физичког у електронски облик – 30 динара.         </d:p>
+      <d:p>Износ укупних трошкова израде копије документа по вашем захтеву износи <d:novcana_naknada>213.99</d:novcana_naknada>динара и уплаћује се на жиро-рачун Буџета Републике Србије бр. 840-742328-843-30, с позивом на број 97 – ознака шифре општине/града где се налази орган власти (из Правилника о условима и начину вођења рачуна – „Сл. гласник РС“, 20/07... 40/10). </d:p>
+   </d:tekst_obavestenja>
+   <d:mesto_pecata xmlns="">(М.П.)</d:mesto_pecata>
+</d:obavestenje>

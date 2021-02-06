@@ -14,7 +14,8 @@ export const environment = {
     apiDecision: 'api/resenje/',
     apiAppealDecision: 'api/zalba_odluke/',
     apiAppealSilence: 'api/zalba_cutanje/',
-    apiReport: 'api/izvestaj/'
+    apiReport: 'api/izvestaj/',
+    initializeUsers: 'api/exist/initiateData'
 };
 
 /*

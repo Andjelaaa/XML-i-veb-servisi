@@ -1,65 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<zahtev
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:noNamespaceSchemaLocation="zahtev.xsd">
-    <podnosilac_zahteva>
-        <naziv_podnosioca>
-            <ime></ime>
-            <prezime></prezime>
-            <naziv_firme></naziv_firme>
-        </naziv_podnosioca>
-        <adresa>
-            <ulica></ulica>
-            <broj></broj>
-            <grad></grad>
-        </adresa>
-        <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
-    </podnosilac_zahteva>
-    <organ_vlasti>
-        <naziv_organa_vlasti></naziv_organa_vlasti>
-        <sediste_organa></sediste_organa>
-    </organ_vlasti>
-    <tekst_zahteva>
-        <naslov>
-            ЗАХТЕВ
-            за приступ информацији од јавног значаја
-        </naslov>
-        <p>
-            На основу члана 15. ст. 1. Закона о слободном приступу информацијама од 
-            јавног значаја („Службени гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10),
-            од горе наведеног органа захтевам:*
-        </p>
-        <p>
-            <izbori>
-                <izbor broj="1">обавештење да ли поседује тражену информацију;</izbor>
-                <izbor broj="2">увид у документ који садржи тражену информацију;</izbor>
-                <izbor broj="3">копију документа који садржи тражену информацију;</izbor>
-                <izbor broj="4">достављање копије документа који садржи тражену информацију:**
-                    <podizbori>
-                        <podizbor broj="1">поштом</podizbor>
-                        <podizbor broj="2">електронском поштом</podizbor>
-                        <podizbor broj="3">факсом</podizbor>
-                        <podizbor broj="4">на други начин:***</podizbor>
-                        <drugi_nacin></drugi_nacin>
-                    </podizbori>
-                </izbor>
-            </izbori>
-        </p>
-        <p>
-            Овај захтев се односи на следеће информације:
-        </p>
-        <trazene_informacije></trazene_informacije>
-        <podaci_o_vremenu_i_mestu_podnosenja_zahteva>
-            У
-            <mesto></mesto>
-            ,дана
-            <datum></datum>
-            године
-        </podaci_o_vremenu_i_mestu_podnosenja_zahteva>
-        <fusnote>
-            <fusnota broj="1">* У кућици означити која законска права на приступ информацијама желите да остварите.</fusnota>
-            <fusnota broj="2">** У кућици означити начин достављања копије докумената.</fusnota>
-            <fusnota broj="3">*** Када захтевате други начин достављања обавезно уписати који начин достављања захтевате.</fusnota>
-        </fusnote>
-    </tekst_zahteva>
-</zahtev>
+<?xml-stylesheet type="text/xsl" href="src/main/resources/podaci/xsl/zahtev.xsl"?>
+<d:zahtev xmlns="http://www.w3.org/ns/rdfa#" xmlns:d="http://www.ftn.uns.ac.rs/xpath/examples" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#">
+  <d:URI datatype="xs:string" property="pred:URI">9</d:URI>
+  <d:podnosilac_zahteva>
+    <d:naziv_podnosioca>
+      <d:ime>jdkfj</d:ime>
+      <d:prezime>dkfkdg</d:prezime>
+      <d:naziv_firme>kdfkk</d:naziv_firme>
+      <d:korisnicko_ime datatype="xs:string" property="pred:korisnicko_ime">jova</d:korisnicko_ime>
+    </d:naziv_podnosioca>
+    <d:adresa>
+      <d:ulica>lalla</d:ulica>
+      <d:broj>2</d:broj>
+      <d:grad>novi sad</d:grad>
+    </d:adresa>
+    <d:drugi_podaci_za_kontakt>sjjfj</d:drugi_podaci_za_kontakt>
+  </d:podnosilac_zahteva>
+  <d:organ_vlasti>
+    <d:naziv_organa_vlasti datatype="xs:string" property="pred:naziv_organa_vlasti">djfkjsdg</d:naziv_organa_vlasti>
+    <d:sediste_organa>djjdg</d:sediste_organa>
+  </d:organ_vlasti>
+  <d:tekst_zahteva>
+    <d:naslov>asjdskf</d:naslov>
+    <d:p>Na osnovu člana 15. st. 1. Zakona o slobodnom pristupu informacijama od 
+             javnog značaja (Službeni glasnik RS, br. 120/04, 54/07, 104/09 i 36/10),
+             od gore navedenog organa zahtevam:*</d:p>
+    <d:p>
+      <d:izbori>
+        <d:izbor d:broj="1">obaveštenje da li poseduje traženu informaciju</d:izbor>
+      </d:izbori>
+    </d:p>
+    <d:p>Ovaj zahtev se odnosi na sledeće informacije:</d:p>
+    <d:trazene_informacije>dkf</d:trazene_informacije>
+    <d:podaci_o_vremenu_i_mestu_podnosenja_zahteva>У<d:mesto>djfjdf</d:mesto>,дана<d:datum datatype="xs:string" property="pred:datum">15.11.2021.</d:datum>године</d:podaci_o_vremenu_i_mestu_podnosenja_zahteva>
+    <d:fusnote>
+      <d:fusnota d:broj="1">* U kućici označiti koja zakonska prava na pristup informacijama želite da ostvarite.</d:fusnota>
+      <d:fusnota d:broj="2">** U kućici označiti način dostavljanja kopije dokumenata.</d:fusnota>
+      <d:fusnota d:broj="3">*** Kada zahtevate drugi način dostavljanja obavezno upisati koji način dostavljanja zahtevate.</d:fusnota>
+    </d:fusnote>
+  </d:tekst_zahteva>
+</d:zahtev>

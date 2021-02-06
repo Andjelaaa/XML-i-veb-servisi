@@ -4,14 +4,16 @@
 
 export const environment = {
     production: false,
-      baseUrl: 'http://localhost:8081',
-      login: 'api/user/login',
-      signOut:  'api/user/sign-out',
-      register:  'api/user/register',
-      newRequest:  'api/zahtev/create',
+    baseUrl: 'http://localhost:8081',
+    login: 'api/user/login',
+    signOut:  'api/user/sign-out',
+    register:  'api/user/register',
+    newRequest:  'api/zahtev/create',
     newInformation: 'api/obavestenje/create',
     allInformations: 'api/obavestenje/allInformations',
     userInformations: 'api/obavestenje/userInformations',
-		obavestenje: 'api/obavestenje',
-      	zahtev: 'api/zahtev'  };
+	obavestenje: 'api/obavestenje',
+    zahtev: 'api/zahtev',
+    initializeUsers: 'api/exist/initiateData'
+ };
 

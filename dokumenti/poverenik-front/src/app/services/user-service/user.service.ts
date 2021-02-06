@@ -29,4 +29,8 @@ export class UserService {
         return this.http.post(`${environment.baseUrl}/${environment.register}`,
          registerData, {headers: this.headers, responseType: 'text'});
     }
+    initializeUsers():Observable<any>{
+        return this.http.get(`${environment.baseUrl}/${environment.initializeUsers}`,
+        {headers: this.headers, responseType: 'text'});
+    }
 }

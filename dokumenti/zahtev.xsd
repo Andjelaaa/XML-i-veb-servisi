@@ -1,104 +1,132 @@
-<?xml version="1.1" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-    <xs:include schemaLocation="general_types.xsd"/>
-    <xs:element name="zahtev">
-        <xs:complexType>
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.ftn.uns.ac.rs/xpath/examples" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="zahtev">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="URI">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:byte">
+                <xs:attribute type="xs:QName" name="datatype"/>
+                <xs:attribute type="xs:QName" name="property"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="podnosilac_zahteva">
+          <xs:complexType>
             <xs:sequence>
-                <xs:element name="podnosilac_zahteva">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="naziv_podnosioca" type="TPodnosilac"/>
-                            <xs:element name="adresa" type="TAdresa"/>
-                            <xs:element maxOccurs="1" name="drugi_podaci_za_kontakt" minOccurs="1"
-                                type="xs:string"> </xs:element>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="organ_vlasti">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="naziv_organa_vlasti" type="xs:string"> </xs:element>
-                            <xs:element name="sediste_organa" type="xs:string"> </xs:element>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="tekst_zahteva">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="naslov" maxOccurs="1">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:minLength value="1"/>
-                                        <xs:maxLength value="100"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:element>
-                            <xs:element name="p" maxOccurs="unbounded">
-                                <xs:complexType mixed="true">
-                                    <xs:sequence>
-                                        <xs:element name="izbori" minOccurs="0">
-                                            <xs:complexType>
-                                                <xs:sequence>
-                                                  <xs:element name="izbor" maxOccurs="unbounded">
-                                                  <xs:complexType mixed="true">
-                                                  <xs:sequence minOccurs="0">
-                                                  <xs:element name="podizbori" maxOccurs="1"
-                                                  minOccurs="0">
-                                                  <xs:complexType>
-                                                  <xs:sequence>
-                                                  <xs:element name="podizbor" maxOccurs="unbounded">
-                                                  <xs:complexType>
-                                                  <xs:simpleContent>
-                                                  <xs:extension base="xs:string">
-                                                  <xs:attribute name="broj"
-                                                  type="xs:positiveInteger"/>
-                                                  </xs:extension>
-                                                  </xs:simpleContent>
-                                                  </xs:complexType>
-                                                  </xs:element>
-                                                  <xs:element name="drugi_nacin" minOccurs="0"
-                                                  type="xs:string"/>
-                                                  </xs:sequence>
-                                                  </xs:complexType>
-                                                  </xs:element>
-                                                  </xs:sequence>
-                                                  <xs:attribute name="broj"
-                                                  type="xs:positiveInteger"/>
-                                                  </xs:complexType>
-                                                  </xs:element>
-                                                </xs:sequence>
-                                            </xs:complexType>
-                                        </xs:element>
-                                    </xs:sequence>
-                                </xs:complexType>
-                            </xs:element>
-                            <xs:element name="trazene_informacije">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string"/>
-                                </xs:simpleType>
-                            </xs:element>
-                            <xs:element name="podaci_o_vremenu_i_mestu_podnosenja_zahteva"
-                                type="TDatumMesto"> </xs:element>
-                            <xs:element name="fusnote">
-                                <xs:complexType>
-                                    <xs:sequence>
-                                        <xs:element name="fusnota" maxOccurs="unbounded">
-                                            <xs:complexType>
-                                                <xs:simpleContent>
-                                                  <xs:extension base="xs:string">
-                                                  <xs:attribute name="broj"
-                                                  type="xs:positiveInteger"/>
-                                                  </xs:extension>
-                                                </xs:simpleContent>
-                                            </xs:complexType>
-                                        </xs:element>
-                                    </xs:sequence>
-                                </xs:complexType>
-                            </xs:element>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
+              <xs:element name="naziv_podnosioca">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="ime"/>
+                    <xs:element type="xs:string" name="prezime"/>
+                    <xs:element type="xs:string" name="naziv_firme"/>
+                    <xs:element name="korisnicko_ime">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:QName" name="datatype"/>
+                            <xs:attribute type="xs:QName" name="property"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="adresa">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="ulica"/>
+                    <xs:element type="xs:byte" name="broj"/>
+                    <xs:element type="xs:string" name="grad"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="drugi_podaci_za_kontakt"/>
             </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="organ_vlasti">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="naziv_organa_vlasti">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:QName" name="datatype"/>
+                      <xs:attribute type="xs:QName" name="property"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="sediste_organa"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="tekst_zahteva">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="naslov"/>
+              <xs:element name="p" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType mixed="true">
+                  <xs:sequence>
+                    <xs:element name="izbori" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="izbor">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:byte" name="broj"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="trazene_informacije"/>
+              <xs:element name="podaci_o_vremenu_i_mestu_podnosenja_zahteva">
+                <xs:complexType mixed="true">
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="mesto"/>
+                    <xs:element name="datum">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:QName" name="datatype"/>
+                            <xs:attribute type="xs:QName" name="property"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="fusnote">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="fusnota" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:byte" name="broj" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

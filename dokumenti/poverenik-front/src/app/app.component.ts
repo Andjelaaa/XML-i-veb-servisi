@@ -7,7 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent{
   title = 'poverenik-front';
   public type!: string| undefined;
 

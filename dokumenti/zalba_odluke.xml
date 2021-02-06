@@ -1,103 +1,60 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<zalba_odluke xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="zalba_odluke.xsd">
-    <podnosilac_zalbe>
-        <naziv_podnosioca>
-            <ime></ime>
-            <prezime></prezime>
-            <naziv_firme></naziv_firme>
-        </naziv_podnosioca>
-        <adresa>
-            <ulica></ulica>
-            <broj></broj>
-            <grad></grad>
-        </adresa>
-        <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
-        
-    </podnosilac_zalbe>
-    <poverenik>
-        <naziv_poverenika>
-                Повереникy за информације од јавног значаја и заштиту података о личности
-        </naziv_poverenika>
-        <sediste_poverenika>
-            Aдреса за пошту:  
-            <ulica>Булевар краља Александра</ulica>
-            бр.
-            <broj>15</broj> 
-            <grad>
-                Београд 
-            </grad>
-        </sediste_poverenika>
-    </poverenik>
-    <naslov>
-           ЖАЛБА ПРОТИВ ОДЛУКЕ ОРГАНА ВЛАСТИ КОЈОМ ЈЕ ОДБИЈЕН ИЛИ ОДБАЧЕН ЗАТЕВ ЗА ПРИСТУП ИНФОРМАЦИЈИ
-    </naslov>
-    <tekst_zalbe>
-            Жалбa
-            <podnosilac_zalbe>
-                <naziv_podnosioca>
-                    <ime></ime>
-                    <prezime></prezime>
-                    <naziv_firme></naziv_firme>
-                </naziv_podnosioca>
-                <adresa>
-                    <ulica></ulica>
-                    <broj></broj>
-                    <grad></grad>
-                </adresa>
-                <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
-                
-            </podnosilac_zalbe>
-            против решења-закључка
-            <organ_vlasti>
-                <naziv_organa></naziv_organa>
-            </organ_vlasti>
-            <p>
-                Број
-                <broj_zalbe></broj_zalbe>
-                од
-                <godina_odbijanja></godina_odbijanja>
-                године.
-            </p>
-            <p>
-                Наведеном одлуком органа власти(решењем, закључком, обавештењем у писаној
-                форми са елементима одлуке) , супротно закону, одбијен-одбачен је мој захтев који
-                сам поднео/ла- упутио/ла дана
-                <datum></datum>
-                године и тако ми ускраћено-онемогућено остваривање уставног и законског права на 
-                слободан приступ информацијама од јавног значаја. Одлуку побијам у целости, односно 
-                у делу којим
-                <razlog></razlog>
-                јер није заснована на Закону о слободном приступу информацијама од јавног значаја.
-            </p>
-            <p>
-                На основу изнетих разлога, предлажем да Повереник уважи моју жалбу, поништи одлука првостепеног органа и омогући
-                ми приступ траженој/им информацији/ма.
-            </p>
-            <p>
-                Жалбу подносим благовремено, у законском року утврђеном у члану 22.ст. 1. Закона о слободном
-                приступу информацијама од јавног значаја. 
-            </p>
-            <podaci_o_trenutku>
-                У
-                <mesto></mesto>
-                ,дана
-                <datum></datum> године
-            </podaci_o_trenutku>
-        
-    </tekst_zalbe>
-    <napomena>
-        Напомена:
-        <tacke>
-            <tacka broj="1">
-                У жалби се мора навести одлука која се побија( решење, закњучак, обавештење)
-                назив органа који је одлуку донео, као и број и датум одлуке. Довољно је да жалилац
-                наведе у жалби у ком погледу је незадовољан одлуком, с тим да жалбу не мора посебно
-                приложити. 
-            </tacka>
-            <tacka broj ="2">
-                Уз жалбу обавезно приложити копију поднетог захтева и доказ
-                о његовој предаји-упућивању органу као и копију одлуке органа која се оспорава жалбом.
-            </tacka>
-        </tacke>
-    </napomena>
-</zalba_odluke>
+<?xml-stylesheet type="text/xsl" href="src/main/resources/podaci/xsl/zalba_odluke.xsl"?>
+<d:zalba_odluke xmlns="http://www.w3.org/ns/rdfa#" xmlns:d="http://www.ftn.uns.ac.rs/xpath/examples" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#">
+   <d:URI datatype="xs:string" property="pred:URI">3</d:URI>
+   <d:zahtev_uri datatype="xs:string" property="pred:zahtev_uri">1</d:zahtev_uri>
+   <d:podnosilac_zalbe>
+      <d:naziv_podnosioca>
+         <d:ime>alo</d:ime>
+         <d:prezime>boje</d:prezime>
+         <d:naziv_firme>moze</d:naziv_firme>
+         <d:korisnicko_ime datatype="xs:string" property="pred:korisnicko_ime">jova</d:korisnicko_ime>
+      </d:naziv_podnosioca>
+      <d:adresa>
+         <d:ulica>mise dimitrijevica</d:ulica>
+         <d:broj>5</d:broj>
+         <d:grad>leskovac</d:grad>
+      </d:adresa>
+      <d:drugi_podaci_za_kontakt>452163</d:drugi_podaci_za_kontakt>
+   </d:podnosilac_zalbe>
+   <d:poverenik>
+      <d:naziv_poverenika datatype="xs:string" property="pred:naziv_poverenika">
+                        Povereniky za informacije od javnog značaja i zaštitu podataka o ličnosti
+                </d:naziv_poverenika>
+      <d:sediste_poverenika>Aдреса за пошту:<d:ulica>faegae</d:ulica>бр.<d:broj>15</d:broj>
+         <d:grad>pazar</d:grad>
+      </d:sediste_poverenika>
+   </d:poverenik>
+   <d:naslov>ŽALBA PROTIV ODLUKE ORGANA VLASTI KOJOM JE ODBIJEN ILI ODBAČEN ZATEV ZA PRISTUP INFORMACIJI</d:naslov>
+   <d:tekst_zalbe>Жалбa<d:podnosilac_zalbe>
+         <d:naziv_podnosioca>
+            <d:ime>alo</d:ime>
+            <d:prezime>boje</d:prezime>
+            <d:naziv_firme>moze</d:naziv_firme>
+         </d:naziv_podnosioca>
+         <d:adresa>
+            <d:ulica>mise dimitrijevica</d:ulica>
+            <d:broj>5</d:broj>
+            <d:grad>leskovac</d:grad>
+         </d:adresa>
+         <d:drugi_podaci_za_kontakt>452163</d:drugi_podaci_za_kontakt>
+      </d:podnosilac_zalbe>против решења-закључка<d:p>Број<d:broj_zalbe>4526</d:broj_zalbe>од<d:godina_odbijanja>aedhaj</d:godina_odbijanja>године.</d:p>
+      <d:p>Наведеном одлуком органа власти(решењем, закључком, обавештењем у писаној форми са елементима одлуке) , супротно закону, одбијен-одбачен је мој захтев који сам поднео/ла- упутио/ла дана<d:datum>12.03.2020.</d:datum>године и тако ми ускраћено-онемогућено остваривање уставног и законског права на слободан приступ информацијама од јавног значаја. Одлуку побијам у целости, односно у делу којим<d:razlog>mora tako</d:razlog>јер није заснована на Закону о слободном приступу информацијама од јавног значаја.</d:p>
+      <d:p>Na osnovu iznetih razloga, predlažem da Poverenik uvaži moju žalbu, poništi odluka prvostepenog organa i omogući
+                        mi pristup traženoj/im informaciji/ma.</d:p>
+      <d:p>Žalbu podnosim blagovremeno, u zakonskom roku utvrđenom u članu 22.st. 1. Zakona o slobodnom
+                        pristupu informacijama od javnog značaja.</d:p>
+      <d:podaci_o_trenutku>У<d:mesto>davkdj</d:mesto>,дана<d:datum datatype="xs:string" property="pred:datum">05.02.2021.</d:datum> године</d:podaci_o_trenutku>
+   </d:tekst_zalbe>
+   <d:organ_vlasti>
+      <d:naziv_organa/>
+   </d:organ_vlasti>
+   <d:napomena>Напомена:<d:tacke>
+         <d:tacka broj="1">U žalbi se mora navesti odluka koja se pobija( rešenje, zaknjučak, obaveštenje)
+                        naziv organa koji je odluku doneo, kao i broj i datum odluke. Dovoljno je da žalilac
+                        navede u žalbi u kom pogledu je nezadovoljan odlukom, s tim da žalbu ne mora posebno
+                        priložiti.</d:tacka>
+         <d:tacka broj="2">Uz žalbu obavezno priložiti kopiju podnetog zahteva i dokaz
+                        o njegovoj predaji-upućivanju organu kao i kopiju odluke organa koja se osporava žalbom.</d:tacka>
+      </d:tacke>
+   </d:napomena>
+</d:zalba_odluke>
