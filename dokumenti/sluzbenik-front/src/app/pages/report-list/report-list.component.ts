@@ -32,7 +32,7 @@ export class ReportListComponent implements OnInit {
        result => {
          const listObject: any = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
          console.log(listObject);
-         if(listObject.List.item.naziv){
+         if(listObject.List.item.godina){
            this.list.push(listObject.List.item);
          }else{
            this.list = listObject.List.item;

@@ -21,7 +21,7 @@ export class LoginPageComponent implements OnInit {
         this.createForm();
     }
     ngOnInit(): void {
-        this.userService.initializeUsers().subscribe();
+      //  this.userService.initializeUsers().subscribe();
     }
     createForm(): void{
         this.form = this.fb.group({

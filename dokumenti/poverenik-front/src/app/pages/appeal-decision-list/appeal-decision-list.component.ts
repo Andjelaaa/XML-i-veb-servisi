@@ -38,8 +38,10 @@ export class AppealDecisionListComponent implements OnInit {
         console.log(listObject);
         if(listObject.List.item.datum){
           this.list.push(listObject.List.item);
+          
         }else{
           this.list = listObject.List.item;
+         
         }
         console.log(this.list);
         

@@ -5,28 +5,32 @@
     <variable name="URI"/>
     <variable name="datum"/>
     <variable name="korisnicko_ime"/>
-    <variable name="naziv_poverenika"/>
-    <variable name="zahtev_uri"/>
+    <variable name="zalba_odluke_uri"/>
+    <variable name="zalba_cutanje_uri"/>
+    <variable name="brojResenja"/>
   </head>
   <results>
     <result>
       <binding name="subject">
-        <uri>file:///C:/Users/Tamara/Desktop/XML-i-veb-servisi/dokumenti/poverenik/src/main/resources/podaci/rdf/4.rdf</uri>
+        <uri>file:///C:/Users/Tamara/Desktop/XML-i-veb-servisi/dokumenti/poverenik/src/main/resources/podaci/rdf/1.rdf</uri>
       </binding>
       <binding name="URI">
-        <literal>4</literal>
+        <literal>1</literal>
       </binding>
       <binding name="datum">
-        <literal>05.02.2021.</literal>
+        <literal>06.02.2021.</literal>
       </binding>
       <binding name="korisnicko_ime">
         <literal>jova</literal>
       </binding>
-      <binding name="naziv_poverenika">
-        <literal>dasd</literal>
+      <binding name="zalba_odluke_uri">
+        <literal></literal>
       </binding>
-      <binding name="zahtev_uri">
-        <literal>1</literal>
+      <binding name="zalba_cutanje_uri">
+        <literal>3</literal>
+      </binding>
+      <binding name="brojResenja">
+        <literal>12-33/2021</literal>
       </binding>
     </result>
   </results>

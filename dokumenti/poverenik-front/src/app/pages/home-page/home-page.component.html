@@ -30,6 +30,11 @@
       </button>
       <br>
       <br>
+      <button *ngIf ="type==='POVERENIK'" [routerLink]="['/reports']">
+        Izveštaji
+      </button>
+      <br>
+      <br>
       <button *ngIf ="type==='GRADJANIN'" [routerLink]="['/make_appeal_silence']">
           Nova žalba cutanja 
       </button>
@@ -53,6 +58,7 @@
       <button *ngIf ="type==='GRADJANIN'" [routerLink]="['/user_decision']">
         Istorija rešenja 
       </button>
+      
   
       
   
