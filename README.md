@@ -16,4 +16,4 @@
   6. potrebno je imati exist.war, exist2.war, fuseki.war i fuseki2.war fajlove
   (Exist baze se nalaze na portovima 8080/exist i 8080/exist2. Fuseki baze se nalaze na portovima 8080/fuseki i 8080/fuseki2.)
   7. u fuseki bazama je potrebno napraviti ručno kolekcije zahtevi, resenja, obavestenja, zalbeOdluke i zalbeCutanje
-  8. korisnici su automatski ubačeni u bazama i šifra za svakog korisnika je asdf
+  8. korisnici su automatski ubačeni u baze i šifra za svakog korisnika je asdf
